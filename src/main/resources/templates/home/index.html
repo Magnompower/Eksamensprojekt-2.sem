@@ -1,10 +1,53 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
 </head>
 <body>
 
+<header>
+    <section class="headerright">
+        <!-- Removed the th:href attribute since it's specific to Thymeleaf template engine -->
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+    </section>
+    <section class="headercenter">
+        <h1>Bilabonnement A/S</h1>
+    </section>
+</header>
+
+<nav class="navbar">
+    <a href="#home" class="nav-button">Home</a>
+    <a href="#cars" class="nav-button">Overview</a>
+    <a href="#cars" class="nav-button">All cars</a>
+    <a href="#cars" class="nav-button">Reports</a>
+    <a href="#cars" class="nav-button">Contracts</a>
+</nav>
+
+<main>
+    <section class="centertext">
+        <form action="/submit-your-login-form" method="POST">
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            <div>
+                <button type="submit">Login</button>
+            </div>
+        </form>
+        <div>
+            <p>Don't have an account yet?</p>
+            <button type="submit"><br>Sign up</button>
+        </div>
+    </section>
+    <section class="rights">
+    </section>
+</main>
+
+<footer>
+    <span class="brand-name"><sup>©</sup> 2024 IntelliJKingz<sup>™<br>All rights reserved.</sup></span>
+    <span class="brand-name">
+        <a href="https://https://github.com/Magnompower/Eksamensprojekt-2.sem">Github</a>
+    </span>
+</footer>
+
 </body>
-</html>
