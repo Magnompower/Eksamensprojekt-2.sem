@@ -22,14 +22,14 @@ public class ValidateController {
         if (loginStatus.equals("UserApproved")) {
 
             redirectAttributes.addAttribute("email", email);
-            return "redirect:/homepage";
+            return "redirect:/inventory";
 
         } else if (loginStatus.equals("NoUserFound")) {
             model.addAttribute("error", "This email does not exist in the database");
-            return "home/login";
+            return "home/index";
         } else {
             model.addAttribute("error", "Wrong password");
         }
-        return "home/login";
+        return "home/index";
     }
 }
