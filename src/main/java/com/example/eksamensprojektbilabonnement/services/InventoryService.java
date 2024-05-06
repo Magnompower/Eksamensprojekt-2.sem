@@ -1,14 +1,14 @@
 package com.example.eksamensprojektbilabonnement.services;
 import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
-import com.example.eksamensprojektbilabonnement.repositories.CarRepository;
+import com.example.eksamensprojektbilabonnement.repositories.InventoryRepository;
 import org.springframework.stereotype.Service;
 
 @Service
-public class CarService {
+public class InventoryService {
 
-    private CarRepository carRepository;
+    private InventoryRepository inventoryRepository;
 
     public Car getCarById(int id){
-        return carRepository.getCarById(id);
+        return inventoryRepository.getCarById(id);
     }
 }

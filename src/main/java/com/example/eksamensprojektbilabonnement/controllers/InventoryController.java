@@ -6,20 +6,20 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
-import com.example.eksamensprojektbilabonnement.services.CarService;
+import com.example.eksamensprojektbilabonnement.services.InventoryService;
 
 @Controller
-public class CarController {
+public class InventoryController {
 
     @Autowired
-    private CarService carService;
+    private InventoryService inventoryService;
 
-    @GetMapping("/car/{id}")
-    public String carDetails(@PathVariable("id") int id, Model model) {
-        Car car = carService.getCarById(id);
+    @GetMapping("/inventory")
+    public String inventoryDetails(Model model) {
+        Car car = inventoryService.getCarById(1);
 
         model.addAttribute("car", car);
 
-        return "car_details";
+        return "inventory_details";
     }
 }
