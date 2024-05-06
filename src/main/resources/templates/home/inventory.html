@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grid Layout Example</title>
+    <link rel="stylesheet" href="css.css">
+</head>
+<body>
+
+<header>
+    <h1>Header</h1>
+</header>
+
+<nav>
+    <ul>
+        <li><a href="#">Link 1</a></li>
+        <li><a href="#">Link 2</a></li>
+        <li><a href="#">Link 3</a></li>
+    </ul>
+</nav>
+
+<main>
+    <div class="grid-container">
+        <div class="grid-item" th:each="car : ${cars}">
+            <div class="grid-content">
+                <h2 th:text="${car.name}"></h2>
+                <img th:src="${'data:image/jpeg;base64,' + #strings.bytesToBase64(car.imageData)}" alt="Car Image">
+                <div class="ItemLink">
+                    <a th:href="'#item/' + ${car.id}">Go to car</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</main>
+
+<footer>
+    <p>Footer</p>
+</footer>
+
+</body>
+</html>
