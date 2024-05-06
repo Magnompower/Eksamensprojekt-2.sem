@@ -1,161 +1,56 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grid Layout Example</title>
-    <link rel="stylesheet" href="css.css">
 </head>
 <body>
 
 <header>
-    <h1>Header</h1>
+    <section class="headerright">
+        <!-- Removed the th:href attribute since it's specific to Thymeleaf template engine -->
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+        <link rel=" stylesheet" type="text/css" href="/index.css">
+    </section>
+    <section class="headercenter">
+        <h1>Bilabonnement A/S</h1>
+    </section>
 </header>
 
-<nav>
-    <ul>
-        <li><a href="#">Link 1</a></li>
-        <li><a href="#">Link 2</a></li>
-        <li><a href="#">Link 3</a></li>
-    </ul>
+<nav class="navbar">
+    <a href="#home" class="nav-button">Home</a>
+    <a href="#cars" class="nav-button">Overview</a>
+    <a href="#cars" class="nav-button">All cars</a>
+    <a href="#cars" class="nav-button">Reports</a>
+    <a href="#cars" class="nav-button">Contracts</a>
 </nav>
 
 <main>
-    <div class="grid-container">
-        <div class="grid-item">
-            <div class="grid-content">
-                <h2>Bil 1</h2>
-                <div class="ItemLink">
-                    <a href="#item1">Go to car</a>
-                </div>
+    <section class="centertext">
+        <form th:action="@{/validate}" method="POST">
+            <p th:text ="${error}" ></p>
+            <div>
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="email" placeholder="Enter email" required>
             </div>
-        </div>
-        <div class="grid-item">
-            <div class="grid-content">
-                <h2>Bil 2</h2>
-                <div class="ItemLink">
-                    <a href="#item2">Go to car</a>
-                </div>
+            <div>
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password"  placeholder="Enter password" required>
             </div>
-        </div>
-        <div class="grid-item">
-            <div class="grid-content">
-                <h2>Bil 3</h2>
-                <div class="ItemLink">
-                    <a href="#item3">Go to car</a>
-                </div>
+            <div>
+                <button type="submit">Login</button>
             </div>
+        </form>
+        <div>
+            <p1>Don't have an account? <a th:href="@{/signup}">
+                <button type="button">Sign up</button>
+            </a></p1>
         </div>
-        <div class="grid-item">
-            <div class="grid-content">
-                <h2>Bil 4</h2>
-                <div class="ItemLink">
-                    <a href="#item4">Go to car</a>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="grid-content">
-                <h2>Bil 5</h2>
-                <div class="ItemLink">
-                    <a href="#item5">Go to car</a>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="grid-content">
-                <h2>Bil 6</h2>
-                <div class="ItemLink">
-                    <a href="#item6">Go to car</a>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="grid-content">
-                <h2>Bil 7</h2>
-                <div class="ItemLink">
-                    <a href="#item7">Go to car</a>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="grid-content">
-                <h2>Bil 8</h2>
-                <div class="ItemLink">
-                    <a href="#item8">Go to car</a>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="grid-content">
-                <h2>Bil 9</h2>
-                <div class="ItemLink">
-                    <a href="#item9">Go to car</a>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="grid-content">
-                <h2>Bil 10</h2>
-                <div class="ItemLink">
-                    <a href="#item10">Go to car</a>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="grid-content">
-                <h2>Bil 11</h2>
-                <div class="ItemLink">
-                    <a href="#item11">Go to car</a>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="grid-content">
-                <h2>Bil 12</h2>
-                <div class="ItemLink">
-                    <a href="#item12">Go to car</a>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="grid-content">
-                <h2>Bil 13</h2>
-                <div class="ItemLink">
-                    <a href="#item13">Go to car</a>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="grid-content">
-                <h2>Bil 14</h2>
-                <div class="ItemLink">
-                    <a href="#item14">Go to car</a>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="grid-content">
-                <h2>Bil 15</h2>
-                <div class="ItemLink">
-                    <a href="#item15">Go to car</a>
-                </div>
-            </div>
-        </div>
-        <div class="grid-item">
-            <div class="grid-content">
-                <h2>Bil 16</h2>
-                <div class="ItemLink">
-                    <a href="#item16">Go to car</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    </section>
+    <section class="rights">
+    </section>
 </main>
 
 <footer>
-    <p>Footer</p>
+    <span class="brand-name"><sup>©</sup> 2024 IntelliJKingz<sup>™<br>All rights reserved.</sup></span>
+    <span class="brand-name">
+        <a href="https://https://github.com/Magnompower/Eksamensprojekt-2.sem">Github</a>
+    </span>
 </footer>
 
 </body>
-</html>
