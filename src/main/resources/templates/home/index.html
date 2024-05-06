@@ -1,9 +1,8 @@
-</head>
+</html>
 <body>
 
 <header>
     <section class="headerright">
-        <!-- Removed the th:href attribute since it's specific to Thymeleaf template engine -->
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
         <link rel=" stylesheet" type="text/css" href="/index.css">
     </section>
@@ -11,26 +10,17 @@
         <h1>Bilabonnement A/S</h1>
     </section>
 </header>
-
-<nav class="navbar">
-    <a href="#home" class="nav-button">Home</a>
-    <a href="#cars" class="nav-button">Overview</a>
-    <a href="#cars" class="nav-button">All cars</a>
-    <a href="#cars" class="nav-button">Reports</a>
-    <a href="#cars" class="nav-button">Contracts</a>
-</nav>
-
 <main>
     <section class="centertext">
         <form th:action="@{/validate}" method="post">
-            <p th:text ="${error}" ></p>
+            <p th:text="${error}"></p>
             <div>
                 <label for="email">Email:</label>
                 <input type="text" id="email" name="email" placeholder="Enter email" required>
             </div>
             <div>
                 <label for="password">Password:</label>
-                <input type="password" id="password" name="password"  placeholder="Enter password" required>
+                <input type="password" id="password" name="password" placeholder="Enter password" required>
             </div>
             <div>
                 <button type="submit">Login</button>
@@ -45,12 +35,11 @@
     <section class="rights">
     </section>
 </main>
-
+</body>
 <footer>
     <span class="brand-name"><sup>©</sup> 2024 IntelliJKingz<sup>™<br>All rights reserved.</sup></span>
     <span class="brand-name">
-        <a href="https://https://github.com/Magnompower/Eksamensprojekt-2.sem">Github</a>
+        <a href="https://github.com/Magnompower/Eksamensprojekt-2.sem" target="_blank" th:href="@{https://github.com/Magnompower/Eksamensprojekt-2.sem}">Github</a>
     </span>
 </footer>
-
-</body>
+</html>

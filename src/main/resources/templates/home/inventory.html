@@ -22,12 +22,13 @@
 
 <main>
     <div class="grid-container">
-        <div class="grid-item" th:each="car : ${cars}">
+        <div class="grid-item" th:each="car : ${GasCar}">
             <div class="grid-content">
-                <h2 th:text="${car.name}"></h2>
-                <img th:src="${'data:image/jpeg;base64,' + #strings.bytesToBase64(car.imageData)}" alt="Car Image">
+                <h2 th:text="${#numbers.formatInteger(car.price, 0)}"></h2>
+                <p th:text="${car.brand}"></p>
+                <p th:text="${car.model}"></p>
                 <div class="ItemLink">
-                    <a th:href="'#item/' + ${car.id}">Go to car</a>
+                    <a th:href="'#item/' + ${car.licensePlateNumber}">Go to car</a>
                 </div>
             </div>
         </div>

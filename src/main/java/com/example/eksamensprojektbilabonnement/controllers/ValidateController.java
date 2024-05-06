@@ -17,12 +17,12 @@ public class ValidateController {
 
     @PostMapping("/validate")
 
-    public String validate(Model model, @RequestParam String email, @RequestParam String password, RedirectAttributes redirectAttributes) {
+    public String validate(Model model, @RequestParam String email, @RequestParam String password) {
         String loginStatus = employeeService.checkPass(email,password);
         if (loginStatus.equals("UserApproved")) {
 
-            redirectAttributes.addAttribute("email", email);
             return "redirect:/createlease";
+
 
         } else if (loginStatus.equals("NoUserFound")) {
             model.addAttribute("error", "This email does not exist in the database");
