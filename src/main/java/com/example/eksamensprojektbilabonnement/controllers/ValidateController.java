@@ -22,7 +22,7 @@ public class ValidateController {
         if (loginStatus.equals("UserApproved")) {
 
             redirectAttributes.addAttribute("email", email);
-            return "redirect:/inventory";
+            return "redirect:/createlease";
 
         } else if (loginStatus.equals("NoUserFound")) {
             model.addAttribute("error", "This email does not exist in the database");

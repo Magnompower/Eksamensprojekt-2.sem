@@ -1,35 +1,36 @@
 package com.example.eksamensprojektbilabonnement.models.inheritance;
 
-public class ElectricVan extends ElectricCar{
-    private double floorLengthinMm;
-    private double maxHeightInMm;
-    private double maxWidthInMm;
+public class ElectricVan extends ElectricCar {
+    private int floorLengthinMm;
+    private int maxHeightInMm;
+    private int maxWidthInMm;
 
-    public ElectricVan(){
+    public ElectricVan() {
 
     }
 
-    public double getFloorLengthinMm() {
+    public int getFloorLengthinMm() {
         return floorLengthinMm;
     }
 
-    public void setFloorLengthinMm(double floorLengthinMm) {
+    public void setFloorLengthinMm(int floorLengthinMm) {
         this.floorLengthinMm = floorLengthinMm;
     }
 
-    public double getMaxHeightInMm() {
+    public int getMaxHeightInMm() {
         return maxHeightInMm;
     }
 
-    public void setMaxHeightInMm(double maxHeightInMm) {
+    public void setMaxHeightInMm(int maxHeightInMm) {
         this.maxHeightInMm = maxHeightInMm;
     }
 
-    public double getMaxWidthInMm() {
+    public int getMaxWidthInMm() {
         return maxWidthInMm;
     }
 
-    public void setMaxWidthInMm(double maxWidthInMm) {
+    public void setMaxWidthInMm(int maxWidthInMm) {
         this.maxWidthInMm = maxWidthInMm;
     }
 }
+

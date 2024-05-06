@@ -4,7 +4,9 @@ package com.example.eksamensprojektbilabonnement.repositories;
 import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
 import com.example.eksamensprojektbilabonnement.models.inheritance.GasCar;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 @Repository
@@ -25,8 +27,11 @@ public class CarRepository {
     }
 
 
-
-
+    public String getAllCarsChassisNumber() {
+        String query = "SELECT * from all_cars";
+        RowMapper<Car> rowMapper = new BeanPropertyRowMapper<>(Car.class);
+        return jdbcTemplate.query(query, rowMapper).toString();
+    }
 }
 
 /*

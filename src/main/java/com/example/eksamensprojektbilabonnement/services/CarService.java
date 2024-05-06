@@ -11,4 +11,8 @@ public class CarService {
     public Car getCarById(int id){
         return carRepository.getCarById(id);
     }
+
+    public String getAllCarsChassisNumber() {
+        return carRepository.getAllCarsChassisNumber();
+    }
 }
