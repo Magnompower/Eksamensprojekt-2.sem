@@ -17,11 +17,11 @@ public class ValidateController {
 
     @PostMapping("/validate")
 
-    public String validate(Model model, @RequestParam String email, @RequestParam String password, RedirectAttributes redirectAttributes) {
+    public String validate(Model model, @RequestParam String email, @RequestParam String password) {
         String loginStatus = employeeService.checkPass(email,password);
         if (loginStatus.equals("UserApproved")) {
 
-            redirectAttributes.addAttribute("email", email);
+           // redirectAttributes.addAttribute("email", email);
             return "redirect:/inventory";
 
         } else if (loginStatus.equals("NoUserFound")) {

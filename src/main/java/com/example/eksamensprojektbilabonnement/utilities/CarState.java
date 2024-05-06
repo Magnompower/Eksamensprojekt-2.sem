@@ -4,5 +4,5 @@ public enum CarState {
     RENTED,
     DAMAGED,
     UNDER_MAINTENANCE,
-    AVALIABLE
+    AVAILABLE
 }
