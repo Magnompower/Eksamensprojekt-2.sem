@@ -22,11 +22,11 @@
 
 <main>
     <section class="centertext">
-        <form th:action="@{/validate}" method="POST">
+        <form th:action="@{/validate}" method="post">
             <p th:text ="${error}" ></p>
             <div>
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="email" placeholder="Enter email" required>
+                <label for="email">Email:</label>
+                <input type="text" id="email" name="email" placeholder="Enter email" required>
             </div>
             <div>
                 <label for="password">Password:</label>

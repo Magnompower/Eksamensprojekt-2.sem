@@ -13,7 +13,7 @@ public class EmployeeRepository {
 
     public String checkPass(String email) {
         try {
-            String query = "SELECT password FROM employee WHERE email = ?;";
+            String query = "SELECT password FROM employees WHERE email = ?;";
             return jdbcTemplate.queryForObject(query, String.class, email);
         } catch (EmptyResultDataAccessException e) {
             return "UserNotFound";
