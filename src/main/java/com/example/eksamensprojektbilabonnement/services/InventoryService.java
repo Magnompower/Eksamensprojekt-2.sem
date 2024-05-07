@@ -1,4 +1,5 @@
 package com.example.eksamensprojektbilabonnement.services;
+
 import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
 import com.example.eksamensprojektbilabonnement.models.inheritance.GasCar;
 import com.example.eksamensprojektbilabonnement.repositories.InventoryRepository;
@@ -17,8 +18,8 @@ public class InventoryService {
         this.inventoryRepository = inventoryRepository;
     }
 
-    public Car getCarByLicensePlateNumber(String LicensePlateNumber) {
-        return inventoryRepository.getCarByLicensePlateNumber(LicensePlateNumber);
+    public Car getCarByLicensePlateNumber(String licensePlateNumber) {
+        return inventoryRepository.getCarByLicensePlateNumber(licensePlateNumber);
     }
 
     public List<GasCar> getAllGasCars() {

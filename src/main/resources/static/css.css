@@ -35,20 +35,37 @@ nav ul li a {
 main {
     padding: 20px;
 }
-
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(4, 200px);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 10px;
+    position: relative;
 }
 
 .grid-item {
     background-color: #f0f0f0;
     border: 1px solid #ccc;
     padding: 20px;
+    display: flex;
+    align-items: center;
 }
+
+.image-container {
+    margin-left: 20px;
+}
+
+.image {
+    width: 150px;
+    height: 150px;
+}
+
+
+.car-details {
+    flex: 1; /* Allow text container to grow to fill available space */
+}
+
+
 .ItemLink {
-    height: 10px;
-    text-align: left;
-}
+     height: 10px;
+     text-align: left;
+ }
