@@ -35,8 +35,8 @@ public class InventoryRepository {
         }
     }
 
-    public GasCar getCarByChassisNumber(String carChassisNumber) {
-        String query = "SELECT * FROM gas_cars WHERE chassis_number = ?";
+    public GasCar getCarByChassisNumber(String carChassisNumber) { //vi skal tage højde for de forskellige typer biler
+        String query = "SELECT * FROM all_cars_view WHERE chassis_number = ?";
         return jdbcTemplate.queryForObject(query, BeanPropertyRowMapper.newInstance(GasCar.class), carChassisNumber);
     }
 
