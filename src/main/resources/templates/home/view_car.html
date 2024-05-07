@@ -7,17 +7,47 @@
     <link rel="stylesheet" type="text/css" href="/css.css">
     <h2>Info about car</h2>
     <thead>
+    <th>Chassis number</th>
     <th>Car brand</th>
     <th>Car model</th>
     <th>Car Price</th>
     </thead>
+    <br>
     <tr>
+        <td th:text="${Car.chassisNumber}"> </td>
         <td th:text="${Car.brand}"></td>
         <td th:text="${Car.model}"></td>
         <td th:text="${Car.price}"></td>
     </tr>
 
+    <form action="/createLease" method="post">
+        <div class="input-group">
+            <label for="CarChassisNumber"></label>
+            <input type="text" id="CarChassisNumber" name="CarChassisNumber" th:value="${Car.chassisNumber}" th:placeholder="${Car.chassisNumber}">
+        <div class="input-group">
+            <label for="StartDate"></label>
+            <input type="text" id="StartDate" name="StartDate" placeholder="Start Date" required
+                   pattern="\d{4}-\d{2}-\d{2}">
+        </div>
+        <div class="input-group">
+            <label for="EndDate"></label>
+            <input type="text" id="EndDate" name="EndDate" placeholder="End Date" required
+                   pattern="\d{4}-\d{2}-\d{2}">
+        </div>
+        <div class="input-group">
+            <label for="terms"></label>
+            <input type="text" id="terms" name="terms" placeholder="Terms" required>
+        </div>
+       //todo create a drop down menu with customer name and id using th:each for customers in the database
+        <div class="input-group">
+            <label for="customerId"></label>
+            <select id="customerId" name="customerId">
+                <option th:each="customer : ${Customers}" th:value="${customer.customerId}" th:text="${customer.firstName}"  th:text="${customer.customerId}"></option>
+            </select>
 
+
+
+        <button type="submit">Submit</button>
 </head>
 <body>
 

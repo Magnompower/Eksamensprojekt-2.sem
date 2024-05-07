@@ -18,6 +18,6 @@ public class CustomerRepository {
         String query = "SELECT * FROM customers";
         RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
 
-        return (List<Customer>) jdbcTemplate.queryForObject(query, rowMapper);
+        return jdbcTemplate.query(query, rowMapper);
     }
 }
