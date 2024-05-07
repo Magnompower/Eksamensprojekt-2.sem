@@ -10,6 +10,9 @@
 </head>
 <body>
 <h2>Lease Overview</h2>
+<table>
+
+
 <thead>
 <th>Lease ID</th>
 <th>Car Chassis Number</th>
@@ -18,7 +21,8 @@
 <th>Terms</th>
 <th>Customer ID</th>
 </thead>
-<br>
+
+<tbody>
 <tr th:each="lease : ${leases}">
     <td th:text="${lease.leaseId}"> </td>
     <td th:text="${lease.car.chassisNumber}"></td>
@@ -27,4 +31,7 @@
     <td th:text="${lease.terms}"></td>
     <td th:text="${lease.customer.customerId}"></td>
 </tr>
+</tbody>
+</table>
 </body>
+</html>
