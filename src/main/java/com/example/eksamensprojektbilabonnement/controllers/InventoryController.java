@@ -19,9 +19,9 @@ public class InventoryController {
 
     @GetMapping("/inventory")
     public String showInventory(Model model) {
-        List<GasCar> gasCars = inventoryService.getAllGasCars(); // Assuming you have a method to retrieve all gas cars
+        List<GasCar> gasCars = inventoryService.getAllGasCars();
         model.addAttribute("GasCar", gasCars);
-        return "home/inventory"; // The name of your HTML template
+        return "home/inventory";
     }
     @GetMapping ("/view_car")
     public String view_car(@RequestParam String carChassisNumber, Model model) {

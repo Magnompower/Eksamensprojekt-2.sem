@@ -13,20 +13,20 @@ public abstract class Car { //abstract fordi der ikke skal oprettes instanser af
     private double registrationFee;
     private CarState carState;
     private double price;
-    private  byte[] image;
+    private String image_url;
 
-    public byte[] getImage() {
-        return image;
-    }
 
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
 
     public Car(){
 
     }
+    public String getImage_url() {
+        return image_url;
+    }
 
+    public void setImage_url(String image_url) {
+        this.image_url = image_url;
+    }
 
     public int getVehicleId() {
         return vehicleId;

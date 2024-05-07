@@ -21,7 +21,7 @@ public class CarRepository {
             GasCar car = new GasCar();
             car.setVehicleId(rs.getInt("id"));
             car.setModel(rs.getString("name"));
-            car.setImage(rs.getBytes("image"));
+            car.setImage_url(rs.getString("image"));
             return car;
         });
     }
