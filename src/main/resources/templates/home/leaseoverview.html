@@ -1,25 +1,30 @@
 //todo create html for a overview for all leases
-<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Lease Overview</title>
-    <link rel="stylesheet" type="text/css" href="/style.css">
-    <h2>Lease Overview</h2>
-    <thead>
-    <th>Lease ID</th>
-    <th>Car Chassis Number</th>
-    <th>Start Date</th>
-    <th>End Date</th>
-    <th>Terms</th>
-    <th>Customer ID</th>
-    </thead>
-    <br>
-    <tr th:each="lease : ${Leases}">
-        <td th:text="${lease.leaseId}"> </td>
-        <td th:text="${lease.carChassisNumber}"></td>
-        <td th:text="${lease.startDate}"></td>
-        <td th:text="${lease.endDate}"></td>
-        <td th:text="${lease.terms}"></td>
-        <td th:text="${lease.customerId}"></td>
+    <link rel="stylesheet" type="text/css" href="/css.css">
+
+
 </head>
+<body>
+<h2>Lease Overview</h2>
+<thead>
+<th>Lease ID</th>
+<th>Car Chassis Number</th>
+<th>Start Date</th>
+<th>End Date</th>
+<th>Terms</th>
+<th>Customer ID</th>
+</thead>
+<br>
+<tr th:each="lease : ${leases}">
+    <td th:text="${lease.leaseId}"> </td>
+    <td th:text="${lease.car.chassisNumber}"></td>
+    <td th:text="${lease.startDate}"></td>
+    <td th:text="${lease.endDate}"></td>
+    <td th:text="${lease.terms}"></td>
+    <td th:text="${lease.customer.customerId}"></td>
+</tr>
+</body>
