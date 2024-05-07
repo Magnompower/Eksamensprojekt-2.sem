@@ -22,15 +22,14 @@ public class LeaseController {
     LeaseService leaseService;
 
     //todo create controller that sends  a car and customer over so that a lease can be created
-    @GetMapping("home/leaseoverview")
+    @GetMapping("/leaseOverview")
     public  String leaseOverview(Model model) {
         model.addAttribute("leases", leaseService.getLeases());
         return "home/leaseoverview";
     }
     @PostMapping ("/createLease")
-    public String createLease(Model model, @RequestParam String carChassisNumber, @RequestParam int customerId, @RequestParam LocalDate startDate, @RequestParam LocalDate endDate, @RequestParam String terms)  {
+    public String createLease(@RequestParam String carChassisNumber, @RequestParam int customerId, @RequestParam LocalDate startDate, @RequestParam LocalDate endDate, @RequestParam String terms)  {
     leaseService.createLease(carChassisNumber, customerId, startDate, endDate, terms);
-
-        return "home/leaseoverview";
+        return "redirect:/leaseOverview";
     }
 }

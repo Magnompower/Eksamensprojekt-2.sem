@@ -28,4 +28,8 @@ public class InventoryService {
     public Car getCarByChassisNumber(String carChassisNumber) {
         return inventoryRepository.getCarByChassisNumber(carChassisNumber);
     }
+
+    public List<Car> getAllCars() {
+        return inventoryRepository.getAllCars();
+    }
 }

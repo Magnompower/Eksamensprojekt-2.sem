@@ -32,13 +32,20 @@ public class InventoryRepository {
             return null;
         }
     }
-    public GasCar getCarByChassisNumber ( String carChassisNumber) {
+
+    public GasCar getCarByChassisNumber(String carChassisNumber) {
         String query = "SELECT * FROM gas_cars WHERE chassis_number = ?";
         return jdbcTemplate.queryForObject(query, BeanPropertyRowMapper.newInstance(GasCar.class), carChassisNumber);
     }
+
     public List<GasCar> getAllGasCars() {
         String query = "SELECT * FROM gas_cars";
         return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(GasCar.class));
+    }
+
+    public List<Car> getAllCars() {
+        String query = "SELECT * FROM all_cars_view";
+        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Car.class));
     }
 }
 

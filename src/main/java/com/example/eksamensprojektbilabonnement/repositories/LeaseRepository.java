@@ -1,6 +1,7 @@
 package com.example.eksamensprojektbilabonnement.repositories;
 
 import com.example.eksamensprojektbilabonnement.models.LeaseAgreement;
+import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -22,8 +23,9 @@ public class LeaseRepository {
 
     public List<LeaseAgreement> getLeases() {
         String query = "SELECT * FROM lease_agreements";
-        RowMapper<LeaseAgreement> rowMapper = new BeanPropertyRowMapper<>(LeaseAgreement.class);
-        return jdbcTemplate.query(query, rowMapper);
+        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(LeaseAgreement.class));
 
     }
+
+
 }
