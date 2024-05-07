@@ -33,18 +33,3 @@ public class CarRepository {
         return jdbcTemplate.query(query, rowMapper).toString();
     }
 }
-
-/*
-public void addProduct(String name, String url, String description, double price, int amount, int wishlistId) {
-        String sql = "INSERT INTO products (wishlist_id, name, url, description, price, amount) VALUES (?, ?, ?, ?, ?, ?);";
-        jdbcTemplate.update(sql, wishlistId, name, url, description, price, amount);
-
-
-public Product getProduct(int productId) {
-        String query = "SELECT * FROM products WHERE product_id = ?;";
-        RowMapper<Product> rowMapper = new BeanPropertyRowMapper<>(Product.class);
-        return jdbcTemplate.queryForObject(query, rowMapper, productId);
-
-    }
-
- */

@@ -1,6 +1,7 @@
 package com.example.eksamensprojektbilabonnement.controllers;
 
 import com.example.eksamensprojektbilabonnement.models.inheritance.GasCar;
+import com.example.eksamensprojektbilabonnement.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,8 @@ public class InventoryController {
 
     @Autowired
     private InventoryService inventoryService;
+    @Autowired
+    private CustomerService customerService;
 
     @GetMapping("/inventory")
     public String showInventory(Model model) {
@@ -27,6 +30,8 @@ public class InventoryController {
     public String view_car(@RequestParam String carChassisNumber, Model model) {
         Car car = inventoryService.getCarByChassisNumber(carChassisNumber);
         model.addAttribute("Car", car);
+
+        model.addAttribute("Customers", customerService.getAllCustomers());
         return "home/view_car";
     }
 }

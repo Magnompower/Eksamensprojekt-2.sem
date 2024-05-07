@@ -4,22 +4,53 @@
     <meta charset="UTF-8">
     <title>Title</title>
 
-    <link rel="stylesheet" type="text/css" href="/css.css">
-    <h2>Info about car</h2>
-    <thead>
-    <th>Car brand</th>
-    <th>Car model</th>
-    <th>Car Price</th>
-    </thead>
-    <tr>
-        <td th:text="${Car.brand}"></td>
-        <td th:text="${Car.model}"></td>
-        <td th:text="${Car.price}"></td>
-    </tr>
-
-
+    <link rel="stylesheet" type="text/css" href="/view_car.css">
 </head>
 <body>
+<h2 class="title">Info about car</h2>
+<table class="car-table">
+    <thead>
+    <tr>
+        <th>Chassis number</th>
+        <th>Car brand</th>
+        <th>Car model</th>
+        <th>Car Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="chassis-number" th:text="${Car.chassisNumber}"> </td>
+        <td class="car-brand" th:text="${Car.brand}"></td>
+        <td class="car-model" th:text="${Car.model}"></td>
+        <td class="car-price" th:text="${Car.price}"></td>
+    </tr>
+    </tbody>
+</table>
 
+<form action="/createLease" method="post" class="lease-form">
+    <div class="input-group">
+        <label for="CarChassisNumber">Chassis Number:</label>
+        <input type="text" id="CarChassisNumber" name="carChassisNumber" th:value="${Car.chassisNumber}" th:placeholder="${Car.chassisNumber}">
+    </div>
+    <div class="input-group">
+        <label for="StartDate">Start Date:</label>
+        <input type="date" id="StartDate" name="startDate" placeholder="Start Date" required pattern="\d{4}-\d{2}-\d{2}">
+    </div>
+    <div class="input-group">
+        <label for="EndDate">End Date:</label>
+        <input type="date" id="EndDate" name="endDate" placeholder="End Date" required pattern="\d{4}-\d{2}-\d{2}">
+    </div>
+    <div class="input-group">
+        <label for="terms">Terms:</label>
+        <input type="text" id="terms" name="terms" placeholder="Terms" required>
+    </div>
+    <div class="input-group">
+        <label for="customerId">Customer:</label>
+        <select id="customerId" name="customerId" class="customer-select">
+            <option th:each="customer : ${Customers}" th:value="${customer.customerId}" th:text="${customer.firstName + ' - ' + customer.customerId}"></option>
+        </select>
+    </div>
+    <button type="submit" class="submit-btn">Create lease</button>
+</form>
 </body>
 </html>
