@@ -20,7 +20,7 @@ public class CarRepository {
         return jdbcTemplate.queryForObject(query, new Object[]{id}, (rs, rowNum) -> {
             GasCar car = new GasCar();
             car.setModel(rs.getString("name"));
-            car.setImage(rs.getBytes("image"));
+            car.setImage_url(rs.getString("image"));
             return car;
         });
     }
