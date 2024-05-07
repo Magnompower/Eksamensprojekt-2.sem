@@ -24,4 +24,8 @@ public class InventoryService {
     public List<GasCar> getAllGasCars() {
         return inventoryRepository.getAllGasCars();
     }
+
+    public Car getCarByChassisNumber(String carChassisNumber) {
+        return inventoryRepository.getCarByChassisNumber(carChassisNumber);
+    }
 }

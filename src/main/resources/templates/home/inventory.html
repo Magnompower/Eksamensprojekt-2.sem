@@ -28,7 +28,10 @@
                 <p th:text="${car.brand}"></p>
                 <p th:text="${car.model}"></p>
                 <div class="ItemLink">
-                    <a th:href="'#item/' + ${car.licensePlateNumber}">Go to car</a>
+                    <form action="/view_car" method="get">
+                        <input type="hidden" name="carChassisNumber" th:value="${car.chassisNumber}">
+                        <button class="button" type="submit">View</button>
+                    </form>
                 </div>
             </div>
         </div>

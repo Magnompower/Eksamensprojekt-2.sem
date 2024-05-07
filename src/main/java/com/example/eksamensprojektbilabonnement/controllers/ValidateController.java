@@ -21,7 +21,7 @@ public class ValidateController {
         String loginStatus = employeeService.checkPass(email,password);
         if (loginStatus.equals("UserApproved")) {
 
-            return "redirect:/createlease";
+            return "redirect:/inventory";
 
 
         } else if (loginStatus.equals("NoUserFound")) {

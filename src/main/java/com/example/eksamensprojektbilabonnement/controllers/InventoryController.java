@@ -5,9 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
 import com.example.eksamensprojektbilabonnement.services.InventoryService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -22,5 +22,11 @@ public class InventoryController {
         List<GasCar> gasCars = inventoryService.getAllGasCars(); // Assuming you have a method to retrieve all gas cars
         model.addAttribute("GasCar", gasCars);
         return "home/inventory"; // The name of your HTML template
+    }
+    @GetMapping ("/view_car")
+    public String view_car(@RequestParam String carChassisNumber, Model model) {
+        Car car = inventoryService.getCarByChassisNumber(carChassisNumber);
+        model.addAttribute("Car", car);
+        return "home/view_car";
     }
 }
