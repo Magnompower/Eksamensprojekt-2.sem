@@ -22,8 +22,8 @@ public class InventoryController {
 
     @GetMapping("/inventory")
     public String showInventory(Model model) {
-        List<GasCar> gasCars = inventoryService.getAllGasCars();
-        model.addAttribute("GasCar", gasCars);
+        List<Car> cars = inventoryService.getAllCars();
+        model.addAttribute("cars", cars);
         return "home/inventory";
     }
     @GetMapping ("/view_car")

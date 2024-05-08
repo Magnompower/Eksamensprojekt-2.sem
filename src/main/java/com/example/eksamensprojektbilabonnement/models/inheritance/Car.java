@@ -3,8 +3,7 @@ package com.example.eksamensprojektbilabonnement.models.inheritance;
 import com.example.eksamensprojektbilabonnement.utilities.CarState;
 import com.example.eksamensprojektbilabonnement.utilities.TransmissionType;
 
-public abstract class Car { //abstract fordi der ikke skal oprettes instanser af den her klasse
-    private int vehicleId;
+public class Car {
     private String chassisNumber;
     private String licensePlateNumber;
     private String brand;
@@ -28,12 +27,6 @@ public abstract class Car { //abstract fordi der ikke skal oprettes instanser af
         this.image_url = image_url;
     }
 
-    public int getVehicleId() {
-        return vehicleId;
-    }
-
-    public void setVehicleId(int vehicleId) { this.vehicleId = vehicleId;
-    }
 
     public String getChassisNumber() {
         return chassisNumber;

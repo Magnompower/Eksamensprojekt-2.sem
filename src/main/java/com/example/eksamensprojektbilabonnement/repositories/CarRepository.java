@@ -19,7 +19,6 @@ public class CarRepository {
         String query = "SELECT * FROM cars WHERE id = ?";
         return jdbcTemplate.queryForObject(query, new Object[]{id}, (rs, rowNum) -> {
             GasCar car = new GasCar();
-            car.setVehicleId(rs.getInt("id"));
             car.setModel(rs.getString("name"));
             car.setImage_url(rs.getString("image"));
             return car;
