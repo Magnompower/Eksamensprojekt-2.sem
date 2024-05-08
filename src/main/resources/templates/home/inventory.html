@@ -20,7 +20,18 @@
     </ul>
 </nav>
 
-
+<!-------------- Dropdown menu for sortering --------------------->
+<form action="/sort_cars" method="get">
+    <label for="sortType">Sort by:</label>
+    <select id="sortType" name="sortType">
+        <option value="priceAscending">Price: low to high</option>
+        <option value="priceDescending">Price: high to low</option>
+        <option value="brandAscending">Brand: A-Z</option>
+        <option value="brandDescending">Brand: Z-A</option>
+    </select>
+    <button type="submit">Sort</button>
+</form>
+<!----------------------------------------------------------------->
 
 <main>
     <div class="grid-container">

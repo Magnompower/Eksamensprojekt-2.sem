@@ -8,7 +8,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
 import com.example.eksamensprojektbilabonnement.services.InventoryService;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -30,8 +32,20 @@ public class InventoryController {
     public String view_car(@RequestParam String carChassisNumber, Model model) {
         Car car = inventoryService.getCarByChassisNumber(carChassisNumber);
         model.addAttribute("Car", car);
-
         model.addAttribute("Customers", customerService.getAllCustomers());
         return "home/view_car";
+    }
+
+    @GetMapping ("/sort_cars")
+    public String SortCars(@RequestParam String sortType, RedirectAttributes redirectAttributes){
+      List<Car> sortedCars = inventoryService.getSortedCars(sortType);
+      redirectAttributes.addFlashAttribute("sortedCars", sortedCars);
+      return "redirect:/show_inventory_sorted";
+    }
+
+    @GetMapping("/show_inventory_sorted")
+    public String showInventorySorted(@ModelAttribute("sortedCars") List<Car> sortedCars, Model model) {
+        model.addAttribute("cars", sortedCars);
+        return "home/inventory";
     }
 }

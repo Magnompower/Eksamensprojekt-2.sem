@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -49,4 +50,42 @@ public class InventoryRepository {
         String query = "SELECT * FROM all_cars_view";
         return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Car.class));
     }
+
+
+    ///////////////////// Sort metoder/////////////////////////////
+
+    public List<Car> getSortedCars(String sortType) {
+        return switch (sortType) {
+            case "priceAscending" -> sortByPriceAscending();
+            case "priceDescending" -> sortByPriceDescending();
+            case "brandAscending" -> sortByBrandAscending();
+            case "brandDescending" -> sortByBrandDescending();
+            default -> new ArrayList<>();
+        };
+        }
+
+    public List<Car> sortByPriceAscending(){
+        String query = "SELECT * FROM all_cars_view ORDER BY brand ASC";
+        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Car.class));
+    }
+
+    public List<Car> sortByPriceDescending(){
+        String query = "SELECT * FROM all_cars_view ORDER BY price DESC";
+        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Car.class));
+    }
+
+    public List<Car> sortByBrandAscending(){
+        String query = "SELECT * FROM all_cars_view ORDER BY brand ASC";
+        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Car.class));
+    }
+    public List<Car> sortByBrandDescending(){
+        String query = "SELECT * FROM all_cars_view ORDER BY brand DESC";
+        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Car.class));
+    }
+
+    //////////////////////////////////////////////////////////////////////////////
 }
+
+
+
+

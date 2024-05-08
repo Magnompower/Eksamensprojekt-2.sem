@@ -33,4 +33,8 @@ public class InventoryService {
     public List<Car> getAllCars() {
         return inventoryRepository.getAllCars();
     }
+
+    public List<Car> getSortedCars(String sortType) {
+        return inventoryRepository.getSortedCars(sortType);
+    }
 }
