@@ -16,6 +16,7 @@
         <th>Car model</th>
         <th>Car Price</th>
     </tr>
+
     </thead>
     <tbody>
     <tr>
@@ -25,6 +26,19 @@
         <td class="car-price" th:text="${Car.price}"></td>
     </tr>
     </tbody>
+
+    <tr>
+        <th>License plate</th>
+        <th>Car State</th>
+        <th>Transmission Type</th>
+        <th>Registration Fee</th>
+    </tr>
+    <tr>
+        <td class="license-plate" th:text="${Car.licensePlateNumber}"> </td>
+        <td class="car-state" th:text="${Car.getCarState()}"></td>
+        <td class="Transmission-type" th:text="${Car.transmissionType}"></td>
+        <td class="registration-fee" th:text="${Car.registrationFee}"></td>
+    </tr>
 </table>
 
 <form action="/createLease" method="post" class="lease-form">
@@ -49,8 +63,20 @@
         <select id="customerId" name="customerId" class="customer-select">
             <option th:each="customer : ${Customers}" th:value="${customer.customerId}" th:text="${customer.firstName + ' - ' + customer.customerId}"></option>
         </select>
+        <br>
     </div>
     <button type="submit" class="submit-btn">Create lease</button>
+
+
+    <div>
+        <br>
+    </div>
+
 </form>
+<!-- Image
+<div class="image-container">
+    <img class="image" th:src="${car.image_url}" alt="Car Image">
+</div>
+-->
 </body>
 </html>

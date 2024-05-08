@@ -35,9 +35,10 @@ nav ul li a {
 main {
     padding: 20px;
 }
+
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 10px;
     position: relative;
 }
@@ -51,24 +52,27 @@ main {
 }
 
 .image-container {
-    margin-left: 20px;
+    margin-left: 190px;
+    margin-bottom: 200px;
+    position: relative;
+    top: -200px;
 }
 
 .image {
-    width: 150px;
-    height: 150px;
+    width: 230px;
+    height: 200px;
 }
 
 
 .car-details {
-    flex: 1; /* Allow text container to grow to fill available space */
+    flex: 1;
 }
 
 
 .ItemLink {
-     height: 10px;
-     text-align: left;
- }
+    height: 10px;
+    text-align: left;
+}
 
 .lease-box {
     border: 1px solid #ccc;
