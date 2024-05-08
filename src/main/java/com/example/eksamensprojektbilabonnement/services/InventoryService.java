@@ -6,6 +6,7 @@ import com.example.eksamensprojektbilabonnement.repositories.InventoryRepository
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -35,6 +36,13 @@ public class InventoryService {
     }
 
     public List<Car> getSortedCars(String sortType) {
-        return inventoryRepository.getSortedCars(sortType);
+            return switch (sortType) {
+                case "priceAscending" -> inventoryRepository.getSortedCars("price", "ASC");
+                case "priceDescending" -> inventoryRepository.getSortedCars("price", "DESC");
+                case "brandAscending" -> inventoryRepository.getSortedCars("brand", "ASC");
+                case "brandDescending" -> inventoryRepository.getSortedCars("brand", "DESC");
+                default -> new ArrayList<>();
+            };
+        }
     }
-}
+

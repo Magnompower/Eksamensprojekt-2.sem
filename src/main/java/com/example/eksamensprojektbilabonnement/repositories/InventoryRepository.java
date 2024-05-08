@@ -52,38 +52,12 @@ public class InventoryRepository {
     }
 
 
-    ///////////////////// Sort metoder/////////////////////////////
-
-    public List<Car> getSortedCars(String sortType) {
-        return switch (sortType) {
-            case "priceAscending" -> sortByPriceAscending();
-            case "priceDescending" -> sortByPriceDescending();
-            case "brandAscending" -> sortByBrandAscending();
-            case "brandDescending" -> sortByBrandDescending();
-            default -> new ArrayList<>();
-        };
+    public List<Car> getSortedCars(String sortByColumn, String sortDirection) {
+        String query = "SELECT * FROM all_cars_view ORDER BY " + sortByColumn + " " + sortDirection;
+        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Car.class));
         }
 
-    public List<Car> sortByPriceAscending(){
-        String query = "SELECT * FROM all_cars_view ORDER BY brand ASC";
-        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Car.class));
-    }
 
-    public List<Car> sortByPriceDescending(){
-        String query = "SELECT * FROM all_cars_view ORDER BY price DESC";
-        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Car.class));
-    }
-
-    public List<Car> sortByBrandAscending(){
-        String query = "SELECT * FROM all_cars_view ORDER BY brand ASC";
-        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Car.class));
-    }
-    public List<Car> sortByBrandDescending(){
-        String query = "SELECT * FROM all_cars_view ORDER BY brand DESC";
-        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Car.class));
-    }
-
-    //////////////////////////////////////////////////////////////////////////////
 }
 
 
