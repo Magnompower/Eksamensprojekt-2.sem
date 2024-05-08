@@ -22,16 +22,31 @@
 <th>Customer ID</th>
 </thead>
 
-<tbody>
-<tr th:each="lease : ${leases}">
-    <td th:text="${lease.leaseId}"> </td>
-    <td th:text="${lease.car.chassisNumber}"></td>
-    <td th:text="${lease.startDate}"></td>
-    <td th:text="${lease.endDate}"></td>
-    <td th:text="${lease.terms}"></td>
-    <td th:text="${lease.customer.customerId}"></td>
-</tr>
-</tbody>
+
+    <tbody>
+    <tr th:if="${leases != null and leases.isEmpty()}">
+        <td colspan="6">No leases available</td>
+    </tr>
+    <tr>
+        <td>
+            <div class="lease-container">
+                <div th:each="lease : ${leases}" class="lease-box">
+                    <p th:text="${lease.leaseId}"></p>
+                    <p th:text="${lease.carChassisNumber}"></p>
+                    <p th:text="${lease.startDate}"></p>
+                    <p th:text="${lease.endDate}"></p>
+                    <p th:text="${lease.terms}"></p>
+                    <p th:text="${lease.customerId}"></p>
+                    <!-- Edit button -->
+                    <button class="edit-button">Edit</button>
+                </div>
+            </div>
+        </td>
+    </tr>
+    </tbody>
+
+
+
 </table>
 </body>
 </html>

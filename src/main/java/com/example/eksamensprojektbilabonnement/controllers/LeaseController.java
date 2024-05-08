@@ -30,7 +30,7 @@ public class LeaseController {
     @PostMapping ("/createLease")
     public String createLease(Model model, @RequestParam String carChassisNumber, @RequestParam int customerId, @RequestParam LocalDate startDate, @RequestParam LocalDate endDate, @RequestParam String terms)  {
     leaseService.createLease(carChassisNumber, customerId, startDate, endDate, terms);
-
+        model.addAttribute("leases", leaseService.getLeases());
         return "home/leaseoverview";
     }
 }
