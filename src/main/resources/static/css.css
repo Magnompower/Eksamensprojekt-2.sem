@@ -69,3 +69,42 @@ main {
      height: 10px;
      text-align: left;
  }
+
+.lease-box {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+    background-color: #f8f8f8; /* Light gray background */
+    width: calc(25% - 20px); /* Set the width of each box to 25% of the container minus margins */
+    margin-right: 20px; /* Add margin between boxes */
+    box-sizing: border-box; /* Include padding and border in box size */
+}
+
+/* Style for the container */
+.lease-container {
+    display: flex; /* Use flexbox to arrange boxes side by side */
+    flex-wrap: wrap; /* Allow boxes to wrap to the next line if there's not enough space */
+    justify-content: flex-start; /* Align boxes to the start of the container */
+}
+
+/* Style for the edit button */
+.edit-button {
+    background-color: #007bff; /* Blue color for the button */
+    color: #fff; /* White text color */
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition */
+}
+
+.edit-button:hover {
+    background-color: #0056b3; /* Darker blue color on hover */
+}
+
+
+.edit-button:hover {
+    background-color: #0056b3;
+}
+

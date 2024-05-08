@@ -4,15 +4,31 @@ import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
 
 import java.time.LocalDate;
 
+
 public class LeaseAgreement {
     private int leaseId;
-    private Car car;
-    private Customer customer;
+    private String carChassisNumber;
+    private int customerId;
     private boolean isConcluded;
     private String terms;
     private LocalDate startDate;
     private LocalDate endDate;
 
+    public int getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(int customerId) {
+        this.customerId = customerId;
+    }
+
+    public String getCarChassisNumber() {
+        return carChassisNumber;
+    }
+
+    public void setCarChassisNumber(String carChassisNumber) {
+        this.carChassisNumber = carChassisNumber;
+    }
 
     public int getLeaseId() {
         return leaseId;
@@ -49,21 +65,9 @@ public class LeaseAgreement {
     public LeaseAgreement(){
     }
 
-    public Car getCar() {
-        return car;
-    }
 
-    public void setCar(Car car) {
-        this.car = car;
-    }
 
-    public Customer getCustomer() {
-        return customer;
-    }
 
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
 
     public boolean isConcluded() {
         return isConcluded;

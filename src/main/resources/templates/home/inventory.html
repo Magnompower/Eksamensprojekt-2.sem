@@ -21,6 +21,25 @@
 </nav>
 
 <main>
+<<<<<<<<< Temporary merge branch 1
+
+    <main>
+        <div class="grid-container">
+            <div class="grid-item" th:each="car : ${GasCar}">
+                <div class="car-details">
+                    <h2 th:text="${#numbers.formatInteger(car.price, 0)}"></h2>
+                    <p th:text="${car.brand}"></p>
+                    <p th:text="${car.model}"></p>
+                    <div class="ItemLink">
+                        <form action="/view_car" method="get">
+                            <input type="hidden" name="carChassisNumber" th:value="${car.chassisNumber}">
+                            <button class="button" type="submit">View</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="image-container">
+                    <img class="image" th:src="${car.image_url}" alt="Car Image">
+=========
     <div class="grid-container">
         <div class="grid-item" th:each="car : ${cars}">
             <div class="grid-content">
@@ -33,9 +52,10 @@
                         <input type="hidden" name="carChassisNumber" th:value="${car.chassisNumber}">
                         <button class="button" type="submit">View</button>
                     </form>
+                    <div class="image-container">
+                        <img class="image" th:src="${car.image_url}" alt="Car Image">
+                    </div>
                 </div>
-                <div class="image-container">
-                    <img class="image" th:src="${car.image_url}" alt="Car Image">
                 </div>
             </div>
         </div>
