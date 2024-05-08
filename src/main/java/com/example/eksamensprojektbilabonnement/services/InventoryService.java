@@ -36,7 +36,15 @@ public class InventoryService {
         return inventoryRepository.getAllCars();
     }
 
-    public List<Car> getSortedCars(String sortType, String filterBy) {
+    public List<Car> getFilteredCars(String filterBy){
+        if (filterBy.equals("ALL")) {
+            return inventoryRepository.getAllCars();
+        } else {
+            return inventoryRepository.getFilteredCars(filterBy);
+        }
+    }
+
+    public List<Car> setSortCriteria(String sortType, String filterBy){
         String sortByColumn = null;
         String sortDirection = null;
 
@@ -58,13 +66,17 @@ public class InventoryService {
                 sortDirection = "DESC";
                 break;
         }
-
+        return getSortedAndFilteredCars(sortByColumn, sortDirection, filterBy);
+    }
+    public List<Car> getSortedAndFilteredCars(String sortByColumn, String sortDirection, String filterBy) {
         if (filterBy.equals("ALL")) {
             return inventoryRepository.getSortedCars(sortByColumn, sortDirection);
         } else {
             return inventoryRepository.getSortedAndFilteredCars(filterBy, sortByColumn, sortDirection);
         }
     }
+
+
     public void updateCarState(String chassisNumber, String CarState) {
      //   inventoryRepository.getCarByChassisNumber(chassisNumber);
         inventoryRepository.updateCarState(chassisNumber, CarState);

@@ -56,6 +56,11 @@ public class InventoryRepository {
         return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Car.class));
     }
 
+    public List<Car> getFilteredCars(String filterBy){
+        String query = "SELECT * FROM all_cars_view WHERE car_state = ?";
+        return jdbcTemplate.query(query, new Object[]{filterBy},BeanPropertyRowMapper.newInstance(Car.class));
+    }
+
     public List<Car> getSortedAndFilteredCars(String filterBy, String sortByColumn, String sortDirection) {
         String query = "SELECT * FROM all_cars_view WHERE car_state = ? ORDER BY " + sortByColumn + " " + sortDirection;
         return jdbcTemplate.query(query, new Object[]{filterBy},BeanPropertyRowMapper.newInstance(Car.class));
