@@ -36,9 +36,9 @@ public class InventoryController {
         return "home/view_car";
     }
 
-    @GetMapping ("/sort_cars")
-    public String SortCars(@RequestParam String sortType, RedirectAttributes redirectAttributes){
-      List<Car> sortedCars = inventoryService.getSortedCars(sortType);
+    @GetMapping ("/sort_and_filter_cars")
+    public String SortCars(@RequestParam String sortType, @RequestParam String filterBy, RedirectAttributes redirectAttributes){
+      List<Car> sortedCars = inventoryService.getSortedCars(sortType, filterBy);
       redirectAttributes.addFlashAttribute("sortedCars", sortedCars);
       return "redirect:/show_inventory_sorted";
     }
