@@ -33,6 +33,9 @@
                         <input type="hidden" name="carChassisNumber" th:value="${car.chassisNumber}">
                         <button class="button" type="submit">View</button>
                     </form>
+                    <div class="image-container">
+                        <img class="image" th:src="${car.image_url}" alt="Car Image">
+                    </div>
                 </div>
             </div>
         </div>
