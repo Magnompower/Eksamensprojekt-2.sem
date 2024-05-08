@@ -1,5 +1,4 @@
-//todo create html for a overview for all leases
-
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -9,44 +8,23 @@
 
 </head>
 <body>
-<h2>Lease Overview</h2>
-<table>
-
-
-<thead>
-<th>Lease ID</th>
-<th>Car Chassis Number</th>
-<th>Start Date</th>
-<th>End Date</th>
-<th>Terms</th>
-<th>Customer ID</th>
-</thead>
-
-
-    <tbody>
-    <tr th:if="${leases != null and leases.isEmpty()}">
-        <td colspan="6">No leases available</td>
-    </tr>
-    <tr>
-        <td>
-            <div class="lease-container">
-                <div th:each="lease : ${leases}" class="lease-box">
-                    <p th:text="${lease.leaseId}"></p>
-                    <p th:text="${lease.carChassisNumber}"></p>
-                    <p th:text="${lease.startDate}"></p>
-                    <p th:text="${lease.endDate}"></p>
-                    <p th:text="${lease.terms}"></p>
-                    <p th:text="${lease.customerId}"></p>
-                    <!-- Edit button -->
-                    <button class="edit-button">Edit</button>
-                </div>
+<div class="container">
+    <h2 class="title">Lease Overview</h2>
+    <div class="lease-grid">
+        <div class="lease-box" th:each="lease : ${leases}">
+            <div class="lease-header">
+                <h3>Lease ID: <span th:text="${lease.leaseId}"></span></h3>
+                <button class="edit-button">Edit</button>
             </div>
-        </td>
-    </tr>
-    </tbody>
-
-
-
-</table>
+            <div class="lease-content">
+                <p><strong>Car Chassis Number:</strong> <span th:text="${lease.getCarChassisNumber()}"></span></p>
+                <p><strong>Start Date:</strong> <span th:text="${lease.startDate}"></span></p>
+                <p><strong>End Date:</strong> <span th:text="${lease.endDate}"></span></p>
+                <p><strong>Terms:</strong> <span th:text="${lease.terms}"></span></p>
+                <p><strong>Customer ID:</strong> <span th:text="${lease.customerId}"></span></p>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 </html>
