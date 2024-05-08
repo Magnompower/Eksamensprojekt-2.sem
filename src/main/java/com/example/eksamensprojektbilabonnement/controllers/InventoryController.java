@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
 import com.example.eksamensprojektbilabonnement.services.InventoryService;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -47,5 +48,11 @@ public class InventoryController {
     public String showInventorySorted(@ModelAttribute("sortedCars") List<Car> sortedCars, Model model) {
         model.addAttribute("cars", sortedCars);
         return "home/inventory";
+    }
+
+    @PostMapping("/update_car")
+    public String updateCar(@RequestParam String chassisNumber, @RequestParam String CarState) {
+        inventoryService.updateCarState(chassisNumber, CarState);
+        return "redirect:/inventory";
     }
 }
