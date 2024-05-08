@@ -11,6 +11,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -62,4 +63,19 @@ public class InventoryRepository {
         jdbcTemplate.update(queryElectricCar, CarState, chassisNumber);
         jdbcTemplate.update(queryElectricVan, CarState, chassisNumber);
     }
+
+    public List<Car> getSortedCars(String sortByColumn, String sortDirection) {
+        String query = "SELECT * FROM all_cars_view ORDER BY " + sortByColumn + " " + sortDirection;
+        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Car.class));
+    }
+
+    public List<Car> getSortedAndFilteredCars(String filterBy, String sortByColumn, String sortDirection) {
+        String query = "SELECT * FROM all_cars_view WHERE car_state = ? ORDER BY " + sortByColumn + " " + sortDirection;
+        return jdbcTemplate.query(query, new Object[]{filterBy},BeanPropertyRowMapper.newInstance(Car.class));
+        }
+
 }
+
+
+
+

@@ -8,7 +8,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
 import com.example.eksamensprojektbilabonnement.services.InventoryService;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 import java.util.List;
@@ -31,13 +33,27 @@ public class InventoryController {
     public String view_car(@RequestParam String carChassisNumber, Model model) {
         Car car = inventoryService.getCarByChassisNumber(carChassisNumber);
         model.addAttribute("Car", car);
-
         model.addAttribute("Customers", customerService.getAllCustomers());
         return "home/view_car";
     }
+
     @PostMapping("/update_car")
     public String updateCar(@RequestParam String chassisNumber, @RequestParam String CarState) {
         inventoryService.updateCarState(chassisNumber, CarState);
         return "redirect:/inventory";
+    }
+
+    @GetMapping ("/sort_and_filter_cars")
+    public String SortCars(@RequestParam String sortType, @RequestParam String filterBy, RedirectAttributes redirectAttributes){
+      List<Car> sortedCars = inventoryService.getSortedCars(sortType, filterBy);
+      redirectAttributes.addFlashAttribute("sortedCars", sortedCars);
+      return "redirect:/show_inventory_sorted";
+    }
+
+    @GetMapping("/show_inventory_sorted")
+    public String showInventorySorted(@ModelAttribute("sortedCars") List<Car> sortedCars, Model model) {
+        model.addAttribute("cars", sortedCars);
+        return "home/inventory";
+
     }
 }

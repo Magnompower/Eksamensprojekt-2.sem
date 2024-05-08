@@ -7,6 +7,7 @@ import com.example.eksamensprojektbilabonnement.utilities.CarState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -39,4 +40,36 @@ public class InventoryService {
         inventoryRepository.updateCarState(chassisNumber, CarState);
     }
 
+
+    public List<Car> getSortedCars(String sortType, String filterBy) {
+        String sortByColumn = null;
+        String sortDirection = null;
+
+        switch (sortType) {
+            case "priceAscending":
+                sortByColumn = "price";
+                sortDirection = "ASC";
+                break;
+            case "priceDescending":
+                sortByColumn = "price";
+                sortDirection = "DESC";
+                break;
+            case "brandAscending":
+                sortByColumn = "brand";
+                sortDirection = "ASC";
+                break;
+            case "brandDescending":
+                sortByColumn = "brand";
+                sortDirection = "DESC";
+                break;
+        }
+
+        if (filterBy.equals("ALL")) {
+            return inventoryRepository.getSortedCars(sortByColumn, sortDirection);
+        } else {
+            return inventoryRepository.getSortedAndFilteredCars(filterBy, sortByColumn, sortDirection);
+        }
+    }
 }
+
+
