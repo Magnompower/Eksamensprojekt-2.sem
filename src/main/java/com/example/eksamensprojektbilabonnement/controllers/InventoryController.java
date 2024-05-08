@@ -37,6 +37,12 @@ public class InventoryController {
         return "home/view_car";
     }
 
+    @PostMapping("/update_car")
+    public String updateCar(@RequestParam String chassisNumber, @RequestParam String CarState) {
+        inventoryService.updateCarState(chassisNumber, CarState);
+        return "redirect:/inventory";
+    }
+
     @GetMapping ("/sort_and_filter_cars")
     public String SortCars(@RequestParam(required = false) String sortType, @RequestParam(required = false) String filterBy, RedirectAttributes redirectAttributes){
 
@@ -59,11 +65,7 @@ public class InventoryController {
     public String showInventorySorted(@ModelAttribute("cars") List<Car> cars, Model model) {
         model.addAttribute("cars", cars);
         return "home/inventory";
+
     }
 
-    @PostMapping("/update_car")
-    public String updateCar(@RequestParam String chassisNumber, @RequestParam String CarState) {
-        inventoryService.updateCarState(chassisNumber, CarState);
-        return "redirect:/inventory";
-    }
 }
