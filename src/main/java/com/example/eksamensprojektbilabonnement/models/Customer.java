@@ -6,7 +6,7 @@ public class Customer {
     private String lastName;
     private int phoneNumber;
     private String email;
-    private String adress;
+    private String address;
     private int zipCode;
     private String city;
     private String country;
@@ -56,12 +56,12 @@ public class Customer {
         this.email = email;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public int getZipCode() {
