@@ -3,6 +3,7 @@ package com.example.eksamensprojektbilabonnement.services;
 import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
 import com.example.eksamensprojektbilabonnement.models.inheritance.GasCar;
 import com.example.eksamensprojektbilabonnement.repositories.InventoryRepository;
+import com.example.eksamensprojektbilabonnement.utilities.CarState;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -33,4 +34,9 @@ public class InventoryService {
     public List<Car> getAllCars() {
         return inventoryRepository.getAllCars();
     }
+    public void updateCarState(String chassisNumber, String CarState) {
+     //   inventoryRepository.getCarByChassisNumber(chassisNumber);
+        inventoryRepository.updateCarState(chassisNumber, CarState);
+    }
+
 }

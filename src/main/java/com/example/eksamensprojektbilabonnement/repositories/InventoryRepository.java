@@ -46,7 +46,20 @@ public class InventoryRepository {
     }
 
     public List<Car> getAllCars() {
+
         String query = "SELECT * FROM all_cars_view";
         return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Car.class));
+    }
+
+    public void updateCarState(String chassisNumber, String CarState) {
+        String queryGasCar = "UPDATE gas_cars SET car_state = ? WHERE chassis_number = ?";
+        String queryGasVan = "UPDATE gas_vans SET car_state = ? WHERE chassis_number = ?";
+        String queryElectricCar = "UPDATE electric_cars SET car_state = ? WHERE chassis_number = ?";
+        String queryElectricVan = "UPDATE electric_vans SET car_state = ? WHERE chassis_number = ?";
+
+        jdbcTemplate.update(queryGasCar, CarState, chassisNumber);
+        jdbcTemplate.update(queryGasVan, CarState, chassisNumber);
+        jdbcTemplate.update(queryElectricCar, CarState, chassisNumber);
+        jdbcTemplate.update(queryElectricVan, CarState, chassisNumber);
     }
 }

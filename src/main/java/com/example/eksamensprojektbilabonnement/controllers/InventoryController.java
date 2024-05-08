@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
 import com.example.eksamensprojektbilabonnement.services.InventoryService;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -33,5 +34,10 @@ public class InventoryController {
 
         model.addAttribute("Customers", customerService.getAllCustomers());
         return "home/view_car";
+    }
+    @PostMapping("/update_car")
+    public String updateCar(@RequestParam String chassisNumber, @RequestParam String CarState) {
+        inventoryService.updateCarState(chassisNumber, CarState);
+        return "redirect:/inventory";
     }
 }
