@@ -38,8 +38,9 @@ public class InventoryController {
     }
 
     @PostMapping("/update_car")
-    public String updateCar(@RequestParam String chassisNumber, @RequestParam String CarState) {
-        inventoryService.updateCarState(chassisNumber, CarState);
+    public String updateCar(@RequestParam String chassisNumber, @RequestParam String carState) {
+        String carTable = inventoryService.getCarTable(chassisNumber);
+        inventoryService.updateCarState(chassisNumber, carState, carTable);
         return "redirect:/inventory";
     }
 

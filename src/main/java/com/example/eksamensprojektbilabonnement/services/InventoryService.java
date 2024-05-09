@@ -76,10 +76,13 @@ public class InventoryService {
         }
     }
 
+    public String getCarTable(String chassisNumber) {
+        return inventoryRepository.getCarTable(chassisNumber);
+    }
 
-    public void updateCarState(String chassisNumber, String CarState) {
-     //   inventoryRepository.getCarByChassisNumber(chassisNumber);
-        inventoryRepository.updateCarState(chassisNumber, CarState);
+
+    public void updateCarState(String chassisNumber, String carState, String carTable) {
+        inventoryRepository.updateCarState(chassisNumber, carState, carTable);
     }
 
 }
