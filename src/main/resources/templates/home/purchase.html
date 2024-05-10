@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="/inventory.css">
+</head>
+<body>
+
+<main>
+    <form action="/purchaseSelected" method="post">
+
+
+    <div class="grid-container">
+        <div class="grid-item" th:each="car : ${cars}">
+            <div class="grid-content">
+                <h2 th:text="${#numbers.formatInteger(car.price, 0)}"></h2>
+                <p> Chassis Number : <span th:text ="${car.chassisNumber}"></span></p>
+                <p>Brand: <span th:text="${car.brand}"></span></p>
+                <p>Model: <span th:text="${car.model}"></span></p>
+                <p>Registration Fee: <span th:text="${car.registrationFee}"></span></p>
+                <p>License Plate: <span  th:text="${car.licensePlateNumber}"></span></p>
+                <p>State: <span th:text="${car.carState}"></span></p>
+                <p>Transmission Type: <span th:text="${car.transmissionType}"></span></p>
+                <p>KM per Liter: <span th:text="${car.kmPerLiter}"></span></p>
+                <p>Fuel Type: <span th:text="${car.fuelType}"></span></p>
+                <p>Carbon Emission per KM: <span th:text="${car.carbonEmissionPerKm}"></span></p>
+                <input type="checkbox" name="selectedCars">
+
+                <input type="hidden" name="licensePlate" th:value="${car.licensePlateNumber}">
+                <input type="hidden" name="carChassisNumber" th:value="${car.chassisNumber}">
+                <input type="hidden" name="price" th:value="${car.price}">
+                <input type="hidden" name="brand" th:value="${car.brand}">
+                <input type="hidden" name="carModel" th:value="${car.model}">
+                <input type="hidden" name="registrationFee" th:value="${car.registrationFee}">
+
+                <input type="hidden" name="carState" th:value="${car.carState}">
+                <input type="hidden" name="transmissionType" th:value="${car.transmissionType}">
+                <input type="hidden" name="kmPerLiter" th:value="${car.kmPerLiter}">
+                <input type="hidden" name="fuelType" th:value="${car.fuelType}">
+                <input type="hidden" name="carbonEmissionPerKm" th:value="${car.carbonEmissionPerKm}">
+                <input type="hidden" name="image_url" value="https://imgur.com/a/Xjtvbjn">
+
+
+                <div class="image-container">
+                    <img class="image" src="https://imgur.com/a/Xjtvbjn" alt="Car Image">
+                </div>
+            </div>
+            <button type="submit"> Purchase Selected</button>
+        </div>
+    </div>
+    </form>
+</main>
+
+</body>
+</html>
