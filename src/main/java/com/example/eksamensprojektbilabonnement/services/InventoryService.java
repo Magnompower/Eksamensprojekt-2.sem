@@ -70,6 +70,10 @@ public class InventoryService {
             return inventoryRepository.getSortedAndFilteredCars(filterBy, sortByColumn, sortDirection);
         }
     }
+
+    public List<Car> getLeasedCars() {
+        return inventoryRepository.findAllByIsLeased(true);
+    }
 }
 
 

@@ -71,8 +71,13 @@ public class InventoryRepository {
 
     public List<Car> getSortedAndFilteredCars(String filterBy, String sortByColumn, String sortDirection) {
         String query = "SELECT * FROM all_cars_view WHERE car_state = ? ORDER BY " + sortByColumn + " " + sortDirection;
-        return jdbcTemplate.query(query, new Object[]{filterBy},BeanPropertyRowMapper.newInstance(Car.class));
-        }
+        return jdbcTemplate.query(query, new Object[]{filterBy}, BeanPropertyRowMapper.newInstance(Car.class));
+    }
+
+    public List<Car> findAllByIsLeased(boolean isLeased) {
+        String query = "SELECT * FROM all_cars_view WHERE car_state = 'RENTED'";
+        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Car.class));
+    }
 
 }
 
