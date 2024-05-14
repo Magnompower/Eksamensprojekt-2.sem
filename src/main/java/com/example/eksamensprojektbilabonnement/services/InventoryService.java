@@ -1,5 +1,6 @@
 package com.example.eksamensprojektbilabonnement.services;
 
+import com.example.eksamensprojektbilabonnement.models.LeaseAgreement;
 import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
 import com.example.eksamensprojektbilabonnement.models.inheritance.GasCar;
 import com.example.eksamensprojektbilabonnement.repositories.InventoryRepository;

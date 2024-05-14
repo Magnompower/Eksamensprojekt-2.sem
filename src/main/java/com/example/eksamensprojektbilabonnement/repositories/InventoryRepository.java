@@ -1,6 +1,7 @@
 package com.example.eksamensprojektbilabonnement.repositories;
 
 
+import com.example.eksamensprojektbilabonnement.models.LeaseAgreement;
 import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
 import com.example.eksamensprojektbilabonnement.models.inheritance.ElectricCar;
 import com.example.eksamensprojektbilabonnement.models.inheritance.GasCar;
@@ -78,7 +79,6 @@ public class InventoryRepository {
         String query = "SELECT * FROM all_cars_view WHERE car_state = 'RENTED'";
         return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Car.class));
     }
-
 }
 
 

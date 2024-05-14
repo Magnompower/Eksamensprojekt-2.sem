@@ -25,6 +25,7 @@ public class LeaseController {
     @GetMapping("/leaseOverview")
     public  String leaseOverview(Model model) {
         model.addAttribute("leases", leaseService.getLeases());
+        model.addAttribute("localDateTime", LocalDate.now());
         return "home/leaseoverview";
     }
     @PostMapping ("/createLease")

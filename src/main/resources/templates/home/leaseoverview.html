@@ -20,6 +20,7 @@
                 <p><strong>Car Chassis Number:</strong> <span th:text="${lease.getCarChassisNumber()}"></span></p>
                 <p><strong>Start Date:</strong> <span th:text="${lease.startDate}"></span></p>
                 <p><strong>End Date:</strong> <span th:text="${lease.endDate}"></span></p>
+                <p th:if="${#temporals.format(lease.endDate, 'yyyy-MM-dd')} &lt; ${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}"><strong><font color = red>Past Due!</font></strong></p>
                 <p><strong>Terms:</strong> <span th:text="${lease.terms}"></span></p>
                 <p><strong>Customer ID:</strong> <span th:text="${lease.customerId}"></span></p>
             </div>
