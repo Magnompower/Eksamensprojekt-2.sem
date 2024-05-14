@@ -37,12 +37,9 @@ public class CarRepository {
     }
 
     public void createCar(String carChassisNumber, String carModel, String brand, double price, double registrationFee, double kmPerLiter, double carbonEmissionPerKm, String licensePlate, CarState carState, TransmissionType transmissionType, FuelType fuelType, String image_url) {
-        String query = "INSERT INTO gas_cars (chassis_number, license_plate_number, brand, model, registration_fee, price, car_state, transmission_type, km_per_liter, fuel_type, carbon_emission_per_km, image_url ) " +
+        String query = "INSERT INTO gas_cars (chassis_number, license_plate_number, brand, model, registration_fee, price, car_state, transmission_type, km_per_liter, fuel_type, carbon_emission_per_km, image_url) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
             jdbcTemplate.update(query, carChassisNumber, licensePlate, brand, carModel, registrationFee, price, carState.name(), transmissionType.name(), kmPerLiter, fuelType.name(), carbonEmissionPerKm, image_url);
-
-
     }
 }
 

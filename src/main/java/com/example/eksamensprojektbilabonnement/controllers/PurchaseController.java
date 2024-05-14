@@ -1,5 +1,4 @@
 package com.example.eksamensprojektbilabonnement.controllers;
-
 import com.example.eksamensprojektbilabonnement.services.CarService;
 import com.example.eksamensprojektbilabonnement.utilities.CarState;
 import com.example.eksamensprojektbilabonnement.utilities.FuelType;
@@ -11,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class PurchaseController {
     @Autowired
@@ -19,14 +20,52 @@ public class PurchaseController {
 
     @GetMapping("/purchase")
     public String showRandomCars( Model model) {
-      model.addAttribute("cars",  carService.generateRandomCars(5));
+        //Man kunne spare mange kodelinjre hvis cars blev instantieret i klassen i stedet. Man kunne slippe for alle
+        // de requestparams der er i metoden under. Men så har den scope i hele klassen, og det er måske dumt med
+        //en controller?
+        model.addAttribute("cars",  carService.generateRandomCars(5));
         return "home/purchase";
     }
-    @PostMapping("/purchaseSelected")
-    public String purchaseSelected(Model model, @RequestParam String carChassisNumber, @RequestParam String carModel, @RequestParam String brand, @RequestParam double price, @RequestParam double registrationFee, @RequestParam double kmPerLiter, @RequestParam double carbonEmissionPerKm, @RequestParam String licensePlate, @RequestParam String image_url, @RequestParam CarState carState, @RequestParam TransmissionType transmissionType, @RequestParam FuelType fuelType) {
-        carService.createCar(carChassisNumber, carModel, brand, price, registrationFee, kmPerLiter, carbonEmissionPerKm, licensePlate, carState, transmissionType, fuelType, image_url);
 
-        return "redirect:/inventory";
-    }
+
+    @PostMapping("/purchaseSelected")
+    public String purchaseSelected(@RequestParam("selectedCars") List<String> selectedCars,
+                                   @RequestParam("carChassisNumber") List<String> carChassisNumbers,
+                                   @RequestParam("carModel") List<String> carModels,
+                                   @RequestParam("brand") List<String> brands,
+                                   @RequestParam("price") List<Double> prices,
+                                   @RequestParam("registrationFee") List<Double> registrationFees,
+                                   @RequestParam("kmPerLiter") List<Double> kmPerLiters,
+                                   @RequestParam("carbonEmissionPerKm") List<Double> carbonEmissionPerKms,
+                                   @RequestParam("licensePlate") List<String> licensePlates,
+                                   @RequestParam("carState") List<CarState> carStates,
+                                   @RequestParam("transmissionType") List<TransmissionType> transmissionTypes,
+                                   @RequestParam("fuelType") List<FuelType> fuelTypes) {
+
+
+        for (String chassisNumber : selectedCars) {
+                int index = carChassisNumbers.indexOf(chassisNumber);
+                // Den bruger stelnumrene i selectedCars til at finde deres indeks i carChassisNumbers, som
+                // indeholder alle stelnumrene i viewet. Så opretter den biler kun for dem der er selected.
+                String carModel = carModels.get(index);
+                String brand = brands.get(index);
+                double price = prices.get(index);
+                double registrationFee = registrationFees.get(index);
+                double kmPerLiter = kmPerLiters.get(index);
+                double carbonEmissionPerKm = carbonEmissionPerKms.get(index);
+                String licensePlate = licensePlates.get(index);
+                String imageUrl = null;
+                CarState carState = carStates.get(index);
+                TransmissionType transmissionType = transmissionTypes.get(index);
+                FuelType fuelType = fuelTypes.get(index);
+
+                carService.createCar(chassisNumber, carModel, brand, price, registrationFee, kmPerLiter,
+                        carbonEmissionPerKm, licensePlate, carState, transmissionType,
+                        fuelType, imageUrl);
+            }
+            return "redirect:/inventory";
+        }
+
+
 
 }
