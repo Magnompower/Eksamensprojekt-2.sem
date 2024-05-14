@@ -26,14 +26,14 @@ public class LeaseController {
     public  String leaseOverview(Model model) {
         model.addAttribute("leases", leaseService.getLeases());
         model.addAttribute("localDateTime", LocalDate.now());
-        return "home/leaseoverview";
+        return "home/lease_overview";
     }
     @PostMapping ("/createLease")
-    public String createLease(Model model, @RequestParam String carChassisNumber, @RequestParam int customerId, @RequestParam LocalDate startDate, @RequestParam LocalDate endDate, @RequestParam String terms)  {
+    public String createLease(Model model, @RequestParam String carChassisNumber, @RequestParam int customerId,
+                              @RequestParam LocalDate startDate, @RequestParam LocalDate endDate,
+                              @RequestParam String terms)  {
     leaseService.createLease(carChassisNumber, customerId, startDate, endDate, terms);
         model.addAttribute("leases", leaseService.getLeases());
         return "redirect:/success.html";
-
-
     }
 }

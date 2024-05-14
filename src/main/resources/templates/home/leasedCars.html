@@ -4,7 +4,7 @@
 <header>
     <section class="headerright">
         <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
-        <link rel="stylesheet" href="/leasedCars.css">
+        <link rel="stylesheet" href="/leased_cars.css">
     </section>
     <section class="headercenter">
         <h1>Bilabonnement A/S</h1>
@@ -12,7 +12,7 @@
 </header>
 <main>
     <div class="leasingPrice">
-        <h3>Total pris for udlejet biler: </h3>
+        <h3>Total pris for udlejede biler: </h3>
         <h2><span th:text="${#numbers.formatInteger(totalPrice, 0)} + ' DKK'"> </span></h2>
         <h2><span th:text="'≈ ' + ${#numbers.formatInteger(totalPrice * 0.13, 0)} + ' EURO'"></span></h2>
     </div>
