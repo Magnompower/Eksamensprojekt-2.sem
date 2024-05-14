@@ -10,28 +10,6 @@ header, footer {
     padding: 20px;
 }
 
-nav {
-    background-color: #666;
-    padding: 10px;
-    text-align: center;
-}
-
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 10px;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
 main {
     padding: 20px;
 }
@@ -50,14 +28,6 @@ main {
     align-items: center;
 }
 
-.image-container {
-    margin-left: 20px;
-}
-
-.image {
-    width: 150px;
-    height: 150px;
-}
 
 
 .car-details {

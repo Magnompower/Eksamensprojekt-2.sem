@@ -10,7 +10,11 @@
         <h1>Bilabonnement A/S</h1>
     </section>
 </header>
+<div th:insert="~{home/fragments :: logo}"></div>
+<div th:insert="~{home/fragments :: navbar}"></div>
 <main>
+
+
     <section class="centertext">
         <form th:action="@{/validate}" method="post">
             <p th:text="${error}"></p>
@@ -35,11 +39,9 @@
     <section class="rights">
     </section>
 </main>
-</body>
 <footer>
-    <span class="brand-name"><sup>©</sup> 2024 IntelliJKingz<sup>™<br>All rights reserved.</sup></span>
-    <span class="brand-name">
-        <a href="https://github.com/Magnompower/Eksamensprojekt-2.sem" target="_blank" th:href="@{https://github.com/Magnompower/Eksamensprojekt-2.sem}">Github</a>
-    </span>
+    <div th:insert="~{home/fragments :: navbar}"></div>
 </footer>
+</body>
+
 </html>
