@@ -43,11 +43,12 @@
 <form class="updateCar" action="/update_car" method="post">
     <label for="chassisNumber">Update car:</label>
     <input type="text" id="chassisNumber" name="chassisNumber" placeholder="Enter chassis number" required>
-    <label for="CarState">Select car state:</label>
-    <select id="CarState" name="CarState" required>
+    <label for="carState">Select car state:</label>
+    <select id="carState" name="carState" required>
         <option value="RENTED">Rented</option>
         <option value="DAMAGED">Damaged</option>
-        <option value="UNDER_MAINTENANCE">Under Maintenance</option>
+        <option value="UNDER_MAINTENANCE">Under maintenance</option>
+        <option value="GETTING_PREPARED">Getting prepared</option>
         <option value="AVAILABLE">Available</option>
     </select>
     <button type="submit">Update</button>

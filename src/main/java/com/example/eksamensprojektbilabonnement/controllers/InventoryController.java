@@ -72,4 +72,12 @@ public class InventoryController {
         return "home/inventory";
 
     }
+    @GetMapping("/leasedCars")
+    public String getLeasedCars(Model model) {
+        List<Car> leasedCars = inventoryService.getLeasedCars();
+        double totalPrice = leasedCars.stream().mapToDouble(Car::getPrice).sum();
+        model.addAttribute("leasedCars", leasedCars);
+        model.addAttribute("totalPrice", totalPrice);
+        return "home/leasedCars";
+    }
 }

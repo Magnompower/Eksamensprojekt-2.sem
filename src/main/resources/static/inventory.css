@@ -112,3 +112,17 @@ main {
     background-color: #0056b3;
 }
 
+/* Style for the drop down menu */
+form {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+form label {
+    font-weight: bold;
+    font-size: 14px
+}
+
+form select {
+    font-size: 14px;
+}

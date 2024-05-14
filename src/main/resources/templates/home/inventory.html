@@ -20,24 +20,16 @@
     </ul>
 </nav>
 
-
-
 <!-------------- Dropdown menu for sortering og filtrering --------------------->
 <form action="/sort_and_filter_cars" method="get">
     <label for="sortType">Sort by:</label>
     <select id="sortType" name="sortType">
         <option value="" disabled selected hidden>Select a sorting option</option>
-
         <option value="priceAscending">Price: low to high</option>
         <option value="priceDescending">Price: high to low</option>
         <option value="brandAscending">Brand: A-Z</option>
         <option value="brandDescending">Brand: Z-A</option>
     </select>
-
-
-
-
-
 
     <label for="filterBy">Filter by:</label>
     <select id="filterBy" name="filterBy">
@@ -50,10 +42,9 @@
         <option value="ALL">Show all</option>
     </select>
 
-    <button type="submit">Sort</button>
+    <button type="submit">Apply</button>
 </form>
 <!----------------------------------------------------------------->
-
 
 <main>
     <div class="grid-container">
