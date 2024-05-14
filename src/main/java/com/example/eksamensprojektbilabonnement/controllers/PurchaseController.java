@@ -23,7 +23,7 @@ public class PurchaseController {
         //Man kunne spare mange kodelinjre hvis cars blev instantieret i klassen i stedet. Man kunne slippe for alle
         // de requestparams der er i metoden under. Men så har den scope i hele klassen, og det er måske dumt med
         //en controller?
-        model.addAttribute("cars",  carService.generateRandomCars(5));
+        model.addAttribute("cars",  carService.generateRandomCars(6));
         return "home/purchase";
     }
 
