@@ -29,9 +29,9 @@ public class InventoryController {
 
     @GetMapping("/inventory")
     public String showInventory(Model model) {
-        List<Car> cars = inventoryService.getAllCars(); // Assuming you have a method to retrieve all gas cars
+        List<Car> cars = inventoryService.getAllCars();
         model.addAttribute("cars", cars);
-        return "home/inventory"; // The name of your HTML template
+        return "home/inventory";
     }
     @GetMapping ("/view_car")
     public String view_car(@RequestParam String carChassisNumber, Model model) {
@@ -42,31 +42,34 @@ public class InventoryController {
     }
 
     @PostMapping("/update_car")
-    public String updateCar(@RequestParam String chassisNumber, @RequestParam String CarState) {
-        inventoryService.updateCarState(chassisNumber, CarState);
+    public String updateCar(@RequestParam String chassisNumber, @RequestParam String carState) {
+        String carTable = inventoryService.getCarTable(chassisNumber);
+        inventoryService.updateCarState(chassisNumber, carState, carTable);
         return "redirect:/inventory";
     }
 
     @GetMapping ("/sort_and_filter_cars")
-    public String SortCars(@RequestParam String sortType, @RequestParam String filterBy, RedirectAttributes redirectAttributes){
-      List<Car> sortedCars = inventoryService.getSortedCars(sortType, filterBy);
-      redirectAttributes.addFlashAttribute("sortedCars", sortedCars);
+    public String SortCars(@RequestParam(required = false) String sortType, @RequestParam(required = false) String filterBy, RedirectAttributes redirectAttributes){
+
+        List<Car> cars;
+        if (sortType == null && filterBy == null) {
+            return "redirect:/inventory";
+        } else if (filterBy == null){
+            filterBy = "ALL";
+            cars = inventoryService.setSortCriteria(sortType, filterBy);
+        } else if (sortType == null) {
+            cars = inventoryService.getFilteredCars(filterBy);
+        } else {
+            cars = inventoryService.setSortCriteria(sortType, filterBy);
+        }
+      redirectAttributes.addFlashAttribute("cars", cars);
       return "redirect:/show_inventory_sorted";
     }
 
     @GetMapping("/show_inventory_sorted")
-    public String showInventorySorted(@ModelAttribute("sortedCars") List<Car> sortedCars, Model model) {
-        model.addAttribute("cars", sortedCars);
+    public String showInventorySorted(@ModelAttribute("cars") List<Car> cars, Model model) {
+        model.addAttribute("cars", cars);
         return "home/inventory";
 
-    }
-
-    @GetMapping("/leasedCars")
-    public String getLeasedCars(Model model) {
-        List<Car> leasedCars = inventoryService.getLeasedCars();
-        double totalPrice = leasedCars.stream().mapToDouble(Car::getPrice).sum();
-        model.addAttribute("leasedCars", leasedCars);
-        model.addAttribute("totalPrice", totalPrice);
-        return "home/leasedCars";
     }
 }
