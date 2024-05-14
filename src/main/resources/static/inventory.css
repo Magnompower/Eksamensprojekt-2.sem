@@ -13,9 +13,10 @@ header, footer {
 main {
     padding: 20px;
 }
+
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 10px;
     position: relative;
 }
@@ -28,17 +29,28 @@ main {
     align-items: center;
 }
 
+.image-container {
+    margin-left: 190px;
+    margin-bottom: 200px;
+    position: relative;
+    top: -200px;
+}
+
+.image {
+    width: 230px;
+    height: 200px;
+}
 
 
 .car-details {
-    flex: 1; /* Allow text container to grow to fill available space */
+    flex: 1;
 }
 
 
 .ItemLink {
-     height: 10px;
-     text-align: left;
- }
+    height: 10px;
+    text-align: left;
+}
 
 .lease-box {
     border: 1px solid #ccc;
@@ -78,3 +90,17 @@ main {
     background-color: #0056b3;
 }
 
+/* Style for the drop down menu */
+form {
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+form label {
+    font-weight: bold;
+    font-size: 14px
+}
+
+form select {
+    font-size: 14px;
+}

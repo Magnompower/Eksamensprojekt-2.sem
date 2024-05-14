@@ -1,19 +1,50 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Grid Layout Example</title>
-    <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="/inventory.css">
 </head>
 <body>
 
 <header>
     <h1>Header</h1>
-
 </header>
 
+<nav>
+    <ul>
+        <li><a th:href="@{/leasedCars}">Leased Cars</a></li>
+        <li><a th:href="@{/leaseoverview}">Lease Overview</a></li>
+        <li><a th:href="@{/purchase}">Purchase</a></li>
+    </ul>
+</nav>
 
+<!-------------- Dropdown menu for sortering og filtrering --------------------->
+<form action="/sort_and_filter_cars" method="get">
+    <label for="sortType">Sort by:</label>
+    <select id="sortType" name="sortType">
+        <option value="" disabled selected hidden>Select a sorting option</option>
+        <option value="priceAscending">Price: low to high</option>
+        <option value="priceDescending">Price: high to low</option>
+        <option value="brandAscending">Brand: A-Z</option>
+        <option value="brandDescending">Brand: Z-A</option>
+    </select>
+
+    <label for="filterBy">Filter by:</label>
+    <select id="filterBy" name="filterBy">
+        <option value="" disabled selected hidden>Select a filter option</option>
+        <option value="RENTED">Rented</option>
+        <option value="DAMAGED">Damaged</option>
+        <option value="UNDER_MAINTENANCE">Under maintenance</option>
+        <option value="GETTING_PREPARED">Getting prepared</option>
+        <option value="AVAILABLE">Available</option>
+        <option value="ALL">Show all</option>
+    </select>
+
+    <button type="submit">Apply</button>
+</form>
+<!----------------------------------------------------------------->
 
 <main>
     <div class="grid-container">
@@ -37,6 +68,9 @@
     </div>
 </main>
 
+<form action="/purchase" method="get">
+    <button type="submit">Go to Purchase Page</button>
+</form>
 
 <footer>
     <p>Footer</p>

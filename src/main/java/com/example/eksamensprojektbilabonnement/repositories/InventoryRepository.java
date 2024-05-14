@@ -1,6 +1,7 @@
 package com.example.eksamensprojektbilabonnement.repositories;
 
 
+import com.example.eksamensprojektbilabonnement.models.LeaseAgreement;
 import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
 import com.example.eksamensprojektbilabonnement.models.inheritance.ElectricCar;
 import com.example.eksamensprojektbilabonnement.models.inheritance.GasCar;
@@ -11,6 +12,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -49,4 +51,36 @@ public class InventoryRepository {
         String query = "SELECT * FROM all_cars_view";
         return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Car.class));
     }
+
+    public List<Car> getSortedCars(String sortByColumn, String sortDirection) {
+        String query = "SELECT * FROM all_cars_view ORDER BY " + sortByColumn + " " + sortDirection;
+        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Car.class));
+    }
+
+    public List<Car> getFilteredCars(String filterBy) {
+        String query = "SELECT * FROM all_cars_view WHERE car_state = ?";
+        return jdbcTemplate.query(query, new Object[]{filterBy}, BeanPropertyRowMapper.newInstance(Car.class));
+    }
+
+    public List<Car> getSortedAndFilteredCars(String filterBy, String sortByColumn, String sortDirection) {
+        String query = "SELECT * FROM all_cars_view WHERE car_state = ? ORDER BY " + sortByColumn + " " + sortDirection;
+        return jdbcTemplate.query(query, new Object[]{filterBy},BeanPropertyRowMapper.newInstance(Car.class));
+        }
+
+    public String getCarTable(String chassisNumber) {
+        String query = "SELECT car_table FROM all_cars WHERE chassis_number = ?";
+        return jdbcTemplate.queryForObject(query, new Object[]{chassisNumber}, String.class);
+    }
+
+    public void updateCarState(String chassisNumber, String CarState, String carTable) {
+        String query = "UPDATE " + carTable + " SET car_state = ? WHERE chassis_number = ?";
+        jdbcTemplate.update(query, CarState, chassisNumber);
+    }
+    public List<Car> findAllByIsLeased(boolean isLeased) {
+        String query = "SELECT * FROM all_cars_view WHERE car_state = 'RENTED'";
+        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Car.class));
+    }
 }
+
+
+

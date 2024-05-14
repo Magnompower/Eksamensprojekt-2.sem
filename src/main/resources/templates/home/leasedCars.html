@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<header>
+    <section class="headerright">
+        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+        <link rel="stylesheet" href="/leasedCars.css">
+    </section>
+    <section class="headercenter">
+        <h1>Bilabonnement A/S</h1>
+    </section>
+</header>
+<main>
+    <div class="leasingPrice">
+        <h3>Total pris for udlejet biler: </h3>
+        <h2><span th:text="${#numbers.formatInteger(totalPrice, 0)} + ' DKK'"> </span></h2>
+        <h2><span th:text="'≈ ' + ${#numbers.formatInteger(totalPrice * 0.13, 0)} + ' EURO'"></span></h2>
+    </div>
+    <div class="grid-content">
+        <div class="grid-item" th:each="car : ${leasedCars}">
+            <div>
+                <p th:text="'Mærke: ' + ${car.brand}"></p>
+                <p th:text="'Model: ' + ${car.model}"></p>
+                <p th:text="'Nummerplade: ' + ${car.licensePlateNumber}"></p>
+                <p th:text="'Stelnummer: ' + ${car.chassisNumber}"></p>
+                <br>
+                <p th:text="'Pris: ' + ${#numbers.formatInteger(car.price, 0)}"></p>
+            </div>
+            <div class="image-container">
+                <img class="image" th:src="${car.image_url}" alt="Car Image">
+            </div>
+        </div>
+    </div>
+</main>
+</body>
+</html>
