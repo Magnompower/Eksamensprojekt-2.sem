@@ -14,11 +14,6 @@ body {
     padding: 20px;
 }
 
-.title {
-    margin-bottom: 20px;
-    text-align: center;
-    color: #333;
-}
 
 .lease-grid {
     display: grid;
@@ -32,13 +27,14 @@ body {
 
 .lease-box {
     flex-basis: calc(33.33% - 20px); /* 3 boxes per row with 20px gap */
-    background-color: #808080;
+    background-color: #007bff;
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 20px;
     margin-bottom: 20px; /* Add some space between rows */
     margin-right: 10px;
     justify-content: space-between;
+
 }
 
 .lease-box:nth-child(3n) {
@@ -52,20 +48,6 @@ body {
 }
 
 .lease-header h3 {
+
     margin: 0;
-    font-weight: bold;
-}
-.past-due {
-    right: 10px;
-    color: red;
-    font-weight: bold;
-}
-.customer-id{
-    color: #084381;
-}
-.lease-id{
-    color: #9d4b08;
-}
-.end-past-date{
-    color: #e01111;
 }

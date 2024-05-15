@@ -1,63 +1,10 @@
-body {
+html, body {
     font-family: 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
     color: #007bff;
-}
-header, footer {
-    background-color: #007bff;
-    color: white;
-    padding: 20px 0;
-    text-align: center;
-}
-h1 {
-    margin: 0;
-}
-nav {
-    background: #333;
-    padding: 10px 0;
-    text-align: center;
-}
-nav a {
-    color: #007bff;
-    text-decoration: none;
-    margin: 0 20px;
-    font-size: 16px;
-}
-.navbar {
-    display: flex;
-    justify-content: center;
-    background-color: #333;
-    color: white;
-    padding: 10px 0;
-    position: fixed;
-    width: 100%;
-    top: 60px; /* Adjust based on the height of your header */
-    z-index: 900;
+    height: 100%;
 }
 
-.nav-button {
-    display: inline-block;
-    padding: 5px 30px;
-    margin: 0 30px;
-    color: white;
-    background-color: #007bff;
-    border: none;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 1s ease, transform 0.2s ease;
-}
-
-
-.nav-button:hover, .nav-button:focus {
-    background-color: #0dd500;
-    transform: scale(1.2);
-    outline: none;
-}
-
-.nav-button:active {
-    background-color: #007bff;
-    transform: scale(1.3);
-}
 main {
     display: flex;
     justify-content: center;
@@ -69,8 +16,9 @@ main {
         padding: 50px;
         margin-top: 100px;
         border-radius: 80px;
-        box-shadow: 0 2px 1px #0dd500;
+        box-shadow: 0 2px 1px #000000;
         width: 300px;
+        margin-bottom: 100px;
     }
     & label {
         font-size: 14px;
@@ -103,28 +51,6 @@ button {
 button:hover {
     background-color: #0dd500;
 }
-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #333;
-    padding: 10px 20px; /* Adjusted padding for better spacing */
-    text-align: left;
-}
-footer a {
-    color: #007bff;
-    text-decoration: none;
-}
-.brand-name {
-    font-weight: bold;
-    color: #db6000;
-    text-shadow: 1px 1px 2px black; /* Text shadow for depth */
-}
-.brand-name sup {
-    font-size: smaller;
-    color: #808080; /* Grey color for the trademark symbol */
-    animation: bounce 1s infinite; /* Animation for the TM symbol */
-}
 
 @keyframes bounce {
     0%, 100% {
@@ -135,4 +61,15 @@ footer a {
     50% {
         transform: translateY(-50px);
     }
+}
+.error-message{
+    color: #ff2020;
+    font-size: large;
+    text-align: center;
+    font-weight: bold;
+
+}
+
+.signup{
+    margin-bottom: 72px;
 }

@@ -1,15 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
+<head>
+<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
+<link rel="stylesheet" href="/leased_cars.css">
+<link rel="stylesheet" href="/fragments.css">
+<link rel="stylesheet" href="/reusables.css">
+</head>
 <body>
+
 <header>
-    <section class="headerright">
-        <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
-        <link rel="stylesheet" href="/leased_cars.css">
-    </section>
-    <section class="headercenter">
-        <h1>Bilabonnement A/S</h1>
-    </section>
+    <div th:insert="~{home/fragments :: header('Leased Cars')}"></div>
+    <div th:insert="~{home/fragments :: logo}"></div>
+    <div th:insert="~{home/fragments :: navbar('/inventory')}"></div>
 </header>
+
 <main>
     <div class="leasingPrice">
         <h3>Total pris for udlejede biler: </h3>
@@ -18,7 +22,7 @@
     </div>
     <div class="grid-content">
         <div class="grid-item" th:each="car : ${leasedCars}">
-            <div>
+            <div> <!-- TODO STRONG -->
                 <p th:text="'Mærke: ' + ${car.brand}"></p>
                 <p th:text="'Model: ' + ${car.model}"></p>
                 <p th:text="'Nummerplade: ' + ${car.licensePlateNumber}"></p>
@@ -32,5 +36,10 @@
         </div>
     </div>
 </main>
+
+<footer>
+    <div th:insert="~{home/fragments :: footer}"></div>
+</footer>
+
 </body>
 </html>

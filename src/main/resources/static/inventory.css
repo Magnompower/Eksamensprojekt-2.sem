@@ -4,12 +4,6 @@ body {
     padding: 0;
 }
 
-header, footer {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-}
-
 main {
     padding: 20px;
 }
@@ -22,11 +16,12 @@ main {
 }
 
 .grid-item {
-    background-color: #f0f0f0;
+    background-color: #007bff;
     border: 1px solid #ccc;
     padding: 20px;
     display: flex;
     align-items: center;
+    font-weight: bold;
 }
 
 .image-container {
@@ -34,11 +29,17 @@ main {
     margin-bottom: 200px;
     position: relative;
     top: -200px;
+    overflow: hidden;
 }
 
 .image {
-    width: 230px;
-    height: 200px;
+    height: auto;
+    width: 100%;
+    object-fit: cover;
+    overflow: auto;
+    z-index: -1000;
+    /*width: 230px;*/
+    /*height: 200px;*/
 }
 
 
@@ -72,7 +73,10 @@ main {
 
 /* Style for the edit button */
 .edit-button {
-    background-color: #007bff; /* Blue color for the button */
+    width: 180px;
+    margin-left: 190px;
+    margin-top: -10px;
+    background-color: #000000; /* Blue color for the button */
     color: #fff; /* White text color */
     border: none;
     padding: 8px 12px;
@@ -82,18 +86,13 @@ main {
 }
 
 .edit-button:hover {
-    background-color: #0056b3; /* Darker blue color on hover */
-}
-
-
-.edit-button:hover {
-    background-color: #0056b3;
+    background-color: #808080;
 }
 
 /* Style for the drop down menu */
 form {
-    margin-top: 20px;
-    margin-left: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 form label {
@@ -104,3 +103,11 @@ form label {
 form select {
     font-size: 14px;
 }
+
+.sort-form {
+    margin-left: 200px;
+}
+.form p{
+}
+
+

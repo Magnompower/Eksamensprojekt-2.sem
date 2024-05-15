@@ -1,6 +1,5 @@
 package com.example.eksamensprojektbilabonnement.controllers;
 
-import com.example.eksamensprojektbilabonnement.models.LeaseAgreement;
 import com.example.eksamensprojektbilabonnement.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,10 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
-import java.rmi.dgc.Lease;
-import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 public class InventoryController {
@@ -47,6 +43,7 @@ public class InventoryController {
         inventoryService.updateCarState(chassisNumber, carState, carTable);
         return "redirect:/inventory";
     }
+    //TODO MAKE CARSTATE SMALL.
 
     @GetMapping ("/sort_and_filter_cars")
     public String SortCars(@RequestParam(required = false) String sortType, @RequestParam(required = false) String filterBy, RedirectAttributes redirectAttributes){
@@ -72,12 +69,12 @@ public class InventoryController {
         return "home/inventory";
 
     }
-    @GetMapping("/leasedCars")
+    @GetMapping("/leased_cars")
     public String getLeasedCars(Model model) {
         List<Car> leasedCars = inventoryService.getLeasedCars();
         double totalPrice = leasedCars.stream().mapToDouble(Car::getPrice).sum();
         model.addAttribute("leasedCars", leasedCars);
         model.addAttribute("totalPrice", totalPrice);
-        return "home/leasedCars";
+        return "home/leased_cars";
     }
 }

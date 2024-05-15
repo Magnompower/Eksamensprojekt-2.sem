@@ -2,34 +2,42 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Lease Overview</title>
     <link rel="stylesheet" type="text/css" href="/lease_overview.css">
-
+    <link rel="stylesheet" href="/fragments.css">
+    <link rel="stylesheet" href="/reusables.css">
 </head>
 <body>
+
+<header>
+    <div th:insert="~{home/fragments :: header('Lease Overview')}"></div>
+    <div th:insert="~{home/fragments :: logo}"></div>
+    <div th:insert="~{home/fragments :: navbar('/')}"></div>
+</header>
+<p>Sort!</p> <!--TODO IMPLEMENT-->
 <div class="container">
-    <h2 class="title">Lease Overview</h2>
     <div class="lease-grid">
-        <div class="lease-box" th:each="lease : ${leases}">
+        <div class="lease-box" th:each="lease : ${leases}" th:classappend="${#temporals.format(lease.endDate, 'yyyy-MM-dd')<
+            #temporals.format(#temporals.createNow(), 'yyyy-MM-dd') ? 'lease-item red-box' : 'lease-item'}">
+<!--  TODO! USE CLASS OR CLASSAPPEND!?!?         th:if="${#temporals.daysBetween(#temporals.createToday(), lease.endDate) > 7 ? 'lease-item green-box' : 'lease-item'}">-->
             <div class="lease-header">
-                <h3>Lease ID: <span class="lease-id" th:text="${lease.leaseId}"></span></h3>
+                <h3><strong>Lease ID:</strong> <span th:text="${lease.leaseId}"></span></h3> <!--TODO HVORFOR ER lease.leaseID STORT!? -->
             </div>
-            <div class="lease-content">
+            <div>
                 <p><strong>Customer ID:</strong> <span class="customer-id" th:text="${lease.customerId}"></span></p>
                 <p><strong>Chassis Number:</strong> <span th:text="${lease.chassisNumber}"></span></p>
                 <p><strong>Start Date:</strong> <span th:text="${lease.startDate}"></span></p>
-                <p>
-                    <strong>End Date:</strong>
-                    <span th:if="${#temporals.format(lease.endDate, 'yyyy-MM-dd')} < ${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}"
-                          class="end-date-past" th:text="${lease.endDate}" ></span>
-                    <span th:unless="${#temporals.format(lease.endDate, 'yyyy-MM-dd')} < ${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd')}"
-                          th:text="${lease.endDate}"></span>
-                </p>
-<!--                TODO-->
+                <p><strong>End Date:</strong> <span th:text="${lease.endDate}"></span> <span
+                        th:text="${lease.endDate}"></span></p>
                 <p><strong>Terms:</strong> <span th:text="${lease.terms}"></span></p>
             </div>
         </div>
     </div>
 </div>
+
+
+<footer>
+    <div th:insert="~{home/fragments :: footer}"></div>
+</footer>
+
 </body>
 </html>

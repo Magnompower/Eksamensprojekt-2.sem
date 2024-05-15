@@ -3,9 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="/inventory.css">
+    <link rel="stylesheet" type="text/css" href="/inventory.css"> <!-- TODO MAKE PURCHASE-->
+    <link rel="stylesheet" href="/fragments.css">
+    <link rel="stylesheet" href="/reusables.css">
 </head>
 <body>
+
+<header>
+    <div th:insert="~{home/fragments :: header('Purchases')}"></div>
+    <div th:insert="~{home/fragments :: logo}"></div>
+    <div th:insert="~{home/fragments :: navbar('/')}"></div>
+</header>
 
 <main>
     <form action="/purchaseSelected" method="post">
@@ -48,6 +56,10 @@
         <button type="submit">Purchase Selected</button>
     </form>
 </main>
+
+<footer>
+    <div th:insert="~{home/fragments :: footer}"></div>
+</footer>
 
 </body>
 </html>

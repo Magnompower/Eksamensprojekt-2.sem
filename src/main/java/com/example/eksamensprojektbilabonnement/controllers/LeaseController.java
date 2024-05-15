@@ -22,7 +22,7 @@ public class LeaseController {
     LeaseService leaseService;
 
     //todo create controller that sends  a car and customer over so that a lease can be created
-    @GetMapping("/leaseOverview")
+    @GetMapping("/lease_overview")
     public  String leaseOverview(Model model) {
         model.addAttribute("leases", leaseService.getLeases());
         model.addAttribute("localDateTime", LocalDate.now());
