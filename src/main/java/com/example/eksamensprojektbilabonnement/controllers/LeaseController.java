@@ -36,4 +36,5 @@ public class LeaseController {
     carService.updateCarState(carChassisNumber,"RENTED", carService.getCarTable(carChassisNumber)); //Sætter bilen som rented. Skal nok opdateres senere
         return "redirect:/success.html";
     }
+
 }
