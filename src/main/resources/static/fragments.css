@@ -20,17 +20,17 @@
     height: auto;
     position: absolute;
     top: 10px;
-    left: 75px;
+    left: 20px;
     z-index: 1000;
     box-shadow: #000000;
 }
 
 .logo img {
-    width: 500px;
-    max-width: 110px;
+    width: 250px;
+    max-width: 70px;
     border-radius: 200px;
     box-shadow: #000000;
-    object-fit: cover;
+
 }
 
 /*----------------------------------------LOGO-------------------------------------------*/
