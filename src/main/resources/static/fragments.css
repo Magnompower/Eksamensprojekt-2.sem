@@ -1,5 +1,5 @@
 .header {
-    background-color: #007bff;
+    background-color: #3b719f;
     color: white;
     padding: 20px 0;
     text-align: center;
@@ -59,7 +59,7 @@
 
 .navbar a:hover {
     font-weight: bold;
-    color: #007bff;
+    color: #3b719f;
     transform-style: preserve-3d;
     transform: scale(1.4);
 }

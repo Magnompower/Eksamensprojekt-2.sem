@@ -20,7 +20,7 @@
         <!--  TODO! USE CLASS OR CLASSAPPEND!?!?         th:if="${#temporals.daysBetween(#temporals.createToday(), lease.endDate) > 7 ? 'grid-item green-box' : grid-item'}">-->
         <div class="grid-header">
             <h3><strong>Lease ID:</strong> <span th:text="${lease.leaseId}"></span></h3>
-            <!--TODO HVORFOR ER lease.leaseID STORT!? -->
+            <!--TODO HVORFOR ER lease.leaseID STRONG!? -->
         </div>
         <div>
             <p><strong>Customer ID:</strong> <span class="customer-id" th:text="${lease.customerId}"></span></p>

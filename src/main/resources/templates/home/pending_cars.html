@@ -26,11 +26,11 @@
                 <p th:text="'Pris: ' + ${#numbers.formatInteger(car.price, 0)}"></p>
             </div>
             <div>
-                <form th:action="@{/car_returned}" method="get">
-                    <button type="submit">Car returned</button>
+                <form th:action="@{/car_returned}" class="grid-item" method="get">
+                    <button type="submit" class="simple-button">Car returned</button>
                 </form>
-                <form th:action="@{/car_bought}" method="get">
-                    <button type="submit">Car bought</button>
+                <form th:action="@{/car_bought}" class="grid-item" method="get">
+                    <button type="submit" class="simple-button">Car bought</button>
                 </form>
             </div>
             <div class="image-container">

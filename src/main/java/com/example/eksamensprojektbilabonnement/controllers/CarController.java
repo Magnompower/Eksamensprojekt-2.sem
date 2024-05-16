@@ -33,4 +33,17 @@ public class CarController {
         carService.updateCarState(chassisNumber, carState, carTable);
         return "redirect:/inventory";
     }
+
+    @GetMapping("/car_bought")
+    public String carBought(Model model){
+
+        return "home/car_bought";
+    }
+
+    @GetMapping("/car_returned")
+    public String carReturned(Model model){
+
+        return "home/car_returned";
+    }
+
 }
