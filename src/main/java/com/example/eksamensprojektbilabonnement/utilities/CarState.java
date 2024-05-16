@@ -6,4 +6,6 @@ public enum CarState {
     UNDER_MAINTENANCE,
     GETTING_PREPARED,
     AVAILABLE,
+    PENDING_MANAGEMENT
+
 }
