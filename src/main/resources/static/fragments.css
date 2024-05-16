@@ -58,7 +58,8 @@
 }
 
 .navbar a:hover {
-    color: #0dd500;
+    font-weight: bold;
+    color: #007bff;
     transform-style: preserve-3d;
     transform: scale(1.4);
 }
