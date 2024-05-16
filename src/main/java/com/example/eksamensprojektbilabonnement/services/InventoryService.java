@@ -85,10 +85,6 @@ public class InventoryService {
     public void updateCarState(String chassisNumber, String carState, String carTable) {
         inventoryRepository.updateCarState(chassisNumber, carState, carTable);
     }
-    public List<Car> getLeasedCars() {
-        return inventoryRepository.findAllByIsLeased(true);
-    }
-
 }
 
 

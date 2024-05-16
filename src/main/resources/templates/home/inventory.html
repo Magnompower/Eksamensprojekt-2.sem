@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
+    <title>Inventory</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grid Layout Example</title>
     <link rel="stylesheet" href="/inventory.css">
     <link rel="stylesheet" href="/reusables.css">
     <link rel="stylesheet" href="/fragments.css">
@@ -36,6 +36,7 @@
         <option value="UNDER_MAINTENANCE">Under maintenance</option>
         <option value="GETTING_PREPARED">Getting prepared</option>
         <option value="AVAILABLE">Available</option>
+        <option value="PENDING_MANAGEMENT">Pending management</option>
         <option value="ALL">Show all</option>
     </select>
 
@@ -53,14 +54,14 @@
                         (car.carState.name() == 'DAMAGED' || car.carState.name() == 'UNDER_MAINTENANCE') ? 'grid-item red-box' :
                         'grid-item'}">
             <div>
-                <h2 th:text="${#numbers.formatInteger(car.price, 0)}"></h2>
+                <h3 th:text="${#numbers.formatInteger(car.price, 0)}" class="grid-header"></h3>
                 <p th:text="${car.brand}"></p>
                 <p th:text="${car.model}"></p>
                 <p th:text="${car.carState}" class="format-text"></p>
                 <div class="ItemLink">
                     <form action="/view_car" method="get">
                         <input type="hidden" name="carChassisNumber" th:value="${car.chassisNumber}">
-                        <button class="edit-button" type="submit">View</button>
+                        <button class="view-button" type="submit">View</button>
                     </form>
                     <div class="image-container">
                         <img class="image" th:src="${car.image_url}" alt="Car Image">
@@ -70,9 +71,6 @@
         </div>
     </div>
 </main>
-
-
-<!--<form action="/purchase" method="get">    <button type="submit">Go to Purchase Page</button></form>-->
 
 <footer>
     <div th:insert="~{home/fragments :: footer}"></div>

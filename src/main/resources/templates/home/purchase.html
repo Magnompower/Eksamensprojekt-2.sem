@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" type="text/css" href="/inventory.css"> <!-- TODO MAKE PURCHASE-->
+    <title>Purchase</title>
+    <link rel="stylesheet" type="text/css" href="purchase.css"> <!-- TODO MAKE PURCHASE-->
     <link rel="stylesheet" href="/fragments.css">
     <link rel="stylesheet" href="/reusables.css">
 </head>
@@ -20,8 +20,6 @@
         <div class="grid-container">
             <!-- Iterate over each car -->
             <div class="grid-item" th:each="car : ${cars}">
-                <!-- Start form for each car -->
-                <div class="grid-content">
                     <h2 th:text="${#numbers.formatInteger(car.price, 0)}"></h2>
                     <p> Chassis Number : <span th:text ="${car.chassisNumber}"></span></p>
                     <p>Brand: <span th:text="${car.brand}"></span></p>
@@ -47,8 +45,6 @@
                     <input type="hidden" name="fuelType" th:value="${car.fuelType}">
                     <input type="hidden" name="carbonEmissionPerKm" th:value="${car.carbonEmissionPerKm}">
                     <input type="hidden" name="price" th:value="${car.price}">
-                </div>
-                <!-- End form for each car -->
             </div>
             <!-- End iteration -->
         </div>

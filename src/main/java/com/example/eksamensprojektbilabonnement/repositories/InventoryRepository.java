@@ -76,10 +76,7 @@ public class InventoryRepository {
         String query = "UPDATE " + carTable + " SET car_state = ? WHERE chassis_number = ?";
         jdbcTemplate.update(query, CarState, chassisNumber);
     }
-    public List<Car> findAllByIsLeased(boolean isLeased) {
-        String query = "SELECT * FROM all_cars_view WHERE car_state = 'RENTED'";
-        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Car.class));
-    }
+
 }
 
 
