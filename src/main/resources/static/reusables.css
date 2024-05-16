@@ -11,6 +11,10 @@
 }
 .format-text {
     text-transform: lowercase;
+    content: attr(data-text);
+    visibility: visible;
+    display: block;
+    white-space: pre-wrap;
 }
 
 .format-text::first-letter {
