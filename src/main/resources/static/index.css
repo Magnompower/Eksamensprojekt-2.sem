@@ -5,27 +5,24 @@ html, body {
     height: 100%;
 }
 
-main {
-    display: flex;
-    justify-content: center;
-    padding: 20px;
-    min-height: 60vh; /* Minimum height to keep the layout balanced */
 
-    & form {
-        background: #808080;
-        padding: 50px;
-        margin-top: 100px;
-        border-radius: 80px;
-        box-shadow: 0 2px 1px #000000;
-        width: 300px;
-        margin-bottom: 100px;
-    }
-    & label {
-        font-size: 14px;
-        color: #666;
-        display: block;
-        margin-bottom: 8px;
-    }}
+& form {
+    background: #808080;
+    padding: 50px;
+    margin-top: 100px;
+    border-radius: 80px;
+    box-shadow: 0 2px 1px #000000;
+    width: 300px;
+    margin-bottom: 228px;
+}
+
+& label {
+    font-size: 14px;
+    color: #666;
+    display: block;
+    margin-bottom: 8px;
+}
+
 input[type="text"], input[type="password"] {
     width: 100%;
     padding: 10px;
@@ -33,10 +30,12 @@ input[type="text"], input[type="password"] {
     border: 2px solid #ddd;
     border-radius: 4px;
 }
+
 input[type="text"]:focus, input[type="password"]:focus {
     border-color: #007bff;
     outline: none;
 }
+
 button {
     width: 100%;
     padding: 10px;
@@ -48,6 +47,7 @@ button {
     cursor: pointer;
     transition: background-color 1s;
 }
+
 button:hover {
     background-color: #0dd500;
 }
@@ -62,14 +62,11 @@ button:hover {
         transform: translateY(-50px);
     }
 }
-.error-message{
+
+.error-message {
     color: #ff2020;
     font-size: large;
     text-align: center;
     font-weight: bold;
 
-}
-
-.signup{
-    margin-bottom: 72px;
 }

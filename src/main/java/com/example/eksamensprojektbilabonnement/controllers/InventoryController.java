@@ -29,7 +29,8 @@ public class InventoryController {
         model.addAttribute("cars", cars);
         return "home/inventory";
     }
-    @GetMapping ("/view_car")
+
+    @GetMapping("/view_car")
     public String view_car(@RequestParam String carChassisNumber, Model model) {
         Car car = inventoryService.getCarByChassisNumber(carChassisNumber);
         model.addAttribute("Car", car);
@@ -45,13 +46,13 @@ public class InventoryController {
     }
     //TODO MAKE CARSTATE SMALL.
 
-    @GetMapping ("/sort_and_filter_cars")
-    public String SortCars(@RequestParam(required = false) String sortType, @RequestParam(required = false) String filterBy, RedirectAttributes redirectAttributes){
+    @GetMapping("/sort_and_filter_cars")
+    public String SortCars(@RequestParam(required = false) String sortType, @RequestParam(required = false) String filterBy, RedirectAttributes redirectAttributes) {
 
         List<Car> cars;
         if (sortType == null && filterBy == null) {
             return "redirect:/inventory";
-        } else if (filterBy == null){
+        } else if (filterBy == null) {
             filterBy = "ALL";
             cars = inventoryService.setSortCriteria(sortType, filterBy);
         } else if (sortType == null) {
@@ -59,8 +60,8 @@ public class InventoryController {
         } else {
             cars = inventoryService.setSortCriteria(sortType, filterBy);
         }
-      redirectAttributes.addFlashAttribute("cars", cars);
-      return "redirect:/show_inventory_sorted";
+        redirectAttributes.addFlashAttribute("cars", cars);
+        return "redirect:/show_inventory_sorted";
     }
 
     @GetMapping("/show_inventory_sorted")
@@ -69,12 +70,21 @@ public class InventoryController {
         return "home/inventory";
 
     }
-    @GetMapping("/leased_cars")
-    public String getLeasedCars(Model model) {
-        List<Car> leasedCars = inventoryService.getLeasedCars();
-        double totalPrice = leasedCars.stream().mapToDouble(Car::getPrice).sum();
-        model.addAttribute("leasedCars", leasedCars);
+
+    @GetMapping("/rented_cars")
+    public String showRentedCars(Model model) {
+        List<Car> rentedCars = inventoryService.getFilteredCars("RENTED");
+        double totalPrice = rentedCars.stream().mapToDouble(Car::getPrice).sum();
+        model.addAttribute("rentedCars", rentedCars);
         model.addAttribute("totalPrice", totalPrice);
-        return "home/leased_cars";
+        return "home/rented_cars";
+    }
+
+
+    @GetMapping("/pending_cars")
+    public String showPendingCars(Model model) {
+        List<Car> pendingCars = inventoryService.getFilteredCars("PENDING_MANAGEMENT");
+        model.addAttribute("pendingCars", pendingCars);
+        return "home/pending_cars";
     }
 }

@@ -1,15 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Rented Cars</title>
 <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico"/>
-<link rel="stylesheet" href="/leased_cars.css">
+<link rel="stylesheet" href="/rented_cars.css">
 <link rel="stylesheet" href="/fragments.css">
 <link rel="stylesheet" href="/reusables.css">
 </head>
 <body>
 
 <header>
-    <div th:insert="~{home/fragments :: header('Leased Cars')}"></div>
+    <div th:insert="~{home/fragments :: header('Rented Cars')}"></div>
     <div th:insert="~{home/fragments :: logo}"></div>
     <div th:insert="~{home/fragments :: navbar('/inventory')}"></div>
 </header>
@@ -20,8 +21,8 @@
         <h2><span th:text="${#numbers.formatInteger(totalPrice, 0)} + ' DKK'"> </span></h2>
         <h2><span th:text="'≈ ' + ${#numbers.formatInteger(totalPrice * 0.13, 0)} + ' EURO'"></span></h2>
     </div>
-    <div class="grid-content">
-        <div class="grid-item" th:each="car : ${leasedCars}">
+    <div class="grid-container">
+        <div class="grid-item" th:each="car : ${rentedCars}">
             <div> <!-- TODO STRONG -->
                 <p th:text="'Mærke: ' + ${car.brand}"></p>
                 <p th:text="'Model: ' + ${car.model}"></p>
