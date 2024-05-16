@@ -50,7 +50,7 @@
     <div class="grid-container">
         <div th:each="car : ${cars}"
              th:class="${car.carState.name() == 'AVAILABLE' ? 'grid-item green-box' :
-                        (car.carState.name() == 'RENTED' || car.carState.name() == 'GETTING_PREPARED') ? 'grid-item blue-box' :
+                        (car.carState.name() == 'RENTED' || car.carState.name() == 'GETTING_PREPARED') || car.carState.name() == 'PENDING_MANAGEMENT' ? 'grid-item blue-box' :
                         (car.carState.name() == 'DAMAGED' || car.carState.name() == 'UNDER_MAINTENANCE') ? 'grid-item red-box' :
                         'grid-item'}">
             <div>
