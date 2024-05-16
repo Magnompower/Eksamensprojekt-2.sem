@@ -46,17 +46,19 @@ form {
 
 form label {
     font-weight: bold;
-    font-size: 14px
+    font-size: 14px;
 }
 
 form select {
     font-size: 14px;
+    border-radius: 20px; /* Oval shape */
 }
 
 .sort-form {
-    margin-left: 200px;
-}
-.form p{
+    margin-left: 50px; /* Adjusted margin-left value */
 }
 
+.form p {
+    /* Add any additional styling for form paragraphs here */
+}
 
