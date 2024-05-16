@@ -22,11 +22,6 @@ public class InventoryController {
     @Autowired
     private InventoryService inventoryService;
 
-    @Autowired
-    private CarService carService;
-    @Autowired
-    private CustomerService customerService;
-
     @GetMapping("/inventory")
     public String showInventory(Model model) {
         List<Car> cars = inventoryService.getAllCars();
@@ -34,21 +29,6 @@ public class InventoryController {
         return "home/inventory";
     }
 
-    @GetMapping("/view_car")
-    public String view_car(@RequestParam String carChassisNumber, Model model) {
-        Car car = carService.getCarByChassisNumber(carChassisNumber);
-        model.addAttribute("Car", car);
-        model.addAttribute("Customers", customerService.getAllCustomers());
-        return "home/view_car";
-    }
-
-    @PostMapping("/update_car")
-    public String updateCar(@RequestParam String chassisNumber, @RequestParam String carState) {
-        String carTable = carService.getCarTable(chassisNumber);
-        carService.updateCarState(chassisNumber, carState, carTable);
-        return "redirect:/inventory";
-    }
-    //TODO MAKE CARSTATE SMALL.
 
     @GetMapping("/sort_and_filter_cars")
     public String SortCars(@RequestParam(required = false) String sortType, @RequestParam(required = false) String filterBy, RedirectAttributes redirectAttributes) {
