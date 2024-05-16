@@ -17,9 +17,8 @@ public class LeaseController {
     @Autowired
     private CarService carService;
     @Autowired
-    private CustomerService customerService;
-    @Autowired
-    LeaseService leaseService;
+    private LeaseService leaseService;
+
 
     //todo create controller that sends  a car and customer over so that a lease can be created
     @GetMapping("/lease_overview")
@@ -33,7 +32,8 @@ public class LeaseController {
                               @RequestParam LocalDate startDate, @RequestParam LocalDate endDate,
                               @RequestParam String terms)  {
     leaseService.createLease(carChassisNumber, customerId, startDate, endDate, terms);
-        model.addAttribute("leases", leaseService.getLeases());
+    model.addAttribute("leases", leaseService.getLeases());
+
         return "redirect:/success.html";
     }
 }

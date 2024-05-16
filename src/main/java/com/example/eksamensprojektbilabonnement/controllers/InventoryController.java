@@ -1,5 +1,6 @@
 package com.example.eksamensprojektbilabonnement.controllers;
 
+import com.example.eksamensprojektbilabonnement.services.CarService;
 import com.example.eksamensprojektbilabonnement.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +21,9 @@ public class InventoryController {
 
     @Autowired
     private InventoryService inventoryService;
+
+    @Autowired
+    private CarService carService;
     @Autowired
     private CustomerService customerService;
 
@@ -32,7 +36,7 @@ public class InventoryController {
 
     @GetMapping("/view_car")
     public String view_car(@RequestParam String carChassisNumber, Model model) {
-        Car car = inventoryService.getCarByChassisNumber(carChassisNumber);
+        Car car = carService.getCarByChassisNumber(carChassisNumber);
         model.addAttribute("Car", car);
         model.addAttribute("Customers", customerService.getAllCustomers());
         return "home/view_car";
@@ -40,8 +44,8 @@ public class InventoryController {
 
     @PostMapping("/update_car")
     public String updateCar(@RequestParam String chassisNumber, @RequestParam String carState) {
-        String carTable = inventoryService.getCarTable(chassisNumber);
-        inventoryService.updateCarState(chassisNumber, carState, carTable);
+        String carTable = carService.getCarTable(chassisNumber);
+        carService.updateCarState(chassisNumber, carState, carTable);
         return "redirect:/inventory";
     }
     //TODO MAKE CARSTATE SMALL.
