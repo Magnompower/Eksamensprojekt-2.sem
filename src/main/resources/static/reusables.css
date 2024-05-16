@@ -9,3 +9,10 @@
 .red-box {
     background-color: #ff2020;
 }
+.format-text {
+    text-transform: lowercase;
+}
+
+.format-text::first-letter {
+    text-transform: capitalize;
+}
