@@ -81,5 +81,12 @@ main {
 .format-text::first-letter {
     text-transform: capitalize;
 }
+.format-text {
+    text-transform: lowercase;
+}
+
+.format-text::first-letter {
+    text-transform: capitalize;
+}
 
 
