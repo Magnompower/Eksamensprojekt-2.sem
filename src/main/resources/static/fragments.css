@@ -22,6 +22,7 @@
     top: 10px;
     left: 75px;
     z-index: 1000;
+    box-shadow: #000000;
 }
 
 .logo img {
