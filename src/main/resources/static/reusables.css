@@ -59,15 +59,15 @@ main {
 }
 
 .green-box {
-    background-color: #0dd500;
+    background-color: #5ca351;
 }
 
 .blue-box {
-    background-color: #007bff;
+    background-color: #3b719f;
 }
 
 .red-box {
-    background-color: #ff2020;
+    background-color: #CB4C4E;
 }
 
 .format-text {
@@ -76,6 +76,13 @@ main {
     visibility: visible;
     display: block;
     white-space: pre-wrap;
+}
+
+.format-text::first-letter {
+    text-transform: capitalize;
+}
+.format-text {
+    text-transform: lowercase;
 }
 
 .format-text::first-letter {

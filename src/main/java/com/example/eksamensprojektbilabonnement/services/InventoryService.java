@@ -21,18 +21,6 @@ public class InventoryService {
         this.inventoryRepository = inventoryRepository;
     }
 
-    public Car getCarByLicensePlateNumber(String licensePlateNumber) {
-        return inventoryRepository.getCarByLicensePlateNumber(licensePlateNumber);
-    }
-
-    public List<GasCar> getAllGasCars() {
-        return inventoryRepository.getAllGasCars();
-    }
-
-    public Car getCarByChassisNumber(String carChassisNumber) {
-        return inventoryRepository.getCarByChassisNumber(carChassisNumber);
-    }
-
     public List<Car> getAllCars() {
         return inventoryRepository.getAllCars();
     }
@@ -77,14 +65,10 @@ public class InventoryService {
         }
     }
 
-    public String getCarTable(String chassisNumber) {
-        return inventoryRepository.getCarTable(chassisNumber);
-    }
 
 
-    public void updateCarState(String chassisNumber, String carState, String carTable) {
-        inventoryRepository.updateCarState(chassisNumber, carState, carTable);
-    }
+
+
 }
 
 

@@ -50,7 +50,7 @@
     <div class="grid-container">
         <div th:each="car : ${cars}"
              th:class="${car.carState.name() == 'AVAILABLE' ? 'grid-item green-box' :
-                        (car.carState.name() == 'RENTED' || car.carState.name() == 'GETTING_PREPARED') ? 'grid-item blue-box' :
+                        (car.carState.name() == 'RENTED' || car.carState.name() == 'GETTING_PREPARED') || car.carState.name() == 'PENDING_MANAGEMENT' ? 'grid-item blue-box' :
                         (car.carState.name() == 'DAMAGED' || car.carState.name() == 'UNDER_MAINTENANCE') ? 'grid-item red-box' :
                         'grid-item'}">
             <div>
@@ -61,7 +61,7 @@
                 <div class="ItemLink">
                     <form action="/view_car" method="get">
                         <input type="hidden" name="carChassisNumber" th:value="${car.chassisNumber}">
-                        <button class="view-button" type="submit">View</button>
+                        <button class="view-button" type="submit">View car</button>
                     </form>
                     <div class="image-container">
                         <img class="image" th:src="${car.image_url}" alt="Car Image">

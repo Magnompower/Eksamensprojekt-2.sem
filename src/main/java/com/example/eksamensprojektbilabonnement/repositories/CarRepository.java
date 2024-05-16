@@ -41,5 +41,20 @@ public class CarRepository {
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             jdbcTemplate.update(query, carChassisNumber, licensePlate, brand, carModel, registrationFee, price, carState.name(), transmissionType.name(), kmPerLiter, fuelType.name(), carbonEmissionPerKm, image_url);
     }
+
+    public Car getCarByChassisNumber(String carChassisNumber) {
+        String query = "SELECT * FROM all_cars_view WHERE chassis_number = ?";
+        return jdbcTemplate.queryForObject(query, BeanPropertyRowMapper.newInstance(Car.class), carChassisNumber);
+    }
+
+    public String getCarTable(String chassisNumber) {
+        String query = "SELECT car_table FROM all_cars WHERE chassis_number = ?";
+        return jdbcTemplate.queryForObject(query, new Object[]{chassisNumber}, String.class);
+    }
+
+    public void updateCarState(String chassisNumber, String CarState, String carTable) {
+        String query = "UPDATE " + carTable + " SET car_state = ? WHERE chassis_number = ?";
+        jdbcTemplate.update(query, CarState, chassisNumber);
+    }
 }
 

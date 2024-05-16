@@ -18,16 +18,20 @@
     <div class="grid-content">
         <div class="grid-item" th:each="car : ${pendingCars}">
             <div> <!-- TODO STRONG -->
-                <p th:text="'Mærke: ' + ${car.brand}"></p>
+                <p th:text="'Brand: ' + ${car.brand}"></p>
                 <p th:text="'Model: ' + ${car.model}"></p>
-                <p th:text="'Nummerplade: ' + ${car.licensePlateNumber}"></p>
-                <p th:text="'Stelnummer: ' + ${car.chassisNumber}"></p>
+                <p th:text="'Licenceplate number: ' + ${car.licensePlateNumber}"></p>
+                <p th:text="'Chassisnumber: ' + ${car.chassisNumber}"></p>
                 <br>
                 <p th:text="'Pris: ' + ${#numbers.formatInteger(car.price, 0)}"></p>
             </div>
             <div>
-                <button type="submit">Car returned</button>
-                <button type="submit">Car bought</button>
+                <form th:action="@{/car_returned}" method="get">
+                    <button type="submit">Car returned</button>
+                </form>
+                <form th:action="@{/car_bought}" method="get">
+                    <button type="submit">Car bought</button>
+                </form>
             </div>
             <div class="image-container">
                 <img class="image" th:src="${car.image_url}" alt="Car Image">
