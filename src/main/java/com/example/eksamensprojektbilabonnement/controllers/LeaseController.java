@@ -33,7 +33,7 @@ public class LeaseController {
                               @RequestParam String terms)  {
     leaseService.createLease(carChassisNumber, customerId, startDate, endDate, terms);
     model.addAttribute("leases", leaseService.getLeases());
-
+    carService.updateCarState(carChassisNumber,"RENTED", carService.getCarTable(carChassisNumber)); //Sætter bilen som rented. Skal nok opdateres senere
         return "redirect:/success.html";
     }
 }
