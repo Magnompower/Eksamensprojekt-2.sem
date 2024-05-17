@@ -27,9 +27,11 @@
             </div>
             <div>
                 <form th:action="@{/car_returned}" class="grid-item" method="get">
+                    <input type="hidden" name="chassisNumber" th:value="${car.chassisNumber}" />
                     <button type="submit" class="simple-button">Car returned</button>
                 </form>
                 <form th:action="@{/car_bought}" class="grid-item" method="get">
+                    <input type="hidden" name="chassisNumber" th:value="${car.chassisNumber}" />
                     <button type="submit" class="simple-button">Car bought</button>
                 </form>
             </div>
