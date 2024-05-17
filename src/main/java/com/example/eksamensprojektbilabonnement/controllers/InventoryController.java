@@ -50,7 +50,6 @@ public class InventoryController {
     public String showInventorySorted(@ModelAttribute("cars") List<Car> cars, Model model) {
         model.addAttribute("cars", cars);
         return "home/inventory";
-
     }
 
     @GetMapping("/rented_cars")

@@ -9,10 +9,22 @@
 <body>
 
 <header>
-    <div th:insert="~{home/fragments :: header('Pending Cars')}"></div>
+    <div th:insert="~{home/fragments :: header('Cars Returned')}"></div>
     <div th:insert="~{home/fragments :: logo}"></div>
     <div th:insert="~{home/fragments :: navbar('/inventory')}"></div>
 </header>
+
+<main class="grid-container">
+    <div class="grid-item" th:each="damage : ${damages}">
+<!--        <div>-->
+            <p th:text="'Type of damages: ' + ${damage.damageName}"></p> <!--TODO -->
+            <p th:text="'Price of damages: ' + ${damage.damagePrice}"></p>
+<!--        </div>-->
+
+    </div>
+
+</main>
+
 
 <footer>
     <div th:insert="~{home/fragments :: footer}"></div>
