@@ -17,22 +17,26 @@ public class LeaseController {
     @Autowired
     private CarService carService;
     @Autowired
-    private CustomerService customerService;
-    @Autowired
-    LeaseService leaseService;
+    private LeaseService leaseService;
+
 
     //todo create controller that sends  a car and customer over so that a lease can be created
-    @GetMapping("/leaseOverview")
+    @GetMapping("/lease_overview")
     public  String leaseOverview(Model model) {
         model.addAttribute("leases", leaseService.getLeases());
-        return "home/leaseoverview";
+        model.addAttribute("localDateTime", LocalDate.now());
+        return "home/lease_overview";
     }
     @PostMapping ("/createLease")
-    public String createLease(Model model, @RequestParam String carChassisNumber, @RequestParam int customerId, @RequestParam LocalDate startDate, @RequestParam LocalDate endDate, @RequestParam String terms)  {
+    public String createLease(Model model, @RequestParam String carChassisNumber, @RequestParam int customerId,
+                              @RequestParam LocalDate startDate, @RequestParam LocalDate endDate,
+                              @RequestParam String terms)  {
     leaseService.createLease(carChassisNumber, customerId, startDate, endDate, terms);
-            model.addAttribute("leases", leaseService.getLeases());
+
+    model.addAttribute("leases", leaseService.getLeases());
+    carService.updateCarState(carChassisNumber,"RENTED", carService.getCarTable(carChassisNumber)); //Sætter bilen som rented. Skal nok opdateres senere
+
         return "redirect:/success.html";
-
-
     }
+
 }

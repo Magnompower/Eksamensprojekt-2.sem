@@ -1,0 +1,37 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}x
+
+main {
+    padding: 20px;
+}
+
+.grid-container {
+    align-content: center;
+    margin-left: 25%;
+}
+
+.grid-item {
+    border: 1px solid #ccc;
+    display: flex;
+}
+
+.grid-item > div {
+    margin-right: 10px;
+}
+
+.image-container {
+    margin-left: auto;
+}
+
+.image {
+    max-width: 150px;
+    max-height: 150px;
+}
+.leasingPrice {
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 15%;
+}

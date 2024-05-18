@@ -1,0 +1,5 @@
+.simple-button:hover {
+    transition: transform 0.3s;
+    transform: scale(1.2);
+}
+

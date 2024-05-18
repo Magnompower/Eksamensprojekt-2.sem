@@ -31,7 +31,7 @@ public class GenerateRandomCar {
                 car.setLicensePlateNumber(generateRandomLicensePlateNumber());
                 car.setBrand(BRANDS[random.nextInt(BRANDS.length)]);
                 car.setModel(MODELS[random.nextInt(MODELS.length)]);
-                car.setCarState(getRandomCarState());
+                car.setCarState(CarState.AVAILABLE);
                 car.setFuelType(getRandomFuelType());
                 car.setTransmissionType(getRandomTransmissionType());
                 car.setPrice(generateRandomPrice());
@@ -44,35 +44,34 @@ public class GenerateRandomCar {
         }
 
         private static String generateRandomChassisNumber() {
-
-            return "GC" + random.nextInt(100);
+            return "GC" + random.nextInt(10000);
         }
 
         private static String generateRandomLicensePlateNumber() {
-
-            return "GS" + random.nextInt(100);
+            return "GS" + random.nextInt(10000);
         }
 
-        private static double generateRandomPrice() {
-            return MIN_PRICE + (MAX_PRICE - MIN_PRICE) * random.nextDouble();
-        }
+
+    private static double generateRandomPrice() {
+        double price = MIN_PRICE + (MAX_PRICE - MIN_PRICE) * random.nextDouble();
+        return Math.round(price * 100.0) / 100.0;
+    }
 
         private static double generateRandomRegistrationFee() {
-            return MIN_REGISTRATION_FEE + (MAX_REGISTRATION_FEE - MIN_REGISTRATION_FEE) * random.nextDouble();
+            double registrationFee = MIN_REGISTRATION_FEE + (MAX_REGISTRATION_FEE - MIN_REGISTRATION_FEE) * random.nextDouble();
+            return Math.round(registrationFee * 100.0) / 100.0;
         }
 
         private static double generateRandomKmPerLiter() {
-            return MIN_KM_PER_LITER + (MAX_KM_PER_LITER - MIN_KM_PER_LITER) * random.nextDouble();
+            double kmPerLiter = MIN_KM_PER_LITER + (MAX_KM_PER_LITER - MIN_KM_PER_LITER) * random.nextDouble();
+            return Math.round(kmPerLiter * 100.0) / 100.0;
         }
 
         private static double generateRandomCarbonEmission() {
-            return MIN_CARBON_EMISSION + (MAX_CARBON_EMISSION - MIN_CARBON_EMISSION) * random.nextDouble();
+            double carbonEmisson = MIN_CARBON_EMISSION + (MAX_CARBON_EMISSION - MIN_CARBON_EMISSION) * random.nextDouble();
+            return Math.round(carbonEmisson * 100.0) / 100.0;
         }
 
-    private static CarState getRandomCarState() {
-        CarState[] values = CarState.values();
-        return values[random.nextInt(values.length)];
-    }
 
     private static FuelType getRandomFuelType() {
         FuelType[] values = FuelType.values();

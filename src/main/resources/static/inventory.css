@@ -1,128 +1,64 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-header, footer {
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-}
-
-nav {
-    background-color: #666;
-    padding: 10px;
-    text-align: center;
-}
-
-nav ul {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 10px;
-}
-
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-}
-
-main {
-    padding: 20px;
-}
-
-.grid-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    gap: 10px;
-    position: relative;
-}
-
 .grid-item {
-    background-color: #f0f0f0;
     border: 1px solid #ccc;
     padding: 20px;
     display: flex;
     align-items: center;
+    font-weight: bold;
+    border-radius: 10px;
 }
-
 .image-container {
-    margin-left: 190px;
-    margin-bottom: 200px;
-    position: relative;
-    top: -200px;
+    margin-left: 185px;
+    top: -185px;
+    margin-right: 10px;
 }
 
 .image {
-    width: 230px;
-    height: 200px;
+    object-fit: cover;
 }
-
-
-.car-details {
-    flex: 1;
-}
-
-
 .ItemLink {
-    height: 10px;
+    height: 22px;
     text-align: left;
 }
-
-.lease-box {
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-bottom: 20px;
-    background-color: #f8f8f8; /* Light gray background */
-    width: calc(25% - 20px); /* Set the width of each box to 25% of the container minus margins */
-    margin-right: 20px; /* Add margin between boxes */
-    box-sizing: border-box; /* Include padding and border in box size */
-}
-
-/* Style for the container */
-.lease-container {
-    display: flex; /* Use flexbox to arrange boxes side by side */
-    flex-wrap: wrap; /* Allow boxes to wrap to the next line if there's not enough space */
-    justify-content: flex-start; /* Align boxes to the start of the container */
-}
-
-/* Style for the edit button */
-.edit-button {
-    background-color: #007bff; /* Blue color for the button */
-    color: #fff; /* White text color */
-    border: none;
+.view-button {
+    width: 100px;
+    margin-left: 310px;
+    margin-top: -10px;
+    background-color: #ffffff; /* White background color */
+    color: #555555;
+    border: 2px solid #555555;
     padding: 8px 12px;
-    border-radius: 4px;
+    border-radius: 50px;
     cursor: pointer;
     transition: background-color 0.3s ease; /* Smooth transition */
+    font-weight: bold;
 }
 
-.edit-button:hover {
-    background-color: #0056b3; /* Darker blue color on hover */
-}
-
-
-.edit-button:hover {
-    background-color: #0056b3;
+.view-button:hover {
+    background-color: #555555; /* Gray background color on hover */
+    color: #ffffff; /* White text color on hover */
 }
 
 /* Style for the drop down menu */
 form {
-    margin-top: 20px;
-    margin-left: 20px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 form label {
     font-weight: bold;
-    font-size: 14px
+    font-size: 14px;
 }
 
 form select {
     font-size: 14px;
+    border-radius: 20px; /* Oval shape */
 }
+
+.sort-form {
+    margin-left: 50px; /* Adjusted margin-left value */
+}
+
+.form p {
+    /* Add any additional styling for form paragraphs here */
+}
+

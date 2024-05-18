@@ -2,12 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Car</title>
 
     <link rel="stylesheet" type="text/css" href="/view_car.css">
+    <link rel="stylesheet" href="/fragments.css">
 </head>
 <body>
-<h2 class="title">Info about car</h2>
+
+<header>
+    <div th:insert="~{home/fragments :: header(${Car.licensePlateNumber} + ' - ' + ${Car.brand} + ' ' + ${Car.model})}"></div>
+    <div th:insert="~{home/fragments :: logo}"></div>
+    <div th:insert="~{home/fragments :: navbar('/')}"></div>
+</header>
+
 <table class="car-table">
     <thead>
     <tr>
@@ -20,7 +27,7 @@
     </thead>
     <tbody>
     <tr>
-        <td class="chassis-number" th:text="${Car.chassisNumber}"> </td>
+        <td class="chassis-number" th:text="${Car.chassisNumber}"></td>
         <td class="car-brand" th:text="${Car.brand}"></td>
         <td class="car-model" th:text="${Car.model}"></td>
         <td class="car-price" th:text="${Car.price}"></td>
@@ -34,8 +41,8 @@
         <th>Registration Fee</th>
     </tr>
     <tr>
-        <td class="license-plate" th:text="${Car.licensePlateNumber}"> </td>
-        <td class="car-state" th:text="${Car.getCarState()}"></td>
+        <td class="license-plate" th:text="${Car.licensePlateNumber}"></td>
+        <td class="car-state" th:text="${Car.getCarState()}"></td>  <!-- Hvorfor bruge en getter her? TODO-->
         <td class="Transmission-type" th:text="${Car.transmissionType}"></td>
         <td class="registration-fee" th:text="${Car.registrationFee}"></td>
     </tr>
@@ -49,6 +56,7 @@
         <option value="DAMAGED">Damaged</option>
         <option value="UNDER_MAINTENANCE">Under maintenance</option>
         <option value="GETTING_PREPARED">Getting prepared</option>
+        <option value="PENDING_MANAGEMENT">Pending management</option>
         <option value="AVAILABLE">Available</option>
     </select>
     <button type="submit">Update</button>
@@ -61,7 +69,8 @@
     </div>
     <div class="input-group">
         <label for="StartDate">Start Date:</label>
-        <input type="date" id="StartDate" name="startDate" placeholder="Start Date" required pattern="\d{4}-\d{2}-\d{2}">
+        <input type="date" id="StartDate" name="startDate" placeholder="Start Date" required
+               pattern="\d{4}-\d{2}-\d{2}">
     </div>
     <div class="input-group">
         <label for="EndDate">End Date:</label>
@@ -74,7 +83,10 @@
     <div class="input-group">
         <label for="customerId">Customer:</label>
         <select id="customerId" name="customerId" class="customer-select">
-                <option th:each="customer : ${Customers}" th:value="${customer.customerId}" th:text="${customer.firstName + ' - ' + customer.customerId}"></option>
+
+            <option th:each="customer : ${Customers}" th:value="${customer.customerId}"
+                    th:text="${customer.firstName + ' - ' + customer.customerId}"></option>
+
         </select>
         <br>
     </div>
@@ -91,5 +103,10 @@
     <img class="image" th:src="${car.image_url}" alt="Car Image">
 </div>
 -->
+
+<footer>
+    <div th:insert="~{home/fragments :: footer}"></div>
+</footer>
+
 </body>
 </html>

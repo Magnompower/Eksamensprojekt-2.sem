@@ -1,13 +1,11 @@
 package com.example.eksamensprojektbilabonnement.models;
 
-import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
-
 import java.time.LocalDate;
 
 
 public class LeaseAgreement {
     private int leaseId;
-    private String carChassisNumber;
+    private String chassisNumber;
     private int customerId;
     private boolean isConcluded;
     private String terms;
@@ -22,12 +20,12 @@ public class LeaseAgreement {
         this.customerId = customerId;
     }
 
-    public String getCarChassisNumber() {
-        return carChassisNumber;
+    public String getChassisNumber() {
+        return chassisNumber;
     }
 
-    public void setCarChassisNumber(String carChassisNumber) {
-        this.carChassisNumber = carChassisNumber;
+    public void setChassisNumber(String chassisNumber) {
+        this.chassisNumber = chassisNumber;
     }
 
     public int getLeaseId() {

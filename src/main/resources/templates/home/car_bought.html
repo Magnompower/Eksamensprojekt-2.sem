@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car Bought</title>
+    <link rel="stylesheet" href="/fragments.css">
+    <link rel="stylesheet" href="/reusables.css">
+</head>
+<body>
+
+<header>
+    <div th:insert="~{home/fragments :: header('Pending Cars')}"></div>
+    <div th:insert="~{home/fragments :: logo}"></div>
+    <div th:insert="~{home/fragments :: navbar('/inventory')}"></div>
+</header>
+
+<main class="grid-item"
+  th:each="damage : ${damages}">
+        <!--        <div>-->
+        <p th:text="'Type of damages: ' + ${damage.damageName}"></p> <!--TODO-->
+        <p th:text="'Price of damages: ' + ${damage.damagePrice}"></p>
+        <!--        </div>-->
+</main>
+
+<div class="grid-item">
+    <button type="submit" class="simple-button">Finish lease</button>
+</div>
+
+<footer>
+    <div th:insert="~{home/fragments :: footer}"></div>
+</footer>
+
+</body>
+</html>

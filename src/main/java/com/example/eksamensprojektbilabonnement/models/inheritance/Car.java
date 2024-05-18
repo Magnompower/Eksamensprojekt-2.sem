@@ -14,8 +14,6 @@ public class Car {
     private double price;
     private String image_url;
 
-
-
     public Car(){
 
     }

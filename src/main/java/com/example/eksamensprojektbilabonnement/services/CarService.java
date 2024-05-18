@@ -23,22 +23,25 @@ public class CarService {
         this.generateRandomCar = generateRandomCar;
     }
 
-    public Car getCarById(int id){
-        return carRepository.getCarById(id);
-    }
-
-    public String getAllCarsChassisNumber() {
-        return carRepository.getAllCarsChassisNumber();
-    }
-
     public List<GasCar> generateRandomCars(int count) {
         return GenerateRandomCar.generateRandomCars(count);
     }
 
     public void createCar(String carChassisNumber, String carModel, String brand, double price, double registrationFee, double kmPerLiter, double carbonEmissionPerKm, String licensePlate, CarState carState, TransmissionType transmissionType, FuelType fuelType, String image_url) {
         carRepository.createCar(carChassisNumber, carModel, brand, price, registrationFee, kmPerLiter, carbonEmissionPerKm, licensePlate, carState, transmissionType, fuelType, image_url);
-
-
-
     }
+
+    public Car getCarByChassisNumber(String carChassisNumber) {
+        return carRepository.getCarByChassisNumber(carChassisNumber);
+    }
+
+    public String getCarTable(String chassisNumber) {
+        return carRepository.getCarTable(chassisNumber);
+    }
+
+    public void updateCarState(String chassisNumber, String carState, String carTable) {
+        carRepository.updateCarState(chassisNumber, carState, carTable);
+    }
+
+
 }

@@ -1,6 +1,7 @@
 package com.example.eksamensprojektbilabonnement.repositories;
 
 
+import com.example.eksamensprojektbilabonnement.models.LeaseAgreement;
 import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
 import com.example.eksamensprojektbilabonnement.models.inheritance.ElectricCar;
 import com.example.eksamensprojektbilabonnement.models.inheritance.GasCar;
@@ -19,33 +20,6 @@ public class InventoryRepository {
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
-
-    public GasCar getCarByLicensePlateNumber(String licensePlateNumber) {
-        String query = "SELECT * FROM gas_cars WHERE license_plate_number = ?";
-        try {
-            return jdbcTemplate.queryForObject(query, new Object[]{licensePlateNumber}, (rs, rowNum) -> {
-                GasCar car = new GasCar();
-                car.setLicensePlateNumber(rs.getString("license_plate_number"));
-                car.setModel(rs.getString("brand"));
-                //TODO add more fields
-                return car;
-            });
-        } catch (EmptyResultDataAccessException e) {
-            // Handle case where no car is found with the given license plate number
-            return null;
-        }
-    }
-
-    public GasCar getCarByChassisNumber(String carChassisNumber) { //vi skal tage højde for de forskellige typer biler
-        String query = "SELECT * FROM all_cars_view WHERE chassis_number = ?";
-        return jdbcTemplate.queryForObject(query, BeanPropertyRowMapper.newInstance(GasCar.class), carChassisNumber);
-    }
-
-    public List<GasCar> getAllGasCars() {
-        String query = "SELECT * FROM gas_cars";
-        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(GasCar.class));
-    }
-
     public List<Car> getAllCars() {
         String query = "SELECT * FROM all_cars_view";
         return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Car.class));
@@ -63,18 +37,13 @@ public class InventoryRepository {
 
     public List<Car> getSortedAndFilteredCars(String filterBy, String sortByColumn, String sortDirection) {
         String query = "SELECT * FROM all_cars_view WHERE car_state = ? ORDER BY " + sortByColumn + " " + sortDirection;
-        return jdbcTemplate.query(query, new Object[]{filterBy}, BeanPropertyRowMapper.newInstance(Car.class));
-    }
+        return jdbcTemplate.query(query, new Object[]{filterBy},BeanPropertyRowMapper.newInstance(Car.class));
+        }
 
-    public String getCarTable(String chassisNumber) {
-        String query = "SELECT car_table FROM all_cars WHERE chassis_number = ?";
-        return jdbcTemplate.queryForObject(query, new Object[]{chassisNumber}, String.class);
-    }
 
-    public void updateCarState(String chassisNumber, String CarState, String carTable) {
-        String query = "UPDATE " + carTable + " SET car_state = ? WHERE chassis_number = ?";
-        jdbcTemplate.update(query, CarState, chassisNumber);
-    }
+
+
+
 }
 
 

@@ -1,0 +1,32 @@
+<link rel="stylesheet" href="/fragments.css">
+
+<div th:fragment="header(title)" class="header">
+    <h1 th:text="${title}">Default Title</h1>
+</div>
+
+<div th:fragment="logo">
+    <div class="logo-container">
+        <a href="/" class="logo"> <!-- TODO if logged in - goto inventory-->
+            <img src="/logo.png" alt="Logo">
+        </a>
+    </div>
+</div>
+
+<div th:fragment="navbar(backLink)" class="navbar">
+        <a th:href="${backLink}">Login</a> <!-- TODO -->
+        <a th:href="@{/inventory}">Inventory</a>
+        <a th:href="@{/rented_cars}">Rented Cars</a>
+        <a th:href="@{/purchase}">Purchases</a>
+        <a th:href="@{/lease_overview}">Lease Overview</a> <!-- TODO -->
+        <a th:href="@{/pending_cars}">Pending Cars</a> <!-- TODO -->
+        <a th:href="@{/inventory}">Admin Site??!?!?</a> <!-- TODO -->
+</div>
+
+<div th:fragment="footer" class="footer">
+    <p class="brand-name"><sup>©</sup> 2024 IntelliJKingz<sup>™<br>All rights reserved.</sup></p>
+    <span class="github-link">
+        <a href="https://github.com/Magnompower/Eksamensprojekt-2.sem" target="_blank"
+           th:href="@{https://github.com/Magnompower/Eksamensprojekt-2.sem}">Github</a></span>
+</div>
+
+<div th:fragment="navbar-empty" class="navbar"></div>
