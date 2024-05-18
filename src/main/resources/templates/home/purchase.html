@@ -13,7 +13,7 @@
 
     <div class="grid-container">
         <div class="grid-item" th:each="car : ${cars}">
-            <div class="grid-content">
+            <div class="grid-content"> 
                 <h2 th:text="${#numbers.formatInteger(car.price, 0)}"></h2>
                 <p> Chassis Number : <span th:text ="${car.chassisNumber}"></span></p>
                 <p>Brand: <span th:text="${car.brand}"></span></p>
@@ -25,7 +25,7 @@
                 <p>KM per Liter: <span th:text="${car.kmPerLiter}"></span></p>
                 <p>Fuel Type: <span th:text="${car.fuelType}"></span></p>
                 <p>Carbon Emission per KM: <span th:text="${car.carbonEmissionPerKm}"></span></p>
-                <input type="checkbox" name="selectedCars">
+                <input type="checkbox" name="selectedCar" th:value="${car.chassisNumber}">
 
                 <input type="hidden" name="licensePlate" th:value="${car.licensePlateNumber}">
                 <input type="hidden" name="carChassisNumber" th:value="${car.chassisNumber}">
@@ -41,9 +41,8 @@
                 <input type="hidden" name="carbonEmissionPerKm" th:value="${car.carbonEmissionPerKm}">
                 <input type="hidden" name="image_url" value="https://imgur.com/a/Xjtvbjn">
 
-
                 <div class="image-container">
-                    <img class="image" src="https://imgur.com/a/Xjtvbjn" alt="Car Image">
+                    <img class="image" src="https://i.imgur.com/OQtcskU.jpeg" alt="Car Image">
                 </div>
             </div>
             <button type="submit"> Purchase Selected</button>

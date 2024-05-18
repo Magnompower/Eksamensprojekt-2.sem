@@ -25,7 +25,6 @@ public class PurchaseController {
     @PostMapping("/purchaseSelected")
     public String purchaseSelected(Model model, @RequestParam String carChassisNumber, @RequestParam String carModel, @RequestParam String brand, @RequestParam double price, @RequestParam double registrationFee, @RequestParam double kmPerLiter, @RequestParam double carbonEmissionPerKm, @RequestParam String licensePlate, @RequestParam String image_url, @RequestParam CarState carState, @RequestParam TransmissionType transmissionType, @RequestParam FuelType fuelType) {
         carService.createCar(carChassisNumber, carModel, brand, price, registrationFee, kmPerLiter, carbonEmissionPerKm, licensePlate, carState, transmissionType, fuelType, image_url);
-
         return "redirect:/inventory";
     }
 

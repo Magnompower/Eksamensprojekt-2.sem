@@ -74,7 +74,7 @@
     <div class="input-group">
         <label for="customerId">Customer:</label>
         <select id="customerId" name="customerId" class="customer-select">
-            <option th:each="customer : ${Customers}" th:value="${customer.customerId}" th:text="${customer.firstName + ' - ' + customer.customerId}"></option>
+                <option th:each="customer : ${Customers}" th:value="${customer.customerId}" th:text="${customer.firstName + ' - ' + customer.customerId}"></option>
         </select>
         <br>
     </div>
