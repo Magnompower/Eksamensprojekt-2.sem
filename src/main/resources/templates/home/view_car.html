@@ -92,7 +92,9 @@
     </div>
     <button type="submit" class="submit-btn">Create lease</button>
 
-
+    <div  th:if="${error}">
+        <p class="error-message" th:text="${error}"></p>
+    </div>
     <div>
         <br>
     </div>

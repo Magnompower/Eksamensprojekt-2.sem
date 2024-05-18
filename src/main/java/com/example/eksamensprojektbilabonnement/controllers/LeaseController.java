@@ -4,11 +4,13 @@ import com.example.eksamensprojektbilabonnement.services.CarService;
 import com.example.eksamensprojektbilabonnement.services.CustomerService;
 import com.example.eksamensprojektbilabonnement.services.LeaseService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 
@@ -27,16 +29,25 @@ public class LeaseController {
         model.addAttribute("localDateTime", LocalDate.now());
         return "home/lease_overview";
     }
-    @PostMapping ("/createLease")
-    public String createLease(Model model, @RequestParam String carChassisNumber, @RequestParam int customerId,
-                              @RequestParam LocalDate startDate, @RequestParam LocalDate endDate,
-                              @RequestParam String terms)  {
-    leaseService.createLease(carChassisNumber, customerId, startDate, endDate, terms);
-
-    model.addAttribute("leases", leaseService.getLeases());
-    carService.updateCarState(carChassisNumber,"RENTED", carService.getCarTable(carChassisNumber)); //Sætter bilen som rented. Skal nok opdateres senere
-
-        return "redirect:/success.html";
+    @PostMapping("/createLease")
+    public String createLease(Model model,
+                              @RequestParam String carChassisNumber,
+                              @RequestParam int customerId,
+                              @RequestParam LocalDate startDate,
+                              @RequestParam LocalDate endDate,
+                              @RequestParam String terms,
+                              RedirectAttributes redirectAttributes) {
+        try {
+            leaseService.createLease(carChassisNumber, customerId, startDate, endDate, terms);
+            carService.updateCarState(carChassisNumber, "RENTED", carService.getCarTable(carChassisNumber));
+            model.addAttribute("leases", leaseService.getLeases());
+            return "redirect:/lease_overview";
+        } catch (IllegalArgumentException e) {
+            redirectAttributes.addFlashAttribute("error", e.getMessage());
+            return "redirect:/view_car?carChassisNumber=" + carChassisNumber;
+        } catch (Exception e) {
+            redirectAttributes.addFlashAttribute("error", "En uventet fejl opstod. Prøv igen.");
+            return "redirect:/view_car?carChassisNumber=" + carChassisNumber;
+        }
     }
-
 }
