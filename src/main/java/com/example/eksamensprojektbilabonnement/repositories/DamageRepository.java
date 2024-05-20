@@ -15,10 +15,10 @@ public class DamageRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public void addDamageToTable(String chassisNumber, String damage, double price) {
+    public void addDamageToTable(String chassisNumber, String damageName, double damagePrice) {
         String query = "INSERT INTO damages (chassis_number, damage_name, damage_price)"
                 + "VALUES(?,?,?)";
-        jdbcTemplate.update(query, chassisNumber, damage, price);
+        jdbcTemplate.update(query, chassisNumber, damageName, damagePrice);
     }
 
     public List<Damage> getDamagesFromTable(String chassisNumber) {

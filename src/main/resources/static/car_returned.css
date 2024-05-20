@@ -1,0 +1,36 @@
+.box {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+.damage-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.damage-item {
+    margin-bottom: 10px;
+}
+
+.input-container {
+    margin-top: 20px;
+}
+
+.input-container input {
+    width: calc(100% - 110px);
+    padding: 5px;
+    margin-right: 10px;
+}
+
+.input-container button {
+    padding: 5px 10px;
+}
+
+.text-container {
+    font-weight: bold;
+    margin-bottom: 10px;
+}

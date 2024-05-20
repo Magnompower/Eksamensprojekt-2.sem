@@ -12,11 +12,22 @@ public class Car {
     private double registrationFee;
     private CarState carState;
     private double price;
+
+    private double kmDriven;
     private String image_url;
 
     public Car(){
 
     }
+
+    public double getKmDriven() {
+        return kmDriven;
+    }
+
+    public void setKmDriven(double kmDriven) {
+        this.kmDriven = kmDriven;
+    }
+
     public String getImage_url() {
         return image_url;
     }
