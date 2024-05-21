@@ -60,7 +60,7 @@
                 <p th:text="${car.carState}" class="format-text"></p>
                 <div class="ItemLink">
                     <form action="/view_car" method="get">
-                        <input type="hidden" name="carChassisNumber" th:value="${car.chassisNumber}">
+                        <input type="hidden" name="chassisNumber" th:value="${car.chassisNumber}">
                         <button class="view-button" type="submit">View car</button>
                     </form>
                     <div class="image-container">

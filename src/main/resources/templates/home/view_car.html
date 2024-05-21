@@ -47,7 +47,7 @@
         <td class="registration-fee" th:text="${Car.registrationFee}"></td>
     </tr>
 </table>
-<form class="updateCar" action="/update_car" method="post">
+<form class="updateCar" action="/update_car_state" method="post">
     <label for="chassisNumber">Update car:</label>
     <input type="text" id="chassisNumber" name="chassisNumber" th:value="${Car.chassisNumber}" readonly required>
     <label for="carState">Select car state:</label>
