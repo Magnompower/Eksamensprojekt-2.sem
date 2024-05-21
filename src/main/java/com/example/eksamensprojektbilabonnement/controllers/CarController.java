@@ -68,13 +68,7 @@ public class CarController {
 
         return "home/car_returned";
     }
-    @GetMapping("/car_bought")
-    public String carBought(Model model, @RequestParam String chassisNumber){
-        List<Damage> damages = damageService.getDamagesFromTable(chassisNumber);
-        model.addAttribute("damages", damages);
-        //Skal bruge forhåndsaftalen
-        return "home/car_bought";
-    }
+
 
 
 
