@@ -13,7 +13,7 @@
 }
 
 .image {
-    object-fit: cover;
+    object-fit: scale-down;
 }
 .ItemLink {
     height: 22px;
@@ -21,7 +21,7 @@
 }
 .view-button {
     width: 100px;
-    margin-left: 310px;
+    margin-left: 200px;
     margin-top: -10px;
     background-color: #ffffff; /* White background color */
     color: #555555;
