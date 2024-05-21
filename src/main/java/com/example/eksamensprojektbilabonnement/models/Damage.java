@@ -4,10 +4,19 @@ public class Damage {
 
     private String damageName;
     private double damagePrice;
+    private boolean invoiced;
 
     public Damage() {
 
     }
+    public boolean isInvoiced() {
+        return invoiced;
+    }
+
+    public void setInvoiced(boolean invoiced) {
+        this.invoiced = invoiced;
+    }
+
 
     public String getDamageName() {
         return damageName;

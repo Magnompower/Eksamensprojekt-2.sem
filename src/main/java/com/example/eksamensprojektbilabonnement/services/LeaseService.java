@@ -40,4 +40,8 @@ public class LeaseService {
     public void concludeLease(int leaseId) {
         leaseRepository.concludeLease(leaseId);
     }
+
+    public LeaseAgreement getLease(int leaseId) {
+        return leaseRepository.getLease(leaseId);
+    }
 }

@@ -26,7 +26,7 @@
                 <p th:text="'Pris: ' + ${#numbers.formatInteger(car.price, 0)}"></p>
             </div>
             <div>
-                <form th:action="@{/car_returned}" class="grid-item" method="get">
+                <form th:action="@{/car_returned}" class="grid-item" method="post">
                     <input type="hidden" name="chassisNumber" th:value="${car.chassisNumber}" />
                     <button type="submit" class="simple-button">Car returned</button>
                 </form>

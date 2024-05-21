@@ -27,11 +27,6 @@
             <p><strong>Start Date:</strong> <span th:text="${lease.startDate}"></span></p>
             <p><strong>End Date:</strong> <span th:text="${lease.endDate}"></span>
             <p><strong>Terms:</strong> <span th:text="${lease.terms}"></span></p>
-            <form action="/conclude_lease" method="post">
-                <input type="hidden" name="leaseId" th:value="${lease.leaseId}">
-                <input type="hidden" name="chassisNumber" th:value="${car.chassisNumber}">
-                <button type="submit">Conclude Lease</button>
-            </form>
         </div>
     </div>
 
@@ -40,19 +35,32 @@
             <h2>Existing Damages on Car</h2>
         </div>
         <ul class="damage-list">
-            <li class="damage-item" th:each="damage : ${damages}">
+            <li class="damage-item" th:each="damage : ${invoicedDamages}">
                 <span th:text="'Type of damage: ' + ${damage.damageName}"></span>
                 <span th:text="' - Price of damage: ' + ${damage.damagePrice}"></span>
             </li>
         </ul>
-        <form action="/add_damage" method="post">
+    </div>
+
+    <div class="box">
+        <div class="text-container">
+            <h2>Add new damages</h2>
+        </div>
+        <ul class="damage-list">
+            <li class="damage-item" th:each="damage : ${nonInvoicedDamages}">
+                <span th:text="'Type of damage: ' + ${damage.damageName}"></span>
+                <span th:text="' - Price of damage: ' + ${damage.damagePrice}"></span>
+            </li>
+        </ul>
+        <form action="/add_non_invoiced_damage" method="post">
             <div class="input-container">
                 <div class="text-container">
                     <p>Please input new damages to the car:</p>
                 </div>
                 <input type="text" id="newDamageName" name="damageName" placeholder="Type of damage">
                 <input type="number" id="newDamagePrice" name="damagePrice" placeholder="Price of damage">
-                <input type="hidden" name="chassisNumber" th:value="${car.chassisNumber}">
+                <input type="hidden" name="chassisNumber" th:value="${lease.chassisNumber}">
+                <input type="hidden" name="leaseId" th:value="${lease.leaseId}">
                 <button type="submit">Add Damage</button>
             </div>
         </form>
@@ -63,7 +71,9 @@
             <h2>Kilometers Driven</h2>
         </div>
         <div class="km-driven-value">
-            <p>KM driven before lease start: <span th:text="${car.kmDriven}"></span></p>
+            <p>KM driven before lease start: <span th:text="${conditionReport.kmBeforeLease}"></span></p>
+            <p>KM driven after lease end: <span th:text="${kmDriven}"></span></p>
+            <p>Total km driven: <span th:text="${kmDriven - conditionReport.kmBeforeLease}"></span></p>
         </div>
         <form action="/update_km_driven" method="post">
             <div class="input-container">
@@ -71,12 +81,18 @@
                     <p>Update kilometers driven:</p>
                 </div>
                 <input type="number" id="kmDriven" name="kmDriven" placeholder="New kilometers driven">
-                <input type="hidden" name="chassisNumber" th:value="${car.chassisNumber}">
+                <input type="hidden" name="chassisNumber" th:value="${lease.chassisNumber}">
+                <input type="hidden" name="leaseId" th:value="${lease.leaseId}">
                 <button type="submit">Update</button>
             </div>
         </form>
     </div>
+
 </main>
+<form action="/conclude_lease" method="post" class="bottom-right-button">
+    <input type="hidden" name="leaseId" th:value="${lease.leaseId}">
+    <button type="submit">Conclude lease</button>
+</form>
 
 <footer>
     <div th:insert="~{home/fragments :: footer}"></div>

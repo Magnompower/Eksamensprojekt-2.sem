@@ -13,12 +13,13 @@ public class DamageController {
     @Autowired
     DamageService damageService;
 
-    @PostMapping("/add_damage")
+    @PostMapping("/add_non_invoiced_damage")
     public String addDamage(@RequestParam String damageName, @RequestParam double damagePrice,
-                            @RequestParam String chassisNumber, RedirectAttributes redirectAttributes){
-        damageService.addDamageToTable(chassisNumber, damageName, damagePrice);
-        redirectAttributes.addAttribute("chassisNumber", chassisNumber);
-        return "redirect:/car_returned";
+                            @RequestParam String chassisNumber, @RequestParam int leaseId,
+                            RedirectAttributes redirectAttributes){
+        damageService.addDamageToTable(chassisNumber, damageName, damagePrice, leaseId);
+        redirectAttributes.addAttribute("leaseId", leaseId);
+        return "redirect:/add_damages_to_report";
     }
 
 
