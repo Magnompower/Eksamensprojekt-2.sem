@@ -15,20 +15,27 @@
     <div th:insert="~{home/fragments :: navbar('/')}"></div>
 </header>
 
-<main class="grid-container">
+<table class="lease-info">
+    <thead>
+    <tr>
+        <th>Customer ID</th>
+        <th>Chassis Number</th>
+        <th>Start Date</th>
+        <th>End Date</th>
+    </tr>
 
-    <div class="box">
-        <div class="text-container">
-            <h2>Lease info</h2>
-        </div>
-        <div class="lease info">
-            <p><strong>Customer ID:</strong> <span class="customer-id" th:text="${lease.customerId}"></span></p>
-            <p><strong>Chassis Number:</strong> <span th:text="${lease.chassisNumber}"></span></p>
-            <p><strong>Start Date:</strong> <span th:text="${lease.startDate}"></span></p>
-            <p><strong>End Date:</strong> <span th:text="${lease.endDate}"></span>
-            <p><strong>Terms:</strong> <span th:text="${lease.terms}"></span></p>
-        </div>
-    </div>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="table-text" th:text="${lease.customerId}"></td>
+        <td class="table-text" th:text="${lease.chassisNumber}"></td>
+        <td class="table-text" th:text="${lease.startDate}"></td>
+        <td class="table-text" th:text="${lease.endDate}"></td>
+    </tr>
+    </tbody>
+</table>
+
+<main class="grid-container">
 
     <div class="box">
         <div class="text-container">
