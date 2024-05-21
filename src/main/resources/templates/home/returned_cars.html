@@ -23,7 +23,7 @@
                 <p th:text="'Licenceplate number: ' + ${car.licensePlateNumber}"></p>
                 <p th:text="'Chassisnumber: ' + ${car.chassisNumber}"></p>
                 <br>
-                <p th:text="'Pris: ' + ${#numbers.formatInteger(car.price, 0)}"></p>
+                <p th:text="'Price: ' + ${#numbers.formatInteger(car.price, 0)} + 'DKK'"></p>
             </div>
             <div>
                 <form th:action="@{/car_returned}" class="grid-item" method="post">

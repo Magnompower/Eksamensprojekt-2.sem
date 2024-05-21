@@ -54,10 +54,10 @@
                         (car.carState.name() == 'DAMAGED' || car.carState.name() == 'UNDER_MAINTENANCE') ? 'grid-item red-box' :
                         'grid-item'}">
             <div>
-                <h3 th:text="${#numbers.formatInteger(car.price, 0)}" class="grid-header"></h3>
-                <p th:text="${car.brand}"></p>
-                <p th:text="${car.model}"></p>
-                <p th:text="${car.carState}" class="format-text"></p>
+                <h3 th:text="'Price: ' + ${#numbers.formatInteger(car.price, 0)}"></h3>
+                <p th:text="'Brand: ' + ${car.brand}"></p>
+                <p th:text="'Model: ' + ${car.model}"></p>
+                <p th:text="'State: ' + ${car.carState}" class="format-text"></p>
                 <div class="ItemLink">
                     <form action="/view_car" method="get">
                         <input type="hidden" name="chassisNumber" th:value="${car.chassisNumber}">
