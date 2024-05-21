@@ -17,7 +17,7 @@ public class LeaseService {
         validateLeaseDates(startDate, endDate);
         leaseRepository.createLease(carChassisNumber, customerId, startDate, endDate, terms);
     }
-    private void validateLeaseDates(LocalDate startDate, LocalDate endDate) {
+    public void validateLeaseDates(LocalDate startDate, LocalDate endDate) {
         LocalDate minDate = LocalDate.of(2024, 1, 1);
         LocalDate maxDate = LocalDate.of(2026, 12, 31);
         // her sikre vi at de datoer kontrakterne har er gyldige.
