@@ -50,8 +50,8 @@ input[type="text"], input[type="date"], select {
 }
 
 button[type="submit"] {
-    background-color: #4CAF50;
-    color: white;
+    background-color: #3b719f;
+    color: #ffffff;
     padding: 10px 20px;
 
     border: none;
@@ -61,10 +61,10 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-    background-color: #45a049;
+    background-color: #5ca351;
 }
 
 .error-message {
-    color: red;
+    color: #CB4C4E;
     margin-bottom: 10px;
 }

@@ -1,6 +1,6 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
+    background-color: #ffffff;
     margin: 0;
     padding: 0;
 }
@@ -15,11 +15,11 @@ body {
 }
 
 h2 {
-    color: #007bff;
+    color: #3b719f;
 }
 
 p {
-    color: #333;
+    color: #555555;
 }
 
 .redirect-message {
