@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Customer List</title>
+  <link rel="stylesheet" type="text/css" href="/customers.css">
+</head>
+<body>
+<h1>Customer List</h1>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Action</th>
+  </tr>
+  </thead>
+  <tbody>
+  <p th:text="${error}" class="error-message"></p>
+
+  <tr th:each="customer : ${customers}">
+    <td th:text="${customer.customerId}"></td>
+    <td th:text="${customer.firstName}"></td>
+    <td th:text="${customer.email}"></td>
+    <td>
+
+      <form th:action="@{/delete_customer}" method="post">
+        <input type="hidden" name="customerId" th:value="${customer.customerId}"/>
+        <button type="submit">Delete</button>
+      </form>
+    </td>
+  </tr>
+  </tbody>
+</table>
+</body>
+</html>

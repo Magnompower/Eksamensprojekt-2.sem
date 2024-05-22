@@ -20,4 +20,10 @@ public class CustomerRepository {
 
         return jdbcTemplate.query(query, rowMapper);
     }
+
+    public void deleteCustomer(int customerId) {
+
+        String query = "DELETE FROM customers WHERE customer_id = ?";
+        jdbcTemplate.update(query, customerId);
+    }
 }

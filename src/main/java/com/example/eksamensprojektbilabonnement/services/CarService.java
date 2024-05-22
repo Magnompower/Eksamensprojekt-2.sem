@@ -40,7 +40,7 @@ public class CarService {
     }
 
     public void updateCarState(String chassisNumber, String carState, String carTable) {
-        carRepository.updateCarState(chassisNumber, carState, carTable);
+        carRepository.updateCarState(chassisNumber, carState, carTable.toLowerCase());
     }
 
 
