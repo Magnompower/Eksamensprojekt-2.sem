@@ -13,6 +13,7 @@
     <div th:insert="~{home/fragments :: logo}"></div>
     <div th:insert="~{home/fragments :: navbar('/')}"></div>
 </header>
+
 <p>Sort!</p> <!--TODO IMPLEMENT-->
 <div class="grid-container">
     <div class="grid-item" th:each="lease : ${leases}" th:classappend="${#temporals.format(lease.endDate, 'yyyy-MM-dd')<
