@@ -76,9 +76,11 @@
         <label for="EndDate">End Date:</label>
         <input type="date" id="EndDate" name="endDate" placeholder="End Date" required pattern="\d{4}-\d{2}-\d{2}">
     </div>
-    <div class="input-group">
-        <label for="terms">Terms:</label>
-        <input type="text" id="terms" name="terms" placeholder="Terms" required>
+    <div class="Hidden">
+        <div class="input-group">
+            <label for="terms">Terms:</label>
+            <input type="text" id="terms" name="terms" placeholder="Terms">
+        </div>
     </div>
     <div class="input-group">
         <label for="customerId">Customer:</label>
@@ -92,7 +94,7 @@
     </div>
     <button type="submit" class="submit-btn">Create lease</button>
 
-    <div  th:if="${error}">
+    <div th:if="${error}">
         <p class="error-message" th:text="${error}"></p>
     </div>
     <div>

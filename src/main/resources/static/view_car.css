@@ -68,3 +68,7 @@ button[type="submit"]:hover {
     color: #CB4C4E;
     margin-bottom: 10px;
 }
+.Hidden {
+    opacity: 0;
+    display: none;
+}
