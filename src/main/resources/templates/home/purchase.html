@@ -17,8 +17,8 @@
 
 <main>
     <form action="/purchaseSelected" method="post">
-        <div class="grid-container">
-            <div class="grid-item" th:each="car : ${cars}">
+        <div class="grid-container2">
+            <div class="grid-item2" th:each="car : ${cars}">
                 <div class="car-details">
                     <h2 th:text="'Price: ' + ${#numbers.formatInteger(car.price, 0)} + ' DKK'"></h2>
                     <div class="text-line">

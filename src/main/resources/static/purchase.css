@@ -1,65 +1,24 @@
-.grid-container {
+.grid-container2 {
     display: flex;
-    flex-direction: row;
-    gap: 20px;
-    margin-top: 20px;
-    overflow-x: auto;
-}
-
-.grid-item {
-    flex: 0 0 auto;
-    width: 300px;
-    height: 470px;
-    display: flex;
-    flex-direction: column;
-}
-
-.car-details {
     position: relative;
-    border: 1px solid #ccc;
-    background-color: #1a4d80;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 85rem;
+    row-gap: 20px;
+
+}
+
+.grid-item2 {
+    box-sizing: border-box;
+    background-color: #3b719f;
+    margin-right: 20px;
+    margin-bottom: 10px;
     padding: 10px;
-    font-weight: bold;
-    color: black;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+    border-radius: 10px;
+    flex-basis: calc(33.33% - 20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
-
 .text-line {
-    text-align: left;
-    display: block;
-    gap: 10px;
-}
-
-
-form {
-    position: relative;
-}
-
-.submit {
-    position: absolute;
-    bottom: 10px;
-    right: -650px;
-    padding: 10px 15px;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-}
-
-.submit:hover {
-    background-color: #45a049;
-}
-
-.checkbox-line {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
+    margin-left: auto;
+    font-weight: bold;
 }
