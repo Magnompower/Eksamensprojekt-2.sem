@@ -36,4 +36,9 @@ public class LeaseRepository {
         String query = "UPDATE lease_agreements SET is_concluded = TRUE WHERE lease_id = ?";
         jdbcTemplate.update(query, leaseId);
     }
+
+    public LeaseAgreement getLease(int leaseId) {
+        String query = "SELECT * FROM lease_agreements WHERE lease_id = ?";
+        return jdbcTemplate.queryForObject(query, BeanPropertyRowMapper.newInstance(LeaseAgreement.class), leaseId);
     }
+}
