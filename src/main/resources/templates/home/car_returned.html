@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Car Returned</title>
+    <link rel="stylesheet" href="/car_returned.css">
     <link rel="stylesheet" href="/fragments.css">
     <link rel="stylesheet" href="/reusables.css">
 </head>
@@ -11,20 +12,71 @@
 <header>
     <div th:insert="~{home/fragments :: header('Cars Returned')}"></div>
     <div th:insert="~{home/fragments :: logo}"></div>
-    <div th:insert="~{home/fragments :: navbar('/inventory')}"></div>
+    <div th:insert="~{home/fragments :: navbar('/')}"></div>
 </header>
 
 <main class="grid-container">
-    <div class="grid-item" th:each="damage : ${damages}">
-<!--        <div>-->
-            <p th:text="'Type of damages: ' + ${damage.damageName}"></p> <!--TODO -->
-            <p th:text="'Price of damages: ' + ${damage.damagePrice}"></p>
-<!--        </div>-->
 
+    <div class="box">
+        <div class="text-container">
+            <h2>Lease info</h2>
+        </div>
+        <div class="lease info">
+            <p><strong>Customer ID:</strong> <span class="customer-id" th:text="${lease.customerId}"></span></p>
+            <p><strong>Chassis Number:</strong> <span th:text="${lease.chassisNumber}"></span></p>
+            <p><strong>Start Date:</strong> <span th:text="${lease.startDate}"></span></p>
+            <p><strong>End Date:</strong> <span th:text="${lease.endDate}"></span>
+            <p><strong>Terms:</strong> <span th:text="${lease.terms}"></span></p>
+            <form action="/conclude_lease" method="post">
+                <input type="hidden" name="leaseId" th:value="${lease.leaseId}">
+                <input type="hidden" name="chassisNumber" th:value="${car.chassisNumber}">
+                <button type="submit">Conclude Lease</button>
+            </form>
+        </div>
     </div>
 
-</main>
+    <div class="box">
+        <div class="text-container">
+            <h2>Existing Damages on Car</h2>
+        </div>
+        <ul class="damage-list">
+            <li class="damage-item" th:each="damage : ${damages}">
+                <span th:text="'Type of damage: ' + ${damage.damageName}"></span>
+                <span th:text="' - Price of damage: ' + ${damage.damagePrice}"></span>
+            </li>
+        </ul>
+        <form action="/add_damage" method="post">
+            <div class="input-container">
+                <div class="text-container">
+                    <p>Please input new damages to the car:</p>
+                </div>
+                <input type="text" id="newDamageName" name="damageName" placeholder="Type of damage">
+                <input type="number" id="newDamagePrice" name="damagePrice" placeholder="Price of damage">
+                <input type="hidden" name="chassisNumber" th:value="${car.chassisNumber}">
+                <button type="submit">Add Damage</button>
+            </div>
+        </form>
+    </div>
 
+    <div class="box">
+        <div class="text-container">
+            <h2>Kilometers Driven</h2>
+        </div>
+        <div class="km-driven-value">
+            <p>KM driven before lease start: <span th:text="${car.kmDriven}"></span></p>
+        </div>
+        <form action="/update_km_driven" method="post">
+            <div class="input-container">
+                <div class="text-container">
+                    <p>Update kilometers driven:</p>
+                </div>
+                <input type="number" id="kmDriven" name="kmDriven" placeholder="New kilometers driven">
+                <input type="hidden" name="chassisNumber" th:value="${car.chassisNumber}">
+                <button type="submit">Update</button>
+            </div>
+        </form>
+    </div>
+</main>
 
 <footer>
     <div th:insert="~{home/fragments :: footer}"></div>

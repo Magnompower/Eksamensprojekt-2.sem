@@ -44,4 +44,7 @@ public class CarService {
     }
 
 
+    public void updateKmDriven(String chassisNumber, double kmDriven, String carTable) {
+        carRepository.updateKmDriven(chassisNumber, kmDriven, carTable);
+    }
 }

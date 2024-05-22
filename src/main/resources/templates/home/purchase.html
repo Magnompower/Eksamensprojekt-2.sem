@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Purchase</title>
-    <link rel="stylesheet" type="text/css" href="purchase.css"> <!-- TODO MAKE PURCHASE-->
+    <link rel="stylesheet" type="text/css" href="purchase.css">
     <link rel="stylesheet" href="/fragments.css">
     <link rel="stylesheet" href="/reusables.css">
 </head>
@@ -17,40 +17,42 @@
 
 <main>
     <form action="/purchaseSelected" method="post">
+        <div class="grid-container2">
+            <div class="grid-item2" th:each="car : ${cars}">
+                <div class="car-details">
+                    <h2 th:text="'Price: ' + ${#numbers.formatInteger(car.price, 0)} + ' DKK'"></h2>
+                    <div class="text-line">
+                        <p th:text="'Chassis Number: ' + ${car.chassisNumber}"></p>
+                        <p th:text="'Brand: ' + ${car.brand}"></p>
+                        <p th:text="'Model: ' + ${car.model}"></p>
+                        <p th:text="'Registration Fee: ' + ${car.registrationFee}"></p>
+                        <p th:text="'License Plate: ' + ${car.licensePlateNumber}"></p>
+                        <p th:text="'State: ' + ${car.carState}"></p>
+                        <p th:text="'Transmission Type: ' + ${car.transmissionType}"></p>
+                        <p th:text="'KM per Liter: ' + ${car.kmPerLiter}"></p>
+                        <p th:text="'Fuel Type: ' + ${car.fuelType}"></p>
+                        <p th:text="'Carbon Emission per KM: ' + ${car.carbonEmissionPerKm}"></p>
 
-        <div class="grid-container">
-            <!-- Iterate over each car -->
-            <div class="grid-item" th:each="car : ${cars}">
-                    <h2 th:text="${#numbers.formatInteger(car.price, 0)}"></h2>
-                    <p> Chassis Number : <span th:text ="${car.chassisNumber}"></span></p>
-                    <p>Brand: <span th:text="${car.brand}"></span></p>
-                    <p>Model: <span th:text="${car.model}"></span></p>
-                    <p>Registration Fee: <span th:text="${car.registrationFee}"></span></p>
-                    <p>License Plate: <span th:text="${car.licensePlateNumber}"></span></p>
-                    <p>State: <span th:text="${car.carState}"></span></p>
-                    <p>Transmission Type: <span th:text="${car.transmissionType}"></span></p>
-                    <p>KM per Liter: <span th:text="${car.kmPerLiter}"></span></p>
-                    <p>Fuel Type: <span th:text="${car.fuelType}"></span></p>
-                    <p>Carbon Emission per KM: <span th:text="${car.carbonEmissionPerKm}"></span></p>
-                    <!-- Checkbox for selecting the car -->
-                    <input type="checkbox" name="selectedCars" th:value="${car.chassisNumber}">
-                    <!-- Hidden inputs for car attributes -->
-                    <input type="hidden" name="carChassisNumber" th:value="${car.chassisNumber}">
-                    <input type="hidden" name="brand" th:value="${car.brand}">
-                    <input type="hidden" name="carModel" th:value="${car.model}">
-                    <input type="hidden" name="registrationFee" th:value="${car.registrationFee}">
-                    <input type="hidden" name="licensePlate" th:value="${car.licensePlateNumber}">
-                    <input type="hidden" name="carState" th:value="${car.carState}">
-                    <input type="hidden" name="transmissionType" th:value="${car.transmissionType}">
-                    <input type="hidden" name="kmPerLiter" th:value="${car.kmPerLiter}">
-                    <input type="hidden" name="fuelType" th:value="${car.fuelType}">
-                    <input type="hidden" name="carbonEmissionPerKm" th:value="${car.carbonEmissionPerKm}">
-                    <input type="hidden" name="price" th:value="${car.price}">
+                        <div class="checkbox-line">
+                            <input type="checkbox" name="selectedCars" th:value="${car.chassisNumber}">
+                        </div>
+                        <!-- Hidden inputs for car attributes -->
+                        <input type="hidden" name="carChassisNumber" th:value="${car.chassisNumber}">
+                        <input type="hidden" name="brand" th:value="${car.brand}">
+                        <input type="hidden" name="carModel" th:value="${car.model}">
+                        <input type="hidden" name="registrationFee" th:value="${car.registrationFee}">
+                        <input type="hidden" name="licensePlate" th:value="${car.licensePlateNumber}">
+                        <input type="hidden" name="carState" th:value="${car.carState}">
+                        <input type="hidden" name="transmissionType" th:value="${car.transmissionType}">
+                        <input type="hidden" name="kmPerLiter" th:value="${car.kmPerLiter}">
+                        <input type="hidden" name="fuelType" th:value="${car.fuelType}">
+                        <input type="hidden" name="carbonEmissionPerKm" th:value="${car.carbonEmissionPerKm}">
+                        <input type="hidden" name="price" th:value="${car.price}">
+                    </div>
+                </div>
             </div>
-            <!-- End iteration -->
         </div>
-        <!-- Submit button for all selected cars -->
-        <button type="submit">Purchase Selected</button>
+        <button class="submit" type="submit">Purchase Selected</button>
     </form>
 </main>
 

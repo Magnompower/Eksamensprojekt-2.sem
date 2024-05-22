@@ -32,4 +32,12 @@ public class LeaseService {
         return leaseRepository.getLeases();
 
     }
+
+    public LeaseAgreement getActiveLease(String chassisNumber) {
+        return leaseRepository.getActiveLease(chassisNumber);
+    }
+
+    public void concludeLease(int leaseId) {
+        leaseRepository.concludeLease(leaseId);
+    }
 }

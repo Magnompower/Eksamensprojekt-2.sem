@@ -13,8 +13,8 @@ public class DamageService {
     @Autowired
     DamageRepository damageRepository;
 
-    public void addDamageToTable(String chassisNumber, String damage, double price){
-        damageRepository.addDamageToTable(chassisNumber, damage, price);
+    public void addDamageToTable(String chassisNumber, String damageName, double damagePrice){
+        damageRepository.addDamageToTable(chassisNumber, damageName, damagePrice);
     }
 
     public List<Damage> getDamagesFromTable(String chassisNumber){

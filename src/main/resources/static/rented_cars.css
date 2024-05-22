@@ -2,36 +2,77 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-}x
+}
 
 main {
     padding: 20px;
 }
 
+.leasingPrice-container {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin: 20px auto;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+    max-width: 400px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.leasingPrice-container h3 {
+    margin-top: 0;
+    text-align: center;
+}
+
+.leasingPrice-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.leasingPrice-item:last-child {
+    border-bottom: none;
+}
+
+.leasingPrice-label {
+    font-weight: bold;
+}
+
+.leasingPrice-value {
+    text-align: right;
+}
+
 .grid-container {
-    align-content: center;
-    margin-left: 25%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-top: 20px;
 }
 
 .grid-item {
     border: 1px solid #ccc;
     display: flex;
+    background-color: #1a4d80;
+    padding: 10px;
+    font-weight: bold;
+    color: black;
+    align-items: center;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .grid-item > div {
-    margin-right: 10px;
+    margin-bottom: 10px;
 }
 
 .image-container {
-    margin-left: auto;
+    position: relative;
+    width: 450px;
+    height: 200px;
+    border-radius: 10px;
 }
 
 .image {
-    max-width: 150px;
-    max-height: 150px;
-}
-.leasingPrice {
-    font-size: 15px;
-    font-weight: bold;
-    margin-left: 15%;
+    object-fit: cover;
+
 }

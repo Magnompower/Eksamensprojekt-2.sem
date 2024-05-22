@@ -48,4 +48,16 @@ public class LeaseController {
             return "redirect:/view_car?carChassisNumber=" + carChassisNumber;
         }
     }
+
+    @PostMapping ("/conclude_lease")
+    public String concludeLease(@RequestParam int leaseId, @RequestParam String chassisNumber,
+                                RedirectAttributes redirectAttributes){
+        leaseService.concludeLease(leaseId);
+        String carTable = carService.getCarTable(chassisNumber);
+        carService.updateCarState(chassisNumber, "AVAILABLE", carTable);
+        redirectAttributes.addAttribute("chassisNumber", chassisNumber);
+        return "redirect:/pending_cars";
+    }
+
+
 }

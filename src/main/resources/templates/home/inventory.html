@@ -36,7 +36,7 @@
         <option value="UNDER_MAINTENANCE">Under maintenance</option>
         <option value="GETTING_PREPARED">Getting prepared</option>
         <option value="AVAILABLE">Available</option>
-        <option value="PENDING_MANAGEMENT">Pending management</option>
+        <option value="RETURNED">Returned</option>
         <option value="ALL">Show all</option>
     </select>
 
@@ -50,17 +50,17 @@
     <div class="grid-container">
         <div th:each="car : ${cars}"
              th:class="${car.carState.name() == 'AVAILABLE' ? 'grid-item green-box' :
-                        (car.carState.name() == 'RENTED' || car.carState.name() == 'GETTING_PREPARED') || car.carState.name() == 'PENDING_MANAGEMENT' ? 'grid-item blue-box' :
+                        (car.carState.name() == 'RENTED' || car.carState.name() == 'GETTING_PREPARED' || car.carState.name() == 'PENDING_MANAGEMENT') ? 'grid-item blue-box' :
                         (car.carState.name() == 'DAMAGED' || car.carState.name() == 'UNDER_MAINTENANCE') ? 'grid-item red-box' :
                         'grid-item'}">
             <div>
-                <h3 th:text="${#numbers.formatInteger(car.price, 0)}" class="grid-header"></h3>
-                <p th:text="${car.brand}"></p>
-                <p th:text="${car.model}"></p>
-                <p th:text="${car.carState}" class="format-text"></p>
+                <h3 th:text="'Price: ' + ${#numbers.formatInteger(car.price, 0)}"></h3>
+                <p th:text="'Brand: ' + ${car.brand}"></p>
+                <p th:text="'Model: ' + ${car.model}"></p>
+                <p th:text="'State: ' + ${car.carState}" class="format-text"></p>
                 <div class="ItemLink">
                     <form action="/view_car" method="get">
-                        <input type="hidden" name="carChassisNumber" th:value="${car.chassisNumber}">
+                        <input type="hidden" name="chassisNumber" th:value="${car.chassisNumber}">
                         <button class="view-button" type="submit">View car</button>
                     </form>
                     <div class="image-container">

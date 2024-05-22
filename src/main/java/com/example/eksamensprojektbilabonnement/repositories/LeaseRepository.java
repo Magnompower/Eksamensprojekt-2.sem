@@ -24,8 +24,16 @@ public class LeaseRepository {
     public List<LeaseAgreement> getLeases() {
         String query = "SELECT * FROM lease_agreements";
         return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(LeaseAgreement.class));
-
     }
 
 
-}
+    public LeaseAgreement getActiveLease(String chassisNumber) {
+        String query = "SELECT * FROM lease_agreements WHERE chassis_number = ? AND is_concluded = 'FALSE'";
+        return jdbcTemplate.queryForObject(query, BeanPropertyRowMapper.newInstance(LeaseAgreement.class), chassisNumber);
+    }
+
+    public void concludeLease(int leaseId) {
+        String query = "UPDATE lease_agreements SET is_concluded = TRUE WHERE lease_id = ?";
+        jdbcTemplate.update(query, leaseId);
+    }
+    }

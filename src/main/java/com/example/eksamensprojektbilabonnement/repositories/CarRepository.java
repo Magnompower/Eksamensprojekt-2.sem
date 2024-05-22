@@ -41,13 +41,15 @@ public class CarRepository {
         return jdbcTemplate.queryForObject(query, new Object[]{chassisNumber}, String.class);
     }
 
-    public void updateCarState(String chassisNumber, String CarState, String carTable) {
+    public void updateCarState(String chassisNumber, String carState, String carTable) {
         String query = "UPDATE " + carTable + " SET car_state = ? WHERE chassis_number = ?";
-        jdbcTemplate.update(query, CarState, chassisNumber);
+        jdbcTemplate.update(query, carState, chassisNumber);
     }
 
 
-
-
+    public void updateKmDriven(String chassisNumber, double kmDriven, String carTable) {
+        String query = "UPDATE " + carTable + " SET km_driven = ? WHERE chassis_number = ?";
+        jdbcTemplate.update(query, kmDriven, chassisNumber);
+    }
 }
 

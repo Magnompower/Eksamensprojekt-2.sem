@@ -47,7 +47,7 @@
         <td class="registration-fee" th:text="${Car.registrationFee}"></td>
     </tr>
 </table>
-<form class="updateCar" action="/update_car" method="post">
+<form class="updateCar" action="/update_car_state" method="post">
     <label for="chassisNumber">Update car:</label>
     <input type="text" id="chassisNumber" name="chassisNumber" th:value="${Car.chassisNumber}" readonly required>
     <label for="carState">Select car state:</label>
@@ -56,7 +56,7 @@
         <option value="DAMAGED">Damaged</option>
         <option value="UNDER_MAINTENANCE">Under maintenance</option>
         <option value="GETTING_PREPARED">Getting prepared</option>
-        <option value="PENDING_MANAGEMENT">Pending management</option>
+        <option value="RETURNED">Returned</option>
         <option value="AVAILABLE">Available</option>
     </select>
     <button type="submit">Update</button>
@@ -76,9 +76,11 @@
         <label for="EndDate">End Date:</label>
         <input type="date" id="EndDate" name="endDate" placeholder="End Date" required pattern="\d{4}-\d{2}-\d{2}">
     </div>
-    <div class="input-group">
-        <label for="terms">Terms:</label>
-        <input type="text" id="terms" name="terms" placeholder="Terms" required>
+    <div class="Hidden">
+        <div class="input-group">
+            <label for="terms">Terms:</label>
+            <input type="text" id="terms" name="terms" placeholder="Terms">
+        </div>
     </div>
     <div class="input-group">
         <label for="customerId">Customer:</label>
@@ -92,7 +94,7 @@
     </div>
     <button type="submit" class="submit-btn">Create lease</button>
 
-    <div  th:if="${error}">
+    <div th:if="${error}">
         <p class="error-message" th:text="${error}"></p>
     </div>
     <div>

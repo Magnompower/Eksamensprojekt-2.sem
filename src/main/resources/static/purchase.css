@@ -1,0 +1,24 @@
+.grid-container2 {
+    display: flex;
+    position: relative;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 85rem;
+    row-gap: 20px;
+
+}
+
+.grid-item2 {
+    box-sizing: border-box;
+    background-color: #3b719f;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 10px;
+    flex-basis: calc(33.33% - 20px);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.text-line {
+    margin-left: auto;
+    font-weight: bold;
+}

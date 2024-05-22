@@ -1,6 +1,6 @@
 .header {
     background-color: #3b719f;
-    color: white;
+    color: #ffffff;
     padding: 20px 0;
     text-align: center;
     width: 100%;
@@ -9,11 +9,11 @@
     text-shadow: #000000;
     text-decoration-thickness: auto;
 }
-
+/*
 .header h1 {
     margin-top: -0.001px;
 }
-
+*/
 /*---------------------------------------HEADER-------------------------------------*/
 
 .logo-container {
@@ -61,7 +61,7 @@
     font-weight: bold;
     color: #3b719f;
     transform-style: preserve-3d;
-    transform: scale(1.4);
+    transform: scale(1.2);
 }
 
 /*MAKE BUTTON TODO*/
@@ -76,7 +76,7 @@
     background-color: #000000;
     padding: 10px 20px;
     text-align: left;
-    color: white;
+    color: #ffffff;
     margin-top: 50px;
 }
 
@@ -85,7 +85,7 @@
 }
 
 .footer a {
-    color: #007bff;
+    color: #3b719f;
     text-decoration: none;
     transition: transform 0.3s, color 0.3s;
     margin: auto;
@@ -110,8 +110,7 @@
 }
 
 .github-link a:hover{
-    transform: scale(1.1);
-    color: #2c8eff;
+    color: #db6000;
 }
 
 /*----------------------------------------------------FOOTER----------------------------------------------------------*/
