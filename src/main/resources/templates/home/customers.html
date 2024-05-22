@@ -4,9 +4,17 @@
   <meta charset="UTF-8">
   <title>Customer List</title>
   <link rel="stylesheet" type="text/css" href="/customers.css">
+  <link rel="stylesheet" href="/reusables.css">
+  <link rel="stylesheet" href="/fragments.css">
 </head>
 <body>
-<h1>Customer List</h1>
+
+<header>
+  <div th:insert="~{home/fragments :: header('Customer List')}"></div>
+  <div th:insert="~{home/fragments :: logo}"></div>
+  <div th:insert="~{home/fragments :: navbar('/')}"></div>
+</header>
+
 <table>
   <thead>
   <tr>
@@ -33,5 +41,10 @@
   </tr>
   </tbody>
 </table>
+
+<footer>
+  <div th:insert="~{home/fragments :: footer}"></div>
+</footer>
+
 </body>
 </html>

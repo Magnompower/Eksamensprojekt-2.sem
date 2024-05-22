@@ -26,10 +26,10 @@ p {
     margin: auto;
     padding: 22px 22px 22px 22px;
     width: 100%;
-    border-radius: 5px;
-    background: #0d64ad;
-    border-top: 3px solid #113359;
-    border-bottom: 3px solid #113359;
+    border-radius: 30px;
+    background: #3b718f;
+    border-top: 3px solid #3b718f;
+    border-bottom: 3px solid #3b718f;
 }
 
 #login form span {
@@ -76,5 +76,11 @@ p {
     transition: background 0.3s ease-in-out;
 }
 #login form input[type="submit"]:hover {
-    background: #16aa56;
+    background: #5ca351;
+}
+.error-message{
+    color: #c70f12;
+    font-weight: bold;
+    text-align: center;
+    font-size: 16px;
 }

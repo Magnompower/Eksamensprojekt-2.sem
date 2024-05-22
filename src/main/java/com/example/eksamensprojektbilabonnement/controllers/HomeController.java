@@ -16,11 +16,6 @@ public class HomeController {
 //            case "damageGuy" -> model.addAttribute("damageGuy", employeetype);}
             return "home/index";
         }
-
-    @GetMapping("/login")
-    public String login() {
-        return "home/login";
-    }
 }
 
 
