@@ -14,7 +14,6 @@ public class ValidateController {
     EmployeeService employeeService;
 
 
-
     @PostMapping("/validate")
 
     public String validate(Model model, @RequestParam String email, @RequestParam String password) {

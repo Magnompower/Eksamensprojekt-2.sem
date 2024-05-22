@@ -16,20 +16,26 @@
 </header>
 
 <main>
-    <div class="leasingPrice">
-        <h3>Total pris for udlejede biler: </h3>
-        <h2><span th:text="${#numbers.formatInteger(totalPrice, 0)} + ' DKK'"> </span></h2>
-        <h2><span th:text="'≈ ' + ${#numbers.formatInteger(totalPrice * 0.13, 0)} + ' EURO'"></span></h2>
+    <div class="leasingPrice-container">
+        <h3>Collective price for leased cars</h3>
+        <div class="leasingPrice-item">
+            <span class="leasingPrice-label">DKK:</span>
+            <span class="leasingPrice-value" th:text="${#numbers.formatInteger(totalPrice, 0)} + ',-'"></span>
+        </div>
+        <div class="leasingPrice-item">
+            <span class="leasingPrice-label">EUR:</span>
+            <span class="leasingPrice-value" th:text="'≈ ' + ${#numbers.formatInteger(totalPrice * 0.13, 0)} + '€'"></span>
+        </div>
     </div>
     <div class="grid-container">
         <div class="grid-item" th:each="car : ${rentedCars}">
-            <div> <!-- TODO STRONG -->
-                <p th:text="'Mærke: ' + ${car.brand}"></p>
+            <div>
+                <p th:text="'Brand: ' + ${car.brand}"></p>
                 <p th:text="'Model: ' + ${car.model}"></p>
-                <p th:text="'Nummerplade: ' + ${car.licensePlateNumber}"></p>
-                <p th:text="'Stelnummer: ' + ${car.chassisNumber}"></p>
+                <p th:text="'Plate: ' + ${car.licensePlateNumber}"></p>
+                <p th:text="'Chassis Number: ' + ${car.chassisNumber}"></p>
                 <br>
-                <p th:text="'Pris: ' + ${#numbers.formatInteger(car.price, 0)}"></p>
+                <p th:text="'Price: ' + ${#numbers.formatInteger(car.price, 0)} + ' DKK'"></p>
             </div>
             <div class="image-container">
                 <img class="image" th:src="${car.image_url}" alt="Car Image">
@@ -37,6 +43,9 @@
         </div>
     </div>
 </main>
+
+
+
 
 <footer>
     <div th:insert="~{home/fragments :: footer}"></div>

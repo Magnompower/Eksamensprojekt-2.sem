@@ -62,10 +62,10 @@ public class InventoryController {
     }
 
 
-    @GetMapping("/pending_cars")
-    public String showPendingCars(Model model) {
-        List<Car> pendingCars = inventoryService.getFilteredCars("PENDING_MANAGEMENT");
-        model.addAttribute("pendingCars", pendingCars);
-        return "home/pending_cars";
+    @GetMapping("/returned_cars")
+    public String showReturnedCars(Model model) {
+        List<Car> returnedCars = inventoryService.getFilteredCars("RETURNED");
+        model.addAttribute("returnedCars", returnedCars);
+        return "home/returned_cars";
     }
 }

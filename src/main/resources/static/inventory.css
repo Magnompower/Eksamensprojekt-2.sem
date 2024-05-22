@@ -5,37 +5,37 @@
     align-items: center;
     font-weight: bold;
     border-radius: 10px;
+    position: relative;
 }
 .image-container {
-    margin-left: 185px;
-    top: -185px;
-    margin-right: 10px;
+    position: relative;
+    width: 450px;
+    height: 200px;
 }
 
 .image {
-    object-fit: scale-down;
+    object-fit: cover;
+
 }
-.ItemLink {
-    height: 22px;
-    text-align: left;
-}
+
 .view-button {
+    position: relative;
     width: 100px;
-    margin-left: 200px;
-    margin-top: -10px;
-    background-color: #ffffff; /* White background color */
+    margin-left: 300px;
+    top: -150px;
+    background-color: #ffffff;
     color: #555555;
     border: 2px solid #555555;
     padding: 8px 12px;
     border-radius: 50px;
     cursor: pointer;
-    transition: background-color 0.3s ease; /* Smooth transition */
+    transition: background-color 0.3s ease;
     font-weight: bold;
 }
 
 .view-button:hover {
-    background-color: #555555; /* Gray background color on hover */
-    color: #ffffff; /* White text color on hover */
+    background-color: #555555;
+    color: #ffffff;
 }
 
 /* Style for the drop down menu */
@@ -51,14 +51,10 @@ form label {
 
 form select {
     font-size: 14px;
-    border-radius: 20px; /* Oval shape */
+    border-radius: 20px;
 }
 
 .sort-form {
-    margin-left: 50px; /* Adjusted margin-left value */
-}
-
-.form p {
-    /* Add any additional styling for form paragraphs here */
+    margin-left: 50px;
 }
 

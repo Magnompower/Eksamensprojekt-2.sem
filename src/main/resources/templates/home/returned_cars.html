@@ -9,30 +9,26 @@
 <body>
 
 <header>
-    <div th:insert="~{home/fragments :: header('Pending Cars')}"></div>
+    <div th:insert="~{home/fragments :: header('Returned Cars')}"></div>
     <div th:insert="~{home/fragments :: logo}"></div>
     <div th:insert="~{home/fragments :: navbar('/')}"></div>
 </header>
 
 <main>
     <div class="grid-content">
-        <div class="grid-item" th:each="car : ${pendingCars}">
+        <div class="grid-item" th:each="car : ${returnedCars}">
             <div> <!-- TODO STRONG -->
                 <p th:text="'Brand: ' + ${car.brand}"></p>
                 <p th:text="'Model: ' + ${car.model}"></p>
                 <p th:text="'Licenceplate number: ' + ${car.licensePlateNumber}"></p>
                 <p th:text="'Chassisnumber: ' + ${car.chassisNumber}"></p>
                 <br>
-                <p th:text="'Pris: ' + ${#numbers.formatInteger(car.price, 0)}"></p>
+                <p th:text="'Price: ' + ${#numbers.formatInteger(car.price, 0)} + 'DKK'"></p>
             </div>
             <div>
-                <form th:action="@{/car_returned}" class="grid-item" method="get">
+                <form th:action="@{/car_returned}" class="grid-item" method="post">
                     <input type="hidden" name="chassisNumber" th:value="${car.chassisNumber}" />
                     <button type="submit" class="simple-button">Car returned</button>
-                </form>
-                <form th:action="@{/car_bought}" class="grid-item" method="get">
-                    <input type="hidden" name="chassisNumber" th:value="${car.chassisNumber}" />
-                    <button type="submit" class="simple-button">Car bought</button>
                 </form>
             </div>
             <div class="image-container">
