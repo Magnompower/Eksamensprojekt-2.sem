@@ -33,7 +33,7 @@ public class PurchaseController {
 
     @PostMapping("/purchaseSelected")
     public String purchaseSelected(@RequestParam("selectedCars") List<String> selectedCars,
-                                   @RequestParam("carChassisNumber") List<String> carChassisNumbers,
+                                   @RequestParam("chassisNumber") List<String> chassisNumbers,
                                    @RequestParam("carModel") List<String> carModels,
                                    @RequestParam("brand") List<String> brands,
                                    @RequestParam("price") List<Double> prices,
@@ -49,8 +49,8 @@ public class PurchaseController {
             return "redirect:/purchase";
         }
         for (String chassisNumber : selectedCars) {
-                int index = carChassisNumbers.indexOf(chassisNumber);
-                // Den bruger stelnumrene i selectedCars til at finde deres indeks i carChassisNumbers, som
+                int index = chassisNumbers.indexOf(chassisNumber);
+                // Den bruger stelnumrene i selectedCars til at finde deres indeks i chassisNumbers, som
                 // indeholder alle stelnumrene i viewet. Så opretter den biler kun for dem der er selected.
                 String carModel = carModels.get(index);
                 String brand = brands.get(index);

@@ -35,23 +35,29 @@ public class LeaseController {
     }
     @PostMapping("/createLease")
     public String createLease(Model model,
-                              @RequestParam String carChassisNumber,
+                              @RequestParam String chassisNumber,
                               @RequestParam int customerId,
                               @RequestParam LocalDate startDate,
                               @RequestParam LocalDate endDate,
                               @RequestParam String terms,
                               RedirectAttributes redirectAttributes) {
-        try {
-            leaseService.createLease(carChassisNumber, customerId, startDate, endDate, terms);
-            carService.updateCarState(carChassisNumber, "RENTED", carService.getCarTable(carChassisNumber));
-            model.addAttribute("leases", leaseService.getLeases());
-            return "redirect:/lease_overview";
-        } catch (IllegalArgumentException e) {
-            redirectAttributes.addFlashAttribute("error", e.getMessage());
-            return "redirect:/view_car?carChassisNumber=" + carChassisNumber;
-        } catch (Exception e) {
-            redirectAttributes.addFlashAttribute("error", "En uventet fejl opstod. Prøv igen.");
-            return "redirect:/view_car?carChassisNumber=" + carChassisNumber;
+
+        boolean isAvailable = leaseService.checkLeaseAvailability(chassisNumber, startDate, endDate);
+
+        if (isAvailable) {
+            try {
+                leaseService.createLease(chassisNumber, customerId, startDate, endDate, terms);
+                return "redirect:/lease_overview";
+            } catch (IllegalArgumentException e) {
+                redirectAttributes.addFlashAttribute("error", e.getMessage());
+                return "redirect:/view_car?chassisNumber=" + chassisNumber;
+            } catch (Exception e) {
+                redirectAttributes.addFlashAttribute("error", "Unknown Error. Try again.");
+                return "redirect:/view_car?chassisNumber=" + chassisNumber;
+            }
+        } else {
+            redirectAttributes.addFlashAttribute("error", "Those dates are not avaliable. Please choose valid dates");
+            return "redirect:/view_car?chassisNumber=" + chassisNumber;
         }
     }
 
@@ -67,6 +73,7 @@ public class LeaseController {
         //Set the damages to invoiced:
         damageService.setDamagesToInvoiced(leaseId, chassisNumber);
 
+        //isActive should be set to false. Also think about that functionality here should be triggers instead
         return "redirect:/returned_cars";
     }
 
