@@ -16,6 +16,7 @@
 </header>
 
 <table class="car-table">
+    <h2>Car Info</h2>
     <thead>
     <tr>
         <th>Chassis number</th>
@@ -47,6 +48,7 @@
         <td class="registration-fee" th:text="${Car.registrationFee}"></td>
     </tr>
 </table>
+<h2>Update Car State</h2>
 <form class="updateCar" action="/update_car_state" method="post">
     <label for="chassisNumber">Update car:</label>
     <input type="text" id="chassisNumber2" name="chassisNumber" th:value="${Car.chassisNumber}" readonly required>
@@ -62,7 +64,30 @@
     <button type="submit">Update</button>
 </form>
 
+<div class="lease-list">
+    <h2>Existing Leases</h2>
+    <table>
+        <thead>
+        <tr>
+            <th>Lease ID</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="lease : ${leases}">
+            <td th:text="${lease.leaseId}"></td>
+            <td th:text="${lease.startDate}"></td>
+            <td th:text="${lease.endDate}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</div>
+
+<h2>Create New Lease</h2>
 <form action="/createLease" method="post" class="lease-form">
+
     <div class="input-group">
         <label for="chassisNumber">Chassis Number:</label>
         <input type="text" id="chassisNumber" name="chassisNumber" th:value="${Car.chassisNumber}" readonly>
@@ -100,9 +125,9 @@
     <div>
         <br>
     </div>
-
-
 </form>
+
+
 <!-- Image
 <div class="image-container">
     <img class="image" th:src="${car.image_url}" alt="Car Image">
