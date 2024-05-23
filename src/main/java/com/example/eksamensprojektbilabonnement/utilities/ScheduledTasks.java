@@ -14,7 +14,7 @@ import java.util.List;
 @EnableScheduling
 public class ScheduledTasks {
 
-    private static final Logger logger = LoggerFactory.getLogger(ScheduledTasks.class);
+    private static final Logger logger = LoggerFactory.getLogger(ScheduledTasks.class); // FJERNES??
 
     @Autowired
     private CarRepository carRepository;
