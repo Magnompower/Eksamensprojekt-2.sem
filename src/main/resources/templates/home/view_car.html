@@ -49,7 +49,7 @@
 </table>
 <form class="updateCar" action="/update_car_state" method="post">
     <label for="chassisNumber">Update car:</label>
-    <input type="text" id="chassisNumber" name="chassisNumber" th:value="${Car.chassisNumber}" readonly required>
+    <input type="text" id="chassisNumber2" name="chassisNumber" th:value="${Car.chassisNumber}" readonly required>
     <label for="carState">Select car state:</label>
     <select id="carState" name="carState" required>
         <option value="RENTED">Rented</option>
@@ -64,8 +64,8 @@
 
 <form action="/createLease" method="post" class="lease-form">
     <div class="input-group">
-        <label for="CarChassisNumber">Chassis Number:</label>
-        <input type="text" id="CarChassisNumber" name="carChassisNumber" th:value="${Car.chassisNumber}" readonly>
+        <label for="chassisNumber">Chassis Number:</label>
+        <input type="text" id="chassisNumber" name="chassisNumber" th:value="${Car.chassisNumber}" readonly>
     </div>
     <div class="input-group">
         <label for="StartDate">Start Date:</label>

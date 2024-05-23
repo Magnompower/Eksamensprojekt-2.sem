@@ -13,9 +13,9 @@ public class LeaseService {
     @Autowired
     LeaseRepository leaseRepository;
 
-    public void createLease(String carChassisNumber, int customerId, LocalDate startDate, LocalDate endDate, String terms) {
+    public void createLease(String chassisNumber, int customerId, LocalDate startDate, LocalDate endDate, String terms) {
         validateLeaseDates(startDate, endDate);
-        leaseRepository.createLease(carChassisNumber, customerId, startDate, endDate, terms);
+        leaseRepository.createLease(chassisNumber, customerId, startDate, endDate, terms);
     }
     public void validateLeaseDates(LocalDate startDate, LocalDate endDate) {
         LocalDate minDate = LocalDate.of(2024, 1, 1);
@@ -43,5 +43,23 @@ public class LeaseService {
 
     public LeaseAgreement getLease(int leaseId) {
         return leaseRepository.getLease(leaseId);
+    }
+
+    public boolean checkLeaseAvailability(String chassisNumber, LocalDate startDateNew, LocalDate endDateNew) {
+        List<LeaseAgreement> nonConcludedLeases = getNonConcludedLeases(chassisNumber);
+
+        for (LeaseAgreement lease : nonConcludedLeases) {
+            LocalDate existingStart = lease.getStartDate();
+            LocalDate existingEnd = lease.getEndDate();
+
+            if (!(endDateNew.isBefore(existingStart) || startDateNew.isAfter(existingEnd))) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private List<LeaseAgreement> getNonConcludedLeases(String chassisNumber) {
+        return leaseRepository.getNonConcludedLeases(chassisNumber);
     }
 }
