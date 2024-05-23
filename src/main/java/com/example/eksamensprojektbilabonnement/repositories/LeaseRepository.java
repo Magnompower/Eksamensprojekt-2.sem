@@ -1,11 +1,9 @@
 package com.example.eksamensprojektbilabonnement.repositories;
 
 import com.example.eksamensprojektbilabonnement.models.LeaseAgreement;
-import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
@@ -16,9 +14,9 @@ public class LeaseRepository {
     @Autowired
     JdbcTemplate jdbcTemplate;
 
-    public void createLease(String carChassisNumber, int customerId, LocalDate startDate, LocalDate endDate, String terms) {
+    public void createLease(String chassisNumber, int customerId, LocalDate startDate, LocalDate endDate, String terms) {
         String  query = "INSERT INTO lease_agreements (chassis_number, customer_id, start_date, end_date, terms) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(query, carChassisNumber, customerId, startDate, endDate, terms);
+        jdbcTemplate.update(query, chassisNumber, customerId, startDate, endDate, terms);
     }
 
     public List<LeaseAgreement> getLeases() {
@@ -40,5 +38,10 @@ public class LeaseRepository {
     public LeaseAgreement getLease(int leaseId) {
         String query = "SELECT * FROM lease_agreements WHERE lease_id = ?";
         return jdbcTemplate.queryForObject(query, BeanPropertyRowMapper.newInstance(LeaseAgreement.class), leaseId);
+    }
+
+    public List<LeaseAgreement> getNonConcludedLeases(String chassisNumber) {
+        String query = "SELECT * FROM lease_agreements WHERE chassis_number = ? AND is_concluded = FALSE";
+        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(LeaseAgreement.class), chassisNumber);
     }
 }

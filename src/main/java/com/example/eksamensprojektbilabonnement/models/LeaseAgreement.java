@@ -7,10 +7,22 @@ public class LeaseAgreement {
     private int leaseId;
     private String chassisNumber;
     private int customerId;
+    private boolean isActive;
     private boolean isConcluded;
     private String terms;
     private LocalDate startDate;
     private LocalDate endDate;
+
+    public LeaseAgreement(){
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 
     public int getCustomerId() {
         return customerId;
@@ -59,13 +71,6 @@ public class LeaseAgreement {
     public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
-
-    public LeaseAgreement(){
-    }
-
-
-
-
 
     public boolean isConcluded() {
         return isConcluded;
