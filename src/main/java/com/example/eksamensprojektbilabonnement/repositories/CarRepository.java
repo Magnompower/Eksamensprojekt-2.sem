@@ -2,16 +2,16 @@ package com.example.eksamensprojektbilabonnement.repositories;
 
 
 import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
-import com.example.eksamensprojektbilabonnement.models.inheritance.GasCar;
 import com.example.eksamensprojektbilabonnement.utilities.CarState;
 import com.example.eksamensprojektbilabonnement.utilities.FuelType;
 import com.example.eksamensprojektbilabonnement.utilities.TransmissionType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class CarRepository {
@@ -45,5 +45,21 @@ public class CarRepository {
         String query = "UPDATE " + carTable + " SET km_driven = ? WHERE chassis_number = ?";
         jdbcTemplate.update(query, kmDriven, chassisNumber);
     }
+
+    public void changeCarStateInLeasedCars(String chassisNumber, String carState) {
+        String query = "UPDATE " + getCarTable(chassisNumber) + " SET car_state = ? WHERE chassis_number = ?";
+        jdbcTemplate.update(query, carState, chassisNumber);
+    }
+
+
+
+    public List<String> findCarsWithUpcomingLeases() {
+        String query = "SELECT a.chassis_number FROM lease_agreements l JOIN all_cars a ON " +
+                "l.chassis_number = a.chassis_number WHERE l.start_date BETWEEN CURRENT_TIMESTAMP " +
+                "AND (CURRENT_TIMESTAMP + INTERVAL 24 HOUR)";
+        return jdbcTemplate.queryForList(query, String.class);
+    }
+
+
 }
 
