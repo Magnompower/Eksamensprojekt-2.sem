@@ -76,3 +76,9 @@ main {
     object-fit: cover;
 
 }
+.message {
+    font-size : 20px;
+    color: cornflowerblue;
+    text-align: center;
+
+}
