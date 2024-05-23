@@ -25,7 +25,10 @@ public class CarController {
     private CustomerService customerService;
 
     @Autowired
-    ConditionReportService conditionReportService;
+    private ConditionReportService conditionReportService;
+
+    @Autowired
+    private LeaseService leaseService;
 
 
     @GetMapping("/view_car")
@@ -33,6 +36,7 @@ public class CarController {
         Car car = carService.getCarByChassisNumber(chassisNumber);
         model.addAttribute("Car", car);
         model.addAttribute("Customers", customerService.getAllCustomers());
+        model.addAttribute("leases", leaseService.getNonConcludedLeases(chassisNumber));
         return "home/view_car";
     }
 

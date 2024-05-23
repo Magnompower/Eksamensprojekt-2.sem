@@ -18,7 +18,6 @@ public class ValidateController {
     public String validate(Model model, @RequestParam String email, @RequestParam String password) {
         String loginStatus = employeeService.checkPass(email,password);
         if (loginStatus.equals("UserApproved")) {
-
             return "redirect:/inventory";
 
 
