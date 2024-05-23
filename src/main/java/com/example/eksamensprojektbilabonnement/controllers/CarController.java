@@ -30,7 +30,6 @@ public class CarController {
     @Autowired
     private LeaseService leaseService;
 
-
     @GetMapping("/view_car")
     public String view_car(@RequestParam String chassisNumber, Model model) {
         Car car = carService.getCarByChassisNumber(chassisNumber);
