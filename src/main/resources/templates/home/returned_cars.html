@@ -16,10 +16,11 @@
 
 <main>
     <div class="grid-content">
+        <div th:if="${returnedCars.isEmpty()}">
+            <p class="message">There are no cars to return at the moment. Please update a car-status to returned and come back.</p>
+        </div>
         <div class="grid-item" th:each="car : ${returnedCars}">
-            <div th:if="${returnedCars.}">
-                <p class="message">There are no cars to return at the moment. Please update car status to return and come back.</p>
-            </div>
+
             <div> <!-- TODO STRONG -->
                 <p th:text="'Brand: ' + ${car.brand}"></p>
                 <p th:text="'Model: ' + ${car.model}"></p>
@@ -29,14 +30,15 @@
                 <p th:text="'Price: ' + ${#numbers.formatInteger(car.price, 0)} + 'DKK'"></p>
             </div>
             <div>
-                <form th:action="@{/car_returned}" class="grid-item" method="post">
-                    <input type="hidden" name="chassisNumber" th:value="${car.chassisNumber}" />
-                    <button type="submit" class="simple-button">Car returned</button>
-                </form>
+
             </div>
             <div class="image-container">
                 <img class="image" th:src="${car.image_url}" alt="Car Image">
             </div>
+            <form th:action="@{/car_returned}" class="grid-item" method="post">
+                <input type="hidden" name="chassisNumber" th:value="${car.chassisNumber}" />
+                <button type="submit" class="simple-button">Car returned</button>
+            </form>
         </div>
     </div>
 </main>
