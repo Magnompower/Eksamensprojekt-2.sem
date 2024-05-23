@@ -8,13 +8,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class LeaseServiceTest {
     @Test
-    public void testExceptionThrow () {
+    public void testExceptionThrow_invalidDates() {
 
         LeaseService validator = new LeaseService();
             LocalDate startDate = LocalDate.of(2023, 12, 31); // Testen burde pass, da vi har en ugyldig dato.
             LocalDate endDate = LocalDate.of(2024, 2, 1);
 
-            assertThrows(IllegalArgumentException.class, () -> {
+            assertThrows(IllegalArgumentException.class, () -> {   // () ->  er et lambda udtryk. Det gør at vi kan sikre os at metoden bliver sendt over til assertThrows metoden
+                                                                    // assertThrows kører metoden og ser om den kaster en IllegalArgumentException.
                 validator.validateLeaseDates(startDate, endDate);
             }, "Expected to throw IllegalArgumentException when start date is before minDate");
         }
