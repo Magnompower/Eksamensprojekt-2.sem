@@ -17,7 +17,7 @@
 <main>
     <div class="grid-content">
         <div class="grid-item" th:each="car : ${returnedCars}">
-            <div> <!-- TODO STRONG -->
+            <div>
                 <p th:text="'Brand: ' + ${car.brand}"></p>
                 <p th:text="'Model: ' + ${car.model}"></p>
                 <p th:text="'Licenceplate number: ' + ${car.licensePlateNumber}"></p>

@@ -6,7 +6,7 @@
 
 <div th:fragment="logo">
     <div class="logo-container">
-        <a href="/" class="logo"> <!-- TODO if logged in - goto inventory-->
+        <a href="/" class="logo">
             <img src="/logo.png" alt="Logo">
         </a>
     </div>
@@ -17,10 +17,10 @@
         <a th:href="@{/inventory}">Inventory</a>
         <a th:href="@{/rented_cars}">Rented Cars</a>
         <a th:href="@{/purchase}">Purchases</a>
-        <a th:href="@{/lease_overview}">Lease Overview</a> <!-- TODO -->
-        <a th:href="@{/returned_cars}">Returned Cars</a> <!-- TODO -->
+        <a th:href="@{/lease_overview}">Lease Overview</a>
+        <a th:href="@{/returned_cars}">Returned Cars</a>
         <a th:href="@{/customers}">Customers</a>
-        <a th:if="${isAdmin}" th:href="@{/inventory}">Admin Site??!?!?</a> <!-- TODO -->
+<!--        <a th:if="${isAdmin}" th:href="@{/inventory}">Admin Site??!?!?</a> &lt;!&ndash; TODO &ndash;&gt;-->
 </div>
 
 <div th:fragment="footer" class="footer">

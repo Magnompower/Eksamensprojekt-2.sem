@@ -15,7 +15,6 @@ import java.util.List;
 public class CarService {
     private final GenerateRandomCar generateRandomCar;
 
-
     @Autowired
     private CarRepository carRepository;
 
@@ -35,8 +34,6 @@ public class CarService {
         return carRepository.getCarByChassisNumber(chassisNumber);
     }
 
-
-
     public String getCarTable(String chassisNumber) {
         return carRepository.getCarTable(chassisNumber);
     }
@@ -45,16 +42,15 @@ public class CarService {
         carRepository.updateCarState(chassisNumber, carState, carTable.toLowerCase());
     }
 
-
     public void updateKmDriven(String chassisNumber, double kmDriven, String carTable) {
         carRepository.updateKmDriven(chassisNumber, kmDriven, carTable);
     }
+
     public String getCarTypeByChassisNumber(String chassisNumber) {
         String carTable = carRepository.getCarTable(chassisNumber);
-        System.out.println(carTable);
         return switch (carTable) {
             case "GAS_CARS", "GAS_VANS" -> "Gas";
-            case "ELECTRIC_CARS", "ELECTRIC_VANS" -> "EV";
+            case "ELECTRIC_CARS", "ELECTRIC_VANS" -> "Electric";
             default -> "Unknown";
         };
     }

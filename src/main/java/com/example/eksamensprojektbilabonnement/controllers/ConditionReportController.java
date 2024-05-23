@@ -70,15 +70,6 @@ public class ConditionReportController {
         double kmDriven = carService.getCarByChassisNumber(conditionReport.getChassisNumber()).getKmDriven();
         model.addAttribute("kmDriven", kmDriven);
 
-
-        for (Damage damage : nonInvoicedDamages) {
-            System.out.println(damage.getDamageName());
-        }
-
-
-        //Indtast nyt kmtal. giv det til conditionreport
-        //conditionreporten bliver vist. bilen bliver sat til avaliable og skaderne bliver sat til faktureret. Leasen bliver sat til concluded.
-
         return "home/car_returned";
     }
 }

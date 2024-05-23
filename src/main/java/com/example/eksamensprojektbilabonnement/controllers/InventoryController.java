@@ -1,6 +1,7 @@
 package com.example.eksamensprojektbilabonnement.controllers;
 
 
+import com.example.eksamensprojektbilabonnement.services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +21,16 @@ public class InventoryController {
     @Autowired
     private InventoryService inventoryService;
 
+    @Autowired
+    private CarService carService;
+
     @GetMapping("/inventory")
     public String showInventory(Model model) {
+    // TODO Flyt logik til service
         List<Car> cars = inventoryService.getAllCars();
+        for (Car car : cars){
+            car.setCarType(carService.getCarTypeByChassisNumber(car.getChassisNumber()));
+        }
         model.addAttribute("cars", cars);
         return "home/inventory";
     }
@@ -30,7 +38,7 @@ public class InventoryController {
 
     @GetMapping("/sort_and_filter_cars")
     public String SortCars(@RequestParam(required = false) String sortType, @RequestParam(required = false) String filterBy, RedirectAttributes redirectAttributes) {
-
+    // TODO Flyt logik til service
         List<Car> cars;
         if (sortType == null && filterBy == null) {
             return "redirect:/inventory";
@@ -60,7 +68,6 @@ public class InventoryController {
         model.addAttribute("totalPrice", totalPrice);
         return "home/rented_cars";
     }
-
 
     @GetMapping("/returned_cars")
     public String showReturnedCars(Model model) {
