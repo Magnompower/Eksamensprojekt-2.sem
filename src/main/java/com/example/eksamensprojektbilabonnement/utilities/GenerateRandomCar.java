@@ -22,7 +22,7 @@ public class GenerateRandomCar {
         private static final double MAX_CARBON_EMISSION = 150.0;
 
         private static final Random random = new Random();
-       //todo add functionality to generate random cars and not only gas cars.
+
         public static List<GasCar> generateRandomCars(int count) {
             List<GasCar> gasCars = new ArrayList<>();
             for (int i = 0; i < count; i++) {

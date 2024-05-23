@@ -17,6 +17,9 @@
 <main>
     <div class="grid-content">
         <div class="grid-item" th:each="car : ${returnedCars}">
+            <div th:if="${returnedCars.}">
+                <p class="message">There are no cars to return at the moment. Please update car status to return and come back.</p>
+            </div>
             <div> <!-- TODO STRONG -->
                 <p th:text="'Brand: ' + ${car.brand}"></p>
                 <p th:text="'Model: ' + ${car.model}"></p>

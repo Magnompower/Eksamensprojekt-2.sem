@@ -26,7 +26,7 @@ public class LeaseController {
     @Autowired
     private DamageService damageService;
 
-    //todo create controller that sends  a car and customer over so that a lease can be created
+
     @GetMapping("/lease_overview")
     public  String leaseOverview(Model model) {
         model.addAttribute("leases", leaseService.getLeases());
