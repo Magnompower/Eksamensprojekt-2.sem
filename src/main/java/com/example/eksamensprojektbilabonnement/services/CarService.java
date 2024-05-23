@@ -49,4 +49,13 @@ public class CarService {
     public void updateKmDriven(String chassisNumber, double kmDriven, String carTable) {
         carRepository.updateKmDriven(chassisNumber, kmDriven, carTable);
     }
+    public String getCarTypeByChassisNumber(String chassisNumber) {
+        String carTable = carRepository.getCarTable(chassisNumber);
+        System.out.println(carTable);
+        return switch (carTable) {
+            case "GAS_CARS", "GAS_VANS" -> "Gas";
+            case "ELECTRIC_CARS", "ELECTRIC_VANS" -> "EV";
+            default -> "Unknown";
+        };
+    }
 }

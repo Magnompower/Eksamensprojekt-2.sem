@@ -57,6 +57,19 @@ public class CarController {
         return "redirect:/add_damages_to_report";
     }
 
+    @GetMapping("/carDetails")
+    public String getCarDetails(Model model, @RequestParam("chassisNumber") String chassisNumber) {
+        String carType = carService.getCarTypeByChassisNumber(chassisNumber);
+        Car car = carService.getCarByChassisNumber(chassisNumber);
+        model.addAttribute("carType", carType);
+        model.addAttribute("car", car);
+
+        System.out.println(carType + car);
+
+        return "home/inventory";
+    }
+
+
 
 
 
