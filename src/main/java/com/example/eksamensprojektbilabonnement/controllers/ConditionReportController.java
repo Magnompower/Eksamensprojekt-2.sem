@@ -23,9 +23,6 @@ public class ConditionReportController {
     private CarService carService;
 
     @Autowired
-    private CustomerService customerService;
-
-    @Autowired
     private DamageService damageService;
 
     @Autowired

@@ -45,13 +45,15 @@ public class LeaseService {
         return leaseRepository.getLease(leaseId);
     }
 
-    public boolean checkLeaseAvailability(String chassisNumber, LocalDate startDateNew, LocalDate endDateNew) {
-        List<LeaseAgreement> nonConcludedLeases = getNonConcludedLeases(chassisNumber);
+
+    public boolean checkLeaseAvailability(String carChassisNumber, LocalDate startDateNew, LocalDate endDateNew) {
+        List<LeaseAgreement> nonConcludedLeases = getNonConcludedLeases(carChassisNumber);
 
         for (LeaseAgreement lease : nonConcludedLeases) {
             LocalDate existingStart = lease.getStartDate();
             LocalDate existingEnd = lease.getEndDate();
 
+            // this works, find out how before exam
             if (!(endDateNew.isBefore(existingStart) || startDateNew.isAfter(existingEnd))) {
                 return false;
             }
@@ -59,7 +61,7 @@ public class LeaseService {
         return true;
     }
 
-    private List<LeaseAgreement> getNonConcludedLeases(String chassisNumber) {
+    public List<LeaseAgreement> getNonConcludedLeases(String chassisNumber) {
         return leaseRepository.getNonConcludedLeases(chassisNumber);
     }
 }

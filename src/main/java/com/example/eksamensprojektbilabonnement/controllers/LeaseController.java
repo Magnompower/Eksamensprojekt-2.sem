@@ -48,7 +48,7 @@ public class LeaseController {
         if (isAvailable) {
             try {
                 leaseService.createLease(chassisNumber, customerId, startDate, endDate, terms);
-                return "redirect:/lease_overview";
+                return "redirect:/success.html";
             } catch (IllegalArgumentException e) {
                 redirectAttributes.addFlashAttribute("error", e.getMessage());
                 return "redirect:/view_car?chassisNumber=" + chassisNumber;
