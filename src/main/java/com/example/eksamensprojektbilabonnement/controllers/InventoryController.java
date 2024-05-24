@@ -1,6 +1,7 @@
 package com.example.eksamensprojektbilabonnement.controllers;
 
 
+import com.example.eksamensprojektbilabonnement.services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,9 +21,16 @@ public class InventoryController {
     @Autowired
     private InventoryService inventoryService;
 
+    @Autowired
+    private CarService carService;
+
     @GetMapping("/inventory")
     public String showInventory(Model model) {
+    // TODO Flyt logik til service
         List<Car> cars = inventoryService.getAllCars();
+        for (Car car : cars){
+            car.setCarType(carService.getCarTypeByChassisNumber(car.getChassisNumber()));
+        }
         model.addAttribute("cars", cars);
         return "home/inventory";
     }
@@ -30,18 +38,9 @@ public class InventoryController {
 
     @GetMapping("/sort_and_filter_cars")
     public String SortCars(@RequestParam(required = false) String sortType, @RequestParam(required = false) String filterBy, RedirectAttributes redirectAttributes) {
-
-        List<Car> cars;
-        if (sortType == null && filterBy == null) {
-            return "redirect:/inventory";
-        } else if (filterBy == null) {
-            filterBy = "ALL";
-            cars = inventoryService.setSortCriteria(sortType, filterBy);
-        } else if (sortType == null) {
-            cars = inventoryService.getFilteredCars(filterBy);
-        } else {
-            cars = inventoryService.setSortCriteria(sortType, filterBy);
-        }
+        //Returns a list of sorted and/or filtered cars, based on provided strings:
+        List<Car> cars = inventoryService.checkSortAndFilterCriteria(sortType, filterBy);
+        //Adds the sorted and/or filtered cars to a flashAttribute, and redirects:
         redirectAttributes.addFlashAttribute("cars", cars);
         return "redirect:/show_inventory_sorted";
     }
@@ -55,6 +54,7 @@ public class InventoryController {
     @GetMapping("/rented_cars")
     public String showRentedCars(Model model) {
         List<Car> rentedCars = inventoryService.getFilteredCars("RENTED");
+        //Calculated the total price of all rented cars:
         double totalPrice = rentedCars.stream().mapToDouble(Car::getPrice).sum();
         model.addAttribute("rentedCars", rentedCars);
         model.addAttribute("totalPrice", totalPrice);

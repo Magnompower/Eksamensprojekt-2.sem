@@ -20,8 +20,7 @@
             <p class="message">There are no cars to return at the moment. Please update a car-status to returned and come back.</p>
         </div>
         <div class="grid-item" th:each="car : ${returnedCars}">
-
-            <div> <!-- TODO STRONG -->
+            <div>
                 <p th:text="'Brand: ' + ${car.brand}"></p>
                 <p th:text="'Model: ' + ${car.model}"></p>
                 <p th:text="'Licenceplate number: ' + ${car.licensePlateNumber}"></p>

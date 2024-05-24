@@ -47,19 +47,25 @@ public class LeaseService {
 
 
     public boolean checkLeaseAvailability(String carChassisNumber, LocalDate startDateNew, LocalDate endDateNew) {
+        // Check if the starting date is later than the end date
+        if (startDateNew.isAfter(endDateNew)) {
+            return false;
+        }
+
         List<LeaseAgreement> nonConcludedLeases = getNonConcludedLeases(carChassisNumber);
 
         for (LeaseAgreement lease : nonConcludedLeases) {
-            LocalDate existingStart = lease.getStartDate();
-            LocalDate existingEnd = lease.getEndDate();
-
-            // this works, find out how before exam
-            if (!(endDateNew.isBefore(existingStart) || startDateNew.isAfter(existingEnd))) {
+            if (isOverlapping(lease.getStartDate(), lease.getEndDate(), startDateNew, endDateNew)) {
                 return false;
             }
         }
         return true;
     }
+
+    private boolean isOverlapping(LocalDate existingStart, LocalDate existingEnd, LocalDate newStart, LocalDate newEnd) {
+        return !(newEnd.isBefore(existingStart) || newStart.isAfter(existingEnd));
+    }
+
 
     public List<LeaseAgreement> getNonConcludedLeases(String chassisNumber) {
         return leaseRepository.getNonConcludedLeases(chassisNumber);

@@ -10,7 +10,7 @@ public class HomeController {
     @GetMapping("/")
     public String index(Model model) {
 //        TODO Indsæt check for employeeType
-//        employeeType = determineEmployeeType(); TODO
+//        employeeType = determineEmployeeType();
 //        switch (employeeType) {
 //            case "admin" -> model.addAttribute("admin", employeeType);
 //            case "damageGuy" -> model.addAttribute("damageGuy", employeetype);}

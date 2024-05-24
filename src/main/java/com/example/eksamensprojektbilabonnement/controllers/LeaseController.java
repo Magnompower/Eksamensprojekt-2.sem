@@ -33,6 +33,7 @@ public class LeaseController {
         model.addAttribute("localDateTime", LocalDate.now());
         return "home/lease_overview";
     }
+
     @PostMapping("/createLease")
     public String createLease(Model model,
                               @RequestParam String chassisNumber,

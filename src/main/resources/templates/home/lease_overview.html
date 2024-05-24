@@ -14,14 +14,12 @@
     <div th:insert="~{home/fragments :: navbar('/')}"></div>
 </header>
 
-<p>Sort!</p> <!--TODO IMPLEMENT-->
+<p>SORT!</p> <!--TODO IMPLEMENT-->
 <div class="grid-container">
     <div class="grid-item" th:each="lease : ${leases}" th:classappend="${#temporals.format(lease.endDate, 'yyyy-MM-dd')<
             #temporals.format(#temporals.createNow(), 'yyyy-MM-dd') ? 'grid-item red-box' : 'grid-item'}">
-        <!--  TODO! USE CLASS OR CLASSAPPEND!?!?         th:if="${#temporals.daysBetween(#temporals.createToday(), lease.endDate) > 7 ? 'grid-item green-box' : grid-item'}">-->
         <div class="grid-header">
             <h3><strong>Lease ID:</strong> <span th:text="${lease.leaseId}"></span></h3>
-            <!--TODO HVORFOR ER lease.leaseID STRONG!? -->
         </div>
         <div>
             <p><strong>Customer ID:</strong> <span class="customer-id" th:text="${lease.customerId}"></span></p>

@@ -30,12 +30,12 @@ public class CarController {
     @Autowired
     private LeaseService leaseService;
 
-
     @GetMapping("/view_car")
     public String view_car(@RequestParam String chassisNumber, Model model) {
         Car car = carService.getCarByChassisNumber(chassisNumber);
         model.addAttribute("Car", car);
-        model.addAttribute("Customers", customerService.getAllCustomers());
+        //model.addAttribute("Customers", customerService.getAllCustomers());
+        model.addAttribute("Customers", customerService.getNonAnonymousCustomers());
         model.addAttribute("leases", leaseService.getNonConcludedLeases(chassisNumber));
         return "home/view_car";
     }
@@ -48,6 +48,7 @@ public class CarController {
     }
 
     @PostMapping("/update_km_driven")
+// TODO Flyt logik til service
     public String updateKmDriven(@RequestParam String chassisNumber, @RequestParam double kmDriven, @RequestParam int leaseId,
                                  RedirectAttributes redirectAttributes) {
         String carTable = carService.getCarTable(chassisNumber);
@@ -60,23 +61,5 @@ public class CarController {
         redirectAttributes.addAttribute("leaseId", leaseId);
         return "redirect:/add_damages_to_report";
     }
-
-    @GetMapping("/carDetails")
-    public String getCarDetails(Model model, @RequestParam("chassisNumber") String chassisNumber) {
-        String carType = carService.getCarTypeByChassisNumber(chassisNumber);
-        Car car = carService.getCarByChassisNumber(chassisNumber);
-        model.addAttribute("carType", carType);
-        model.addAttribute("car", car);
-
-        System.out.println(carType + car);
-
-        return "home/inventory";
-    }
-
-
-
-
-
-
 
 }
