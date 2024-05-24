@@ -37,7 +37,7 @@ public class InventoryController {
 
 
     @GetMapping("/sort_and_filter_cars")
-    public String SortCars(@RequestParam(required = false) String sortType, @RequestParam(required = false) String filterBy, RedirectAttributes redirectAttributes) {
+    public String sortCars(@RequestParam(required = false) String sortType, @RequestParam(required = false) String filterBy, RedirectAttributes redirectAttributes) {
         //Returns a list of sorted and/or filtered cars, based on provided strings:
         List<Car> cars = inventoryService.checkSortAndFilterCriteria(sortType, filterBy);
         //Adds the sorted and/or filtered cars to a flashAttribute, and redirects:
