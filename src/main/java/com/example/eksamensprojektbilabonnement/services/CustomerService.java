@@ -51,4 +51,12 @@ public class CustomerService {
     public List<Integer> findCustomersForAnonymization(){
         return customerRepository.findCustomersForAnonymization();
     }
+
+    public Customer getCustomerById(int customerId) {
+        return customerRepository.getCustomerById(customerId);
+    }
+
+    public void updateCustomer(Customer customer) {
+        customerRepository.updateCustomer(customer);
+    }
 }
