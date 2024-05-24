@@ -32,4 +32,8 @@ public class CustomerService {
     public List<Customer> getNonAnonymousCustomers() {
         return customerRepository.getNonAnonymousCustomers();
     }
+
+    public List<Integer> findCustomersForAnonymization(){
+        return customerRepository.findCustomersForAnonymization();
+    }
 }
