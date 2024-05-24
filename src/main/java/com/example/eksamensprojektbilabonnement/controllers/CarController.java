@@ -34,7 +34,8 @@ public class CarController {
     public String view_car(@RequestParam String chassisNumber, Model model) {
         Car car = carService.getCarByChassisNumber(chassisNumber);
         model.addAttribute("Car", car);
-        model.addAttribute("Customers", customerService.getAllCustomers());
+        //model.addAttribute("Customers", customerService.getAllCustomers());
+        model.addAttribute("Customers", customerService.getNonAnonymousCustomers());
         model.addAttribute("leases", leaseService.getNonConcludedLeases(chassisNumber));
         return "home/view_car";
     }

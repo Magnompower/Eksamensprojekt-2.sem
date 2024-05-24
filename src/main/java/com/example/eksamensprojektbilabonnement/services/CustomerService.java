@@ -15,7 +15,7 @@ public class CustomerService {
     CustomerRepository customerRepository;
 
     public List<Customer> getAllCustomers() {
-        return customerRepository.getCustomers();
+        return customerRepository.getAllCustomers();
     }
 
     public String deleteCustomer(int customerId) {
@@ -23,9 +23,13 @@ public class CustomerService {
             customerRepository.deleteCustomer(customerId);
         } catch (Exception e) {
             if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
-                return "This customer has active leases and cannot be deleted";
+                customerRepository.anonymizeCustomerData(customerId);
+                return "This customer has active leases, and cannot be deleted. Customer data has been anonymized";
             }
-
         } return "Customer and all its data have been deleted.";
+    }
+
+    public List<Customer> getNonAnonymousCustomers() {
+        return customerRepository.getNonAnonymousCustomers();
     }
 }

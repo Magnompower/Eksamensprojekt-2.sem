@@ -66,9 +66,19 @@ public class InventoryService {
     }
 
 
-
-
-
+    public List<Car> checkSortAndFilterCriteria(String sortType, String filterBy) {
+        //Checks whether cars needs to be sorted, filtered or both, and calls the corresponding methods:
+        if (sortType == null && filterBy == null) {
+            return inventoryRepository.getAllCars();
+        } else if (filterBy == null) {
+            filterBy = "ALL";
+            return setSortCriteria(sortType, filterBy);
+        } else if (sortType == null) {
+            return getFilteredCars(filterBy);
+        } else {
+            return setSortCriteria(sortType, filterBy);
+        }
+    }
 }
 
 
