@@ -43,7 +43,7 @@
     </tr>
     <tr>
         <td class="license-plate" th:text="${Car.licensePlateNumber}"></td>
-        <td class="car-state" th:text="${Car.getCarState()}"></td>  <!-- Hvorfor bruge en getter her? TODO-->
+        <td class="car-state" th:text="${Car.carState}"></td>
         <td class="Transmission-type" th:text="${Car.transmissionType}"></td>
         <td class="registration-fee" th:text="${Car.registrationFee}"></td>
     </tr>

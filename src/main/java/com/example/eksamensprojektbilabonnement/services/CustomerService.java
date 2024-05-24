@@ -47,4 +47,8 @@ public class CustomerService {
             return "Customer has non concluded leases, and cannot be deleted";
         }
     }
+
+    public List<Integer> findCustomersForAnonymization(){
+        return customerRepository.findCustomersForAnonymization();
+    }
 }

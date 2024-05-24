@@ -42,10 +42,7 @@
 
     <button type="submit">Apply</button>
 </form>
-<!--<p>Color codes:</p>-->
 <!--TODO Sorter automatisk fra available når man kommer ind på siden-->
-<!----------------------------------------------------------------->
-
 <main>
     <div class="grid-container">
         <div th:each="car : ${cars}"
@@ -57,7 +54,8 @@
                 <h3 th:text="'Price: ' + ${#numbers.formatInteger(car.price, 0)}"></h3>
                 <p th:text="'Brand: ' + ${car.brand}"></p>
                 <p th:text="'Model: ' + ${car.model}"></p>
-<!--                <p th:text="'Car type: ' +${car.}"</p> TODO I VIEW?-->
+                <p th:text="'Gearbox: ' + ${car.transmissionType}"></p>
+                <p th:text="'Car type: ' + ${car.carType}"></p>
                 <p th:text="'State: ' + ${car.carState}" class="format-text"></p>
                 <div class="ItemLink">
                     <form action="/view_car" method="get">
@@ -72,7 +70,6 @@
         </div>
     </div>
 </main>
-
 <footer>
     <div th:insert="~{home/fragments :: footer}"></div>
 </footer>

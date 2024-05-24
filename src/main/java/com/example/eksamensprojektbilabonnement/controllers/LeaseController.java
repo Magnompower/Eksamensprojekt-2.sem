@@ -26,13 +26,14 @@ public class LeaseController {
     @Autowired
     private DamageService damageService;
 
-    //todo create controller that sends  a car and customer over so that a lease can be created
+
     @GetMapping("/lease_overview")
     public  String leaseOverview(Model model) {
         model.addAttribute("leases", leaseService.getLeases());
         model.addAttribute("localDateTime", LocalDate.now());
         return "home/lease_overview";
     }
+
     @PostMapping("/createLease")
     public String createLease(Model model,
                               @RequestParam String chassisNumber,
@@ -47,7 +48,7 @@ public class LeaseController {
         if (isAvailable) {
             try {
                 leaseService.createLease(chassisNumber, customerId, startDate, endDate, terms);
-                return "redirect:/lease_overview";
+                return "redirect:/success.html";
             } catch (IllegalArgumentException e) {
                 redirectAttributes.addFlashAttribute("error", e.getMessage());
                 return "redirect:/view_car?chassisNumber=" + chassisNumber;

@@ -1,5 +1,7 @@
 package com.example.eksamensprojektbilabonnement.controllers;
 
+
+import com.example.eksamensprojektbilabonnement.services.CarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,9 +21,16 @@ public class InventoryController {
     @Autowired
     private InventoryService inventoryService;
 
+    @Autowired
+    private CarService carService;
+
     @GetMapping("/inventory")
     public String showInventory(Model model) {
+    // TODO Flyt logik til service
         List<Car> cars = inventoryService.getAllCars();
+        for (Car car : cars){
+            car.setCarType(carService.getCarTypeByChassisNumber(car.getChassisNumber()));
+        }
         model.addAttribute("cars", cars);
         return "home/inventory";
     }

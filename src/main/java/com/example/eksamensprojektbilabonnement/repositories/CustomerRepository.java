@@ -40,4 +40,11 @@ public class CustomerRepository {
         String query = "SELECT * FROM customers where first_name <> 'Anonymous'";
         return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Customer.class));
     }
+
+    public List<Integer> findCustomersForAnonymization() {
+        String query = "SELECT l.customer_id " +
+                "FROM lease_agreements l " +
+                "WHERE l.end_date <= CURRENT_TIMESTAMP - INTERVAL 5 YEAR";
+        return jdbcTemplate.query(query, (rs, rowNum) -> rs.getInt("customer_id"));
+    }
 }

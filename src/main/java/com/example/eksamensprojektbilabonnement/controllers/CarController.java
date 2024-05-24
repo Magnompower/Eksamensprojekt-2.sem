@@ -30,7 +30,6 @@ public class CarController {
     @Autowired
     private LeaseService leaseService;
 
-
     @GetMapping("/view_car")
     public String view_car(@RequestParam String chassisNumber, Model model) {
         Car car = carService.getCarByChassisNumber(chassisNumber);
@@ -49,6 +48,7 @@ public class CarController {
     }
 
     @PostMapping("/update_km_driven")
+// TODO Flyt logik til service
     public String updateKmDriven(@RequestParam String chassisNumber, @RequestParam double kmDriven, @RequestParam int leaseId,
                                  RedirectAttributes redirectAttributes) {
         String carTable = carService.getCarTable(chassisNumber);
@@ -61,10 +61,5 @@ public class CarController {
         redirectAttributes.addAttribute("leaseId", leaseId);
         return "redirect:/add_damages_to_report";
     }
-
-
-
-
-
 
 }

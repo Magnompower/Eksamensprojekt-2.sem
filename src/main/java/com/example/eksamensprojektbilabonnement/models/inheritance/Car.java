@@ -12,12 +12,21 @@ public class Car {
     private double registrationFee;
     private CarState carState;
     private double price;
-
     private double kmDriven;
-    private String image_url;
+    private String image_url; //TODO CAMELCASE
+    private String carType;
+
 
     public Car(){
 
+    }
+
+    public String getCarType() {
+        return carType;
+    }
+
+    public void setCarType(String carType) {
+        this.carType = carType;
     }
 
     public double getKmDriven() {
