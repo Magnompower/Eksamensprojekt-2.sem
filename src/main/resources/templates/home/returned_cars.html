@@ -15,6 +15,7 @@
 </header>
 
 <main>
+    <!--  @Author: Otto -->
     <div class="grid-content">
         <div th:if="${returnedCars.isEmpty()}">
             <p class="message">There are no cars to return at the moment. Please update a car-status to returned and come back.</p>
@@ -26,6 +27,7 @@
                 <p th:text="'Licenceplate number: ' + ${car.licensePlateNumber}"></p>
                 <p th:text="'Chassisnumber: ' + ${car.chassisNumber}"></p>
                 <br>
+                <!--  @Author: Anders -->
                 <p th:text="'Price: ' + ${#numbers.formatInteger(car.price, 0)} + 'DKK'"></p>
             </div>
             <div>

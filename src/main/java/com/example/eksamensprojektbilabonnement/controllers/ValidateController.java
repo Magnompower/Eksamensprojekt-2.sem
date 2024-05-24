@@ -8,12 +8,28 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+/**
+ * The Validate controller.
+ */
 @Controller
 public class ValidateController {
+
+    /**
+     * The Employee service.
+     */
     @Autowired
     EmployeeService employeeService;
 
 
+    /**
+     * Validate string.
+     * @author Hasan, Magne, Otto, Anders
+     *
+     * @param model    the model
+     * @param email    the email
+     * @param password the password
+     * @return the string
+     */
     @PostMapping("/validate")
     public String validate(Model model, @RequestParam String email, @RequestParam String password) {
         String loginStatus = employeeService.checkPass(email,password);

@@ -17,7 +17,7 @@
 </header>
 
 <!-------------- Dropdown menu for sorting & filtering --------------------->
-
+<!--  @Author:  Hasan -->
 <form action="/sort_and_filter_cars" method="get" class="sort-form">
     <label for="sortType">Sort by:</label>
     <select id="sortType" name="sortType">
@@ -44,6 +44,7 @@
 </form>
 <!--TODO Sorter automatisk fra available når man kommer ind på siden-->
 <main>
+    <!--  @Author: Anders -->
     <div class="grid-container">
         <div th:each="car : ${cars}"
              th:class="${car.carState.name() == 'AVAILABLE' ? 'grid-item green-box' :

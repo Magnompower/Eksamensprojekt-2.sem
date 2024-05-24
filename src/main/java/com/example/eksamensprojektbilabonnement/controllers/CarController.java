@@ -15,6 +15,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+
+/**
+ * The Car controller.
+ */
 @Controller
 public class CarController {
 
@@ -30,6 +34,14 @@ public class CarController {
     @Autowired
     private LeaseService leaseService;
 
+    /**
+     * View car string.
+     * @author  Hasan
+     *
+     * @param chassisNumber the chassis number
+     * @param model         the model
+     * @return the string
+     */
     @GetMapping("/view_car")
     public String view_car(@RequestParam String chassisNumber, Model model) {
         Car car = carService.getCarByChassisNumber(chassisNumber);
@@ -40,6 +52,14 @@ public class CarController {
         return "home/view_car";
     }
 
+    /**
+     * Update car string.
+     * @author Anders
+     *
+     * @param chassisNumber the chassis number
+     * @param carState      the car state
+     * @return the string
+     */
     @PostMapping("/update_car_state")
     public String updateCar(@RequestParam String chassisNumber, @RequestParam String carState) {
         String carTable = carService.getCarTable(chassisNumber);
@@ -47,6 +67,16 @@ public class CarController {
         return "redirect:/inventory";
     }
 
+    /**
+     * Update km driven string.
+     * @author Hasan
+     *
+     * @param chassisNumber      the chassis number
+     * @param kmDriven           the km driven
+     * @param leaseId            the lease id
+     * @param redirectAttributes the redirect attributes
+     * @return the string
+     */
     @PostMapping("/update_km_driven")
 // TODO Flyt logik til service
     public String updateKmDriven(@RequestParam String chassisNumber, @RequestParam double kmDriven, @RequestParam int leaseId,

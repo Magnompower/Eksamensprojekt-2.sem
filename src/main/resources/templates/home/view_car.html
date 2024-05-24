@@ -17,6 +17,7 @@
 
 <table class="car-table">
     <h2>Car Info</h2>
+    <!--  @Author: Anders -->
     <thead>
     <tr>
         <th>Chassis number</th>
@@ -86,6 +87,7 @@
 </div>
 
 <h2>Create New Lease</h2>
+<!--  @Author: Otto -->
 <form action="/createLease" method="post" class="lease-form">
 
     <div class="input-group">
@@ -126,13 +128,6 @@
         <br>
     </div>
 </form>
-
-
-<!-- Image
-<div class="image-container">
-    <img class="image" th:src="${car.image_url}" alt="Car Image">
-</div>
--->
 
 <footer>
     <div th:insert="~{home/fragments :: footer}"></div>
