@@ -32,9 +32,7 @@ public class ConditionReportController {
     private ConditionReportService conditionReportService;
 
 
-
-
-    @PostMapping("/car_returned")
+    @PostMapping("/car_returned")//skal omdøbes
     public String carReturned(@RequestParam String chassisNumber, RedirectAttributes redirectAttributes) {
         //Create the initial condition report with known data:
         int leaseId = leaseService.getActiveLease(chassisNumber).getLeaseId();
@@ -68,5 +66,12 @@ public class ConditionReportController {
         model.addAttribute("kmDriven", kmDriven);
 
         return "home/car_returned";
+    }
+
+    @GetMapping ("/display_condition_report")
+    public String displayConditionReport(Model model, @RequestParam int leaseId){
+        ConditionReport conditionReport = conditionReportService.getConditionReport(leaseId);
+        model.addAttribute(conditionReport);
+        return "home/display_condition_report";
     }
 }
