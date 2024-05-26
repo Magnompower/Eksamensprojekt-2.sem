@@ -6,7 +6,6 @@ import com.example.eksamensprojektbilabonnement.repositories.CustomerRepository;
 import com.example.eksamensprojektbilabonnement.repositories.LeaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
@@ -45,9 +44,9 @@ public class CustomerService {
      * @return the string
      * @throws SQLIntegrityConstraintViolationException the sql integrity constraint violation exception
      */
-    public List<Customer> getNonAnonymousCustomers() {
-        return customerRepository.getNonAnonymousCustomers();
-    }
+//    public List<Customer> getNonAnonymousCustomers() {
+//        return customerRepository.getNonAnonymousCustomers();
+//    }
 
     public String deleteCustomer(int customerId) {
         //Checks if there are any non concluded leases for the customer:
