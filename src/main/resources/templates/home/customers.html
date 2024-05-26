@@ -41,8 +41,8 @@
         <input type="hidden" name="customerId" th:value="${customer.customerId}"/>
         <button type="submit" class="red-button">Delete</button>
       </form>
-      <form th:action="@{/edit_customer}" method="post">
-        <input type="hidden" th:value="${customers.customerId}" />
+      <form th:action="@{/edit_customer}" method="get">
+        <input type="hidden" name="customerId" th:value="${customer.customerId}" />
         <button type="submit" class="blue-button">Edit</button>
       </form>
     </td>

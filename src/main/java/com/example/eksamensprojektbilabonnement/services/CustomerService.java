@@ -44,9 +44,15 @@ public class CustomerService {
      * @return the string
      * @throws SQLIntegrityConstraintViolationException the sql integrity constraint violation exception
      */
-//    public List<Customer> getNonAnonymousCustomers() {
-//        return customerRepository.getNonAnonymousCustomers();
-//    }
+    /**
+     * Gets non-anonymous customers.
+     * @author Hasan & Magne
+     *
+     * @return the non-anonymous customers
+     */
+    public List<Customer> getNonAnonymousCustomers() {
+        return customerRepository.getNonAnonymousCustomers();
+    }
 
     public String deleteCustomer(int customerId) {
         //Checks if there are any non concluded leases for the customer:
@@ -66,19 +72,7 @@ public class CustomerService {
         } return "Customer and all its data have been deleted.";
     }
 
-    /**
-     * Gets non-anonymous customers.
-     * @author Hasan & Magne
-     *
-     * @return the non-anonymous customers
-     */
-    public List<Customer> getNonAnonymousCustomers() {
-        return customerRepository.getNonAnonymousCustomers();
-            return "Customer and all its data have been deleted.";
-        } else {
-            return "Customer has non concluded leases, and cannot be deleted";
-        }
-    }
+
 
     /**
      * Find customers for anonymization list.

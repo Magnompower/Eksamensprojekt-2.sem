@@ -7,15 +7,14 @@ import com.example.eksamensprojektbilabonnement.utilities.EmployeeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-/**
- * The Employee service.
- */
 
 @Service
 public class EmployeeService {
     /**
      * The Employee repository.
      */
+    @Autowired
+    EmployeeRepository employeeRepository;
 
     private final EmployeePageMapping employeePageMapping;
     //Reads from a HashMap (which is what employeePages is)
@@ -23,9 +22,10 @@ public class EmployeeService {
     // Since the common operations here (getPage) are read-only,
     // there are no threading issues.
 
+    public EmployeeService(EmployeePageMapping employeePageMapping) {
+        this.employeePageMapping = employeePageMapping;
+    }
 
-    @Autowired
-    EmployeeRepository employeeRepository;
 
     /**
      * Check pass string.
@@ -35,11 +35,6 @@ public class EmployeeService {
      * @param password the password
      * @return the string
      */
-    public String checkPass(String email, String password) {
-    @Autowired
-    public EmployeeService(EmployeePageMapping employeePageMapping) {
-        this.employeePageMapping =  employeePageMapping;
-    }
 
     public String checkPassword(String email, String password) {
         String dbPassword = employeeRepository.checkPass(email);

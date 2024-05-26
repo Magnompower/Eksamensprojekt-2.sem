@@ -53,7 +53,7 @@ public class CustomersController {
     }
 
     @GetMapping("/edit_customer")
-    public String showEditCustomerForm(@RequestParam("id") int customerId, Model model) {
+    public String showEditCustomerForm(@RequestParam int customerId, Model model) {
         Customer customer = customerService.getCustomerById(customerId);
         model.addAttribute("customer", customer);
         return "home/edit_customer";
@@ -62,7 +62,7 @@ public class CustomersController {
     @PostMapping("/edit_customer")
     public String editCustomerSubmit(@ModelAttribute Customer customer) {
         customerService.updateCustomer(customer);
-        return "redirect:/customers";
+        return "redirect:/edit_customer";
     }
 }
 

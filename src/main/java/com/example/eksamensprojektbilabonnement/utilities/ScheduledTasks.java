@@ -1,7 +1,7 @@
 package com.example.eksamensprojektbilabonnement.utilities;
 
 import com.example.eksamensprojektbilabonnement.repositories.CarRepository;
-import com.example.eksamensprojektbilabonnement.repositories.CustomerRepository;
+import com.example.eksamensprojektbilabonnement.services.CarService;
 import com.example.eksamensprojektbilabonnement.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -17,16 +17,16 @@ public class ScheduledTasks {
     private static final Logger logger = LoggerFactory.getLogger(ScheduledTasks.class); // FJERNES??
 
     @Autowired
-    private CarRepository carRepository;
+    private CarService carService;
     @Autowired
     private CustomerService customerService;
 
     @Scheduled(fixedRate = 3600000) // Every hour
     public void updateLeaseStatusesInDatabase() {
         try {
-            List<String> upcomingLeases = carRepository.findCarsWithUpcomingLeases();
+            List<String> upcomingLeases = carService.findCarsWithUpcomingLeases();
             for (String chassisNumber : upcomingLeases) {
-                carRepository.changeCarStateInLeasedCars(chassisNumber, "GETTING_PREPARED");
+                carService.changeCarStateInLeasedCars(chassisNumber, "GETTING_PREPARED");
                 logger.info("Updated lease status for chassis: {}", chassisNumber);
             }
         } catch (Exception e) {
