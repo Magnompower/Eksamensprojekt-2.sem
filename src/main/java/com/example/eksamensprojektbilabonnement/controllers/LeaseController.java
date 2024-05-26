@@ -63,7 +63,7 @@ public class LeaseController {
     }
 
     @PostMapping ("/conclude_lease")
-    public String concludeLease(@RequestParam int leaseId, @RequestParam String chassisNumber){
+    public String concludeLease(@RequestParam int leaseId, @RequestParam String chassisNumber, RedirectAttributes redirectAttributes){
         //Set lease to concluded:
         leaseService.concludeLease(leaseId);
 
@@ -75,8 +75,13 @@ public class LeaseController {
         damageService.setDamagesToInvoiced(leaseId, chassisNumber);
 
         //isActive should be set to false. Also think about that functionality here should be triggers instead
-        return "redirect:/returned_cars";
+
+        redirectAttributes.addAttribute(leaseId);
+        return "redirect:/display_condition_report";
     }
+
+
+
 
 
 }
