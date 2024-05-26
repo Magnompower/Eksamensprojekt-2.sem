@@ -11,20 +11,43 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * The Inventory service.
+ */
 @Service
 public class InventoryService {
 
     private InventoryRepository inventoryRepository;
 
+    /**
+     * Sets inventory repository.
+     * @author Anders
+     *
+     * @param inventoryRepository the inventory repository
+     */
     @Autowired
     public void setInventoryRepository(InventoryRepository inventoryRepository) {
         this.inventoryRepository = inventoryRepository;
     }
 
+    /**
+     * Gets all cars.
+     * @author Anders
+     *
+     * @return the all cars
+     */
     public List<Car> getAllCars() {
         return inventoryRepository.getAllCars();
     }
 
+    /**
+     * Get filtered cars list.
+     * @author Hasan
+     *
+     * @param filterBy the filter by
+     * @return the list
+     */
     public List<Car> getFilteredCars(String filterBy){
         //Returns a list of filtered cars
         if (filterBy.equals("ALL")) {
@@ -34,6 +57,14 @@ public class InventoryService {
         }
     }
 
+    /**
+     * Set sort criteria list.
+     * @author Hasan
+     *
+     * @param sortType the sort type
+     * @param filterBy the filter by
+     * @return the list
+     */
     public List<Car> setSortCriteria(String sortType, String filterBy){
         //Sets the sort criteria for the list of cars to be returned:
         String sortByColumn = null;
@@ -59,6 +90,16 @@ public class InventoryService {
         }
         return getSortedAndFilteredCars(sortByColumn, sortDirection, filterBy);
     }
+
+    /**
+     * Gets sorted and filtered cars.
+     * @author Hasan, Anders
+     *
+     * @param sortByColumn  the sort by column
+     * @param sortDirection the sort direction
+     * @param filterBy      the filter by
+     * @return the sorted and filtered cars
+     */
     public List<Car> getSortedAndFilteredCars(String sortByColumn, String sortDirection, String filterBy) {
         if (filterBy.equals("ALL")) {
             return inventoryRepository.getSortedCars(sortByColumn, sortDirection);
@@ -68,6 +109,14 @@ public class InventoryService {
     }
 
 
+    /**
+     * Check sort and filter criteria list.
+     * @author Hasan
+     *
+     * @param sortType the sort type
+     * @param filterBy the filter by
+     * @return the list
+     */
     public List<Car> checkSortAndFilterCriteria(String sortType, String filterBy) {
         //Checks whether cars needs to be sorted, filtered or both, and calls the corresponding methods:
         if (sortType == null && filterBy == null) {

@@ -1,5 +1,6 @@
 package com.example.eksamensprojektbilabonnement.models;
 
+
 public class ConditionReport {
 
     private int leaseId;
@@ -7,6 +8,7 @@ public class ConditionReport {
     private Double totalExtraCost;
     private Double kmBeforeLease;
     private Double kmAfterLease;
+
 
 
     public ConditionReport() {

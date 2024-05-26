@@ -11,11 +11,25 @@ import org.springframework.ui.Model;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
+
+/**
+ * The Customer service.
+ */
 @Service
 public class CustomerService {
+
+    /**
+     * The Customer repository.
+     */
     @Autowired
     CustomerRepository customerRepository;
 
+    /**
+     * Gets all customers.
+     * @author Otto
+     *
+     * @return the all customers
+     */
     @Autowired
     LeaseRepository leaseRepository;
 
@@ -23,6 +37,14 @@ public class CustomerService {
         return customerRepository.getAllCustomers();
     }
 
+    /**
+     * Delete customer string.
+     * @author Otto & Hasan
+     *
+     * @param customerId the customer id
+     * @return the string
+     * @throws SQLIntegrityConstraintViolationException the sql integrity constraint violation exception
+     */
     public List<Customer> getNonAnonymousCustomers() {
         return customerRepository.getNonAnonymousCustomers();
     }
@@ -42,12 +64,29 @@ public class CustomerService {
                     return "This customer has stored leases, and cannot be deleted. Customer data has been anonymized";
                 }
             }
+        } return "Customer and all its data have been deleted.";
+    }
+
+    /**
+     * Gets non-anonymous customers.
+     * @author Hasan & Magne
+     *
+     * @return the non-anonymous customers
+     */
+    public List<Customer> getNonAnonymousCustomers() {
+        return customerRepository.getNonAnonymousCustomers();
             return "Customer and all its data have been deleted.";
         } else {
             return "Customer has non concluded leases, and cannot be deleted";
         }
     }
 
+    /**
+     * Find customers for anonymization list.
+     * @author Magne & Otto
+     *
+     * @return the list
+     */
     public List<Integer> findCustomersForAnonymization(){
         return customerRepository.findCustomersForAnonymization();
     }

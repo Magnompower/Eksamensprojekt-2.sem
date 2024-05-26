@@ -10,18 +10,40 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+/**
+ * The Customers controller.
+ */
 @Controller
 public class CustomersController {
+
+    /**
+     * The Customer service.
+     */
     @Autowired
     CustomerService customerService;
 
 
+    /**
+     * Show customers string.
+     * @author Otto
+     *
+     * @param model the model
+     * @return the string
+     */
     @GetMapping ("/customers")
     public String showCustomers(Model model) {
        model.addAttribute("customers", customerService.getAllCustomers());
         return "home/customers";
     }
 
+    /**
+     * Delete customer string.
+     * @author Otto, Hasan
+     *
+     * @param customerId the customer id
+     * @param model      the model
+     * @return the string
+     */
     @PostMapping ("/delete_customer")
     public String deleteCustomer(@RequestParam  int customerId, Model model) {
         customerService.deleteCustomer(customerId);

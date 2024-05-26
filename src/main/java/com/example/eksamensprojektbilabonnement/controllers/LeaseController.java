@@ -15,6 +15,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 
+
+/**
+ * The Lease controller.
+ */
 @Controller
 public class LeaseController {
     @Autowired
@@ -27,6 +31,13 @@ public class LeaseController {
     private DamageService damageService;
 
 
+    /**
+     * Lease overview string.
+     * @author Otto, Hasan, Anders, Magne
+     *
+     * @param model the model
+     * @return the string
+     */
     @GetMapping("/lease_overview")
     public  String leaseOverview(Model model) {
         model.addAttribute("leases", leaseService.getLeases());
@@ -34,6 +45,19 @@ public class LeaseController {
         return "home/lease_overview";
     }
 
+    /**
+     * Create lease string.
+     * @author Otto, Hasan
+     *
+     * @param model              the model
+     * @param chassisNumber      the chassis number
+     * @param customerId         the customer id
+     * @param startDate          the start date
+     * @param endDate            the end date
+     * @param terms              the terms
+     * @param redirectAttributes the redirect attributes
+     * @return the string
+     */
     @PostMapping("/createLease")
     public String createLease(Model model,
                               @RequestParam String chassisNumber,
@@ -62,6 +86,14 @@ public class LeaseController {
         }
     }
 
+    /**
+     * Conclude lease string.
+     * @author Hasan
+     *
+     * @param leaseId       the lease id
+     * @param chassisNumber the chassis number
+     * @return the string
+     */
     @PostMapping ("/conclude_lease")
     public String concludeLease(@RequestParam int leaseId, @RequestParam String chassisNumber, RedirectAttributes redirectAttributes){
         //Set lease to concluded:

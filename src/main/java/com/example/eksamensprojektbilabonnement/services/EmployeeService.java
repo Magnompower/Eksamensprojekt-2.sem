@@ -7,9 +7,15 @@ import com.example.eksamensprojektbilabonnement.utilities.EmployeeType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+/**
+ * The Employee service.
+ */
 
 @Service
 public class EmployeeService {
+    /**
+     * The Employee repository.
+     */
 
     private final EmployeePageMapping employeePageMapping;
     //Reads from a HashMap (which is what employeePages is)
@@ -21,6 +27,15 @@ public class EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
+    /**
+     * Check pass string.
+     * @author Hasan, Otto
+     *
+     * @param email    the email
+     * @param password the password
+     * @return the string
+     */
+    public String checkPass(String email, String password) {
     @Autowired
     public EmployeeService(EmployeePageMapping employeePageMapping) {
         this.employeePageMapping =  employeePageMapping;

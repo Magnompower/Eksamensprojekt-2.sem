@@ -15,6 +15,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+
+/**
+ * The Inventory controller.
+ */
 @Controller
 public class InventoryController {
 
@@ -24,6 +28,13 @@ public class InventoryController {
     @Autowired
     private CarService carService;
 
+    /**
+     * Show inventory string.
+     * @author Otto, Hasan, Magne, Anders
+     *
+     * @param model the model
+     * @return the string
+     */
     @GetMapping("/inventory")
     public String showInventory(Model model) {
     // TODO Flyt logik til service
@@ -36,6 +47,15 @@ public class InventoryController {
     }
 
 
+    /**
+     * Sort cars string.
+     * @author Hasan
+     *
+     * @param sortType           the sort type
+     * @param filterBy           the filter by
+     * @param redirectAttributes the redirect attributes
+     * @return the string
+     */
     @GetMapping("/sort_and_filter_cars")
     public String sortCars(@RequestParam(required = false) String sortType, @RequestParam(required = false) String filterBy, RedirectAttributes redirectAttributes) {
         //Returns a list of sorted and/or filtered cars, based on provided strings:
@@ -45,12 +65,27 @@ public class InventoryController {
         return "redirect:/show_inventory_sorted";
     }
 
+    /**
+     * Show inventory sorted string.
+     * @author Hasan
+     *
+     * @param cars  the cars
+     * @param model the model
+     * @return the string
+     */
     @GetMapping("/show_inventory_sorted")
     public String showInventorySorted(@ModelAttribute("cars") List<Car> cars, Model model) {
         model.addAttribute("cars", cars);
         return "home/inventory";
     }
 
+    /**
+     * Show rented cars string.
+     * @author Magne, Hasan, Anders
+     *
+     * @param model the model
+     * @return the string
+     */
     @GetMapping("/rented_cars")
     public String showRentedCars(Model model) {
         List<Car> rentedCars = inventoryService.getFilteredCars("RENTED");
@@ -62,6 +97,13 @@ public class InventoryController {
     }
 
 
+    /**
+     * Show returned cars string.
+     * @author: Hasan
+     *
+     * @param model the model
+     * @return the string
+     */
     @GetMapping("/returned_cars")
     public String showReturnedCars(Model model) {
         List<Car> returnedCars = inventoryService.getFilteredCars("RETURNED");

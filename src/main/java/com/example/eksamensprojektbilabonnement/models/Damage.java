@@ -9,6 +9,7 @@ public class Damage {
     public Damage() {
 
     }
+
     public boolean isInvoiced() {
         return invoiced;
     }
