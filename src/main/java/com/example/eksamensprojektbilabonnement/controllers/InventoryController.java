@@ -24,15 +24,33 @@ public class InventoryController {
     @Autowired
     private CarService carService;
 
-    @GetMapping("/inventory")
-    public String showInventory(Model model) {
+    @GetMapping("/admin_inventory")
+    public String showAdminInventory(Model model) {
+        // TODO Flyt logik til service
+        List<Car> cars = inventoryService.getAllCars();
+        for (Car car : cars){
+            car.setCarType(carService.getCarTypeByChassisNumber(car.getChassisNumber()));
+        }
+        model.addAttribute("cars", cars);
+        return "home/admin/admin_inventory";
+    }
+
+    @GetMapping("/lease_registration_inventory")
+    public String showLeaseRegistrationInventory(Model model) {
     // TODO Flyt logik til service
         List<Car> cars = inventoryService.getAllCars();
         for (Car car : cars){
             car.setCarType(carService.getCarTypeByChassisNumber(car.getChassisNumber()));
         }
         model.addAttribute("cars", cars);
-        return "home/inventory";
+        return "home/lease_registration/lease_registration_inventory";
+    }
+
+    @GetMapping("/damage_management_inventory")
+    public String showDamageManagementInventory(Model model){
+        List<Car> damagedCars = inventoryService.getDamagedCars();
+        model.addAttribute("damagedCars", damagedCars);
+        return "home/damage_management/damage_management_inventory";
     }
 
 
@@ -48,7 +66,7 @@ public class InventoryController {
     @GetMapping("/show_inventory_sorted")
     public String showInventorySorted(@ModelAttribute("cars") List<Car> cars, Model model) {
         model.addAttribute("cars", cars);
-        return "home/inventory";
+        return "home/lease_registration/lease_registration_inventory";
     }
 
     @GetMapping("/rented_cars")
@@ -58,7 +76,7 @@ public class InventoryController {
         double totalPrice = rentedCars.stream().mapToDouble(Car::getPrice).sum();
         model.addAttribute("rentedCars", rentedCars);
         model.addAttribute("totalPrice", totalPrice);
-        return "home/rented_cars";
+        return "home/business_developer/rented_cars";
     }
 
 
@@ -66,6 +84,6 @@ public class InventoryController {
     public String showReturnedCars(Model model) {
         List<Car> returnedCars = inventoryService.getFilteredCars("RETURNED");
         model.addAttribute("returnedCars", returnedCars);
-        return "home/returned_cars";
+        return "home/damage_management/returned_cars";
     }
 }

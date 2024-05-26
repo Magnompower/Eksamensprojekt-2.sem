@@ -3,7 +3,6 @@ package com.example.eksamensprojektbilabonnement.controllers;
 import com.example.eksamensprojektbilabonnement.models.ConditionReport;
 import com.example.eksamensprojektbilabonnement.models.Damage;
 import com.example.eksamensprojektbilabonnement.models.LeaseAgreement;
-import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
 import com.example.eksamensprojektbilabonnement.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.rmi.dgc.Lease;
 import java.util.List;
 
 @Controller
@@ -65,13 +63,13 @@ public class ConditionReportController {
         double kmDriven = carService.getCarByChassisNumber(conditionReport.getChassisNumber()).getKmDriven();
         model.addAttribute("kmDriven", kmDriven);
 
-        return "home/car_returned";
+        return "home/damage_management/car_returned";
     }
 
     @GetMapping ("/display_condition_report")
     public String displayConditionReport(Model model, @RequestParam int leaseId){
         ConditionReport conditionReport = conditionReportService.getConditionReport(leaseId);
         model.addAttribute(conditionReport);
-        return "home/display_condition_report";
+        return "home/damage_management/display_condition_report";
     }
 }

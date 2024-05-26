@@ -1,11 +1,9 @@
 package com.example.eksamensprojektbilabonnement.controllers;
 
 import com.example.eksamensprojektbilabonnement.services.CarService;
-import com.example.eksamensprojektbilabonnement.services.CustomerService;
 import com.example.eksamensprojektbilabonnement.services.DamageService;
 import com.example.eksamensprojektbilabonnement.services.LeaseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,7 +29,7 @@ public class LeaseController {
     public  String leaseOverview(Model model) {
         model.addAttribute("leases", leaseService.getLeases());
         model.addAttribute("localDateTime", LocalDate.now());
-        return "home/lease_overview";
+        return "home/lease_registration/lease_overview";
     }
 
     @PostMapping("/createLease")

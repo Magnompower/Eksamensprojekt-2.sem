@@ -12,7 +12,7 @@
     </div>
 </div>
 
-<div th:fragment="navbar(backLink)" class="navbar">
+<div th:fragment="admin_navbar(backLink)" class="navbar">
         <a th:href="${backLink}">Login</a>
         <a th:href="@{/inventory}">Inventory</a>
         <a th:href="@{/rented_cars}">Rented Cars</a>
@@ -24,26 +24,22 @@
 
 <div th:fragment="damage_management_navbar(backLink)" class="navbar">
     <a th:href="${backLink}">Login</a>
-    <a th:href="@{/inventory}">Inventory</a>
+    <a th:href="@{/damage_management_inventory}">Inventory</a>
     <a th:href="@{/returned_cars}">Returned Cars</a>
-    <a th:href="@{/customers}">Customers</a>
 </div>
 
 <div th:fragment="lease_registration_navbar(backLink)" class="navbar">
     <a th:href="${backLink}">Login</a>
-    <a th:href="@{/inventory}">Inventory</a>
+    <a th:href="@{/lease_registration_inventory}">Inventory</a>
     <a th:href="@{/lease_overview}">Lease Overview</a>
     <a th:href="@{/customers}">Customers</a>
 </div>
 
 <div th:fragment="business_developer_navbar(backLink)" class="navbar">
     <a th:href="${backLink}">Login</a>
-    <a th:href="@{/inventory}">Inventory</a>
     <a th:href="@{/rented_cars}">Rented Cars</a>
     <a th:href="@{/purchase}">Purchases</a>
 </div>
-
-
 
 <div th:fragment="footer" class="footer">
     <p class="brand-name"><sup>©</sup> 2024 IntelliJKingz<sup>™<br>All rights reserved.</sup></p>

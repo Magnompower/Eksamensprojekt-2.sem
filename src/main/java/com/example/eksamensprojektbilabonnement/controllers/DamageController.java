@@ -1,11 +1,18 @@
 package com.example.eksamensprojektbilabonnement.controllers;
 
+import com.example.eksamensprojektbilabonnement.models.Damage;
+import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
+import com.example.eksamensprojektbilabonnement.services.CarService;
 import com.example.eksamensprojektbilabonnement.services.DamageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.List;
 
 @Controller
 public class DamageController {
@@ -13,13 +20,42 @@ public class DamageController {
     @Autowired
     DamageService damageService;
 
+    @Autowired
+    CarService carService;
+
     @PostMapping("/add_non_invoiced_damage")
-    public String addDamage(@RequestParam String damageName, @RequestParam double damagePrice,
+    public String addNonInvoicedDamage(@RequestParam String damageName, @RequestParam double damagePrice,
                             @RequestParam String chassisNumber, @RequestParam int leaseId,
                             RedirectAttributes redirectAttributes){
-        damageService.addDamageToTable(chassisNumber, damageName, damagePrice, leaseId);
+        damageService.addNonInvoicedDamage(chassisNumber, damageName, damagePrice, leaseId);
         redirectAttributes.addAttribute("leaseId", leaseId);
         return "redirect:/add_damages_to_report";
+    }
+
+    @PostMapping("/add_damage")
+    public String addDamage(@RequestParam String damageName, @RequestParam double damagePrice,
+                            @RequestParam String chassisNumber,
+                            RedirectAttributes redirectAttributes){
+        damageService.addDamage(chassisNumber, damageName, damagePrice);
+        redirectAttributes.addAttribute("chassisNumber", chassisNumber);
+        return "redirect:/view_car_damages";
+    }
+
+    @GetMapping("/view_car_damages")
+    public String viewCarDamages(@RequestParam String chassisNumber, Model model) {
+        Car car = carService.getCarByChassisNumber(chassisNumber);
+        model.addAttribute("car", car);
+        List<Damage> invoicedDamages = damageService.getInvoicedDamages(chassisNumber);
+        model.addAttribute("invoicedDamages", invoicedDamages);
+        return "home/damage_management/view_car_damages";
+    }
+
+    @PostMapping("delete_damage")
+    public String deleteDamage(@RequestParam int damageId, @RequestParam String chassisNumber,
+    RedirectAttributes redirectAttributes){
+        damageService.deleteDamage(damageId);
+        redirectAttributes.addAttribute("chassisNumber", chassisNumber);
+        return "redirect:/view_car_damages";
     }
 
 

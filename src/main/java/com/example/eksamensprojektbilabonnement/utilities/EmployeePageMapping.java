@@ -11,17 +11,12 @@ public class EmployeePageMapping {
 
     public EmployeePageMapping() {
         employeePages = new HashMap<>();
-        // Initialize with default pages for each employeeTypr
-        employeePages.put(EmployeeType.ADMIN, "redirect:/inventory");
-        employeePages.put(EmployeeType.BUSINESS_DEVELOPER, "home/business_developer_dashboard");
-        employeePages.put(EmployeeType.DAMAGE_MANAGEMENT, "home/damage_management_dashboard");
-        employeePages.put(EmployeeType.LEASE_REGISTRATION, "home/lease_registration_dashboard");
+        // Initialize with default pages for each employeeType
+        employeePages.put(EmployeeType.ADMIN, "redirect:/admin_inventory");
+        employeePages.put(EmployeeType.BUSINESS_DEVELOPER, "redirect:/rented_cars");
+        employeePages.put(EmployeeType.DAMAGE_MANAGEMENT, "redirect:/damage_management_inventory");
+        employeePages.put(EmployeeType.LEASE_REGISTRATION, "redirect:/lease_registration_inventory");
     }
-
-    public void addEmployeePage(EmployeeType type, String page) {
-        employeePages.put(type, page);
-    }
-
     public String getPage(EmployeeType type) {
         return employeePages.get(type);
     }

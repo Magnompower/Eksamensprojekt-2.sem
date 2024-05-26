@@ -1,7 +1,6 @@
 package com.example.eksamensprojektbilabonnement.repositories;
 
 import com.example.eksamensprojektbilabonnement.models.Damage;
-import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,7 +14,7 @@ public class DamageRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public void addDamageToTable(String chassisNumber, String damageName, double damagePrice, int leaseId) {
+    public void addNonInvoicedDamage(String chassisNumber, String damageName, double damagePrice, int leaseId) {
         String query = "INSERT INTO damages (chassis_number, damage_name, damage_price, lease_id)"
                 + "VALUES(?,?,?,?)";
         jdbcTemplate.update(query, chassisNumber, damageName, damagePrice,leaseId);
@@ -44,6 +43,17 @@ public class DamageRepository {
     public void updateCarState(String chassisNumber, String carState, String carTable) {
         String query = "UPDATE " + carTable + " SET car_state = ? WHERE chassis_number = ?";
         jdbcTemplate.update(query, carState, chassisNumber);
+    }
+
+    public void addDamage(String chassisNumber, String damageName, double damagePrice) {
+        String query = "INSERT INTO damages (chassis_number, damage_name, damage_price, invoiced)"
+                + "VALUES(?,?,?,?)";
+        jdbcTemplate.update(query, chassisNumber, damageName, damagePrice, 1);
+    }
+
+    public void deleteDamage(int damageId) {
+        String query = "DELETE FROM damages WHERE damage_id = ?";
+        jdbcTemplate.update(query,damageId);
     }
 }
 

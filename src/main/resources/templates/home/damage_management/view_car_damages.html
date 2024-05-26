@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Car</title>
+    <link rel="stylesheet" type="text/css" href="/view_car_damages.css">
+    <link rel="stylesheet" href="/fragments.css">
+</head>
+<body>
+<header>
+    <div th:insert="~{home/fragments :: header(${car.licensePlateNumber} + ' - ' + ${car.brand} + ' ' + ${car.model})}"></div>
+    <div th:insert="~{home/fragments :: logo}"></div>
+    <div th:insert="~{home/fragments :: damage_management_navbar('/')}"></div>
+</header>
+
+<table class="car-table">
+    <h2>Car Info</h2>
+    <thead>
+    <tr>
+        <th>Chassis number</th>
+        <th>Car brand</th>
+        <th>Car model</th>
+        <th>Car Price</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td class="chassis-number" th:text="${car.chassisNumber}"></td>
+        <td class="car-brand" th:text="${car.brand}"></td>
+        <td class="car-model" th:text="${car.model}"></td>
+        <td class="car-price" th:text="${car.price}"></td>
+    </tr>
+    </tbody>
+    <tr>
+        <th>License plate</th>
+        <th>Car State</th>
+        <th>Transmission Type</th>
+        <th>Registration Fee</th>
+    </tr>
+    <tr>
+        <td class="license-plate" th:text="${car.licensePlateNumber}"></td>
+        <td class="car-state" th:text="${car.carState}"></td>
+        <td class="Transmission-type" th:text="${car.transmissionType}"></td>
+        <td class="registration-fee" th:text="${car.registrationFee}"></td>
+    </tr>
+</table>
+
+
+
+<h2>Existing Damages on Car</h2>
+<table class="damage-table">
+    <thead>
+    <tr>
+        <th>Damage Id</th>
+        <th>Type of Damage</th>
+        <th>Price of Damage</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="damage : ${invoicedDamages}">
+        <td th:text="${damage.damageId}"></td>
+        <td th:text="${damage.damageName}"></td>
+        <td th:text="${damage.damagePrice}"></td>
+        <td>
+            <form action="/delete_damage" method="post" class="delete-damage-form">
+                <input type="hidden" name="damageId" th:value="${damage.damageId}">
+                <input type="hidden" name="chassisNumber" th:value="${car.chassisNumber}">
+                <button type="submit" class="delete-button">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<div class="box">
+    <div class="text-container">
+        <h2>Add new damages</h2>
+    </div>
+    <form action="/add_damage" method="post">
+        <div class="input-container">
+            <div class="text-container">
+                <p>Please input new damages to the car:</p>
+            </div>
+            <input type="text" id="newDamageName" name="damageName" placeholder="Type of damage">
+            <input type="number" id="newDamagePrice" name="damagePrice" placeholder="Price of damage">
+            <input type="hidden" name="chassisNumber" th:value="${car.chassisNumber}">
+            <button type="submit">Add Damage</button>
+        </div>
+    </form>
+</div>
+
+<h2>Update Car State</h2>
+<form class="updateCar" action="/update_car_state" method="post">
+    <div class="text-container">
+        <label for="carState">Select car state:</label>
+    </div>
+    <select id="carState" name="carState" required>
+        <option value="RENTED">Rented</option>
+        <option value="DAMAGED">Damaged</option>
+        <option value="UNDER_MAINTENANCE">Under maintenance</option>
+        <option value="GETTING_PREPARED">Getting prepared</option>
+        <option value="RETURNED">Returned</option>
+        <option value="AVAILABLE">Available</option>
+    </select>
+    <button type="submit">Update</button>
+</form>
+
+<footer>
+    <div th:insert="~{home/fragments :: footer}"></div>
+</footer>
+</body>
+</html>

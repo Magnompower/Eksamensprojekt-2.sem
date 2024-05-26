@@ -26,7 +26,7 @@ public class PurchaseController {
         // de requestparams der er i metoden under. Men så har den scope i hele klassen, og det er måske dumt med
         //en controller?
         model.addAttribute("cars",  carService.generateRandomCars(6));
-        return "home/purchase";
+        return "home/business_developer/purchase";
     }
 
 
