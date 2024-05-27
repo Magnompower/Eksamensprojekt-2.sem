@@ -35,18 +35,29 @@
     </tbody>
 </table>
 <!--  @Author: Otto -->
-<main class="grid-container">
-
     <div class="box">
         <div class="text-container">
             <h2>Existing Damages on Car</h2>
         </div>
-        <ul class="damage-list">
-            <li class="damage-item" th:each="damage : ${invoicedDamages}">
-                <span th:text="'Type of damage: ' + ${damage.damageName}"></span>
-                <span th:text="' - Price of damage: ' + ${damage.damagePrice}"></span>
-            </li>
-        </ul>
+        <table class="damage-table">
+            <thead>
+            <tr>
+                <th>Damage Id</th>
+                <th>Type of Damage</th>
+                <th>Price of Damage</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="damage : ${invoicedDamages}">
+                <td th:text="${damage.damageId}"></td>
+                <td th:text="${damage.damageName}"></td>
+                <td th:text="${damage.damagePrice}"></td>
+                <td>
+                </td>
+            </tr>
+            </tbody>
+        </table>
     </div>
 <!--  @Author: Hasan -->
     <div class="box">
@@ -95,7 +106,6 @@
         </form>
     </div>
 
-</main>
 <form action="/conclude_lease" method="post" class="bottom-right-button">
     <input type="hidden" name="leaseId" th:value="${lease.leaseId}">
     <input type="hidden" name="chassisNumber" th:value="${lease.chassisNumber}">

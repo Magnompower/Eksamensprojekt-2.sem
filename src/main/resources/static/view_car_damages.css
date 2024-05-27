@@ -65,7 +65,7 @@ form.delete-damage-form button.delete-button:hover {
     background-color: #c0392b;
 }
 
-/* Target buttons within forms specifically */
+
 form button {
     background-color: #3b719f;
     color: #ffffff;
@@ -79,7 +79,7 @@ form button:hover {
     background-color: #5ca351;
 }
 
-/* Input fields and select */
+
 input[type="text"],
 input[type="number"],
 select {
