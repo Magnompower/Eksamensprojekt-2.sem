@@ -51,7 +51,7 @@ tr:hover {
     background-color: #d9534f;
     color: white;
     border: none;
-    padding: 5px 10px;
+    padding: 5px 12px;
     cursor: pointer;
     border-radius: 3px;
 }
@@ -60,7 +60,34 @@ tr:hover {
     background-color: #c9302c;
 }
 
+.blue-button {
+    background-color: #4c8cfc;
+    color: white;
+    border: none;
+    padding: 5px 20px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.blue-button:hover {
+    background-color: #356acc;
+}
+
 .error-message {
     font-weight: bold;
     text-align: center;
+}
+
+.button-container {
+    display: flex;
+    gap: 10px; /* Adjust the gap as needed */
+}
+
+.button-container form {
+    margin: 0;
+}
+
+.button-container .red-button,
+.button-container .blue-button {
+    cursor: pointer;
 }
