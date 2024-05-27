@@ -40,7 +40,7 @@ public class CarController {
      * @param chassisNumber the chassis number
      * @param model         the model
      * @return the string
-     * @author Hasan
+     * @author Hasan & Anders
      */
     @GetMapping("/view_car")
     public String view_car(@RequestParam String chassisNumber, Model model) {
