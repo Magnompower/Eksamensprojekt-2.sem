@@ -33,7 +33,7 @@ public class CustomersController {
     @GetMapping ("/customers")
     public String showCustomers(Model model) {
        model.addAttribute("customers", customerService.getAllCustomers());
-        return "home/customers";
+        return "home/lease_registration/customers";
     }
 
     /**
@@ -49,7 +49,7 @@ public class CustomersController {
         customerService.deleteCustomer(customerId);
         model.addAttribute("error", customerService.deleteCustomer(customerId));
         showCustomers(model);
-        return "home/customers";
+        return "home/lease_registration/customers";
     }
 
     @GetMapping("/edit_customer")

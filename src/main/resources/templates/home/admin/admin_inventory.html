@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Inventory</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/inventory.css">
+    <link rel="stylesheet" href="/reusables.css">
+    <link rel="stylesheet" href="/fragments.css">
+</head>
+<body>
+
+<header>
+    <div th:insert="~{home/fragments :: header('Inventory')}"></div>
+    <div th:insert="~{home/fragments :: logo}"></div>
+    <div th:insert="~{home/fragments :: admin_navbar('/')}"></div>
+</header>
+
+<!-------------- Dropdown menu for sorting & filtering --------------------->
+<!--  @Author:  Hasan -->
+<form action="/sort_and_filter_cars" method="get" class="sort-form">
+    <label for="sortType">Sort by:</label>
+    <select id="sortType" name="sortType">
+        <option value="" disabled selected hidden>Select a sorting option</option>
+        <option value="priceAscending">Price: low to high</option>
+        <option value="priceDescending">Price: high to low</option>
+        <option value="brandAscending">Brand: A-Z</option>
+        <option value="brandDescending">Brand: Z-A</option>
+    </select>
+
+    <label for="filterBy">Filter by:</label>
+    <select id="filterBy" name="filterBy">
+        <option value="" disabled selected hidden>Select a filter option</option>
+        <option value="RENTED">Rented</option>
+        <option value="DAMAGED">Damaged</option>
+        <option value="UNDER_MAINTENANCE">Under maintenance</option>
+        <option value="GETTING_PREPARED">Getting prepared</option>
+        <option value="AVAILABLE">Available</option>
+        <option value="RETURNED">Returned</option>
+        <option value="ALL">Show all</option>
+    </select>
+
+    <button type="submit">Apply</button>
+</form>
+<!--TODO Sorter automatisk fra available når man kommer ind på siden-->
+<main>
+    <!--  @Author: Anders -->
+    <div class="grid-container">
+        <div th:each="car : ${cars}"
+             th:class="${car.carState.name() == 'AVAILABLE' ? 'grid-item green-box' :
+                        (car.carState.name() == 'RENTED' || car.carState.name() == 'GETTING_PREPARED' || car.carState.name() == 'PENDING_MANAGEMENT') ? 'grid-item blue-box' :
+                        (car.carState.name() == 'DAMAGED' || car.carState.name() == 'UNDER_MAINTENANCE') ? 'grid-item red-box' :
+                        'grid-item'}">
+            <div>
+                <h3 th:text="'Price: ' + ${#numbers.formatInteger(car.price, 0)}"></h3>
+                <p th:text="'Brand: ' + ${car.brand}"></p>
+                <p th:text="'Model: ' + ${car.model}"></p>
+                <p th:text="'Gearbox: ' + ${car.transmissionType}"></p>
+                <p th:text="'Car type: ' + ${car.carType}"></p>
+                <p th:text="'State: ' + ${car.carState}" class="format-text"></p>
+                <div class="ItemLink">
+                    <form action="/view_car" method="get">
+                        <input type="hidden" name="chassisNumber" th:value="${car.chassisNumber}">
+                        <button class="view-button" type="submit">View car</button>
+                    </form>
+                    <div class="image-container">
+                        <img class="image" th:src="${car.image_url}" alt="Car Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer>
+    <div th:insert="~{home/fragments :: footer}"></div>
+</footer>
+
+</body>
+</html>

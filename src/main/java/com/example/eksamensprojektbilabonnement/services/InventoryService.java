@@ -130,6 +130,10 @@ public class InventoryService {
             return setSortCriteria(sortType, filterBy);
         }
     }
+
+    public List<Car> getDamagedCars() {
+        return inventoryRepository.getDamagedCars();
+    }
 }
 
 
