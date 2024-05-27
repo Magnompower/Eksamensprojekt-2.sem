@@ -27,8 +27,6 @@ public class CustomerService {
     @Autowired
     private LeaseRepository leaseRepository;
 
-    @Autowired
-    LeaseRepository leaseRepository;
 
     /**
      * Gets all customers.
@@ -40,27 +38,6 @@ public class CustomerService {
         return customerRepository.getAllCustomers();
     }
 
-    public List<Customer> getNonAnonymousCustomers() {
-        return customerRepository.getNonAnonymousCustomers();
-    }
-
-    /**
-     * Delete customer string.
-     * @author Otto & Hasan
-     *
-     * @param customerId the customer id
-     * @return the string
-     */
-    public String deleteCustomer(int customerId) {
-        try {
-            customerRepository.deleteCustomer(customerId);
-        } catch (Exception e) {
-            if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
-                customerRepository.anonymizeCustomerData(customerId);
-                return "This customer has active leases, and cannot be deleted. Customer data has been anonymized";
-            }
-        } return "Customer and all its data have been deleted.";
-    }
 
     /**
      * Gets non-anonymous customers.
@@ -72,6 +49,13 @@ public class CustomerService {
     public List<Customer> getNonAnonymousCustomers() {
         return customerRepository.getNonAnonymousCustomers();
     }
+    /**
+     * Delete customer string.
+     * @author Otto & Hasan
+     *
+     * @param customerId the customer id
+     * @return the string
+     */
 
     public String deleteCustomer(int customerId) {
         //Checks if there are any non concluded leases for the customer:
@@ -88,7 +72,6 @@ public class CustomerService {
                     customerRepository.anonymizeCustomerData(customerId);
                     return "This customer has stored leases, and cannot be deleted. Customer data has been anonymized";
                 } else {
-                    LOGGER.log(Level.SEVERE, "Error deleting customer", e);
                     throw new RuntimeException("An unexpected error occurred while deleting the customer", e);
                 }
             }

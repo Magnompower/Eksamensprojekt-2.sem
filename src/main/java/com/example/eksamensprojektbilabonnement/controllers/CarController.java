@@ -36,11 +36,11 @@ public class CarController {
 
     /**
      * View car string.
-     * @author  Hasan
      *
      * @param chassisNumber the chassis number
      * @param model         the model
      * @return the string
+     * @author Hasan
      */
     @GetMapping("/view_car")
     public String view_car(@RequestParam String chassisNumber, Model model) {
@@ -54,11 +54,11 @@ public class CarController {
 
     /**
      * Update car string.
-     * @author Anders
      *
      * @param chassisNumber the chassis number
      * @param carState      the car state
      * @return the string
+     * @author Anders
      */
     @PostMapping("/update_car_state")
     public String updateCar(@RequestParam String chassisNumber, @RequestParam String carState) {
@@ -69,13 +69,13 @@ public class CarController {
 
     /**
      * Update km driven string.
-     * @author Hasan
      *
      * @param chassisNumber      the chassis number
      * @param kmDriven           the km driven
      * @param leaseId            the lease id
      * @param redirectAttributes the redirect attributes
      * @return the string
+     * @author Hasan
      */
     @PostMapping("/update_km_driven")
 // TODO Flyt logik til service
