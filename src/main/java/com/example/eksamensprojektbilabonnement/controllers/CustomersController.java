@@ -64,7 +64,7 @@ public class CustomersController {
     public String showEditCustomerForm(@RequestParam int customerId, Model model) {
         Customer customer = customerService.getCustomerById(customerId);
         model.addAttribute("customer", customer);
-        return "home/edit_customer";
+        return "home/lease_registration/edit_customer";
     }
 
     /**

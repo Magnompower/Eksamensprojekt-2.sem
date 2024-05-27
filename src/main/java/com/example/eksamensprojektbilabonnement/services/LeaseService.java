@@ -28,12 +28,11 @@ public class LeaseService {
      * @param customerId    the customer id
      * @param startDate     the start date
      * @param endDate       the end date
-     * @param terms         the terms
      * @author Hasan, Otto
      */
-    public void createLease(String chassisNumber, int customerId, LocalDate startDate, LocalDate endDate, String terms) {
+    public void createLease(String chassisNumber, int customerId, LocalDate startDate, LocalDate endDate) {
         validateLeaseDates(startDate, endDate);
-        leaseRepository.createLease(chassisNumber, customerId, startDate, endDate, terms);
+        leaseRepository.createLease(chassisNumber, customerId, startDate, endDate);
     }
 
     /**

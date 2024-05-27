@@ -29,12 +29,11 @@ public class LeaseRepository {
      * @param customerId    the customer id
      * @param startDate     the start date
      * @param endDate       the end date
-     * @param terms         the terms
      * @author Hasan, Otto
      */
-    public void createLease(String chassisNumber, int customerId, LocalDate startDate, LocalDate endDate, String terms) {
-        String  query = "INSERT INTO lease_agreements (chassis_number, customer_id, start_date, end_date, terms) VALUES (?, ?, ?, ?, ?)";
-        jdbcTemplate.update(query, chassisNumber, customerId, startDate, endDate, terms);
+    public void createLease(String chassisNumber, int customerId, LocalDate startDate, LocalDate endDate ) {
+        String  query = "INSERT INTO lease_agreements (chassis_number, customer_id, start_date, end_date) VALUES (?, ?, ?, ?)";
+        jdbcTemplate.update(query, chassisNumber, customerId, startDate, endDate);
     }
 
     /**

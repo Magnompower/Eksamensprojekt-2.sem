@@ -1,11 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
+    <title>Lease concluded -  Condition report</title>
     <meta charset="UTF-8">
-    <title>Title</title>
-    den skal bare displaye condition reporten og der skal være en knap hvor man kan gå tilbage
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/inventory.css">
+    <link rel="stylesheet" href="/reusables.css">
+    <link rel="stylesheet" href="/fragments.css">
 </head>
+<header>
+    <div th:insert="~{home/fragments :: header('Inventory')}"></div>
+    <div th:insert="~{home/fragments :: logo}"></div>
+    <div th:insert="~{home/fragments :: damage_management_navbar('/')}"></div>
+</header>
 <body>
 
+<div class="box">
+    <div class="text-container">
+        <h2>Existing Damages on Car</h2>
+    </div>
+    <ul class="damage-list">
+        <li class="damage-item">
+            <span th:text="'Type of damage: ' + ${conditionReport.leaseId}"></span>
+            <span th:text="' - Price of damage: ' + ${conditionReport.chassisNumber}"></span>
+        </li>
+    </ul>
+</div>
+<footer>
+    <div th:insert="~{home/fragments :: footer}"></div>
+</footer>
 </body>
 </html>

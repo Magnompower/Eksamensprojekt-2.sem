@@ -12,7 +12,7 @@
 <header>
     <div th:insert="~{home/fragments :: header(${Car.licensePlateNumber} + ' - ' + ${Car.brand} + ' ' + ${Car.model})}"></div>
     <div th:insert="~{home/fragments :: logo}"></div>
-    <div th:insert="~{home/fragments :: navbar('/')}"></div>
+    <div th:insert="~{home/fragments :: lease_registration_navbar('/')}"></div>
 </header>
 
 <table class="car-table">
@@ -43,10 +43,10 @@
         <th>Registration Fee</th>
     </tr>
     <tr>
-        <td class="license-plate" th:text="${Car.licensePlateNumber}"></td>
-        <td class="car-state" th:text="${Car.carState}"></td>
-        <td class="Transmission-type" th:text="${Car.transmissionType}"></td>
-        <td class="registration-fee" th:text="${Car.registrationFee}"></td>
+        <td class="license-plate" th:text="${car.licensePlateNumber}"></td>
+        <td class="car-state" th:text="${car.carState}"></td>
+        <td class="Transmission-type" th:text="${car.transmissionType}"></td>
+        <td class="registration-fee" th:text="${car.registrationFee}"></td>
     </tr>
 </table>
 <h2>Update Car State</h2>
@@ -97,22 +97,15 @@
         <label for="EndDate">End Date:</label>
         <input type="date" id="EndDate" name="endDate" placeholder="End Date" required pattern="\d{4}-\d{2}-\d{2}">
     </div>
-    <div class="Hidden">
-        <div class="input-group">
-            <label for="terms">Terms:</label>
-            <input type="text" id="terms" name="terms" placeholder="Terms">
-        </div>
-    </div>
     <div class="input-group">
         <label for="customerId">Customer:</label>
         <select id="customerId" name="customerId" class="customer-select">
-
             <option th:each="customer : ${Customers}" th:value="${customer.customerId}"
                     th:text="${customer.customerId + ' - ' + customer.firstName}"></option>
-
         </select>
         <br>
     </div>
+
     <button type="submit" class="submit-btn">Create lease</button>
 
     <div th:if="${error}">

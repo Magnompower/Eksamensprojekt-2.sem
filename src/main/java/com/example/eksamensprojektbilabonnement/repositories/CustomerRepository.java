@@ -105,7 +105,9 @@ public class CustomerRepository {
      * @author Anders
      */
     public void updateCustomer(Customer customer) {
-        String query = "UPDATE customers SET first_name = ?, last_name = ?, phone_number = ?, email = ?, address = ? WHERE customer_id = ?";
-        jdbcTemplate.update(query, customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber(), customer.getEmail(), customer.getAddress(), customer.getCustomerId());
+        String query = "UPDATE customers SET first_name = ?, last_name = ?, phone_number = ?, email = ?, address = ?," +
+                " zip_code = ? WHERE customer_id = ?";
+        jdbcTemplate.update(query, customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber(),
+                customer.getEmail(), customer.getAddress(), customer.getZipCode(), customer.getCustomerId());
     }
 }

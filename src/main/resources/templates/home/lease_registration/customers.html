@@ -23,6 +23,7 @@
     <th>Phone</th>
     <th>Email</th>
     <th>Address</th>
+    <th>Zipcode</th>
     <th>Action</th>
   </tr>
   </thead>
@@ -35,6 +36,7 @@
     <td th:text="${customer.phoneNumber}"></td>
     <td th:text="${customer.email}"></td>
     <td th:text="${customer.address}"></td>
+    <td th:text="${customer.zipCode}"></td>
     <td>
 
       <form th:action="@{/delete_customer}" method="post">
