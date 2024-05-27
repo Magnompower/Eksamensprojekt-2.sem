@@ -28,9 +28,12 @@ public class CustomerRepository {
      * @return the all customers
      * @author Hasan, Otto
      */
-    public List<Customer> getAllCustomers () {
-        String query = "SELECT * FROM customers";
-        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class); //TODO: whats going on here
+
+    public List<Customer> getAllCustomers() {
+        String query = "SELECT c.*, z.city " +
+                "FROM customers c " +
+                "JOIN zip_codes z ON c.zip_code = z.zip_code";
+        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
         return jdbcTemplate.query(query, rowMapper);
     }
 

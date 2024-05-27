@@ -24,6 +24,7 @@
     <th>Email</th>
     <th>Address</th>
     <th>Zipcode</th>
+    <th>City</th>
     <th>Action</th>
   </tr>
   </thead>
@@ -37,6 +38,7 @@
     <td th:text="${customer.email}"></td>
     <td th:text="${customer.address}"></td>
     <td th:text="${customer.zipCode}"></td>
+    <td th:text="${customer.city}"></td>
     <td>
       <div class="button-container">
         <form th:action="@{/edit_customer}" method="get">
