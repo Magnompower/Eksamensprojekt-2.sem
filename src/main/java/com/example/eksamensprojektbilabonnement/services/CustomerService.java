@@ -6,19 +6,17 @@ import com.example.eksamensprojektbilabonnement.repositories.CustomerRepository;
 import com.example.eksamensprojektbilabonnement.repositories.LeaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 /**
  * The Customer service.
  */
 @Service
 public class CustomerService {
-
-    private static final Logger LOGGER = Logger.getLogger(CustomerService.class.getName());
 
     /**
      * The Customer repository.
@@ -28,6 +26,9 @@ public class CustomerService {
 
     @Autowired
     private LeaseRepository leaseRepository;
+
+    @Autowired
+    LeaseRepository leaseRepository;
 
     /**
      * Gets all customers.
@@ -45,10 +46,33 @@ public class CustomerService {
 
     /**
      * Delete customer string.
+     * @author Otto & Hasan
      *
      * @param customerId the customer id
      * @return the string
      */
+    public String deleteCustomer(int customerId) {
+        try {
+            customerRepository.deleteCustomer(customerId);
+        } catch (Exception e) {
+            if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
+                customerRepository.anonymizeCustomerData(customerId);
+                return "This customer has active leases, and cannot be deleted. Customer data has been anonymized";
+            }
+        } return "Customer and all its data have been deleted.";
+    }
+
+    /**
+     * Gets non-anonymous customers.
+     * @author Hasan & Magne
+     *
+     * @return the non-anonymous customers
+     */
+
+    public List<Customer> getNonAnonymousCustomers() {
+        return customerRepository.getNonAnonymousCustomers();
+    }
+
     public String deleteCustomer(int customerId) {
         //Checks if there are any non concluded leases for the customer:
         List<LeaseAgreement> nonConcludedLeases = leaseRepository.getNonConcludedLeases(customerId);
@@ -80,5 +104,13 @@ public class CustomerService {
      */
     public List<Integer> findCustomersForAnonymization() {
         return customerRepository.findCustomersForAnonymization();
+    }
+
+    public Customer getCustomerById(int customerId) {
+        return customerRepository.getCustomerById(customerId);
+    }
+
+    public void updateCustomer(Customer customer) {
+        customerRepository.updateCustomer(customer);
     }
 }

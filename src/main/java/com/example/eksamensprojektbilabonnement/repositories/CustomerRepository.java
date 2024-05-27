@@ -85,4 +85,14 @@ public class CustomerRepository {
                 "WHERE l.end_date <= CURRENT_TIMESTAMP - INTERVAL 5 YEAR";
         return jdbcTemplate.query(query, (rs, rowNum) -> rs.getInt("customer_id"));
     }
+
+    public Customer getCustomerById(int customerId) {
+        String query = "SELECT * FROM customers WHERE customer_id = ?";
+        return jdbcTemplate.queryForObject(query, new Object[]{customerId}, BeanPropertyRowMapper.newInstance(Customer.class));
+    }
+
+    public void updateCustomer(Customer customer) {
+        String query = "UPDATE customers SET first_name = ?, last_name = ?, phone_number = ?, email = ?, address = ? WHERE customer_id = ?";
+        jdbcTemplate.update(query, customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber(), customer.getEmail(), customer.getAddress(), customer.getCustomerId());
+    }
 }

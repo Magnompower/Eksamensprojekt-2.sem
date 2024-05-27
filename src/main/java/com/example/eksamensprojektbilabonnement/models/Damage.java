@@ -15,6 +15,7 @@ public class Damage {
         return damageId;
     }
 
+
     public void setDamageId(int damageId) {
         this.damageId = damageId;
     }

@@ -36,7 +36,6 @@ public class ConditionReportController {
     private ConditionReportService conditionReportService;
 
 
-
     /**
      * Car returned string.
      * author Otto

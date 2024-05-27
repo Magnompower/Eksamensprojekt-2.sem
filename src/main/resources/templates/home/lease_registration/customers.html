@@ -20,7 +20,9 @@
   <tr>
     <th>ID</th>
     <th>Name</th>
+    <th>Phone</th>
     <th>Email</th>
+    <th>Address</th>
     <th>Action</th>
   </tr>
   </thead>
@@ -30,12 +32,18 @@
   <tr th:each="customer : ${customers}">
     <td th:text="${customer.customerId}"></td>
     <td th:text="${customer.firstName}  +  ' '  + ${customer.lastName}" ></td>
+    <td th:text="${customer.phoneNumber}"></td>
     <td th:text="${customer.email}"></td>
+    <td th:text="${customer.address}"></td>
     <td>
 
       <form th:action="@{/delete_customer}" method="post">
         <input type="hidden" name="customerId" th:value="${customer.customerId}"/>
-        <button type="submit">Delete</button>
+        <button type="submit" class="red-button">Delete</button>
+      </form>
+      <form th:action="@{/edit_customer}" method="get">
+        <input type="hidden" name="customerId" th:value="${customer.customerId}" />
+        <button type="submit" class="blue-button">Edit</button>
       </form>
     </td>
   </tr>

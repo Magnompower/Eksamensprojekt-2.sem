@@ -13,6 +13,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.util.List;
 
+
+/**
+ * The Damage controller.
+ */
+
+
+
 /**
  * The Damage controller.
  */
@@ -39,6 +46,7 @@ public class DamageController {
      * @param redirectAttributes the redirect attributes
      * @return the string
      */
+
     @PostMapping("/add_non_invoiced_damage")
     public String addNonInvoicedDamage(@RequestParam String damageName, @RequestParam double damagePrice,
                             @RequestParam String chassisNumber, @RequestParam int leaseId,

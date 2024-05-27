@@ -51,8 +51,6 @@
 </table>
 <h2>Update Car State</h2>
 <form class="updateCar" action="/update_car_state" method="post">
-    <label for="chassisNumber">Update car:</label>
-    <input type="text" id="chassisNumber2" name="chassisNumber" th:value="${Car.chassisNumber}" readonly required>
     <label for="carState">Select car state:</label>
     <select id="carState" name="carState" required>
         <option value="RENTED">Rented</option>
@@ -91,10 +89,6 @@
 <form action="/createLease" method="post" class="lease-form">
 
     <div class="input-group">
-        <label for="chassisNumber">Chassis Number:</label>
-        <input type="text" id="chassisNumber" name="chassisNumber" th:value="${Car.chassisNumber}" readonly>
-    </div>
-    <div class="input-group">
         <label for="StartDate">Start Date:</label>
         <input type="date" id="StartDate" name="startDate" placeholder="Start Date" required
                pattern="\d{4}-\d{2}-\d{2}">
@@ -114,7 +108,7 @@
         <select id="customerId" name="customerId" class="customer-select">
 
             <option th:each="customer : ${Customers}" th:value="${customer.customerId}"
-                    th:text="${customer.firstName + ' - ' + customer.customerId}"></option>
+                    th:text="${customer.customerId + ' - ' + customer.firstName}"></option>
 
         </select>
         <br>

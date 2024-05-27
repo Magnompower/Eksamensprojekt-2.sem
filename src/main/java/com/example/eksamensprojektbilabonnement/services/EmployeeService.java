@@ -18,13 +18,11 @@ public class EmployeeService {
     // Since the common operations here (getPage) are read-only,
     // there are no threading issues.
 
-
     /**
      * The Employee repository.
      */
     @Autowired
     EmployeeRepository employeeRepository;
-
     /**
      * Instantiates a new Employee service.
      *
@@ -32,7 +30,7 @@ public class EmployeeService {
      */
     @Autowired
     public EmployeeService(EmployeePageMapping employeePageMapping) {
-        this.employeePageMapping =  employeePageMapping;
+        this.employeePageMapping = employeePageMapping;
     }
 
     /**

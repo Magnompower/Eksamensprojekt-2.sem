@@ -106,4 +106,18 @@ background-color: #000000;
     background-color: #808080;
 }
 
+.blue-button{
+    background-color: #3b718f;
+    margin-left: 20px;
+    min-width: 40px;
+    min-height: 10px;
+}
 
+.red-button{
+    background-color: #CB4C4E;
+    min-width: 40px;
+    min-height: 10px;
+}
+.blue-button:hover{
+    background-color: #5ca351;
+}
