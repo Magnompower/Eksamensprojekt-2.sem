@@ -10,13 +10,13 @@
 <body>
 
 <header>
-    <div th:insert="~{home/fragments :: header('Edit Product')}"></div>
+    <div th:insert="~{home/fragments :: header('Edit Costumor')}"></div>
     <div th:insert="~{home/fragments :: logo}"></div>
     <div th:insert="~{home/fragments :: lease_registration_navbar('/')}"></div>
 </header>
 <!-- @Author: Hasan -->
+<h2>Please enter the details you want to edit</h2>
 <div class="form-container">
-
     <form th:action="@{/edit_customer}" th:object="${customer}" method="post">
         <input type="hidden" name="customerId" th:value="${customer.customerId}"/>
         <ul>
