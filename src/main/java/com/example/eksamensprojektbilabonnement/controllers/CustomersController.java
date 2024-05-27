@@ -32,7 +32,7 @@ public class CustomersController {
      */
     @GetMapping ("/customers")
     public String showCustomers(Model model) {
-       model.addAttribute("customers", customerService.getAllCustomers());
+       model.addAttribute("customers", customerService.getNonAnonymousCustomers());
         return "home/lease_registration/customers";
     }
 
