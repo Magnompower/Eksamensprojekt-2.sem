@@ -23,13 +23,13 @@ public class LeaseService {
 
     /**
      * Create lease.
-     * @author Hasan, Otto
      *
      * @param chassisNumber the chassis number
      * @param customerId    the customer id
      * @param startDate     the start date
      * @param endDate       the end date
      * @param terms         the terms
+     * @author Hasan, Otto
      */
     public void createLease(String chassisNumber, int customerId, LocalDate startDate, LocalDate endDate, String terms) {
         validateLeaseDates(startDate, endDate);
@@ -38,11 +38,10 @@ public class LeaseService {
 
     /**
      * Validate lease dates.
-     * @author Otto
      *
      * @param startDate the start date
      * @param endDate   the end date
-     *
+     * @author Otto
      */
     public void validateLeaseDates(LocalDate startDate, LocalDate endDate) {
         LocalDate minDate = LocalDate.of(2024, 1, 1);
@@ -57,10 +56,9 @@ public class LeaseService {
 
     /**
      * Gets leases.
-     * @author Otto & Hasan
      *
      * @return the leases
-     *
+     * @author Otto & Hasan
      */
     public List<LeaseAgreement> getLeases() {
         return leaseRepository.getLeases();
@@ -69,11 +67,10 @@ public class LeaseService {
 
     /**
      * Gets active lease.
-     * @author Hasan
      *
      * @param chassisNumber the chassis number
      * @return the active lease
-     *
+     * @author Hasan
      */
     public LeaseAgreement getActiveLease(String chassisNumber) {
         return leaseRepository.getActiveLease(chassisNumber);
@@ -81,10 +78,9 @@ public class LeaseService {
 
     /**
      * Conclude lease.
-     * @author Hasan
      *
      * @param leaseId the lease id
-     *
+     * @author Hasan
      */
     public void concludeLease(int leaseId) {
         leaseRepository.concludeLease(leaseId);
@@ -92,11 +88,10 @@ public class LeaseService {
 
     /**
      * Gets lease.
-     * @author Hasan
      *
      * @param leaseId the lease id
      * @return the lease
-     *
+     * @author Hasan
      */
     public LeaseAgreement getLease(int leaseId) {
         return leaseRepository.getLease(leaseId);
@@ -105,12 +100,12 @@ public class LeaseService {
 
     /**
      * Check lease availability boolean.
-     * @author Magne, Hasan
      *
      * @param carChassisNumber the car chassis number
      * @param startDateNew     the start date new
      * @param endDateNew       the end date new
      * @return the boolean
+     * @author Magne, Hasan
      */
     public boolean checkLeaseAvailability(String carChassisNumber, LocalDate startDateNew, LocalDate endDateNew) {
         // Check if the starting date is later than the end date
@@ -135,10 +130,10 @@ public class LeaseService {
 
     /**
      * Gets non concluded leases.
-     * @author Otto
      *
      * @param chassisNumber the chassis number
      * @return the non concluded leases
+     * @author Otto
      */
     public List<LeaseAgreement> getNonConcludedLeases(String chassisNumber) {
         return leaseRepository.getNonConcludedLeases(chassisNumber);

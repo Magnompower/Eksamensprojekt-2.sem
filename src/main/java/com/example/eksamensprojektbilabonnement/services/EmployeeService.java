@@ -25,17 +25,23 @@ public class EmployeeService {
     @Autowired
     EmployeeRepository employeeRepository;
 
+    /**
+     * Instantiates a new Employee service.
+     *
+     * @param employeePageMapping the employee page mapping
+     */
     @Autowired
     public EmployeeService(EmployeePageMapping employeePageMapping) {
         this.employeePageMapping =  employeePageMapping;
     }
+
     /**
      * Check pass string.
-     * @author Hasan, Otto
      *
      * @param email    the email
      * @param password the password
      * @return the string
+     * @author Hasan, Otto
      */
     public String checkPassword(String email, String password) {
         String dbPassword = employeeRepository.checkPass(email);
@@ -48,10 +54,25 @@ public class EmployeeService {
         }
     }
 
+    /**
+     * Gets page for employee.
+     *
+     * @author Hasan
+     * @param type the type
+     * @return the page for employee
+     *
+     */
     public String getPageForEmployee(EmployeeType type) {
         return employeePageMapping.getPage(type);
     }
 
+    /**
+     * Get employee employee.
+     *
+     * @author Hasan
+     * @param email the email
+     * @return the employee
+     */
     public Employee getEmployee(String email){
         return employeeRepository.getEmployee(email);
     }
