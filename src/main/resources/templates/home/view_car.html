@@ -10,7 +10,7 @@
 <body>
 
 <header>
-    <div th:insert="~{home/fragments :: header(${Car.licensePlateNumber} + ' - ' + ${Car.brand} + ' ' + ${Car.model})}"></div>
+    <div th:insert="~{home/fragments :: header(${car.licensePlateNumber} + ' - ' + ${car.brand} + ' ' + ${car.model})}"></div>
     <div th:insert="~{home/fragments :: logo}"></div>
     <div th:insert="~{home/fragments :: lease_registration_navbar('/')}"></div>
 </header>
@@ -29,10 +29,10 @@
     </thead>
     <tbody>
     <tr>
-        <td class="chassis-number" th:text="${Car.chassisNumber}"></td>
-        <td class="car-brand" th:text="${Car.brand}"></td>
-        <td class="car-model" th:text="${Car.model}"></td>
-        <td class="car-price" th:text="${Car.price}"></td>
+        <td class="chassis-number" th:text="${car.chassisNumber}"></td>
+        <td class="car-brand" th:text="${car.brand}"></td>
+        <td class="car-model" th:text="${car.model}"></td>
+        <td class="car-price" th:text="${car.price}"></td>
     </tr>
     </tbody>
 
@@ -87,6 +87,7 @@
 <h2>Create New Lease</h2>
 <!--  @Author: Otto -->
 <form action="/createLease" method="post" class="lease-form">
+    <input type="hidden" name="chassisNumber" th:value="${car.chassisNumber}"/>
 
     <div class="input-group">
         <label for="StartDate">Start Date:</label>

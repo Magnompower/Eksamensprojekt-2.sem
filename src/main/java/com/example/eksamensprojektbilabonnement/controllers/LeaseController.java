@@ -47,12 +47,10 @@ public class LeaseController {
      * Create lease string.
      * @author Otto, Hasan
      *
-     * @param model              the model
      * @param chassisNumber      the chassis number
      * @param customerId         the customer id
      * @param startDate          the start date
      * @param endDate            the end date
-     * @param terms              the terms
      * @param redirectAttributes the redirect attributes
      * @return the string
      */

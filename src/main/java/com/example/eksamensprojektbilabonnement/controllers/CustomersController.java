@@ -77,7 +77,7 @@ public class CustomersController {
     @PostMapping("/edit_customer")
     public String editCustomerSubmit(@ModelAttribute Customer customer) {
         customerService.updateCustomer(customer);
-        return "redirect:/edit_customer";
+        return "redirect:/customers";
     }
 }
 
