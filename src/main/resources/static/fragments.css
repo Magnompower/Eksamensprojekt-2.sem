@@ -1,3 +1,5 @@
+/*  @Author: Magne */
+
 .header {
     background-color: #3b719f;
     color: #ffffff;
@@ -40,7 +42,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #000000;
+    background-color: #333;
     color: white;
     padding: 10px 0;
     width: 100%;
@@ -64,7 +66,6 @@
     transform: scale(1.2);
 }
 
-/*MAKE BUTTON TODO*/
 
 /*--------------------------------------NAVBAR--------------------------------------*/
 

@@ -1,0 +1,100 @@
+.damage-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.damage-item {
+    margin-bottom: 5px; /* Reduce margin */
+    padding: 8px; /* Add padding */
+}
+
+.text-container {
+    font-weight: bold;
+    margin-bottom: 5px; /* Reduce margin */
+}
+
+.bottom-right-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+.table-container {
+    width: 100%;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 0 auto;
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+h2 {
+    background-color: #999;
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+}
+
+
+form.delete-damage-form button.delete-button {
+    background-color: #e74c3c; /* Red background for delete button */
+    color: white; /* White text */
+    padding: 8px 12px; /* Adjust padding */
+    border: none; /* No border */
+    border-radius: 4px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+}
+
+form.delete-damage-form button.delete-button:hover {
+    background-color: #c0392b; /* Darker red on hover */
+}
+
+/* Target buttons within forms specifically */
+form button {
+    background-color: #3b719f;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #5ca351;
+}
+
+/* Input fields and select */
+input[type="text"],
+input[type="number"],
+select {
+    width: 25%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Adjust margin-bottom for input groups */
+.input-group {
+    margin-bottom: 10px;
+}
+
+/* Adjust margin-bottom for labels */
+label {
+    display: block;
+    margin-bottom: 5px;
+}

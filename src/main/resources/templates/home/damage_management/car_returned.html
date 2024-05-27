@@ -12,9 +12,9 @@
 <header>
     <div th:insert="~{home/fragments :: header('Cars Returned')}"></div>
     <div th:insert="~{home/fragments :: logo}"></div>
-    <div th:insert="~{home/fragments :: navbar('/')}"></div>
+    <div th:insert="~{home/fragments :: damage_management_navbar('/')}"></div>
 </header>
-
+<!--  @Author: Magne -->
 <table class="lease-info">
     <thead>
     <tr>
@@ -34,7 +34,7 @@
     </tr>
     </tbody>
 </table>
-
+<!--  @Author: Otto -->
 <main class="grid-container">
 
     <div class="box">
@@ -48,7 +48,7 @@
             </li>
         </ul>
     </div>
-
+<!--  @Author: Hasan -->
     <div class="box">
         <div class="text-container">
             <h2>Add new damages</h2>
@@ -59,7 +59,7 @@
                 <span th:text="' - Price of damage: ' + ${damage.damagePrice}"></span>
             </li>
         </ul>
-        <form action="/add_non_invoiced_damage" method="post">
+        <form action="/add_damage" method="post">
             <div class="input-container">
                 <div class="text-container">
                     <p>Please input new damages to the car:</p>

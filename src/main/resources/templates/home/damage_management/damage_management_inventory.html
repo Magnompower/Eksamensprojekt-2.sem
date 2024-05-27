@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <title>Inventory</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/inventory.css">
+    <link rel="stylesheet" href="/reusables.css">
+    <link rel="stylesheet" href="/fragments.css">
+</head>
+<body>
+
+<header>
+    <div th:insert="~{home/fragments :: header('Inventory')}"></div>
+    <div th:insert="~{home/fragments :: logo}"></div>
+    <div th:insert="~{home/fragments :: damage_management_navbar('/')}"></div>
+</header>
+
+
+
+<main>
+    <div class="grid-container">
+        <div th:each="car : ${damagedCars}"
+             th:class="${car.carState.name() == 'AVAILABLE' ? 'grid-item green-box' :
+                        (car.carState.name() == 'RENTED' || car.carState.name() == 'GETTING_PREPARED' || car.carState.name() == 'PENDING_MANAGEMENT') ? 'grid-item blue-box' :
+                        (car.carState.name() == 'DAMAGED' || car.carState.name() == 'UNDER_MAINTENANCE') ? 'grid-item red-box' :
+                        'grid-item'}">
+            <div>
+                <h3 th:text="'Price: ' + ${#numbers.formatInteger(car.price, 0)}"></h3>
+                <p th:text="'Brand: ' + ${car.brand}"></p>
+                <p th:text="'Model: ' + ${car.model}"></p>
+                <p th:text="'Gearbox: ' + ${car.transmissionType}"></p>
+                <p th:text="'Car type: ' + ${car.carType}"></p>
+                <p th:text="'State: ' + ${car.carState}" class="format-text"></p>
+                <div class="ItemLink">
+                    <form action="/view_car_damages" method="get">
+                        <input type="hidden" name="chassisNumber" th:value="${car.chassisNumber}">
+                        <button class="view-button" type="submit">View car</button>
+                    </form>
+                    <div class="image-container">
+                        <img class="image" th:src="${car.image_url}" alt="Car Image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+<footer>
+    <div th:insert="~{home/fragments :: footer}"></div>
+</footer>
+
+</body>
+</html>

@@ -16,6 +16,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.rmi.dgc.Lease;
 import java.util.List;
 
+
+/**
+ * The  Condition report controller.
+ */
 @Controller
 public class ConditionReportController {
 
@@ -32,8 +36,14 @@ public class ConditionReportController {
     private ConditionReportService conditionReportService;
 
 
-
-
+    /**
+     * Car returned string.
+     * author Otto
+     *
+     * @param chassisNumber      the chassis number
+     * @param redirectAttributes the redirect attributes
+     * @return the string
+     */
     @PostMapping("/car_returned")
     public String carReturned(@RequestParam String chassisNumber, RedirectAttributes redirectAttributes) {
         //Create the initial condition report with known data:
@@ -45,6 +55,14 @@ public class ConditionReportController {
     }
 
 
+    /**
+     * Add damages to report string.
+     * author Hasan
+     *
+     * @param model   the model
+     * @param leaseId the lease id
+     * @return the string
+     */
     @GetMapping("/add_damages_to_report")
     public String addDamagesToReport(Model model, @RequestParam int leaseId){
         //Get the lease and add it to the model:
@@ -67,15 +85,13 @@ public class ConditionReportController {
         double kmDriven = carService.getCarByChassisNumber(conditionReport.getChassisNumber()).getKmDriven();
         model.addAttribute("kmDriven", kmDriven);
 
+        return "home/damage_management/car_returned";
+    }
 
-        for (Damage damage : nonInvoicedDamages) {
-            System.out.println(damage.getDamageName());
-        }
-
-
-        //Indtast nyt kmtal. giv det til conditionreport
-        //conditionreporten bliver vist. bilen bliver sat til avaliable og skaderne bliver sat til faktureret. Leasen bliver sat til concluded.
-
-        return "home/car_returned";
+    @GetMapping ("/display_condition_report")
+    public String displayConditionReport(Model model, @RequestParam int leaseId){
+        ConditionReport conditionReport = conditionReportService.getConditionReport(leaseId);
+        model.addAttribute(conditionReport);
+        return "home/damage_management/display_condition_report";
     }
 }

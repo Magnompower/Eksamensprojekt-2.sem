@@ -1,11 +1,9 @@
 package com.example.eksamensprojektbilabonnement.controllers;
 
 import com.example.eksamensprojektbilabonnement.services.CarService;
-import com.example.eksamensprojektbilabonnement.services.CustomerService;
 import com.example.eksamensprojektbilabonnement.services.DamageService;
 import com.example.eksamensprojektbilabonnement.services.LeaseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +13,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.time.LocalDate;
 
+
+/**
+ * The Lease controller.
+ */
 @Controller
 public class LeaseController {
     @Autowired
@@ -26,13 +28,34 @@ public class LeaseController {
     @Autowired
     private DamageService damageService;
 
-    //todo create controller that sends  a car and customer over so that a lease can be created
+
+    /**
+     * Lease overview string.
+     * @author Otto, Hasan, Anders, Magne
+     *
+     * @param model the model
+     * @return the string
+     */
     @GetMapping("/lease_overview")
     public  String leaseOverview(Model model) {
         model.addAttribute("leases", leaseService.getLeases());
         model.addAttribute("localDateTime", LocalDate.now());
-        return "home/lease_overview";
+        return "home/lease_registration/lease_overview";
     }
+
+    /**
+     * Create lease string.
+     * @author Otto, Hasan
+     *
+     * @param model              the model
+     * @param chassisNumber      the chassis number
+     * @param customerId         the customer id
+     * @param startDate          the start date
+     * @param endDate            the end date
+     * @param terms              the terms
+     * @param redirectAttributes the redirect attributes
+     * @return the string
+     */
     @PostMapping("/createLease")
     public String createLease(Model model,
                               @RequestParam String chassisNumber,
@@ -47,7 +70,7 @@ public class LeaseController {
         if (isAvailable) {
             try {
                 leaseService.createLease(chassisNumber, customerId, startDate, endDate, terms);
-                return "redirect:/lease_overview";
+                return "redirect:/success.html";
             } catch (IllegalArgumentException e) {
                 redirectAttributes.addFlashAttribute("error", e.getMessage());
                 return "redirect:/view_car?chassisNumber=" + chassisNumber;
@@ -61,8 +84,16 @@ public class LeaseController {
         }
     }
 
+    /**
+     * Conclude lease string.
+     * @author Hasan
+     *
+     * @param leaseId       the lease id
+     * @param chassisNumber the chassis number
+     * @return the string
+     */
     @PostMapping ("/conclude_lease")
-    public String concludeLease(@RequestParam int leaseId, @RequestParam String chassisNumber){
+    public String concludeLease(@RequestParam int leaseId, @RequestParam String chassisNumber, RedirectAttributes redirectAttributes){
         //Set lease to concluded:
         leaseService.concludeLease(leaseId);
 
@@ -74,8 +105,13 @@ public class LeaseController {
         damageService.setDamagesToInvoiced(leaseId, chassisNumber);
 
         //isActive should be set to false. Also think about that functionality here should be triggers instead
-        return "redirect:/returned_cars";
+
+        redirectAttributes.addAttribute(leaseId);
+        return "redirect:/display_condition_report";
     }
+
+
+
 
 
 }

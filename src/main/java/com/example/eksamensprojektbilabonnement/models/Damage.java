@@ -2,13 +2,24 @@ package com.example.eksamensprojektbilabonnement.models;
 
 public class Damage {
 
+    private int damageId;
     private String damageName;
     private double damagePrice;
     private boolean invoiced;
 
     public Damage() {
-
     }
+
+
+    public int getDamageId() {
+        return damageId;
+    }
+
+
+    public void setDamageId(int damageId) {
+        this.damageId = damageId;
+    }
+
     public boolean isInvoiced() {
         return invoiced;
     }

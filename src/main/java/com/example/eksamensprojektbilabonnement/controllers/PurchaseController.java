@@ -14,23 +14,55 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+
+/**
+ * The Purchase controller.
+ */
 @Controller
 public class PurchaseController {
+
+    /**
+     * The Car service.
+     */
     @Autowired
     CarService carService;
 
 
+    /**
+     * Show random cars string.
+     * @author Otto, Hasan
+     *
+     * @param model the model
+     * @return the string
+     */
     @GetMapping("/purchase")
     public String showRandomCars( Model model) {
         //Man kunne spare mange kodelinjre hvis cars blev instantieret i klassen i stedet. Man kunne slippe for alle
         // de requestparams der er i metoden under. Men så har den scope i hele klassen, og det er måske dumt med
         //en controller?
         model.addAttribute("cars",  carService.generateRandomCars(6));
-        return "home/purchase";
+        return "home/business_developer/purchase";
     }
 
 
-
+    /**
+     * Purchase selected string.
+     * @author Hasan, Otto, Anders
+     *
+     * @param selectedCars         the selected cars
+     * @param chassisNumbers       the chassis numbers
+     * @param carModels            the car models
+     * @param brands               the brands
+     * @param prices               the prices
+     * @param registrationFees     the registration fees
+     * @param kmPerLiters          the km per liters
+     * @param carbonEmissionPerKms the carbon emission per kms
+     * @param licensePlates        the license plates
+     * @param carStates            the car states
+     * @param transmissionTypes    the transmission types
+     * @param fuelTypes            the fuel types
+     * @return the string
+     */
     @PostMapping("/purchaseSelected")
     public String purchaseSelected(@RequestParam("selectedCars") List<String> selectedCars,
                                    @RequestParam("chassisNumber") List<String> chassisNumbers,
@@ -70,7 +102,15 @@ public class PurchaseController {
             }
             return "redirect:/inventory";
         }
-        // Her sikre vi at brugeren ikke møder et white label error page, hvis de ikke har valgt nogle biler.
+
+    /**
+     * Handle missing params string.
+     * @author Otto, Hasan
+     *
+     * @param ex the ex
+     * @return the string
+     */
+// Her sikre vi at brugeren ikke møder et white label error page, hvis de ikke har valgt nogle biler.
         // Vi redirecter dem tilbage til purchase siden, hvor de kan vælge biler.
     @ExceptionHandler(MissingServletRequestParameterException.class)
     public String handleMissingParams(MissingServletRequestParameterException ex) {

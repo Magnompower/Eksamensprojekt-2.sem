@@ -12,10 +12,11 @@
 <header>
     <div th:insert="~{home/fragments :: header('Purchases')}"></div>
     <div th:insert="~{home/fragments :: logo}"></div>
-    <div th:insert="~{home/fragments :: navbar('/')}"></div>
+    <div th:insert="~{home/fragments :: business_developer_navbar('/')}"></div>
 </header>
 
 <main>
+    <!--  @Author: Hasan & Anders -->
     <form action="/purchaseSelected" method="post">
         <div class="grid-container2">
             <div class="grid-item2" th:each="car : ${cars}">

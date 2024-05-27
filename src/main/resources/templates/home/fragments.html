@@ -6,21 +6,41 @@
 
 <div th:fragment="logo">
     <div class="logo-container">
-        <a href="/" class="logo"> <!-- TODO if logged in - goto inventory-->
+        <a href="/" class="logo">
             <img src="/logo.png" alt="Logo">
         </a>
     </div>
 </div>
 
+<!--  @Author: Magne -->
 <div th:fragment="navbar(backLink)" class="navbar">
+<div th:fragment="admin_navbar(backLink)" class="navbar">
         <a th:href="${backLink}">Login</a>
         <a th:href="@{/inventory}">Inventory</a>
         <a th:href="@{/rented_cars}">Rented Cars</a>
         <a th:href="@{/purchase}">Purchases</a>
-        <a th:href="@{/lease_overview}">Lease Overview</a> <!-- TODO -->
-        <a th:href="@{/returned_cars}">Returned Cars</a> <!-- TODO -->
+        <a th:href="@{/lease_overview}">Lease Overview</a>
+        <a th:href="@{/returned_cars}">Returned Cars</a>
         <a th:href="@{/customers}">Customers</a>
-        <a th:if="${isAdmin}" th:href="@{/inventory}">Admin Site??!?!?</a> <!-- TODO -->
+</div>
+
+<div th:fragment="damage_management_navbar(backLink)" class="navbar">
+    <a th:href="${backLink}">Login</a>
+    <a th:href="@{/damage_management_inventory}">Inventory</a>
+    <a th:href="@{/returned_cars}">Returned Cars</a>
+</div>
+
+<div th:fragment="lease_registration_navbar(backLink)" class="navbar">
+    <a th:href="${backLink}">Login</a>
+    <a th:href="@{/lease_registration_inventory}">Inventory</a>
+    <a th:href="@{/lease_overview}">Lease Overview</a>
+    <a th:href="@{/customers}">Customers</a>
+</div>
+
+<div th:fragment="business_developer_navbar(backLink)" class="navbar">
+    <a th:href="${backLink}">Login</a>
+    <a th:href="@{/rented_cars}">Rented Cars</a>
+    <a th:href="@{/purchase}">Purchases</a>
 </div>
 
 <div th:fragment="footer" class="footer">

@@ -1,3 +1,5 @@
+/*  @Author: Anders */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -74,5 +76,11 @@ main {
 
 .image {
     object-fit: cover;
+
+}
+.message {
+    font-size : 20px;
+    color: cornflowerblue;
+    text-align: center;
 
 }
