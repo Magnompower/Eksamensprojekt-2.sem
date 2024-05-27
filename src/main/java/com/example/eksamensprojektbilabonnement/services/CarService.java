@@ -125,9 +125,6 @@ public class CarService {
             default -> "Unknown";
         };
     }
-
-    //TODO Make formatted getter for gearbox and carState to display in HTML
-
     public List<String> findCarsWithUpcomingLeases() {
        return carRepository.findCarsWithUpcomingLeases();
     }

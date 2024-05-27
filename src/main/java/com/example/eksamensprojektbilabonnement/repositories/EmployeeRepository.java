@@ -23,10 +23,10 @@ public class EmployeeRepository {
 
     /**
      * Check pass string.
-     * @author Hasan, Otto
      *
      * @param email the email
      * @return the string
+     * @author Hasan, Otto
      */
     public String checkPass(String email) {
         try {
@@ -37,6 +37,13 @@ public class EmployeeRepository {
         }
     }
 
+    /**
+     * Gets employee.
+     *
+     * @param email the email
+     * @return the employee
+     * @author Hasan
+     */
     public Employee getEmployee(String email) {
         String query = "SELECT * from employees where email = ?";
         return jdbcTemplate.queryForObject(query, BeanPropertyRowMapper.newInstance(Employee.class), email);

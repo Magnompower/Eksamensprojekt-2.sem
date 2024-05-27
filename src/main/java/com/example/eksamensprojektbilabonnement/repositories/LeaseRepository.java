@@ -24,13 +24,13 @@ public class LeaseRepository {
 
     /**
      * Create lease.
-     * @author Hasan, Otto
      *
      * @param chassisNumber the chassis number
      * @param customerId    the customer id
      * @param startDate     the start date
      * @param endDate       the end date
      * @param terms         the terms
+     * @author Hasan, Otto
      */
     public void createLease(String chassisNumber, int customerId, LocalDate startDate, LocalDate endDate, String terms) {
         String  query = "INSERT INTO lease_agreements (chassis_number, customer_id, start_date, end_date, terms) VALUES (?, ?, ?, ?, ?)";
@@ -39,9 +39,9 @@ public class LeaseRepository {
 
     /**
      * Gets leases.
-     * @author Hasan, Otto
      *
      * @return the leases
+     * @author Hasan, Otto
      */
     public List<LeaseAgreement> getLeases() {
         String query = "SELECT * FROM lease_agreements";
@@ -51,10 +51,10 @@ public class LeaseRepository {
 
     /**
      * Gets active lease.
-     * @author Magne
      *
      * @param chassisNumber the chassis number
      * @return the active lease
+     * @author Magne
      */
     public LeaseAgreement getActiveLease(String chassisNumber) {
         String query = "SELECT * FROM lease_agreements WHERE chassis_number = ? AND is_concluded = 'FALSE'";
@@ -63,9 +63,9 @@ public class LeaseRepository {
 
     /**
      * Conclude lease.
-     * @author Hasan
      *
      * @param leaseId the lease id
+     * @author Hasan
      */
     public void concludeLease(int leaseId) {
         String query = "UPDATE lease_agreements SET is_concluded = TRUE WHERE lease_id = ?";
@@ -74,10 +74,10 @@ public class LeaseRepository {
 
     /**
      * Gets lease.
-     * @author Hasan
      *
      * @param leaseId the lease id
      * @return the lease
+     * @author Hasan
      */
     public LeaseAgreement getLease(int leaseId) {
         String query = "SELECT * FROM lease_agreements WHERE lease_id = ?";
@@ -86,16 +86,23 @@ public class LeaseRepository {
 
     /**
      * Gets non concluded leases.
-     * @author Hasan
      *
      * @param chassisNumber the chassis number
      * @return the non concluded leases
+     * @author Hasan
      */
     public List<LeaseAgreement> getNonConcludedLeases(String chassisNumber) {
         String query = "SELECT * FROM lease_agreements WHERE chassis_number = ? AND is_concluded = FALSE";
         return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(LeaseAgreement.class), chassisNumber);
     }
 
+    /**
+     * Gets non concluded leases.
+     *
+     * @param customerId the customer id
+     * @return the non concluded leases
+     * @author Otto
+     */
     public List<LeaseAgreement> getNonConcludedLeases(int customerId) {
         String query = "SELECT * FROM lease_agreements WHERE customer_id = ? AND is_concluded = FALSE";
         return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(LeaseAgreement.class), customerId);

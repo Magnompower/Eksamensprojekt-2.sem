@@ -27,12 +27,13 @@ public class InventoryController {
 
     @Autowired
     private CarService carService;
+
     /**
      * Show inventory string.
-     * @author Otto, Hasan, Magne, Anders
      *
      * @param model the model
      * @return the string
+     * @author Otto, Hasan, Magne, Anders
      */
     @GetMapping("/admin_inventory")
     public String showAdminInventory(Model model) {
@@ -45,6 +46,13 @@ public class InventoryController {
         return "home/admin/admin_inventory";
     }
 
+    /**
+     * Show lease registration inventory string.
+     *
+     * @param model the model
+     * @return the string
+     * @author Hasan
+     */
     @GetMapping("/lease_registration_inventory")
     public String showLeaseRegistrationInventory(Model model) {
     // TODO Flyt logik til service
@@ -56,6 +64,13 @@ public class InventoryController {
         return "home/lease_registration/lease_registration_inventory";
     }
 
+    /**
+     * Show damage management inventory string.
+     *
+     * @param model the model
+     * @return the string
+     * @author Anders
+     */
     @GetMapping("/damage_management_inventory")
     public String showDamageManagementInventory(Model model){
         List<Car> damagedCars = inventoryService.getDamagedCars();
@@ -66,12 +81,12 @@ public class InventoryController {
 
     /**
      * Sort cars string.
-     * @author Hasan
      *
      * @param sortType           the sort type
      * @param filterBy           the filter by
      * @param redirectAttributes the redirect attributes
      * @return the string
+     * @author Hasan
      */
     @GetMapping("/sort_and_filter_cars")
     public String sortCars(@RequestParam(required = false) String sortType, @RequestParam(required = false) String filterBy, RedirectAttributes redirectAttributes) {
@@ -84,11 +99,11 @@ public class InventoryController {
 
     /**
      * Show inventory sorted string.
-     * @author Hasan
      *
      * @param cars  the cars
      * @param model the model
      * @return the string
+     * @author Hasan
      */
     @GetMapping("/show_inventory_sorted")
     public String showInventorySorted(@ModelAttribute("cars") List<Car> cars, Model model) {
@@ -98,10 +113,10 @@ public class InventoryController {
 
     /**
      * Show rented cars string.
-     * @author Magne, Hasan, Anders
      *
      * @param model the model
      * @return the string
+     * @author Magne, Hasan, Anders
      */
     @GetMapping("/rented_cars")
     public String showRentedCars(Model model) {
@@ -116,10 +131,10 @@ public class InventoryController {
 
     /**
      * Show returned cars string.
-     * @author: Hasan
      *
      * @param model the model
      * @return the string
+     * @author: Hasan
      */
     @GetMapping("/returned_cars")
     public String showReturnedCars(Model model) {

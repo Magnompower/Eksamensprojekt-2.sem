@@ -107,7 +107,7 @@ public class PurchaseController {
      * Handle missing params string.
      * @author Otto, Hasan
      *
-     * @param ex the ex
+     * @param ex the exception
      * @return the string
      */
 // Her sikre vi at brugeren ikke møder et white label error page, hvis de ikke har valgt nogle biler.

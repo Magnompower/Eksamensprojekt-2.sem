@@ -1,4 +1,4 @@
-/*  @Author: Magne */
+/*  @Author: Hasan */
 
 body {
     font-family: Arial, sans-serif;
@@ -18,8 +18,8 @@ main {
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
     gap: 10px;
     position: relative;
-    flex-wrap: wrap; /* Wrap items to next line if needed */
-    justify-content: space-between; /* Distribute items evenly */
+    flex-wrap: wrap;
+    justify-content: space-between;
     width: 100%;
     padding: 20px;
 }
@@ -30,7 +30,7 @@ main {
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 10px;
-    flex-basis: calc(33.33% - 20px); /* 3 boxes per row with 20px gap */
+    flex-basis: calc(33.33% - 20px);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     justify-content: space-between;
 

@@ -88,6 +88,14 @@ public class ConditionReportController {
         return "home/damage_management/car_returned";
     }
 
+    /**
+     * Display condition report string.
+     *
+     * @param model   the model
+     * @param leaseId the lease id
+     * @return the string
+     * @author Hasan
+     */
     @GetMapping ("/display_condition_report")
     public String displayConditionReport(Model model, @RequestParam int leaseId){
         ConditionReport conditionReport = conditionReportService.getConditionReport(leaseId);

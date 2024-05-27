@@ -24,9 +24,9 @@ public class CustomerRepository {
 
     /**
      * Gets all customers.
-     * @author Hasan, Otto
      *
      * @return the all customers
+     * @author Hasan, Otto
      */
     public List<Customer> getAllCustomers () {
         String query = "SELECT * FROM customers";
@@ -36,9 +36,9 @@ public class CustomerRepository {
 
     /**
      * Delete customer.
-     * @author Otto
      *
      * @param customerId the customer id
+     * @author Otto
      */
     public void deleteCustomer(int customerId) {
         String query = "DELETE FROM customers WHERE customer_id = ?";
@@ -47,9 +47,9 @@ public class CustomerRepository {
 
     /**
      * Anonymize customer data.
-     * @author Hasan
      *
      * @param customerId the customer id
+     * @author Hasan
      */
     public void anonymizeCustomerData(int customerId) {
         String query = "UPDATE customers SET " +
@@ -64,9 +64,9 @@ public class CustomerRepository {
 
     /**
      * Gets non-anonymous customers.
-     * @author Hasan
      *
      * @return the non-anonymous customers
+     * @author Hasan
      */
     public List<Customer> getNonAnonymousCustomers() {
         String query = "SELECT * FROM customers where first_name <> 'Anonymous'";
@@ -75,9 +75,9 @@ public class CustomerRepository {
 
     /**
      * Find customers for anonymization list.
-     * @author Magne
      *
      * @return the list
+     * @author Magne
      */
     public List<Integer> findCustomersForAnonymization() {
         String query = "SELECT l.customer_id " +
@@ -86,11 +86,24 @@ public class CustomerRepository {
         return jdbcTemplate.query(query, (rs, rowNum) -> rs.getInt("customer_id"));
     }
 
+    /**
+     * Gets customer by id.
+     *
+     * @param customerId the customer id
+     * @return the customer by id
+     * @author Anders
+     */
     public Customer getCustomerById(int customerId) {
         String query = "SELECT * FROM customers WHERE customer_id = ?";
         return jdbcTemplate.queryForObject(query, new Object[]{customerId}, BeanPropertyRowMapper.newInstance(Customer.class));
     }
 
+    /**
+     * Update customer.
+     *
+     * @param customer the customer
+     * @author Anders
+     */
     public void updateCustomer(Customer customer) {
         String query = "UPDATE customers SET first_name = ?, last_name = ?, phone_number = ?, email = ?, address = ? WHERE customer_id = ?";
         jdbcTemplate.update(query, customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber(), customer.getEmail(), customer.getAddress(), customer.getCustomerId());

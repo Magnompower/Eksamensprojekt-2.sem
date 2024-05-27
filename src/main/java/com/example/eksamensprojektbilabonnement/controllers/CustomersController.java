@@ -25,10 +25,10 @@ public class CustomersController {
 
     /**
      * Show customers string.
-     * @author Otto
      *
      * @param model the model
      * @return the string
+     * @author Otto
      */
     @GetMapping ("/customers")
     public String showCustomers(Model model) {
@@ -38,11 +38,11 @@ public class CustomersController {
 
     /**
      * Delete customer string.
-     * @author Otto, Hasan
      *
      * @param customerId the customer id
      * @param model      the model
      * @return the string
+     * @author Otto, Hasan
      */
     @PostMapping ("/delete_customer")
     public String deleteCustomer(@RequestParam  int customerId, Model model) {
@@ -52,6 +52,14 @@ public class CustomersController {
         return "home/lease_registration/customers";
     }
 
+    /**
+     * Show edit customer form string.
+     *
+     * @param customerId the customer id
+     * @param model      the model
+     * @return the string
+     * @author Magne
+     */
     @GetMapping("/edit_customer")
     public String showEditCustomerForm(@RequestParam int customerId, Model model) {
         Customer customer = customerService.getCustomerById(customerId);
@@ -59,6 +67,13 @@ public class CustomersController {
         return "home/edit_customer";
     }
 
+    /**
+     * Edit customer submit string.
+     *
+     * @param customer the customer
+     * @return the string
+     * @author Magne
+     */
     @PostMapping("/edit_customer")
     public String editCustomerSubmit(@ModelAttribute Customer customer) {
         customerService.updateCustomer(customer);
