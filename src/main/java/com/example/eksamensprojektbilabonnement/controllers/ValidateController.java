@@ -10,10 +10,23 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ValidateController {
+
+    /**
+     * The Employee service.
+     */
     @Autowired
     EmployeeService employeeService;
 
 
+    /**
+     * Validate string.
+     * @author Hasan, Magne, Otto, Anders
+     *
+     * @param model    the model
+     * @param email    the email
+     * @param password the password
+     * @return the string
+     */
     @PostMapping("/validate")
     public String validate(Model model, @RequestParam String email, @RequestParam String password) {
         Employee employee = employeeService.getEmployee(email);

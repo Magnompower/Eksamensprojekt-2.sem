@@ -15,6 +15,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
+
+/**
+ * The Inventory controller.
+ */
 @Controller
 public class InventoryController {
 
@@ -24,6 +28,13 @@ public class InventoryController {
     @Autowired
     private CarService carService;
 
+    /**
+     * Show inventory string.
+     *
+     * @param model the model
+     * @return the string
+     * @author Otto, Hasan, Magne, Anders
+     */
     @GetMapping("/admin_inventory")
     public String showAdminInventory(Model model) {
         // TODO Flyt logik til service
@@ -35,6 +46,13 @@ public class InventoryController {
         return "home/admin/admin_inventory";
     }
 
+    /**
+     * Show lease registration inventory string.
+     *
+     * @param model the model
+     * @return the string
+     * @author Hasan
+     */
     @GetMapping("/lease_registration_inventory")
     public String showLeaseRegistrationInventory(Model model) {
     // TODO Flyt logik til service
@@ -46,6 +64,13 @@ public class InventoryController {
         return "home/lease_registration/lease_registration_inventory";
     }
 
+    /**
+     * Show damage management inventory string.
+     *
+     * @param model the model
+     * @return the string
+     * @author Anders
+     */
     @GetMapping("/damage_management_inventory")
     public String showDamageManagementInventory(Model model){
         List<Car> damagedCars = inventoryService.getDamagedCars();
@@ -54,6 +79,15 @@ public class InventoryController {
     }
 
 
+    /**
+     * Sort cars string.
+     *
+     * @param sortType           the sort type
+     * @param filterBy           the filter by
+     * @param redirectAttributes the redirect attributes
+     * @return the string
+     * @author Hasan
+     */
     @GetMapping("/sort_and_filter_cars")
     public String sortCars(@RequestParam(required = false) String sortType, @RequestParam(required = false) String filterBy, RedirectAttributes redirectAttributes) {
         //Returns a list of sorted and/or filtered cars, based on provided strings:
@@ -63,12 +97,27 @@ public class InventoryController {
         return "redirect:/show_inventory_sorted";
     }
 
+    /**
+     * Show inventory sorted string.
+     *
+     * @param cars  the cars
+     * @param model the model
+     * @return the string
+     * @author Hasan
+     */
     @GetMapping("/show_inventory_sorted")
     public String showInventorySorted(@ModelAttribute("cars") List<Car> cars, Model model) {
         model.addAttribute("cars", cars);
         return "home/lease_registration/lease_registration_inventory";
     }
 
+    /**
+     * Show rented cars string.
+     *
+     * @param model the model
+     * @return the string
+     * @author Magne, Hasan, Anders
+     */
     @GetMapping("/rented_cars")
     public String showRentedCars(Model model) {
         List<Car> rentedCars = inventoryService.getFilteredCars("RENTED");
@@ -80,6 +129,13 @@ public class InventoryController {
     }
 
 
+    /**
+     * Show returned cars string.
+     *
+     * @param model the model
+     * @return the string
+     * @author: Hasan
+     */
     @GetMapping("/returned_cars")
     public String showReturnedCars(Model model) {
         List<Car> returnedCars = inventoryService.getFilteredCars("RETURNED");

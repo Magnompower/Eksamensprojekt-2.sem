@@ -11,21 +11,51 @@ import org.springframework.ui.Model;
 import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.List;
 
+
+/**
+ * The Customer service.
+ */
 @Service
 public class CustomerService {
+
+    /**
+     * The Customer repository.
+     */
     @Autowired
-    CustomerRepository customerRepository;
+    private CustomerRepository customerRepository;
 
     @Autowired
-    LeaseRepository leaseRepository;
+    private LeaseRepository leaseRepository;
 
+
+    /**
+     * Gets all customers.
+     *
+     * @return the all customers
+     * @author Otto
+     */
     public List<Customer> getAllCustomers() {
         return customerRepository.getAllCustomers();
     }
 
+
+    /**
+     * Gets non-anonymous customers.
+     * @author Hasan & Magne
+     *
+     * @return the non-anonymous customers
+     */
+
     public List<Customer> getNonAnonymousCustomers() {
         return customerRepository.getNonAnonymousCustomers();
     }
+    /**
+     * Delete customer string.
+     * @author Otto & Hasan
+     *
+     * @param customerId the customer id
+     * @return the string
+     */
 
     public String deleteCustomer(int customerId) {
         //Checks if there are any non concluded leases for the customer:
@@ -36,19 +66,34 @@ public class CustomerService {
         if (nonConcludedLeases.isEmpty()) {
             try {
                 customerRepository.deleteCustomer(customerId);
+                return "Customer and all its data have been deleted.";
             } catch (Exception e) {
                 if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
                     customerRepository.anonymizeCustomerData(customerId);
                     return "This customer has stored leases, and cannot be deleted. Customer data has been anonymized";
+                } else {
+                    throw new RuntimeException("An unexpected error occurred while deleting the customer", e);
                 }
             }
-            return "Customer and all its data have been deleted.";
         } else {
             return "Customer has non concluded leases, and cannot be deleted";
         }
     }
 
-    public List<Integer> findCustomersForAnonymization(){
+    /**
+     * Find customers for anonymization list.
+     *
+     * @return the list
+     */
+    public List<Integer> findCustomersForAnonymization() {
         return customerRepository.findCustomersForAnonymization();
+    }
+
+    public Customer getCustomerById(int customerId) {
+        return customerRepository.getCustomerById(customerId);
+    }
+
+    public void updateCustomer(Customer customer) {
+        customerRepository.updateCustomer(customer);
     }
 }

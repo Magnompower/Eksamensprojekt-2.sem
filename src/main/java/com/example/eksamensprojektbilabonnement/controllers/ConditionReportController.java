@@ -3,6 +3,7 @@ package com.example.eksamensprojektbilabonnement.controllers;
 import com.example.eksamensprojektbilabonnement.models.ConditionReport;
 import com.example.eksamensprojektbilabonnement.models.Damage;
 import com.example.eksamensprojektbilabonnement.models.LeaseAgreement;
+import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
 import com.example.eksamensprojektbilabonnement.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,8 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.rmi.dgc.Lease;
 import java.util.List;
 
+
+/**
+ * The  Condition report controller.
+ */
 @Controller
 public class ConditionReportController {
 
@@ -30,7 +36,15 @@ public class ConditionReportController {
     private ConditionReportService conditionReportService;
 
 
-    @PostMapping("/car_returned")//skal omdøbes
+    /**
+     * Car returned string.
+     * author Otto
+     *
+     * @param chassisNumber      the chassis number
+     * @param redirectAttributes the redirect attributes
+     * @return the string
+     */
+    @PostMapping("/car_returned")
     public String carReturned(@RequestParam String chassisNumber, RedirectAttributes redirectAttributes) {
         //Create the initial condition report with known data:
         int leaseId = leaseService.getActiveLease(chassisNumber).getLeaseId();
@@ -41,6 +55,14 @@ public class ConditionReportController {
     }
 
 
+    /**
+     * Add damages to report string.
+     * author Hasan
+     *
+     * @param model   the model
+     * @param leaseId the lease id
+     * @return the string
+     */
     @GetMapping("/add_damages_to_report")
     public String addDamagesToReport(Model model, @RequestParam int leaseId){
         //Get the lease and add it to the model:
@@ -66,6 +88,14 @@ public class ConditionReportController {
         return "home/damage_management/car_returned";
     }
 
+    /**
+     * Display condition report string.
+     *
+     * @param model   the model
+     * @param leaseId the lease id
+     * @return the string
+     * @author Hasan
+     */
     @GetMapping ("/display_condition_report")
     public String displayConditionReport(Model model, @RequestParam int leaseId){
         ConditionReport conditionReport = conditionReportService.getConditionReport(leaseId);

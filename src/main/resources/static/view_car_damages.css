@@ -1,16 +1,18 @@
+/* @Author: Hasan & Magne */
+
 .damage-list {
     list-style-type: none;
     padding: 0;
 }
 
 .damage-item {
-    margin-bottom: 5px; /* Reduce margin */
-    padding: 8px; /* Add padding */
+    margin-bottom: 5px;
+    padding: 8px;
 }
 
 .text-container {
     font-weight: bold;
-    margin-bottom: 5px; /* Reduce margin */
+    margin-bottom: 5px;
 }
 
 .bottom-right-button {
@@ -51,16 +53,16 @@ h2 {
 
 
 form.delete-damage-form button.delete-button {
-    background-color: #e74c3c; /* Red background for delete button */
-    color: white; /* White text */
-    padding: 8px 12px; /* Adjust padding */
-    border: none; /* No border */
-    border-radius: 4px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
+    background-color: #e74c3c;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
 }
 
 form.delete-damage-form button.delete-button:hover {
-    background-color: #c0392b; /* Darker red on hover */
+    background-color: #c0392b;
 }
 
 /* Target buttons within forms specifically */
@@ -88,12 +90,10 @@ select {
     box-sizing: border-box;
 }
 
-/* Adjust margin-bottom for input groups */
 .input-group {
     margin-bottom: 10px;
 }
 
-/* Adjust margin-bottom for labels */
 label {
     display: block;
     margin-bottom: 5px;
