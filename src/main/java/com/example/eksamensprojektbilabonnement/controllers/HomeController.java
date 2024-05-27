@@ -20,11 +20,6 @@ public class HomeController {
      */
     @GetMapping("/")
     public String index(Model model) {
-//        TODO Indsæt check for employeeType
-//        employeeType = determineEmployeeType();
-//        switch (employeeType) {
-//            case "admin" -> model.addAttribute("admin", employeeType);
-//            case "damageGuy" -> model.addAttribute("damageGuy", employeetype);}
             return "home/index";
         }
 }

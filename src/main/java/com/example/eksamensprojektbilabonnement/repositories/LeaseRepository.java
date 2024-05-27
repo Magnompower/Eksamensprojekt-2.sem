@@ -95,4 +95,9 @@ public class LeaseRepository {
         String query = "SELECT * FROM lease_agreements WHERE chassis_number = ? AND is_concluded = FALSE";
         return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(LeaseAgreement.class), chassisNumber);
     }
+
+    public List<LeaseAgreement> getNonConcludedLeases(int customerId) {
+        String query = "SELECT * FROM lease_agreements WHERE customer_id = ? AND is_concluded = FALSE";
+        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(LeaseAgreement.class), customerId);
+    }
 }

@@ -1,11 +1,9 @@
 package com.example.eksamensprojektbilabonnement.controllers;
 
 import com.example.eksamensprojektbilabonnement.services.CarService;
-import com.example.eksamensprojektbilabonnement.services.CustomerService;
 import com.example.eksamensprojektbilabonnement.services.DamageService;
 import com.example.eksamensprojektbilabonnement.services.LeaseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,7 +40,7 @@ public class LeaseController {
     public  String leaseOverview(Model model) {
         model.addAttribute("leases", leaseService.getLeases());
         model.addAttribute("localDateTime", LocalDate.now());
-        return "home/lease_overview";
+        return "home/lease_registration/lease_overview";
     }
 
     /**
@@ -95,7 +93,7 @@ public class LeaseController {
      * @return the string
      */
     @PostMapping ("/conclude_lease")
-    public String concludeLease(@RequestParam int leaseId, @RequestParam String chassisNumber){
+    public String concludeLease(@RequestParam int leaseId, @RequestParam String chassisNumber, RedirectAttributes redirectAttributes){
         //Set lease to concluded:
         leaseService.concludeLease(leaseId);
 
@@ -107,8 +105,13 @@ public class LeaseController {
         damageService.setDamagesToInvoiced(leaseId, chassisNumber);
 
         //isActive should be set to false. Also think about that functionality here should be triggers instead
-        return "redirect:/returned_cars";
+
+        redirectAttributes.addAttribute(leaseId);
+        return "redirect:/display_condition_report";
     }
+
+
+
 
 
 }

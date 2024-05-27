@@ -36,6 +36,7 @@ public class ConditionReportController {
     private ConditionReportService conditionReportService;
 
 
+
     /**
      * Car returned string.
      * author Otto
@@ -85,6 +86,13 @@ public class ConditionReportController {
         double kmDriven = carService.getCarByChassisNumber(conditionReport.getChassisNumber()).getKmDriven();
         model.addAttribute("kmDriven", kmDriven);
 
-        return "home/car_returned";
+        return "home/damage_management/car_returned";
+    }
+
+    @GetMapping ("/display_condition_report")
+    public String displayConditionReport(Model model, @RequestParam int leaseId){
+        ConditionReport conditionReport = conditionReportService.getConditionReport(leaseId);
+        model.addAttribute(conditionReport);
+        return "home/damage_management/display_condition_report";
     }
 }

@@ -27,7 +27,6 @@ public class InventoryController {
 
     @Autowired
     private CarService carService;
-
     /**
      * Show inventory string.
      * @author Otto, Hasan, Magne, Anders
@@ -35,15 +34,33 @@ public class InventoryController {
      * @param model the model
      * @return the string
      */
-    @GetMapping("/inventory")
-    public String showInventory(Model model) {
+    @GetMapping("/admin_inventory")
+    public String showAdminInventory(Model model) {
+        // TODO Flyt logik til service
+        List<Car> cars = inventoryService.getAllCars();
+        for (Car car : cars){
+            car.setCarType(carService.getCarTypeByChassisNumber(car.getChassisNumber()));
+        }
+        model.addAttribute("cars", cars);
+        return "home/admin/admin_inventory";
+    }
+
+    @GetMapping("/lease_registration_inventory")
+    public String showLeaseRegistrationInventory(Model model) {
     // TODO Flyt logik til service
         List<Car> cars = inventoryService.getAllCars();
         for (Car car : cars){
             car.setCarType(carService.getCarTypeByChassisNumber(car.getChassisNumber()));
         }
         model.addAttribute("cars", cars);
-        return "home/inventory";
+        return "home/lease_registration/lease_registration_inventory";
+    }
+
+    @GetMapping("/damage_management_inventory")
+    public String showDamageManagementInventory(Model model){
+        List<Car> damagedCars = inventoryService.getDamagedCars();
+        model.addAttribute("damagedCars", damagedCars);
+        return "home/damage_management/damage_management_inventory";
     }
 
 
@@ -57,7 +74,7 @@ public class InventoryController {
      * @return the string
      */
     @GetMapping("/sort_and_filter_cars")
-    public String SortCars(@RequestParam(required = false) String sortType, @RequestParam(required = false) String filterBy, RedirectAttributes redirectAttributes) {
+    public String sortCars(@RequestParam(required = false) String sortType, @RequestParam(required = false) String filterBy, RedirectAttributes redirectAttributes) {
         //Returns a list of sorted and/or filtered cars, based on provided strings:
         List<Car> cars = inventoryService.checkSortAndFilterCriteria(sortType, filterBy);
         //Adds the sorted and/or filtered cars to a flashAttribute, and redirects:
@@ -76,7 +93,7 @@ public class InventoryController {
     @GetMapping("/show_inventory_sorted")
     public String showInventorySorted(@ModelAttribute("cars") List<Car> cars, Model model) {
         model.addAttribute("cars", cars);
-        return "home/inventory";
+        return "home/lease_registration/lease_registration_inventory";
     }
 
     /**
@@ -93,7 +110,7 @@ public class InventoryController {
         double totalPrice = rentedCars.stream().mapToDouble(Car::getPrice).sum();
         model.addAttribute("rentedCars", rentedCars);
         model.addAttribute("totalPrice", totalPrice);
-        return "home/rented_cars";
+        return "home/business_developer/rented_cars";
     }
 
 
@@ -108,6 +125,6 @@ public class InventoryController {
     public String showReturnedCars(Model model) {
         List<Car> returnedCars = inventoryService.getFilteredCars("RETURNED");
         model.addAttribute("returnedCars", returnedCars);
-        return "home/returned_cars";
+        return "home/damage_management/returned_cars";
     }
 }

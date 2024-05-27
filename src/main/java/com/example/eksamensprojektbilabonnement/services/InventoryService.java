@@ -49,6 +49,7 @@ public class InventoryService {
      * @return the list
      */
     public List<Car> getFilteredCars(String filterBy){
+        //Returns a list of filtered cars
         if (filterBy.equals("ALL")) {
             return inventoryRepository.getAllCars();
         } else {
@@ -65,6 +66,7 @@ public class InventoryService {
      * @return the list
      */
     public List<Car> setSortCriteria(String sortType, String filterBy){
+        //Sets the sort criteria for the list of cars to be returned:
         String sortByColumn = null;
         String sortDirection = null;
 
@@ -127,6 +129,10 @@ public class InventoryService {
         } else {
             return setSortCriteria(sortType, filterBy);
         }
+    }
+
+    public List<Car> getDamagedCars() {
+        return inventoryRepository.getDamagedCars();
     }
 }
 

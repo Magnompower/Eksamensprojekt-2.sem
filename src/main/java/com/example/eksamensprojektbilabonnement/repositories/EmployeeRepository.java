@@ -1,7 +1,10 @@
 package com.example.eksamensprojektbilabonnement.repositories;
 
+import com.example.eksamensprojektbilabonnement.models.Employee;
+import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -33,5 +36,10 @@ public class EmployeeRepository {
         } catch (EmptyResultDataAccessException e) {
             return "UserNotFound";
         }
+    }
+
+    public Employee getEmployee(String email) {
+        String query = "SELECT * from employees where email = ?";
+        return jdbcTemplate.queryForObject(query, BeanPropertyRowMapper.newInstance(Employee.class), email);
     }
 }

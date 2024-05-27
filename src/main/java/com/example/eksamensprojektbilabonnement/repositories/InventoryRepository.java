@@ -75,6 +75,12 @@ public class InventoryRepository {
         return jdbcTemplate.query(query, new Object[]{filterBy},BeanPropertyRowMapper.newInstance(Car.class));
         }
 
+
+    public List<Car> getDamagedCars() {
+        String query = "SELECT * FROM all_cars_view WHERE chassis_number IN (SELECT chassis_number FROM damages)" +
+                " OR car_state = 'DAMAGED'";
+        return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Car.class));
+    }
 }
 
 

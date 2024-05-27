@@ -22,6 +22,8 @@ public class CustomerService {
     @Autowired
     CustomerRepository customerRepository;
 
+    @Autowired
+    LeaseRepository leaseRepository;
     /**
      * Gets all customers.
      * @author Otto
@@ -32,6 +34,9 @@ public class CustomerService {
         return customerRepository.getAllCustomers();
     }
 
+    public List<Customer> getNonAnonymousCustomers() {
+        return customerRepository.getNonAnonymousCustomers();
+    }
     /**
      * Delete customer string.
      * @author Otto & Hasan
@@ -41,24 +46,24 @@ public class CustomerService {
      * @throws SQLIntegrityConstraintViolationException the sql integrity constraint violation exception
      */
     public String deleteCustomer(int customerId) {
-        try {
-            customerRepository.deleteCustomer(customerId);
-        } catch (Exception e) {
-            if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
-                customerRepository.anonymizeCustomerData(customerId);
-                return "This customer has active leases, and cannot be deleted. Customer data has been anonymized";
-            }
-        } return "Customer and all its data have been deleted.";
-    }
+        //Checks if there are any non concluded leases for the customer:
+        List<LeaseAgreement> nonConcludedLeases = leaseRepository.getNonConcludedLeases(customerId);
 
-    /**
-     * Gets non-anonymous customers.
-     * @author Hasan & Magne
-     *
-     * @return the non-anonymous customers
-     */
-    public List<Customer> getNonAnonymousCustomers() {
-        return customerRepository.getNonAnonymousCustomers();
+        //Tries to delete the customer from the database, if there are no non concluded leases.
+        // If there are foreign key constraints, the data is anonymized instead
+        if (nonConcludedLeases.isEmpty()) {
+            try {
+                customerRepository.deleteCustomer(customerId);
+            } catch (Exception e) {
+                if (e.getCause() instanceof SQLIntegrityConstraintViolationException) {
+                    customerRepository.anonymizeCustomerData(customerId);
+                    return "This customer has stored leases, and cannot be deleted. Customer data has been anonymized";
+                }
+            }
+            return "Customer and all its data have been deleted.";
+        } else {
+            return "Customer has non concluded leases, and cannot be deleted";
+        }
     }
 
     /**

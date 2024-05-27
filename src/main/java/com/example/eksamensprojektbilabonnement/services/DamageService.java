@@ -20,7 +20,6 @@ public class DamageService {
      */
     @Autowired
     DamageRepository damageRepository;
-
     /**
      * Add damage to table.
      * @author Hasan
@@ -30,8 +29,8 @@ public class DamageService {
      * @param damagePrice   the damage price
      * @param leaseId       the lease id
      */
-    public void addDamageToTable(String chassisNumber, String damageName, double damagePrice, int leaseId){
-        damageRepository.addDamageToTable(chassisNumber, damageName, damagePrice, leaseId);
+    public void addNonInvoicedDamage(String chassisNumber, String damageName, double damagePrice, int leaseId){
+        damageRepository.addNonInvoicedDamage(chassisNumber, damageName, damagePrice, leaseId);
     }
 
     /**
@@ -77,5 +76,13 @@ public class DamageService {
      */
     public void setDamagesToInvoiced(int leaseId, String chassisNumber) {
         damageRepository.setDamagesToInvoiced(leaseId, chassisNumber);
+    }
+
+    public void addDamage(String chassisNumber, String damageName, double damagePrice) {
+        damageRepository.addDamage(chassisNumber, damageName, damagePrice);
+    }
+
+    public void deleteDamage(int damageId) {
+        damageRepository.deleteDamage(damageId);
     }
 }
