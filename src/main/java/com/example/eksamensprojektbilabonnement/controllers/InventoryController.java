@@ -57,6 +57,7 @@ public class InventoryController {
     public String showLeaseRegistrationInventory(Model model) {
     // TODO Flyt logik til service
         List<Car> cars = inventoryService.getAllCars();
+        //Adds car type for every car on the list
         for (Car car : cars){
             car.setCarType(carService.getCarTypeByChassisNumber(car.getChassisNumber()));
         }
@@ -74,6 +75,10 @@ public class InventoryController {
     @GetMapping("/damage_management_inventory")
     public String showDamageManagementInventory(Model model){
         List<Car> damagedCars = inventoryService.getDamagedCars();
+        //Adds car type for every car on the list
+        for (Car car : damagedCars){
+            car.setCarType(carService.getCarTypeByChassisNumber(car.getChassisNumber()));
+        }
         model.addAttribute("damagedCars", damagedCars);
         return "home/damage_management/damage_management_inventory";
     }
@@ -92,6 +97,10 @@ public class InventoryController {
     public String sortCars(@RequestParam(required = false) String sortType, @RequestParam(required = false) String filterBy, RedirectAttributes redirectAttributes) {
         //Returns a list of sorted and/or filtered cars, based on provided strings:
         List<Car> cars = inventoryService.checkSortAndFilterCriteria(sortType, filterBy);
+        //Adds car type for every car on the list
+        for (Car car : cars){
+            car.setCarType(carService.getCarTypeByChassisNumber(car.getChassisNumber()));
+        }
         //Adds the sorted and/or filtered cars to a flashAttribute, and redirects:
         redirectAttributes.addFlashAttribute("cars", cars);
         return "redirect:/show_inventory_sorted";
