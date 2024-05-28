@@ -60,6 +60,8 @@
         <option value="RETURNED">Returned</option>
         <option value="AVAILABLE">Available</option>
     </select>
+    <input type="hidden" name="chassisNumber" th:value="${car.chassisNumber}">
+    <input type="hidden" name="employeeType" th:value="leaseRegistration">
     <button type="submit">Update</button>
 </form>
 

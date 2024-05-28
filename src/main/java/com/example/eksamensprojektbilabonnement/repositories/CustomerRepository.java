@@ -72,7 +72,10 @@ public class CustomerRepository {
      * @author Hasan
      */
     public List<Customer> getNonAnonymousCustomers() {
-        String query = "SELECT * FROM customers where first_name <> 'Anonymous'";
+        String query = "SELECT c.*, z.city " +
+                "FROM customers c " +
+                "JOIN zip_codes z ON c.zip_code = z.zip_code " +
+                "WHERE c.first_name <> 'Anonymous'";
         return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(Customer.class));
     }
 
