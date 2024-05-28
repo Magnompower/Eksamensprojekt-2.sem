@@ -61,7 +61,8 @@ public class CarService {
      * @param image_url           the image url
      */
     public void createCar(String chassisNumber, String carModel, String brand, double price, double registrationFee, double kmPerLiter, double carbonEmissionPerKm, String licensePlate, CarState carState, TransmissionType transmissionType, FuelType fuelType, String image_url) {
-        carRepository.createCar(chassisNumber, carModel, brand, price, registrationFee, kmPerLiter, carbonEmissionPerKm, licensePlate, carState, transmissionType, fuelType, image_url);
+        carRepository.getModelId(carModel);
+        carRepository.createCar(chassisNumber, price, registrationFee, kmPerLiter, carbonEmissionPerKm, licensePlate, carState, transmissionType, fuelType, image_url, 1, carRepository.getModelId(carModel) );
     }
 
     /**

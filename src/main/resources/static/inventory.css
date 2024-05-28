@@ -8,15 +8,18 @@
     font-weight: bold;
     border-radius: 10px;
     position: relative;
+    max-width: 450px;
 }
 .image-container {
     position: relative;
-    width: 250px;
-    height: 150px;
+    width: 350px;
+    height: 200px;
+    padding-left: 50px;
+
 }
 
 .image {
-    object-fit: cover;
+    object-fit: fill;
 
 }
 
@@ -24,7 +27,7 @@
     position: relative;
     width: 100px;
     margin-left: 300px;
-    top: -150px;
+    top: -200px;
     background-color: #ffffff;
     color: #555555;
     border: 2px solid #555555;
