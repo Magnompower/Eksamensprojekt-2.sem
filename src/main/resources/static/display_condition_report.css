@@ -1,0 +1,62 @@
+/* @Author Anders */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+
+.box {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+
+.text-container {
+    margin-bottom: 20px;
+}
+
+.text-container h2 {
+    margin: 0;
+    font-size: 1.5em;
+    color: #333;
+}
+
+
+.box span {
+    display: block;
+    margin: 5px 0;
+    font-size: 1.1em;
+    color: #555;
+}
+
+
+.condition-report-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+.condition-report-table td, .condition-report-table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.condition-report-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.condition-report-table tr:hover {
+    background-color: #f1f1f1;
+}
+
+.condition-report-table td:first-child {
+    font-weight: bold;
+    background-color: #f2f2f2;
+}

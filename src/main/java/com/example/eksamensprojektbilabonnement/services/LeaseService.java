@@ -137,4 +137,8 @@ public class LeaseService {
     public List<LeaseAgreement> getNonConcludedLeases(String chassisNumber) {
         return leaseRepository.getNonConcludedLeases(chassisNumber);
     }
+
+    public void setLeaseInactive(int leaseId) {
+        leaseRepository.setLeaseInactive(leaseId);
+    }
 }

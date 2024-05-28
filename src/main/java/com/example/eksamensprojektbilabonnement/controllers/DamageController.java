@@ -3,6 +3,7 @@ package com.example.eksamensprojektbilabonnement.controllers;
 import com.example.eksamensprojektbilabonnement.models.Damage;
 import com.example.eksamensprojektbilabonnement.models.inheritance.Car;
 import com.example.eksamensprojektbilabonnement.services.CarService;
+import com.example.eksamensprojektbilabonnement.services.ConditionReportService;
 import com.example.eksamensprojektbilabonnement.services.DamageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,11 @@ import java.util.List;
 @Controller
 public class DamageController {
 
-
+    /**
+     * The Conditionreport service
+     */
+    @Autowired
+    ConditionReportService conditionReportService;
     /**
      * The Damage service.
      */
@@ -55,6 +60,8 @@ public class DamageController {
                             RedirectAttributes redirectAttributes){
         damageService.addNonInvoicedDamage(chassisNumber, damageName, damagePrice, leaseId);
         redirectAttributes.addAttribute("leaseId", leaseId);
+        //Add the damage_price to the totalcost of the condition report
+        conditionReportService.addPriceToTotalCost(damagePrice, leaseId);
         return "redirect:/add_damages_to_report";
     }
 

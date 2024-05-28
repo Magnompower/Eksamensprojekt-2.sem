@@ -56,7 +56,7 @@ public class LeaseRepository {
      * @author Magne
      */
     public LeaseAgreement getActiveLease(String chassisNumber) {
-        String query = "SELECT * FROM lease_agreements WHERE chassis_number = ? AND is_concluded = 'FALSE'";
+        String query = "SELECT * FROM lease_agreements WHERE chassis_number = ? AND is_active = 1";
         return jdbcTemplate.queryForObject(query, BeanPropertyRowMapper.newInstance(LeaseAgreement.class), chassisNumber);
     }
 
@@ -105,5 +105,10 @@ public class LeaseRepository {
     public List<LeaseAgreement> getNonConcludedLeases(int customerId) {
         String query = "SELECT * FROM lease_agreements WHERE customer_id = ? AND is_concluded = FALSE";
         return jdbcTemplate.query(query, BeanPropertyRowMapper.newInstance(LeaseAgreement.class), customerId);
+    }
+
+    public void setLeaseInactive(int leaseId) {
+        String query = "UPDATE lease_agreements SET is_active = 0 WHERE lease_id = ?";
+        jdbcTemplate.update(query, leaseId);
     }
 }

@@ -52,4 +52,9 @@ public class ConditionReportService {
     public void setKmDrivenAfterLease(int leaseId, double kmDriven) {
         conditionReportRepository.setKmDrivenAfterLease(leaseId, kmDriven);
     }
+
+
+    public void addPriceToTotalCost(double damageprice, int leaseId) {
+        conditionReportRepository.addPriceToTotalCost(damageprice, leaseId);
+    }
 }

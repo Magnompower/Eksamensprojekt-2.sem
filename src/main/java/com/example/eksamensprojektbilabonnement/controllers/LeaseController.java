@@ -100,9 +100,10 @@ public class LeaseController {
         //Set the damages to invoiced:
         damageService.setDamagesToInvoiced(leaseId, chassisNumber);
 
-        //isActive should be set to false. Also think about that functionality here should be triggers instead
+        //isActive should be set to false:
+        leaseService.setLeaseInactive(leaseId);
 
-        redirectAttributes.addAttribute(leaseId);
+        redirectAttributes.addAttribute("leaseId", leaseId);
         return "redirect:/display_condition_report";
     }
 
