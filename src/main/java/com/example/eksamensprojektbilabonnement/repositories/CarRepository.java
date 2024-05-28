@@ -39,11 +39,18 @@ public class CarRepository {
      * @param fuelType            the fuel type
      * @param image_url           the image url
      */
-    public void createCar(String chassisNumber, String carModel, String brand, double price, double registrationFee, double kmPerLiter, double carbonEmissionPerKm, String licensePlate, CarState carState, TransmissionType transmissionType, FuelType fuelType, String image_url) {
-        String query = "INSERT INTO gas_cars (chassis_number, license_plate_number, brand, model, registration_fee, price, car_state, transmission_type, km_per_liter, fuel_type, carbon_emission_per_km, image_url) " +
+    public void createCar(String chassisNumber, double price, double registrationFee, double kmPerLiter, double carbonEmissionPerKm, String licensePlate, CarState carState, TransmissionType transmissionType, FuelType fuelType, String image_url, int brand_id, int model_id) {
+        String query = "INSERT INTO gas_cars (chassis_number, license_plate_number, registration_fee, price, car_state, transmission_type, km_per_liter, fuel_type, carbon_emission_per_km, image_url, brand_id, model_id) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            jdbcTemplate.update(query, chassisNumber, licensePlate, brand, carModel, registrationFee, price, carState.name(), transmissionType.name(), kmPerLiter, fuelType.name(), carbonEmissionPerKm, image_url);
+            jdbcTemplate.update(query, chassisNumber, licensePlate, registrationFee, price, carState.name(), transmissionType.name(), kmPerLiter, fuelType.name(), carbonEmissionPerKm, image_url,brand_id, model_id );
+
     }
+
+    public int getModelId(String carModel) {
+        String query = "SELECT model_id FROM models WHERE model_name = ?";
+        return jdbcTemplate.queryForObject(query, new Object[]{carModel}, Integer.class);
+    }
+
 
     /**
      * Gets car by chassis number.
@@ -78,7 +85,7 @@ public class CarRepository {
      * @param carTable      the car table
      */
     public void updateCarState(String chassisNumber, String carState, String carTable) {
-        String query = "UPDATE " + carTable + " SET car_state = ? WHERE chassis_number = ?";
+        String query = "UPDATE " + carTable.toLowerCase() + " SET car_state = ? WHERE chassis_number = ?";
         jdbcTemplate.update(query, carState, chassisNumber);
     }
 
@@ -104,9 +111,13 @@ public class CarRepository {
      * @param carState      the car state
      */
     public void changeCarStateInLeasedCars(String chassisNumber, String carState) {
-        String query = "UPDATE " + getCarTable(chassisNumber) + " SET car_state = ? WHERE chassis_number = ?";
+        String query = "UPDATE " + getCarTable(chassisNumber).toLowerCase() + " SET car_state = ? WHERE chassis_number = ?";
         jdbcTemplate.update(query, carState, chassisNumber);
+
     }
+
+
+
 
 
     /**

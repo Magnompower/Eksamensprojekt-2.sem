@@ -22,17 +22,17 @@ public class ScheduledTasks {
     private CustomerService customerService;
 
     @Scheduled(fixedRate = 3600000) // Every hour
-    public void updateLeaseStatusesInDatabase() {
-        try {
-            List<String> upcomingLeases = carService.findCarsWithUpcomingLeases();
-            for (String chassisNumber : upcomingLeases) {
-                carService.changeCarStateInLeasedCars(chassisNumber, "GETTING_PREPARED");
-                logger.info("Updated lease status for chassis: {}", chassisNumber);
+          public void updateLeaseStatusesInDatabase() {
+            try {
+                List<String> upcomingLeases = carService.findCarsWithUpcomingLeases();
+                for (String chassisNumber : upcomingLeases) {
+                    carService.changeCarStateInLeasedCars(chassisNumber, "GETTING_PREPARED");
+                    logger.info("Updated lease status for chassis: {}", chassisNumber);
+                }
+            } catch (Exception e) {
+                logger.error("Failed to update lease statuses: ", e);
             }
-        } catch (Exception e) {
-            logger.error("Failed to update lease statuses: ", e);
         }
-    }
 
     @Scheduled(fixedRate = 43200000) // Every 12 hours
     public void anonymizeCustomerAfterFiveYears() {

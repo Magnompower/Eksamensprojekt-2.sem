@@ -100,7 +100,7 @@ public class PurchaseController {
                         carbonEmissionPerKm, licensePlate, carState, transmissionType,
                         fuelType, imageUrl);
             }
-            return "redirect:/inventory";
+            return "redirect:/rented_cars";
         }
 
     /**
