@@ -83,7 +83,6 @@ public class CarController {
      * @author Hasan
      */
     @PostMapping("/update_km_driven")
-// TODO Flyt logik til service
     public String updateKmDriven(@RequestParam String chassisNumber, @RequestParam double kmDriven, @RequestParam int leaseId,
                                  RedirectAttributes redirectAttributes) {
         String carTable = carService.getCarTable(chassisNumber);

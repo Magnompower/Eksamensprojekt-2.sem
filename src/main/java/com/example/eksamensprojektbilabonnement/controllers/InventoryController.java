@@ -37,7 +37,7 @@ public class InventoryController {
      */
     @GetMapping("/admin_inventory")
     public String showAdminInventory(Model model) {
-        // TODO Flyt logik til service
+        // TODO Flyt logik til service??
         List<Car> cars = inventoryService.getAllCars();
         for (Car car : cars){
             car.setCarType(carService.getCarTypeByChassisNumber(car.getChassisNumber()));
@@ -55,7 +55,7 @@ public class InventoryController {
      */
     @GetMapping("/lease_registration_inventory")
     public String showLeaseRegistrationInventory(Model model) {
-    // TODO Flyt logik til service
+    // TODO Flyt logik til service??
         List<Car> cars = inventoryService.getAllCars();
         for (Car car : cars){
             car.setCarType(carService.getCarTypeByChassisNumber(car.getChassisNumber()));
