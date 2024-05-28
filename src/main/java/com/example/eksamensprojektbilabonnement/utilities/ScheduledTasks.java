@@ -1,6 +1,5 @@
 package com.example.eksamensprojektbilabonnement.utilities;
 
-import com.example.eksamensprojektbilabonnement.repositories.CarRepository;
 import com.example.eksamensprojektbilabonnement.services.CarService;
 import com.example.eksamensprojektbilabonnement.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
