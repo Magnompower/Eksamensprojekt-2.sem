@@ -23,6 +23,8 @@
     <th>Phone</th>
     <th>Email</th>
     <th>Address</th>
+    <th>Zipcode</th>
+    <th>City</th>
     <th>Action</th>
   </tr>
   </thead>
@@ -35,16 +37,19 @@
     <td th:text="${customer.phoneNumber}"></td>
     <td th:text="${customer.email}"></td>
     <td th:text="${customer.address}"></td>
+    <td th:text="${customer.zipCode}"></td>
+    <td th:text="${customer.city}"></td>
     <td>
-
-      <form th:action="@{/delete_customer}" method="post">
-        <input type="hidden" name="customerId" th:value="${customer.customerId}"/>
-        <button type="submit" class="red-button">Delete</button>
-      </form>
-      <form th:action="@{/edit_customer}" method="get">
-        <input type="hidden" name="customerId" th:value="${customer.customerId}" />
-        <button type="submit" class="blue-button">Edit</button>
-      </form>
+      <div class="button-container">
+        <form th:action="@{/edit_customer}" method="get">
+          <input type="hidden" name="customerId" th:value="${customer.customerId}" />
+          <button type="submit" class="blue-button">Edit</button>
+        </form>
+        <form th:action="@{/delete_customer}" method="post">
+          <input type="hidden" name="customerId" th:value="${customer.customerId}"/>
+          <button type="submit" class="red-button">Delete</button>
+        </form>
+      </div>
     </td>
   </tr>
   </tbody>

@@ -32,7 +32,7 @@ public class CustomersController {
      */
     @GetMapping ("/customers")
     public String showCustomers(Model model) {
-       model.addAttribute("customers", customerService.getAllCustomers());
+       model.addAttribute("customers", customerService.getNonAnonymousCustomers());
         return "home/lease_registration/customers";
     }
 
@@ -64,7 +64,7 @@ public class CustomersController {
     public String showEditCustomerForm(@RequestParam int customerId, Model model) {
         Customer customer = customerService.getCustomerById(customerId);
         model.addAttribute("customer", customer);
-        return "home/edit_customer";
+        return "home/lease_registration/edit_customer";
     }
 
     /**
@@ -77,7 +77,7 @@ public class CustomersController {
     @PostMapping("/edit_customer")
     public String editCustomerSubmit(@ModelAttribute Customer customer) {
         customerService.updateCustomer(customer);
-        return "redirect:/edit_customer";
+        return "redirect:/customers";
     }
 }
 

@@ -47,29 +47,25 @@ public class LeaseController {
      * Create lease string.
      * @author Otto, Hasan
      *
-     * @param model              the model
      * @param chassisNumber      the chassis number
      * @param customerId         the customer id
      * @param startDate          the start date
      * @param endDate            the end date
-     * @param terms              the terms
      * @param redirectAttributes the redirect attributes
      * @return the string
      */
     @PostMapping("/createLease")
-    public String createLease(Model model,
-                              @RequestParam String chassisNumber,
+    public String createLease(@RequestParam String chassisNumber,
                               @RequestParam int customerId,
                               @RequestParam LocalDate startDate,
                               @RequestParam LocalDate endDate,
-                              @RequestParam String terms,
                               RedirectAttributes redirectAttributes) {
 
         boolean isAvailable = leaseService.checkLeaseAvailability(chassisNumber, startDate, endDate);
 
         if (isAvailable) {
             try {
-                leaseService.createLease(chassisNumber, customerId, startDate, endDate, terms);
+                leaseService.createLease(chassisNumber, customerId, startDate, endDate);
                 return "redirect:/success.html";
             } catch (IllegalArgumentException e) {
                 redirectAttributes.addFlashAttribute("error", e.getMessage());

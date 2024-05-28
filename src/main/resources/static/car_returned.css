@@ -1,40 +1,18 @@
 /*  @Author: Otto */
 
-.box {
-    border: 1px solid #ccc;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    max-width: 400px;
-    margin: 0 auto;
-}
-
 .damage-list {
     list-style-type: none;
     padding: 0;
 }
 
 .damage-item {
-    margin-bottom: 10px;
-}
-
-.input-container {
-    margin-top: 20px;
-}
-
-.input-container input {
-    width: calc(100% - 110px);
-    padding: 5px;
-    margin-right: 10px;
-}
-
-.input-container button {
-    padding: 5px 10px;
+    margin-bottom: 5px;
+    padding: 8px;
 }
 
 .text-container {
     font-weight: bold;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
 }
 
 .bottom-right-button {
@@ -43,18 +21,80 @@
     right: 20px;
 }
 
+.table-container {
+    width: 100%;
+}
+
 table {
     border-collapse: collapse;
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
 }
+
 th, td {
-    border: 1px solid #888;
     padding: 12px;
     text-align: left;
+    border: 1px solid #ddd;
 }
 
-tr:nth-child(even) {
-    background-color: #f2f2f2;
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
+h2 {
+    background-color: #999;
+    color: #fff;
+    padding: 5px;
+    text-align: center;
+}
+
+
+form.delete-damage-form button.delete-button {
+    background-color: #e74c3c;
+    color: white;
+    padding: 8px 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form.delete-damage-form button.delete-button:hover {
+    background-color: #c0392b;
+}
+
+
+form button {
+    background-color: #3b719f;
+    color: #ffffff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+form button:hover {
+    background-color: #5ca351;
+}
+
+
+input[type="text"],
+input[type="number"],
+select {
+    width: 25%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.input-group {
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}

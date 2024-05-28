@@ -28,9 +28,12 @@ public class CustomerRepository {
      * @return the all customers
      * @author Hasan, Otto
      */
-    public List<Customer> getAllCustomers () {
-        String query = "SELECT * FROM customers";
-        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class); //TODO: whats going on here
+
+    public List<Customer> getAllCustomers() {
+        String query = "SELECT c.*, z.city " +
+                "FROM customers c " +
+                "JOIN zip_codes z ON c.zip_code = z.zip_code";
+        RowMapper<Customer> rowMapper = new BeanPropertyRowMapper<>(Customer.class);
         return jdbcTemplate.query(query, rowMapper);
     }
 
@@ -105,7 +108,9 @@ public class CustomerRepository {
      * @author Anders
      */
     public void updateCustomer(Customer customer) {
-        String query = "UPDATE customers SET first_name = ?, last_name = ?, phone_number = ?, email = ?, address = ? WHERE customer_id = ?";
-        jdbcTemplate.update(query, customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber(), customer.getEmail(), customer.getAddress(), customer.getCustomerId());
+        String query = "UPDATE customers SET first_name = ?, last_name = ?, phone_number = ?, email = ?, address = ?," +
+                " zip_code = ? WHERE customer_id = ?";
+        jdbcTemplate.update(query, customer.getFirstName(), customer.getLastName(), customer.getPhoneNumber(),
+                customer.getEmail(), customer.getAddress(), customer.getZipCode(), customer.getCustomerId());
     }
 }

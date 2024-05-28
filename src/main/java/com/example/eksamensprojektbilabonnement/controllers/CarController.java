@@ -45,7 +45,7 @@ public class CarController {
     @GetMapping("/view_car")
     public String view_car(@RequestParam String chassisNumber, Model model) {
         Car car = carService.getCarByChassisNumber(chassisNumber);
-        model.addAttribute("Car", car);
+        model.addAttribute("car", car);
         //model.addAttribute("Customers", customerService.getAllCustomers());
         model.addAttribute("Customers", customerService.getNonAnonymousCustomers());
         model.addAttribute("leases", leaseService.getNonConcludedLeases(chassisNumber));

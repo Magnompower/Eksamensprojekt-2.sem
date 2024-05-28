@@ -29,10 +29,10 @@ public class ValidateController {
      */
     @PostMapping("/validate")
     public String validate(Model model, @RequestParam String email, @RequestParam String password) {
-        Employee employee = employeeService.getEmployee(email);
         String loginStatus = employeeService.checkPassword(email, password);
 
         if (loginStatus.equals("UserApproved")) {
+            Employee employee = employeeService.getEmployee(email);
             return employeeService.getPageForEmployee(employee.getEmployeeType());
         } else if (loginStatus.equals("NoUserFound")) {
             model.addAttribute("error", "This email does not exist in the database");

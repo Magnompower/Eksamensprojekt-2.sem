@@ -9,7 +9,8 @@ public class Customer {
     private String address;
     private int zipCode;
     private String city;
-    private String country;
+
+
 
     public Customer(){
 
@@ -80,11 +81,5 @@ public class Customer {
         this.city = city;
     }
 
-    public String getCountry() {
-        return country;
-    }
 
-    public void setCountry(String country) {
-        this.country = country;
-    }
 }

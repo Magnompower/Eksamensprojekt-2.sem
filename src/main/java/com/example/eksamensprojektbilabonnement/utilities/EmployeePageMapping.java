@@ -20,5 +20,10 @@ public class EmployeePageMapping {
     public String getPage(EmployeeType type) {
         return employeePages.get(type);
     }
+
+    public void addEmployeePage(EmployeeType type, String page) {
+        //Method is not being used yet, but exists if there is any need to dynamically add new users
+        employeePages.put(type, page);
+    }
 }
 
