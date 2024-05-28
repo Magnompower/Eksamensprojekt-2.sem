@@ -61,10 +61,15 @@ public class CarController {
      * @author Anders
      */
     @PostMapping("/update_car_state")
-    public String updateCar(@RequestParam String chassisNumber, @RequestParam String carState) {
+    public String updateCar(@RequestParam String chassisNumber, @RequestParam String carState, @RequestParam String employeeType) {
         String carTable = carService.getCarTable(chassisNumber);
         carService.updateCarState(chassisNumber, carState, carTable);
-        return "redirect:/inventory";
+
+        if (employeeType == "leaseRegistration") {
+            return "redirect:/lease_registration_inventory";
+        } else {
+            return "redirect:/damage_management_inventory";
+        }
     }
 
     /**
