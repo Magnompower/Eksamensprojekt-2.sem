@@ -1,0 +1,379 @@
+USE eksamensprojekt_bilabonnement_intellij_kingz;
+
+CREATE TABLE change_logs (log_id INT AUTO_INCREMENT PRIMARY KEY, changed_by VARCHAR(255) NOT NULL,
+action_type ENUM('INSERT', 'UPDATE', 'DELETE') NOT NULL,
+table_changed ENUM('CUSTOMERS','ELECTRIC_VANS ','EMPLOYEES','ELECTRIC_CARS','GAS_CARS','GAS_VANS') NOT NULL,
+change_ VARCHAR(255) NOT NULL, timestamped DATETIME DEFAULT CURRENT_TIMESTAMP);
+
+SET GLOBAL event_scheduler = OFF;
+
+
+CREATE TABLE change_logs ( -- gammel log.
+    log_id INT AUTO_INCREMENT PRIMARY KEY,
+    changed_by VARCHAR(255) NOT NULL,
+    action_type ENUM('INSERT', 'UPDATE', 'DELETE') NOT NULL,
+    table_changed ENUM('CUSTOMERS','ELECTRIC_VANS ','EMPLOYEES','ELECTRIC_CARS','GAS_CARS','GAS_VANS',
+    '') NOT NULL,
+    changed_id INT NOT NULL,
+    old_changed_name VARCHAR(255),
+    new_changed_name VARCHAR(255),
+    old_changed_email VARCHAR(255),
+    new_changed_email VARCHAR(255),
+    old_changed_password VARCHAR(255),
+    new_changed_password VARCHAR(255),
+    old_changed_address VARCHAR(255),
+    new_changed_address VARCHAR(255),
+	timestamped DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE all_cars
+MODIFY car_table ENUM('ELECTRIC_VANS ','ELECTRIC_CARS','GAS_CARS','GAS_VANS')NOT NULL;
+
+describe all_cars;
+
+ALTER TABLE customers DROP INDEX email;
+
+SELECT l.customer_id -- repo method
+FROM lease_agreements l
+WHERE l.end_date <= CURRENT_TIMESTAMP - INTERVAL 5 YEAR;
+
+SET SQL_SAFE_UPDATES = 0;
+
+ALTER TABLE all_cars
+ADD CONSTRAINT fk_chassis_number
+FOREIGN KEY (chassis_number) REFERENCES gas_vans(chassis_number);
+
+SELECT a.chassis_number FROM lease_agreements l JOIN all_cars a ON l.chassis_number = a.chassis_number
+WHERE l.start_date BETWEEN CURRENT_TIMESTAMP AND (CURRENT_TIMESTAMP + INTERVAL 24 HOUR); -- repo method
+
+DELIMITER $$
+
+CREATE TRIGGER format_employees_before_insert
+BEFORE INSERT ON employees
+FOR EACH ROW
+BEGIN
+    SET NEW.email = TRIM(NEW.email);
+    SET NEW.password = TRIM(NEW.password);
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER update_log_after_employees_inserted
+AFTER INSERT ON employees FOR EACH ROW
+BEGIN
+        INSERT INTO change_logs (changed_by, action_type, table_changed, change_)
+        VALUES (USER(), 'INSERT', 'EMPLOYEES', NEW.email);
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER update_log_after_employees_updated
+AFTER UPDATE ON employees FOR EACH ROW
+BEGIN
+	IF OLD.email <> NEW.email THEN
+        INSERT INTO change_logs (changed_by, action_type, table_changed, change_)
+        VALUES (USER(), 'UPDATE', 'EMPLOYEES', CONCAT('Mail: ', OLD.email, ' -> ', NEW.email));
+    END IF;
+
+    IF OLD.password <> NEW.password THEN
+        INSERT INTO change_logs (changed_by, action_type, table_changed, change_)
+        VALUES (USER(), 'UPDATE', 'EMPLOYEES', CONCAT('Pass: ', OLD.password, ' -> ', NEW.password));
+    END IF;
+
+    IF OLD.employee_type <> NEW.employee_type THEN
+		INSERT INTO change_logs (changed_by, action_type, table_changed, change_)
+		VALUES (USER(), 'UPDATE', 'EMPLOYEES', CONCAT('Type: ', OLD.employee_type, ' -> ', NEW.employee_type));
+	END IF;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER update_log_after_electric_car_state_changed
+AFTER UPDATE ON electric_cars
+FOR EACH ROW
+BEGIN
+    IF OLD.car_state <> NEW.car_state THEN
+        INSERT INTO change_logs (changed_by, action_type, table_changed, change_)
+        VALUES (USER(), 'UPDATE', 'ELECTRIC_CARS', CONCAT(OLD.car_state, ' -> ', NEW.car_state));
+    END IF;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER insert_electric_car_in_all_cars
+BEFORE INSERT ON electric_cars
+FOR EACH ROW
+BEGIN
+    INSERT INTO all_cars (chassis_number, car_table)
+    VALUES (NEW.chassis_number, 'ELECTRIC_CARS');
+END; $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER insert_electric_van_in_all_cars
+BEFORE INSERT ON electric_vans
+FOR EACH ROW
+BEGIN
+    INSERT INTO all_cars (chassis_number, car_table)
+    VALUES (NEW.chassis_number, 'ELECTRIC_VANS');
+END; $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER insert_gas_car_in_all_cars
+BEFORE INSERT ON gas_cars
+FOR EACH ROW
+BEGIN
+    INSERT INTO all_cars (chassis_number, car_table)
+    VALUES (NEW.chassis_number, 'GAS_CARS');
+END; $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER insert_gas_van_in_all_cars
+BEFORE INSERT ON gas_vans
+FOR EACH ROW
+BEGIN
+    INSERT INTO all_cars (chassis_number, car_table)
+    VALUES (NEW.chassis_number, 'GAS_VANS');
+END; $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER update_log_after_gas_vans_state_changed
+AFTER UPDATE ON gas_vans
+FOR EACH ROW
+BEGIN
+    IF OLD.car_state <> NEW.car_state THEN
+        INSERT INTO change_logs (changed_by, action_type, table_changed, change_)
+        VALUES (USER(), 'UPDATE', 'GAS_VANS', OLD.chassis_number);
+    END IF;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER update_log_after_electric_vans_state_changed
+AFTER UPDATE ON electric_vans
+FOR EACH ROW
+BEGIN
+    IF OLD.car_state <> NEW.car_state THEN
+        INSERT INTO change_logs (changed_by, action_type, table_changed, change_)
+        VALUES (USER(), 'UPDATE', 'ELECTRIC_VANS', OLD.chassis_number);
+    END IF;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER update_log_after_gas_cars_state_changed
+AFTER UPDATE ON gas_cars
+FOR EACH ROW
+BEGIN
+    IF OLD.car_state <> NEW.car_state THEN
+        INSERT INTO change_logs (changed_by, action_type, table_changed, change_)
+        VALUES (USER(), 'UPDATE', 'GAS_CARS',  OLD.chassis_number);
+    END IF;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER update_log_after_electric_cars_state_changed
+AFTER UPDATE ON electric_cars
+FOR EACH ROW
+BEGIN
+    IF OLD.car_state <> NEW.car_state THEN
+        INSERT INTO change_logs (changed_by, action_type, table_changed, change_)
+        VALUES (USER(), 'UPDATE', 'ELECTRIC_CARS',  OLD.chassis_number);
+    END IF;
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER update_log_after_gas_vans_inserted
+BEFORE INSERT ON gas_vans
+FOR EACH ROW
+BEGIN
+ INSERT INTO change_logs (changed_by, action_type, table_changed, change_)
+        VALUES (USER(), 'INSERT', 'GAS_VANS', NEW.chassis_number);
+    END; $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER update_log_after_gas_cars_inserted
+BEFORE INSERT ON gas_cars
+FOR EACH ROW
+BEGIN
+ INSERT INTO change_logs (changed_by, action_type, table_changed, change_)
+        VALUES (USER(), 'INSERT', 'GAS_CARS', NEW.chassis_number);
+    END; $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER update_log_after_electric_cars_inserted
+BEFORE INSERT ON electric_cars
+FOR EACH ROW
+BEGIN
+ INSERT INTO change_logs (changed_by, action_type, table_changed, change_)
+        VALUES (USER(), 'INSERT', 'ELECTRIC_CARS', NEW.chassis_number);
+    END; $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER update_log_after_gas_vans_inserted
+BEFORE INSERT ON gas_vans
+FOR EACH ROW
+BEGIN
+ INSERT INTO change_logs (changed_by, action_type, table_changed, change_)
+        VALUES (USER(), 'INSERT', 'GAS_VANS', NEW.chassis_number);
+    END; $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER update_log_after_electric_vans_inserted
+BEFORE INSERT ON electric_vans
+FOR EACH ROW
+BEGIN
+ INSERT INTO change_logs (changed_by, action_type, table_changed, change_)
+        VALUES (USER(), 'INSERT', 'ELECTRIC_VANS',NEW.chassis_number);
+    END; $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER update_log_after_gas_cars_deleted
+AFTER DELETE ON gas_cars
+FOR EACH ROW
+BEGIN
+	INSERT INTO change_logs (changed_by, action_type, table_changed, change_)
+    VALUES (USER(), 'DELETE', 'GAS_CARS',OLD.chassis_number);
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER update_log_after_electric_cars_deleted
+AFTER DELETE ON electric_cars
+FOR EACH ROW
+BEGIN
+	INSERT INTO change_logs (changed_by, action_type, table_changed, change_)
+    VALUES (USER(), 'DELETE', 'ELECTRIC_CARS', OLD.chassis_number);
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER update_log_after_gas_vans_deleted
+AFTER DELETE ON gas_vans
+FOR EACH ROW
+BEGIN
+	INSERT INTO change_logs (changed_by, action_type, table_changed, change_)
+    VALUES (USER(), 'DELETE', 'GAS_VANS', '');
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER update_log_after_electric_vans_deleted
+AFTER DELETE ON electric_vans
+FOR EACH ROW
+BEGIN
+    INSERT INTO change_logs (changed_by, action_type, table_changed, change_)
+    VALUES (USER(), 'DELETE', 'ELECTRIC_VANS', '');
+END$$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER update_lease_agreements_when_electric_car_lease_start
+AFTER UPDATE ON electric_cars
+FOR EACH ROW
+BEGIN
+    IF NEW.car_state = 'GETTING_PREPARED' AND OLD.car_state <> NEW.car_state THEN
+        UPDATE lease_agreements
+        SET is_active = TRUE
+        WHERE chassis_number = NEW.chassis_number;
+    END IF;
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER update_lease_agreements_when_gas_car_lease_start
+AFTER UPDATE ON gas_cars
+FOR EACH ROW
+BEGIN
+    IF NEW.car_state = 'GETTING_PREPARED' AND OLD.car_state <> NEW.car_state THEN
+        UPDATE lease_agreements
+        SET is_active = TRUE
+        WHERE chassis_number = NEW.chassis_number;
+    END IF;
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER update_lease_agreements_when_electric_vans_lease_start
+AFTER UPDATE ON electric_vans
+FOR EACH ROW
+BEGIN
+    IF NEW.car_state = 'GETTING_PREPARED' AND OLD.car_state <> NEW.car_state THEN
+        UPDATE lease_agreements
+        SET is_active = TRUE
+        WHERE chassis_number = NEW.chassis_number;
+    END IF;
+END $$
+
+DELIMITER ;
+
+DELIMITER $$
+
+CREATE TRIGGER update_lease_agreements_when_gas_vans_lease_start
+AFTER UPDATE ON gas_vans
+FOR EACH ROW
+BEGIN
+    IF NEW.car_state = 'GETTING_PREPARED' AND OLD.car_state <> NEW.car_state THEN
+        UPDATE lease_agreements
+        SET is_active = TRUE
+        WHERE chassis_number = NEW.chassis_number;
+    END IF;
+END $$
+
+DELIMITER ;

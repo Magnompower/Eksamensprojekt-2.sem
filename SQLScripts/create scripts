@@ -1,0 +1,131 @@
+USE eksamensprojekt_bilabonnement_intellij_kingz;
+
+CREATE TABLE change_logs (log_id INT AUTO_INCREMENT PRIMARY KEY, changed_by VARCHAR(255) NOT NULL,
+action_type ENUM('INSERT', 'UPDATE', 'DELETE') NOT NULL,
+table_changed ENUM('CUSTOMERS','ELECTRIC_VANS ','EMPLOYEES','ELECTRIC_CARS','GAS_CARS','GAS_VANS') NOT NULL,
+change_ VARCHAR(255) NOT NULL, timestamped DATETIME DEFAULT CURRENT_TIMESTAMP);
+
+SET GLOBAL event_scheduler = OFF;
+
+
+CREATE TABLE change_logs ( -- gammel log.
+    log_id INT AUTO_INCREMENT PRIMARY KEY,
+    changed_by VARCHAR(255) NOT NULL,
+    action_type ENUM('INSERT', 'UPDATE', 'DELETE') NOT NULL,
+    table_changed ENUM('CUSTOMERS','ELECTRIC_VANS ','EMPLOYEES','ELECTRIC_CARS','GAS_CARS','GAS_VANS',
+    '') NOT NULL,
+    changed_id INT NOT NULL,
+    old_changed_name VARCHAR(255),
+    new_changed_name VARCHAR(255),
+    old_changed_email VARCHAR(255),
+    new_changed_email VARCHAR(255),
+    old_changed_password VARCHAR(255),
+    new_changed_password VARCHAR(255),
+    old_changed_address VARCHAR(255),
+    new_changed_address VARCHAR(255),
+	timestamped DATETIME DEFAULT CURRENT_TIMESTAMP
+);
+
+ALTER TABLE all_cars
+MODIFY car_table ENUM('ELECTRIC_VANS ','ELECTRIC_CARS','GAS_CARS','GAS_VANS')NOT NULL;
+
+describe all_cars;
+
+ALTER TABLE customers DROP INDEX email;
+
+SELECT l.customer_id -- repo method
+FROM lease_agreements l
+WHERE l.end_date <= CURRENT_TIMESTAMP - INTERVAL 5 YEAR;
+
+SET SQL_SAFE_UPDATES = 0;
+
+ALTER TABLE all_cars
+ADD CONSTRAINT fk_chassis_number
+FOREIGN KEY (chassis_number) REFERENCES gas_vans(chassis_number);
+
+SELECT a.chassis_number FROM lease_agreements l JOIN all_cars a ON l.chassis_number = a.chassis_number
+WHERE l.start_date BETWEEN CURRENT_TIMESTAMP AND (CURRENT_TIMESTAMP + INTERVAL 24 HOUR); -- repo method
+
+CREATE TABLE model (
+    model_id INT AUTO_INCREMENT PRIMARY KEY,
+    brand_id INT NOT NULL,
+    name VARCHAR(60) NOT NULL,
+    FOREIGN KEY (brand_id) REFERENCES brand(brand_id)
+);
+
+CREATE TABLE brand (
+    brand_id INT AUTO_INCREMENT PRIMARY KEY,
+    brand_name VARCHAR(50) NOT NULL
+);
+
+RENAME TABLE brand TO brands;
+RENAME TABLE model TO models;
+
+ALTER TABLE gas_cars DROP COLUMN brand;
+ALTER TABLE gas_cars DROP COLUMN model;
+
+ALTER TABLE gas_cars ADD COLUMN model_id INT;
+ALTER TABLE gas_cars ADD COLUMN brand_id INT;
+
+ALTER TABLE electric_cars
+ADD CONSTRAINT fk_electric_cars_model
+FOREIGN KEY (model_id) REFERENCES model(model_id);
+
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE electric_cars ec
+SET ec.model_id = (
+    SELECT m.model_id
+    FROM models m
+    WHERE m.brand_id = ec.brand_id
+    ORDER BY RAND()
+    LIMIT 1
+);
+
+CREATE TABLE zip_codes (
+zip_code SMALLINT PRIMARY KEY,
+city VARCHAR(100));
+
+ALTER TABLE customers ADD COLUMN zip_code SMALLINT;
+ALTER TABLE zip_codes CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+ALTER TABLE customers
+ADD CONSTRAINT fk_customers_zip_code
+FOREIGN KEY (zip_code) REFERENCES zip_codes(zip_code);
+
+LOAD DATA INFILE 'C:\Users\Magne\Downloads\postnummerfil-til-download-22-06-2021.csv'
+INTO TABLE zip_codes
+CHARACTER SET utf8mb4
+FIELDS TERMINATED BY ','
+OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+(zip_code, city); -- Dur ikke pga rettigheder
+
+CREATE OR REPLACE VIEW all_cars_view AS
+SELECT
+    ac.chassis_number,
+    COALESCE(ec.license_plate_number, gc.license_plate_number, ev.license_plate_number, gv.license_plate_number) AS license_plate_number,
+    COALESCE(b.brand_name, b_gc.brand_name, b_ev.brand_name, b_gv.brand_name) AS brand,
+    COALESCE(m.model_name, m_gc.model_name, m_ev.model_name, m_gv.model_name) AS model,
+    COALESCE(ec.transmission_type, gc.transmission_type, ev.transmission_type, gv.transmission_type) AS transmission_type,
+    COALESCE(ec.registration_fee, gc.registration_fee, ev.registration_fee, gv.registration_fee) AS registration_fee,
+    COALESCE(ec.car_state, gc.car_state, ev.car_state, gv.car_state) AS car_state,
+    COALESCE(ec.price, gc.price, ev.price, gv.price) AS price,
+    COALESCE(ec.image_url, gc.image_url, ev.image_url, gv.image_url) AS image_url,
+    COALESCE(ec.km_driven, gc.km_driven, ev.km_driven, gv.km_driven) AS km_driven
+FROM
+    all_cars ac
+LEFT JOIN electric_cars ec ON ec.chassis_number = ac.chassis_number
+LEFT JOIN gas_cars gc ON gc.chassis_number = ac.chassis_number
+LEFT JOIN electric_vans ev ON ev.chassis_number = ac.chassis_number
+LEFT JOIN gas_vans gv ON gv.chassis_number = ac.chassis_number
+
+LEFT JOIN brands b ON b.brand_id = ec.brand_id
+LEFT JOIN brands b_gc ON b_gc.brand_id = gc.brand_id
+LEFT JOIN brands b_ev ON b_ev.brand_id = ev.brand_id
+LEFT JOIN brands b_gv ON b_gv.brand_id = gv.brand_id
+
+LEFT JOIN models m ON m.model_id = ec.model_id AND m.brand_id = ec.brand_id
+LEFT JOIN models m_gc ON m_gc.model_id = gc.model_id AND m_gc.brand_id = gc.brand_id
+LEFT JOIN models m_ev ON m_ev.model_id = ev.model_id AND m_ev.brand_id = ev.brand_id
+LEFT JOIN models m_gv ON m_gv.model_id = gv.model_id AND m_gv.brand_id = gv.brand_id;

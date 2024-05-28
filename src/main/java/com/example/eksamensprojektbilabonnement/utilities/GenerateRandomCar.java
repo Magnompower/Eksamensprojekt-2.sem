@@ -9,8 +9,8 @@ import java.util.Random;
 @Component
 public class GenerateRandomCar {
 
-        private static final String[] BRANDS = {"Toyota", "Honda", "Ford", "BMW", "Mercedes-Benz"};
-        private static final String[] MODELS = {"Camry", "Civic", "F-150", "3 Series", "E-Class"};
+       private static  final String model = " " ;
+       private  static final String brand = " ";
 
         private static final double MIN_PRICE = 10000.0;
         private static final double MAX_PRICE = 50000.0;
@@ -29,8 +29,9 @@ public class GenerateRandomCar {
                 GasCar car = new GasCar();
                 car.setChassisNumber(generateRandomChassisNumber());
                 car.setLicensePlateNumber(generateRandomLicensePlateNumber());
-                car.setBrand(BRANDS[random.nextInt(BRANDS.length)]);
-                car.setModel(MODELS[random.nextInt(MODELS.length)]);
+                car.setBrand("Toyota");
+                car.setModel(selectModel());
+
                 car.setCarState(CarState.AVAILABLE);
                 car.setFuelType(getRandomFuelType());
                 car.setTransmissionType(getRandomTransmissionType());
@@ -41,6 +42,32 @@ public class GenerateRandomCar {
                 gasCars.add(car);
             }
             return gasCars;
+        }
+        private static String selectModel () {
+            int num = random.nextInt(4)+1;
+            switch (num) {
+                case 1 -> {
+                    return  "Corolla";
+                }
+                case 2 -> {
+                    return "Prius";
+
+                }
+                case 3 -> {
+                    return "Land Cruiser";
+
+                }
+                case 4 -> {
+                    return "Camry";
+                }
+            } return "Corolla";
+        }
+
+        private static int generateModelId() {
+            return  random.nextInt(100);
+        }
+        private  static int generateBrandId () {
+            return  random.nextInt(20);
         }
 
         private static String generateRandomChassisNumber() {
