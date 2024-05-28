@@ -65,7 +65,7 @@ public class CarController {
         String carTable = carService.getCarTable(chassisNumber);
         carService.updateCarState(chassisNumber, carState, carTable);
 
-        if (employeeType == "leaseRegistration") {
+        if (employeeType.equals("leaseRegistration")) {
             return "redirect:/lease_registration_inventory";
         } else {
             return "redirect:/damage_management_inventory";

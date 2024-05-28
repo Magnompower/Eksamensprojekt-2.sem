@@ -45,7 +45,6 @@
                 <th>Damage Id</th>
                 <th>Type of Damage</th>
                 <th>Price of Damage</th>
-                <th>Action</th>
             </tr>
             </thead>
             <tbody>
@@ -64,12 +63,24 @@
         <div class="text-container">
             <h2>Add new damages</h2>
         </div>
-        <ul class="damage-list">
-            <li class="damage-item" th:each="damage : ${nonInvoicedDamages}">
-                <span th:text="'Type of damage: ' + ${damage.damageName}"></span>
-                <span th:text="' - Price of damage: ' + ${damage.damagePrice}"></span>
-            </li>
-        </ul>
+        <table class="damage-table">
+            <thead>
+            <tr>
+                <th>Damage Id</th>
+                <th>Type of Damage</th>
+                <th>Price of Damage</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="damage : ${nonInvoicedDamages}">
+                <td th:text="${damage.damageId}"></td>
+                <td th:text="${damage.damageName}"></td>
+                <td th:text="${damage.damagePrice}"></td>
+                <td>
+                </td>
+            </tr>
+            </tbody>
+        </table>
         <form action="/add_non_invoiced_damage" method="post">
             <div class="input-container">
                 <div class="text-container">
@@ -105,12 +116,13 @@
             </div>
         </form>
     </div>
-
+    </div>
 <form action="/conclude_lease" method="post" class="bottom-right-button">
     <input type="hidden" name="leaseId" th:value="${lease.leaseId}">
     <input type="hidden" name="chassisNumber" th:value="${lease.chassisNumber}">
     <button type="submit">Conclude lease</button>
 </form>
+
 
 <footer>
     <div th:insert="~{home/fragments :: footer}"></div>

@@ -77,9 +77,10 @@ public class ConditionReportController {
         List<Damage> invoicedDamages = damageService.getInvoicedDamages(conditionReport.getChassisNumber());
         model.addAttribute("invoicedDamages", invoicedDamages);
 
-        //Get the new non-invoiced damages (if added):
+        //Get the new non-invoiced damages and add them to the model;
         List<Damage> nonInvoicedDamages = damageService.getNonInvoicedDamages(conditionReport.getChassisNumber(), lease.getLeaseId());
         model.addAttribute("nonInvoicedDamages", nonInvoicedDamages);
+
 
         //Get the kilometers driven for the car and add to the model:
         double kmDriven = carService.getCarByChassisNumber(conditionReport.getChassisNumber()).getKmDriven();
@@ -96,6 +97,9 @@ public class ConditionReportController {
      * @return the string
      * @author Hasan
      */
+
+
+
     @GetMapping ("/display_condition_report")
     public String displayConditionReport(Model model, @RequestParam int leaseId){
         ConditionReport conditionReport = conditionReportService.getConditionReport(leaseId);

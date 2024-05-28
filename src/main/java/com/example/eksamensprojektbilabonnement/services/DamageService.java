@@ -100,4 +100,7 @@ public class DamageService {
     public void deleteDamage(int damageId) {
         damageRepository.deleteDamage(damageId);
     }
-}
+
+
+    }
+

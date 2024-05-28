@@ -55,8 +55,14 @@ public class ConditionReportRepository {
      */
     public void setKmDrivenAfterLease(int leaseId, double kmDriven) {
         String query = "UPDATE condition_reports SET km_after_lease = ? WHERE lease_id = ?";
-        jdbcTemplate.update(query, leaseId, kmDriven);
+        jdbcTemplate.update(query, kmDriven, leaseId);
 
 
+    }
+
+
+    public void addPriceToTotalCost(double damagePrice, int leaseId) {
+        String query = "UPDATE condition_reports SET total_extra_cost = total_extra_cost + ? WHERE lease_id = ?";
+        jdbcTemplate.update(query, damagePrice, leaseId);
     }
 }
