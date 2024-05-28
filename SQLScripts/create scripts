@@ -1,105 +1,134 @@
 USE eksamensprojekt_bilabonnement_intellij_kingz;
 
-CREATE TABLE change_logs (log_id INT AUTO_INCREMENT PRIMARY KEY, changed_by VARCHAR(255) NOT NULL,
-action_type ENUM('INSERT', 'UPDATE', 'DELETE') NOT NULL,
-table_changed ENUM('CUSTOMERS','ELECTRIC_VANS ','EMPLOYEES','ELECTRIC_CARS','GAS_CARS','GAS_VANS') NOT NULL,
-change_ VARCHAR(255) NOT NULL, timestamped DATETIME DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE gas_cars (
+    chassis_number VARCHAR (25) NOT NULL PRIMARY KEY,
+    license_plate_number VARCHAR(7) NOT NULL,
+    model_id INT,
+    brand_id INT,
+    registration_fee DOUBLE NOT NULL,
+    price DOUBLE NOT NULL,
+    car_state ENUM('RENTED', 'DAMAGED', 'AVAILABLE', 'UNDER_MAINTENANCE', 'GETTING_PREPARED') NOT NULL,
+    transmission_type ENUM('MANUAL', 'AUTOMATIC') NOT NULL,
+    km_per_liter DOUBLE NOT NULL,
+    fuel_type ENUM("GAS", "DIESEL" ) NOT NULL,
+    carbon_emission_per_km DOUBLE NOT NULL,
+    image_url VARCHAR(255)
+);
 
-SET GLOBAL event_scheduler = OFF;
+CREATE TABLE electric_cars (
+    chassis_number VARCHAR (25) NOT NULL PRIMARY KEY,
+    license_plate_number VARCHAR(7) NOT NULL,
+    brand VARCHAR(50) NOT NULL,
+    model VARCHAR (60) NOT NULL,
+    registration_fee DOUBLE NOT NULL,
+    price DOUBLE NOT NULL,
+    car_state ENUM('RENTED', 'DAMAGED', 'AVAILABLE', 'UNDER_MAINTENANCE'  ) NOT NULL,
+    transmission_type ENUM('MANUAL', 'AUTOMATIC') NOT NULL,
+    km_per_charge DOUBLE NOT NULL
+);
 
+CREATE TABLE gas_vans (
+    chassis_number VARCHAR (25) NOT NULL PRIMARY KEY,
+    license_plate_number VARCHAR(7) NOT NULL,
+    brand VARCHAR(50) NOT NULL,
+    model VARCHAR (60) NOT NULL,
+    registration_fee DOUBLE NOT NULL,
+    price DOUBLE NOT NULL,
+    car_state ENUM('RENTED', 'DAMAGED', 'AVAILABLE', 'UNDER_MAINTENANCE' ) NOT NULL,
+    transmission_type ENUM('MANUAL', 'AUTOMATIC') NOT NULL,
+    km_per_liter DOUBLE NOT NULL,
+    fuel_type ENUM( "GAS", "DIESEL" ) NOT NULL,
+    carbon_emission_per_km DOUBLE NOT NULL,
+    floor_length_in_mm INT NOT NULL,
+    max_height_in_mm INT NOT NULL,
+    max_width_in_mm INT NOT NULL
+);
 
-CREATE TABLE change_logs ( -- gammel log.
+CREATE TABLE electric_vans (
+    chassis_number VARCHAR (25) NOT NULL PRIMARY KEY,
+    license_plate_number VARCHAR(7) NOT NULL,
+    brand VARCHAR(50) NOT NULL,
+    model VARCHAR (60) NOT NULL,
+    registration_fee DOUBLE NOT NULL,
+    price DOUBLE NOT NULL,
+    car_state ENUM('RENTED', 'DAMAGED', 'AVAILABLE', 'UNDER_MAINTENANCE'  ) NOT NULL,
+    transmission_type ENUM('MANUAL', 'AUTOMATIC') NOT NULL,
+    km_per_charge DOUBLE NOT NULL,
+    floor_length_in_mm INT NOT NULL,
+    max_height_in_mm INT NOT NULL,
+    max_width_in_mm INT NOT NULL
+);
+
+CREATE TABLE all_cars (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    chassis_number VARCHAR(25) NOT NULL UNIQUE,
+    car_table ENUM('ELECTRIC_VANS', 'ELECTRIC_CARS', 'GAS_CARS', 'GAS_VANS') NOT NULL
+);
+
+CREATE TABLE damages (
+    damage_id INT AUTO_INCREMENT PRIMARY KEY,
+    chassis_number VARCHAR(25) NOT NULL,
+    damage_name VARCHAR(255) NOT NULL,
+    damage_price DOUBLE NOT NULL,
+    invoiced BOOLEAN DEFAULT FALSE NOT NULL,
+    condition_report_id INT,
+    FOREIGN KEY (chassis_number) REFERENCES all_cars(chassis_number),
+    FOREIGN KEY (condition_report_id) REFERENCES condition_reports(condition_report_id)
+);
+
+CREATE TABLE condition_reports (
+    condition_report_id INT AUTO_INCREMENT PRIMARY KEY,
+    chassis_number VARCHAR(25) NOT NULL,
+    total_extra_cost DOUBLE,
+    km_before_lease DOUBLE NOT NULL,
+    km_after_lease DOUBLE,
+    lease_id INT NOT NULL,
+    FOREIGN KEY (chassis_number) REFERENCES all_cars(chassis_number),
+    FOREIGN KEY (lease_id) REFERENCES lease_agreements(lease_id)
+);
+
+CREATE TABLE employees (
+    employee_id INT auto_increment PRIMARY KEY NOT NULL,
+    employee_type ENUM('ADMIN', 'DAMAGE_MANAGEMENT', 'LEASE_REGISTRATION', 'BUSINESS_DEVELOPER') NOT NULL,
+    email VARCHAR(200) UNIQUE  NOT NULL,
+    password VARCHAR(64) NOT NULL
+);
+
+CREATE TABLE customers (
+    customer_id INT auto_increment PRIMARY KEY NOT NULL,
+    first_name VARCHAR(70) NOT NULL,
+    last_name VARCHAR(70) NOT NULL,
+    phone_number INT NOT NULL,
+    email VARCHAR(200) UNIQUE NOT NULL,
+    address VARCHAR(200) NOT NULL,
+    zip_code SMALLINT
+);
+
+CREATE TABLE lease_agreements (
+    lease_id INT auto_increment PRIMARY KEY,
+    chassis_number VARCHAR (25) NOT NULL,
+    customer_id INT NOT NULL,
+    terms VARCHAR(500) NOT NULL,
+    FOREIGN KEY  (chassis_number) REFERENCES all_cars(chassis_number),
+    FOREIGN KEY (customer_id) REFERENCES customers(customer_id)
+);
+
+CREATE TABLE change_logs (
     log_id INT AUTO_INCREMENT PRIMARY KEY,
     changed_by VARCHAR(255) NOT NULL,
     action_type ENUM('INSERT', 'UPDATE', 'DELETE') NOT NULL,
-    table_changed ENUM('CUSTOMERS','ELECTRIC_VANS ','EMPLOYEES','ELECTRIC_CARS','GAS_CARS','GAS_VANS',
-    '') NOT NULL,
-    changed_id INT NOT NULL,
-    old_changed_name VARCHAR(255),
-    new_changed_name VARCHAR(255),
-    old_changed_email VARCHAR(255),
-    new_changed_email VARCHAR(255),
-    old_changed_password VARCHAR(255),
-    new_changed_password VARCHAR(255),
-    old_changed_address VARCHAR(255),
-    new_changed_address VARCHAR(255),
-	timestamped DATETIME DEFAULT CURRENT_TIMESTAMP
+    table_changed ENUM('CUSTOMERS','ELECTRIC_VANS ','EMPLOYEES','ELECTRIC_CARS','GAS_CARS','GAS_VANS') NOT NULL,
+    change_ VARCHAR(255) NOT NULL,
+    timestamped DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 ALTER TABLE all_cars
 MODIFY car_table ENUM('ELECTRIC_VANS ','ELECTRIC_CARS','GAS_CARS','GAS_VANS')NOT NULL;
 
-describe all_cars;
-
 ALTER TABLE customers DROP INDEX email;
 
-SELECT l.customer_id -- repo method
-FROM lease_agreements l
-WHERE l.end_date <= CURRENT_TIMESTAMP - INTERVAL 5 YEAR;
-
-SET SQL_SAFE_UPDATES = 0;
-
-ALTER TABLE all_cars
-ADD CONSTRAINT fk_chassis_number
-FOREIGN KEY (chassis_number) REFERENCES gas_vans(chassis_number);
-
-SELECT a.chassis_number FROM lease_agreements l JOIN all_cars a ON l.chassis_number = a.chassis_number
-WHERE l.start_date BETWEEN CURRENT_TIMESTAMP AND (CURRENT_TIMESTAMP + INTERVAL 24 HOUR); -- repo method
-
-CREATE TABLE model (
-    model_id INT AUTO_INCREMENT PRIMARY KEY,
-    brand_id INT NOT NULL,
-    name VARCHAR(60) NOT NULL,
-    FOREIGN KEY (brand_id) REFERENCES brand(brand_id)
-);
-
-CREATE TABLE brand (
-    brand_id INT AUTO_INCREMENT PRIMARY KEY,
-    brand_name VARCHAR(50) NOT NULL
-);
-
-RENAME TABLE brand TO brands;
-RENAME TABLE model TO models;
-
-ALTER TABLE gas_cars DROP COLUMN brand;
-ALTER TABLE gas_cars DROP COLUMN model;
-
-ALTER TABLE gas_cars ADD COLUMN model_id INT;
-ALTER TABLE gas_cars ADD COLUMN brand_id INT;
-
 ALTER TABLE electric_cars
-ADD CONSTRAINT fk_electric_cars_model
-FOREIGN KEY (model_id) REFERENCES model(model_id);
-
-SET SQL_SAFE_UPDATES = 0;
-
-UPDATE electric_cars ec
-SET ec.model_id = (
-    SELECT m.model_id
-    FROM models m
-    WHERE m.brand_id = ec.brand_id
-    ORDER BY RAND()
-    LIMIT 1
-);
-
-CREATE TABLE zip_codes (
-zip_code SMALLINT PRIMARY KEY,
-city VARCHAR(100));
-
-ALTER TABLE customers ADD COLUMN zip_code SMALLINT;
-ALTER TABLE zip_codes CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-
-ALTER TABLE customers
-ADD CONSTRAINT fk_customers_zip_code
-FOREIGN KEY (zip_code) REFERENCES zip_codes(zip_code);
-
-LOAD DATA INFILE 'C:\Users\Magne\Downloads\postnummerfil-til-download-22-06-2021.csv'
-INTO TABLE zip_codes
-CHARACTER SET utf8mb4
-FIELDS TERMINATED BY ','
-OPTIONALLY ENCLOSED BY '"'
-LINES TERMINATED BY '\n'
-(zip_code, city); -- Dur ikke pga rettigheder
+ADD UNIQUE (chassis_number);
 
 CREATE OR REPLACE VIEW all_cars_view AS
 SELECT
@@ -119,13 +148,80 @@ LEFT JOIN electric_cars ec ON ec.chassis_number = ac.chassis_number
 LEFT JOIN gas_cars gc ON gc.chassis_number = ac.chassis_number
 LEFT JOIN electric_vans ev ON ev.chassis_number = ac.chassis_number
 LEFT JOIN gas_vans gv ON gv.chassis_number = ac.chassis_number
-
 LEFT JOIN brands b ON b.brand_id = ec.brand_id
 LEFT JOIN brands b_gc ON b_gc.brand_id = gc.brand_id
 LEFT JOIN brands b_ev ON b_ev.brand_id = ev.brand_id
 LEFT JOIN brands b_gv ON b_gv.brand_id = gv.brand_id
-
 LEFT JOIN models m ON m.model_id = ec.model_id AND m.brand_id = ec.brand_id
 LEFT JOIN models m_gc ON m_gc.model_id = gc.model_id AND m_gc.brand_id = gc.brand_id
 LEFT JOIN models m_ev ON m_ev.model_id = ev.model_id AND m_ev.brand_id = ev.brand_id
 LEFT JOIN models m_gv ON m_gv.model_id = gv.model_id AND m_gv.brand_id = gv.brand_id;
+
+CREATE TABLE brands (
+    brand_id INT AUTO_INCREMENT PRIMARY KEY,
+    brand_name VARCHAR(50) NOT NULL
+);
+
+CREATE TABLE models (
+    model_id INT AUTO_INCREMENT PRIMARY KEY,
+    brand_id INT NOT NULL,
+    name VARCHAR(60) NOT NULL,
+    FOREIGN KEY (brand_id) REFERENCES brands(brand_id)
+);
+
+RENAME TABLE brand TO brands;
+RENAME TABLE model TO models;
+
+ALTER TABLE gas_cars DROP COLUMN brand;
+ALTER TABLE gas_cars DROP COLUMN model;
+
+ALTER TABLE gas_cars ADD COLUMN model_id INT;
+ALTER TABLE gas_cars ADD COLUMN brand_id INT;
+
+ALTER TABLE electric_cars
+ADD CONSTRAINT fk_electric_cars_model
+FOREIGN KEY (model_id) REFERENCES models(model_id);
+
+SET SQL_SAFE_UPDATES = 0;
+
+UPDATE electric_cars ec
+SET ec.model_id = (
+    SELECT m.model_id
+    FROM models m
+    WHERE m.brand_id = ec.brand_id
+    ORDER BY RAND()
+    LIMIT 1
+);
+
+CREATE TABLE zip_codes (
+    zip_code SMALLINT PRIMARY KEY,
+    city VARCHAR(100)
+);
+
+ALTER TABLE customers ADD COLUMN zip_code SMALLINT;
+ALTER TABLE zip_codes CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+ALTER TABLE customers
+ADD CONSTRAINT fk_customers_zip_code
+FOREIGN KEY (zip_code) REFERENCES zip_codes(zip_code);
+
+SET GLOBAL event_scheduler = OFF;
+
+CREATE TABLE zip_codes (
+    zip_code SMALLINT PRIMARY KEY,
+    city VARCHAR(100)
+);
+
+ALTER TABLE zip_codes CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci; -- Tilader æ, ø og å
+
+LOAD DATA INFILE 'C:\Users\Magne\Downloads\postnummerfil-til-download-22-06-2021.csv'
+INTO TABLE zip_codes
+CHARACTER SET utf8mb4
+FIELDS TERMINATED BY ','
+OPTIONALLY ENCLOSED BY '"'
+LINES TERMINATED BY '\n'
+(zip_code, city);
+
+ALTER TABLE customers ADD CONSTRAINT fk_customers_zip_code FOREIGN KEY (zip_code) REFERENCES zip_codes(zip_code);
+
+GRANT FILE ON *.* TO 'IntelliJ_Kingz'@'%';
